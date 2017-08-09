@@ -332,13 +332,13 @@
   /* Button
   -------------------------- */
   --button-font-size: 14px;
-  --button-border-radius: var(--border-radius-base);
+  --button-border-radius: 2px;
   --button-padding-vertical: 10px;
   --button-padding-horizontal: 15px;
 
   --button-large-font-size: 16px;
-  --button-large-padding-vertical: 11px;
-  --button-large-padding-horizontal: 19px;
+  --button-large-padding-vertical: 20px;
+  --button-large-padding-horizontal: 22px;
 
   --button-small-font-size: 12px;
   --button-small-padding-vertical: 7px;
@@ -350,7 +350,8 @@
 
   --button-default-color: var(--color-base-black);
   --button-default-fill: var(--color-white);
-  --button-default-border: #c4c4c4;
+  /*--button-default-border: #c4c4c4;*/
+  --button-default-border: #399DE2;
 
   --button-ghost-color: #666;
   --button-ghost-fill: transparent;
@@ -360,9 +361,11 @@
   --button-disabled-fill: var(--color-extra-light-gray);
   --button-disabled-border: var(--disabled-border-base);
 
-  --button-primary-border: var(--color-primary);
+  /*--button-primary-border: var(--color-primary);*/
+  --button-primary-border: #399DE2;
   --button-primary-color: var(--color-white);
-  --button-primary-fill: var(--color-primary);
+  /*--button-primary-fill: var(--color-primary);*/
+  --button-primary-fill: #399DE2;
 
   --button-success-border: var(--color-success);
   --button-success-color: var(--color-white);
@@ -372,9 +375,9 @@
   --button-warning-color: var(--color-white);
   --button-warning-fill: var(--color-warning);
 
-  --button-danger-border: var(--color-danger);
+  --button-danger-border: #E56250;
   --button-danger-color: var(--color-white);
-  --button-danger-fill: var(--color-danger);
+  --button-danger-fill: #E56250;
 
   --button-info-border: var(--color-info);
   --button-info-color: var(--color-white);
@@ -494,7 +497,8 @@
   --badge-radius: 10px;
   --badge-font-size: 12px;
   --badge-padding: 6px;
-  --badge-size: 18px;
+  /*--badge-size: 18px;*/
+  --badge-size: 16px;
 
   /* Card
   --------------------------*/

@@ -5,13 +5,15 @@
 @component-namespace el {
   @b button {
     display: inline-block;
+    height: 34px;
     line-height: 1;
     white-space: nowrap;
     cursor: pointer;
     background: var(--button-default-fill);
     border: var(--border-base);
     border-color: var(--button-default-border);
-    color: var(--button-default-color);
+    /*color: var(--button-default-color);*/
+    color: #399DE2;
     -webkit-appearance: none;
     text-align: center;
     box-sizing: border-box;

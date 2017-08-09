@@ -5,7 +5,16 @@
   @b badge {
     position: relative;
     vertical-align: middle;
+    /*display: inline-block;*/
     display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #DE3B24;
+    text-align: center;
+    z-index: 20;
+    color: #fff;
+    font-size: 12px;
 
     @e content {
       background-color: var(--badge-fill);
@@ -13,9 +22,10 @@
       color: var(--color-white);
       display: inline-block;
       font-size: var(--badge-font-size);
+      width: var(--badge-size);
       height: var(--badge-size);
       line-height: var(--badge-size);
-      padding: 0 var(--badge-padding);
+      padding: 0;
       text-align: center;
       white-space: nowrap;
       border: 1px solid var(--color-white);
@@ -26,14 +36,22 @@
 
         @when dot {
           right: 5px;
+         
         }
       }
 
       @when dot {
-        size: 8px 8px;
+       /* size: 8px 8px;
         padding: 0;
         right: 0;
+        border-radius: 50%;*/
+         /*new*/
+        width: 10px;
+        height: 10px;
+        background-color: #FF5722;
         border-radius: 50%;
+        display: inline-block;
+        
       }
     }
   }
