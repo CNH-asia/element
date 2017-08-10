@@ -29,27 +29,40 @@
     }
   }
   @b dropdown-menu {
+    width: 140px;
+    padding: 10px 0;
+    background: #FFFFFF;
+    border: 1px solid #D7D7D7;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.10);
+    border-radius: 2px;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    z-index: 20;
+    font-size: 14px;
+
     margin: 5px 0;
-    background-color: var(--color-white);
+    /*background-color: var(--color-white);
     border: 1px solid var(--color-base-gray);
     box-shadow: var(--dropdown-menu-box-shadow);
     padding: 6px 0;
     z-index: 10;
     position: absolute;
     top: 0;
-    left: 0;
+    left: 0;*/
     min-width: 100px;
 
     @e item {
+      height: 30px;
+      line-height: 30px;
       list-style: none;
-      line-height: 36px;
       padding: 0 10px;
-      margin: 0;
+      margin-top: 8px;
       cursor: pointer;
 
       &:not(.is-disabled):hover {
-        background-color: var(--dropdown-menuItem-hover-fill);
-        color: var(--dropdown-menuItem-hover-color);
+        background-color: #e4e8f1;
+        color: #48576a;
       }
       @m divided {
         position: relative;

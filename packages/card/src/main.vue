@@ -1,11 +1,9 @@
 <template>
   <div class="el-card" 
+    :type="nativeType"
     :class="
       type ? 'el-card--' + type : ''">
-    <div class="el-card__header" v-if="$slots.header || header">
-      <slot name="header">{{ header }}</slot>
-    </div>
-    <div class="el-card__body" :style="bodyStyle">
+    <div class="el-card__body" >
       <slot></slot>
     </div>
   </div>
@@ -14,10 +12,15 @@
 <script>
   export default {
     name: 'ElCard',
-    props: ['header', 'bodyStyle'],
-    type: {
-      type: String,
-      default: 'default'
+    props: {
+      nativeType: {
+        type: String,
+        default: 'comp'
+      },
+      type: {
+        type: String,
+        default: 'comp'
+      }
     }
   };
 </script>

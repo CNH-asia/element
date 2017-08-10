@@ -31,19 +31,6 @@
       </transition>
       <slot></slot>
     </div>
-    <ul
-      class="el-carousel__indicators"
-      v-if="indicatorPosition !== 'none'"
-      :class="{ 'el-carousel__indicators--labels': hasLabel, 'el-carousel__indicators--outside': indicatorPosition === 'outside' || type === 'card' }">
-      <li
-        v-for="(item, index) in items"
-        class="el-carousel__indicator"
-        :class="{ 'is-active': index === activeIndex }"
-        @mouseenter="throttledIndicatorHover(index)"
-        @click.stop="handleIndicatorClick(index)">
-        <button class="el-carousel__button"><span v-if="hasLabel">{{ item.label }}</span></button>
-      </li>
-    </ul>
   </div>
 </template>
 
@@ -79,7 +66,7 @@ export default {
     },
     arrow: {
       type: String,
-      default: 'hover'
+      default: 'always'
     },
     type: String
   },
@@ -111,7 +98,7 @@ export default {
     },
 
     autoplay(val) {
-      val ? this.startTimer() : this.pauseTimer();
+      // val ? this.startTimer() : this.pauseTimer();
     }
   },
 
@@ -171,12 +158,12 @@ export default {
     },
 
     pauseTimer() {
-      clearInterval(this.timer);
+      // clearInterval(this.timer);
     },
 
     startTimer() {
-      if (this.interval <= 0 || !this.autoplay) return;
-      this.timer = setInterval(this.playSlides, this.interval);
+      // if (this.interval <= 0 || !this.autoplay) return;
+      // this.timer = setInterval(this.playSlides, this.interval);
     },
 
     setActiveItem(index) {
@@ -243,6 +230,12 @@ export default {
 
   beforeDestroy() {
     if (this.$el) removeResizeListener(this.$el, this.resetItemPosition);
+  },
+
+  hideCarousel(e) {
+    console.log(e.currentTarget);
+    e.currentTarget.classList.add('hide');
+    document.getElementsByClassName('el-carousel')[0].classList.add('hide');
   }
 };
 </script>

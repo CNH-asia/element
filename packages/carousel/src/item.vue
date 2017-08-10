@@ -14,11 +14,7 @@
       webkitTransform: `translateX(${ translate }px) scale(${ scale })`,
       transform: `translateX(${ translate }px) scale(${ scale })`
     }">
-    <div
-      v-if="$parent.type === 'card'"
-      v-show="!active"
-      class="el-carousel__mask">
-    </div>
+   
     <slot></slot>
   </div>
 </template>
