@@ -237,6 +237,7 @@
   :on-preview="handlePictureCardPreview"
   :on-remove="handleRemove">
   <i class="el-icon-plus"></i>
+  <span>添加</span>
 </el-upload>
 <el-dialog v-model="dialogVisible" size="tiny">
   <img width="100%" :src="dialogImageUrl" alt="">
