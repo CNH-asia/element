@@ -11,10 +11,15 @@
     box-sizing: border-box;
     width: 100%;
     max-width: 100%;
-    background-color: var(--color-white);
-    border: 1px solid var(--table-border-color);
+    /*background-color: var(--color-white);
+    border: 1px solid var(--table-border-color);*/
     font-size: 14px;
     color: var(--table-text-color);
+    margin: 0;
+    padding: 0;
+    table-layout: fixed;
+    border: none;
+    outline: none;
 
     &::before {
       content: '';
@@ -28,7 +33,7 @@
     }
 
     &::after {
-      content: '';
+      /*content: '';*/
       position: absolute;
       top: 0;
       right: 0;
@@ -135,6 +140,20 @@
     & th.is-leaf, td {
       border-bottom: 1px solid var(--table-border-color);
     }
+    & th.is-leaf{
+      border-bottom: 2px solid #D7D7D7;
+    }
+
+    .el-table__header th:first-child, .el-table__body td:first-child {
+      padding-left: 30px;
+    }
+    .el-table--enable-row-transition .el-table__body td {
+      transition: background-color .25s ease;
+    }
+    .el-table-column--selection .cell {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
 
     @modifier border {
       & th, td {
@@ -151,7 +170,7 @@
     }
 
     & th {
-      background-color: var(--table-header-background);
+      background-color: #fff;
       text-align: left;
     }
 
@@ -247,6 +266,7 @@
 
     @e header-wrapper, body-wrapper, footer-wrapper {
       width: 100%;
+      overflow:hidden;
     }
 
     @e footer-wrapper {
@@ -299,6 +319,9 @@
       vertical-align: middle;
       width: 100%;
       box-sizing: border-box;
+      background:#fff;
+      font-weight:normal;
+
 
       &.highlight {
         color: var(--color-primary);
@@ -376,8 +399,9 @@
       white-space: normal;
       word-break: break-all;
       line-height: 24px;
-      padding-left: 18px;
-      padding-right: 18px;
+      padding-left: 0px;
+      padding-right: 20px;
+
     }
 
     & tr input[type="checkbox"] {
@@ -386,6 +410,11 @@
 
     & tr {
       background-color: var(--color-white);
+      height: 35px;
+      color: #4a4a4a;
+      position: relative;
+      z-index: 20;
+      font-weight: normal;
     }
 
     @modifier striped {
@@ -408,14 +437,14 @@
         &, &.el-table__row--striped {
           &, &.current-row {
             > td {
-              background-color: var(--color-extra-light-gray);
+              background-color: #d7d7d7;
             }
           }
         }
       }
 
       tr.current-row > td {
-        background: color(var(--color-primary) tint(92%));
+        background: #d7d7d7;
       }
     }
 
@@ -452,9 +481,18 @@
       }
     }
 
+.el-table__body tr {
+  border-bottom: 1px solid #D7D7D7;
+  height: 60px;
+  color: #7A7A7A;
+  word-break: break-all;
+  word-wrap: break-word;
+  padding-right: 5px;
+}
+
     @modifier enable-row-hover {
       .el-table__body tr:hover > td {
-        background-color: var(--color-extra-light-gray);
+        background-color:#d7d7d7;
         background-clip: padding-box;
       }
     }
