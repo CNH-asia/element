@@ -144,17 +144,19 @@
 ```
 :::
 
-### 主题
+### 展示形式
 
-Tooltip 组件提供了两个不同的主题：`dark`和`light`。
+Tooltip 组件提供了两个不同的展示形式：`dark`和`light`。默认`dark`为文字，`light`为图片。
 
 
-:::demo 通过设置`effect`属性来改变主题，默认为`dark`。
+:::demo 通过设置`effect`属性来改变
 ```html
 <el-tooltip content="Top center" placement="top">
   <el-button>Dark</el-button>
 </el-tooltip>
-<el-tooltip content="Bottom center" placement="bottom" effect="light">
+
+<el-tooltip content="Right center" placement="right" effect="light">
+  <div slot="content"><img src="https://dashboard.lightyy.com/icon.png?9bc13255721bf19a38bf178a395e1c1e"></div>
   <el-button>Light</el-button>
 </el-tooltip>
 ```

@@ -14,7 +14,7 @@
       .popper__arrow,
       .popper__arrow::after {
         position: absolute;
-        display: block;
+        display: none;
         width: 0;
         height: 0;
         border-color: transparent;
@@ -100,13 +100,33 @@
       }
 
       @when dark {
-        background: var(--tooltip-fill);
-        color: var(--tooltip-color);
+        /*background: var(--tooltip-fill);
+        color: var(--tooltip-color);*/
+        padding: 10px 8px;
+        text-align: center;
+        font-size: 14px;
+        color: #399DE2;
+        letter-spacing: 0;
+        background: hsl(204, 29%, 97%);
+        border: 1px solid #8EC0E3;
+        box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.20);
+        border-radius: 4px;
       }
 
       @when light {
-        background: var(--tooltip-color);
-        border: 1px solid var(--tooltip-fill);
+        /*background: var(--tooltip-color);
+        border: 1px solid var(--tooltip-fill);*/
+        padding: 10px 8px;
+        text-align: center;
+        font-size: 14px;
+        color: #000;
+        letter-spacing: 0;
+        border-radius: 4px;
+        z-index: 99;
+        background: #FFFFFF;
+        border: 1px solid #D7D7D7;
+        box-shadow: 0 0 4px 0 rgba(0,0,0,0.10);
+        border-radius: 2px;
 
         &[x-placement^="top"] .popper__arrow {
           border-top-color: var(--tooltip-fill);

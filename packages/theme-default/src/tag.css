@@ -4,17 +4,25 @@
 @component-namespace el {
 
   @b tag {
-    background-color: var(--tag-fill);
-    display: inline-block;
+    /*background-color: var(--tag-fill);
+    display: inline-block;*/
     padding: var(--tag-padding);
     height: 24px;
-    line-height: calc(@height - 2);
+    /*line-height: calc(@height - 2);
     font-size: var(--tag-font-size);
     color: var(--tag-color);
-    border-radius: var(--tag-border-radius);
+    border-radius: var(--tag-border-radius);*/
     box-sizing: border-box;
     border: 1px solid transparent;
     white-space: nowrap;
+
+    background: #4BABED;
+    border-radius: 9px;
+    font-size: 14px;
+    color: #fff;
+    letter-spacing: 0;
+    line-height: 18px;
+    padding: 2px 6px;
 
     & .el-icon-close {
       border-radius: 50%;
@@ -37,9 +45,8 @@
     }
 
     @m gray {
-      background-color: var(--tag-gray-fill);
-      border-color: var(--tag-gray-border);
-      color: var(--tag-gray-color);
+      background-color: #E8E8E8;
+      color: #4A4A4A;
       @when hit {
         border-color: var(--tag-gray-color);
       }
@@ -49,6 +56,12 @@
         color: var(--color-white);
       }
     }
+
+    @m green {
+      background-color: #9AE04C;
+      color: #fff;
+    }
+
     @m primary {
       background-color: var(--tag-primary-fill);
       border-color: var(--tag-primary-border);

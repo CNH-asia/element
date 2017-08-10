@@ -27,18 +27,27 @@
     /* 照片墙模式 */
     @m picture-card {
       background-color: #fbfdff;
-      border: 1px dashed #c0ccda;
+      border: 1px dashed #399de2;
       border-radius: 6px;
       box-sizing: border-box;
-      width: 148px;
-      height: @width;
+      width: 90px;
+      height: 165px;
       cursor: pointer;
-      line-height: calc(@height - 2);
+      line-height: normal;
       vertical-align: top;
 
       i {
-        font-size: 28px;
-        color: #8c939d;
+        display: block;
+        margin-top: 55px;
+        font-size: 18px;
+        color: #399de2;
+      }
+
+      span{
+        color: #399de2;
+        font-size: 14px;
+        text-align: center;
+        line-height: 36px;
       }
 
       &:hover {
@@ -202,11 +211,12 @@
     }
     @e item-delete {
       position: absolute;
-      right: 10px;
-      top: 0;
+      left: 50%;
+      top: -3px;
       font-size: 12px;
       color: var(--color-extra-light-black);
-      display: none;
+      margin-left: -10px;
+      /*display: none;*/
 
       &:hover {
         color: var(--color-primary);
@@ -223,10 +233,12 @@
         border: 1px solid #c0ccda;
         border-radius: 6px;
         box-sizing: border-box;
-        width: 148px;
-        height: @width;
+        width: 90px;
+        height: 165px;
         margin: 0 8px 8px 0;
         display: inline-block;
+
+        &-preview{display: none;}
 
         & .el-icon-check,
         & .el-icon-circle-check {
@@ -238,6 +250,10 @@
         }
 
         &:hover {
+          .el-upload-list__item-actions {
+            opacity: 1;
+            cursor: pointer;
+          }
           .el-upload-list__item-status-label {
             display: none;
           }
@@ -254,6 +270,7 @@
         height: 100%;
       }
       .el-upload-list__item-status-label {
+        display: none;
         position: absolute;
         right: -15px;
         top: -6px;
@@ -273,9 +290,9 @@
       .el-upload-list__item-actions {
         position: absolute;
         width: 100%;
-        height: 100%;
+        height: 30px;
         left: 0;
-        top: 0;
+        bottom: 0;
         cursor: default;
         text-align: center;
         color: #fff;
@@ -286,24 +303,24 @@
         @utils-vertical-center;
 
         span {
-          display: none;
+          /*display: none;*/
           cursor: pointer;
         }
         span + span {
-          margin-left: 15px;
+          /*margin-left: 15px;*/
         }
 
         .el-upload-list__item-delete {
-          position: static;
+          position: absolute;
           font-size: inherit;
           color: inherit;
         }
 
         &:hover {
           opacity: 1;
-          span {
+          /*span {
             display: inline-block;
-          }
+          }*/
         }
       }
       .el-progress {
@@ -335,6 +352,7 @@
         }
         &:hover {
           .el-upload-list__item-status-label {
+            display:none;
             background: transparent;
             box-shadow: none;
             top: -2px;
@@ -378,6 +396,7 @@
         }
       }
       .el-upload-list__item-status-label {
+        display: none;
         position: absolute;
         right: -17px;
         top: -7px;

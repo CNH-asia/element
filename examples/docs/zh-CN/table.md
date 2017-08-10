@@ -1116,7 +1116,7 @@
     style="width: 100%">
     <el-table-column
       type="index"
-      width="50">
+      width="80">
     </el-table-column>
     <el-table-column
       property="date"
@@ -1187,13 +1187,12 @@
   <el-table
     ref="multipleTable"
     :data="tableData3"
-    border
     tooltip-effect="dark"
     style="width: 100%"
     @selection-change="handleSelectionChange">
     <el-table-column
       type="selection"
-      width="55">
+      width="80">
     </el-table-column>
     <el-table-column
       label="日期"
