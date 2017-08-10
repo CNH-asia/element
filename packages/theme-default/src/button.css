@@ -28,8 +28,9 @@
 
     &:hover,
     &:focus {
-      color: var(--color-primary);
+      color: var(--color-white);
       border-color: @color;
+      background-color: #0785DB;
     }
     
     &:active {
@@ -127,12 +128,15 @@
       @mixin button-variant var(--button-info-color), var(--button-info-fill), var(--button-info-border);
     }
     @m large {
+      line-height: 3px;
       @mixin button-size var(--button-large-padding-vertical), var(--button-large-padding-horizontal), var(--button-large-font-size), var(--button-border-radius);
     }
     @m small {
+      height: 30px;
       @mixin button-size var(--button-small-padding-vertical), var(--button-small-padding-horizontal), var(--button-small-font-size), var(--button-border-radius);
     }
     @m mini {
+      height: 26px;
       @mixin button-size var(--button-mini-padding-vertical), var(--button-mini-padding-horizontal), var(--button-mini-font-size), var(--button-border-radius);
     }
     @m text {
@@ -144,9 +148,11 @@
 
       &:hover,
       &:focus {
+        background: transparent;
         color: tint(var(--color-primary), var(--button-hover-tint-percent));
       }
       &:active {
+        background: transparent;
         color: shade(var(--color-primary), var(--button-active-shade-percent));
       }
     }

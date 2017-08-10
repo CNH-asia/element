@@ -1,5 +1,7 @@
 <template>
-  <div class="el-card">
+  <div class="el-card" 
+    :class="
+      type ? 'el-card--' + type : ''">
     <div class="el-card__header" v-if="$slots.header || header">
       <slot name="header">{{ header }}</slot>
     </div>
@@ -12,7 +14,10 @@
 <script>
   export default {
     name: 'ElCard',
-
-    props: ['header', 'bodyStyle']
+    props: ['header', 'bodyStyle'],
+    type: {
+      type: String,
+      default: 'default'
+    }
   };
 </script>
