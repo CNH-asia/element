@@ -2,13 +2,6 @@
   <transition name="msgbox-fade">
     <div class="el-message-box__wrapper" tabindex="-1" v-show="visible" @click.self="handleWrapperClick">
       <div class="el-message-box" :class="customClass">
-        <div class="el-message-box__header" v-if="title !== undefined">
-          <div class="el-message-box__title">{{ title || t('el.messagebox.title') }}</div>
-          <button type="button" class="el-message-box__headerbtn" aria-label="Close" 
-                  v-if="showClose" @click="handleAction('cancel')">
-            <i class="el-message-box__close el-icon-close"></i>
-          </button>
-        </div>
         <div class="el-message-box__content" v-if="message !== ''">
           <div class="el-message-box__status" :class="[ typeClass ]"></div>
           <div class="el-message-box__message" :style="{ 'margin-left': typeClass ? '50px' : '0' }">
@@ -18,23 +11,6 @@
             <el-input v-model="inputValue" @keyup.enter.native="handleAction('confirm')" :placeholder="inputPlaceholder" ref="input"></el-input>
             <div class="el-message-box__errormsg" :style="{ visibility: !!editorErrorMessage ? 'visible' : 'hidden' }">{{ editorErrorMessage }}</div>
           </div>
-        </div>
-        <div class="el-message-box__btns">
-          <el-button
-            :loading="cancelButtonLoading"
-            :class="[ cancelButtonClasses ]"
-            v-show="showCancelButton"
-            @click.native="handleAction('cancel')">
-            {{ cancelButtonText || t('el.messagebox.cancel') }}
-          </el-button>
-          <el-button
-            :loading="confirmButtonLoading"
-            ref="confirm"
-            :class="[ confirmButtonClasses ]"
-            v-show="showConfirmButton"
-            @click.native="handleAction('confirm')">
-            {{ confirmButtonText || t('el.messagebox.confirm') }}
-          </el-button>
         </div>
       </div>
     </div>
@@ -190,23 +166,33 @@
       },
 
       visible(val) {
-        if (val) this.uid++;
-        if (this.$type === 'alert' || this.$type === 'confirm') {
-          this.$nextTick(() => {
-            this.$refs.confirm.$el.focus();
-          });
-        }
-        if (this.$type !== 'prompt') return;
-        if (val) {
-          setTimeout(() => {
-            if (this.$refs.input && this.$refs.input.$el) {
-              this.$refs.input.$el.querySelector('input').focus();
-            }
-          }, 500);
-        } else {
-          this.editorErrorMessage = '';
-          removeClass(this.$refs.input.$el.querySelector('input'), 'invalid');
-        }
+        var t = this;
+        var timer = null;
+        console.log(t.modal);
+        timer=setTimeout(function() {
+          clearTimeout(timer);
+          if(t.visible) {
+            t.doClose();
+          }
+        }, 2000);
+
+        // if (val) this.uid++;
+        // if (this.$type === 'alert' || this.$type === 'confirm') {
+        //   this.$nextTick(() => {
+        //     this.$refs.confirm.$el.focus();
+        //   });
+        // }
+        // if (this.$type !== 'prompt') return;
+        // if (val) {
+        //   setTimeout(() => {
+        //     if (this.$refs.input && this.$refs.input.$el) {
+        //       this.$refs.input.$el.querySelector('input').focus();
+        //     }
+        //   }, 500);
+        // } else {
+        //   this.editorErrorMessage = '';
+        //   removeClass(this.$refs.input.$el.querySelector('input'), 'invalid');
+        // }
       }
     },
 

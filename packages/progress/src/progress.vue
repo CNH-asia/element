@@ -53,7 +53,7 @@
       },
       strokeWidth: {
         type: Number,
-        default: 6
+        default: 10
       },
       textInside: {
         type: Boolean,

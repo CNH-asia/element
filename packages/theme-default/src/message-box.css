@@ -7,12 +7,23 @@
 @component-namespace el {
 
   @b message-box {
-    text-align: left;
     display: inline-block;
+    transform: translate(-50%, -50%);
+    min-width: 421px;
+    min-height: 140px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 60;
+    background: #FFFFFF;
+    border: 1px solid #D7D7D7;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.20);
+    border-radius: 2px;
+
+    text-align: left;
+   
     vertical-align: middle;
-    background-color: var(--color-white);
     width: var(--msgbox-width);
-    border-radius: var(--msgbox-border-radius);
     font-size: var(--msgbox-font-size);
     overflow: hidden;
     backface-visibility: hidden;
@@ -32,10 +43,7 @@
       }
     }
 
-    @e header {
-      position: relative;
-      padding: 20px 20px 0;
-    }
+
 
     @e headerbtn {
       position: absolute;
@@ -60,10 +68,11 @@
     }
 
     @e content {
-      padding: 30px 20px;
-      color: var(--msgbox-content-color);
-      font-size: var(--msgbox-content-font-size);
-      position: relative;
+      height: 100%;
+      padding: 0;
+      color: #48576a;
+      font-size: 14px;
+      position: relative; 
     }
 
     @e input {
@@ -93,7 +102,11 @@
     }
 
     @e message {
+      position: relative;
+      padding: 60px 80px;
       margin: 0;
+      text-align: justify;
+      vertical-align: middle;
 
       & p {
         margin: 0;

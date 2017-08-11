@@ -165,6 +165,14 @@
       </el-menu-item-group>
     </el-menu>
   </el-col>
+  <el-col :span="4">
+    <h5>侧栏菜单</h5>
+    <el-menu default-active="2" class="menu-vertical w60">
+          <el-menu-item index="1" style="padding-left: 0;"><i class="icon icon-ybp"></i>仪表盘</el-menu-item>
+          <el-menu-item index="2" style="padding-left: 0;"><i class="icon icon-comp"></i>H5</el-menu-item>
+          <el-menu-item index="3" style="padding-left: 0;"><i class="icon icon-app"></i>APP</el-menu-item>
+        </el-menu>
+  </el-col>
 </el-row>
 
 <script>
@@ -186,7 +194,54 @@
 
 ::: demo
 ```html
-<el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
+<div class="h-menu">
+        <div class="h-menu-top">    
+          <span style="margin-right: 53px;">运维管理</span>
+          <el-radio-group v-model="isCollapse">
+              <el-radio-button :label="false" @click="openMenu" style="display: none;">></el-radio-button>
+              <el-radio-button :label="true" @click="closeMenu"><</el-radio-button>
+          </el-radio-group>
+        </div>
+      
+        <el-menu  class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" @select="select" :collapse="isCollapse">
+          <el-submenu index="1" @click="justify">
+              <template slot="title">
+                  <i class="el-icon-message"></i>
+                  <span slot="title">社区管理</span>
+              </template>
+              <el-menu-item index="1-1">社区管理</el-menu-item>
+          </el-submenu>
+          <el-submenu index="2">
+              <template slot="title">
+                  <i class="el-icon-message"></i>
+                  <span slot="title">组件管理</span>
+              </template>
+              <el-menu-item index="1-1">组件管理</el-menu-item>
+          </el-submenu>
+            <el-submenu index="3">
+              <template slot="title">
+                  <i class="el-icon-message"></i>
+                  <span slot="title">实例管理</span>
+              </template>
+              <el-menu-item index="1-1">实例管理</el-menu-item>
+          </el-submenu>
+          <el-submenu index="4">
+              <template slot="title">
+                  <i class="el-icon-message"></i>
+                  <span slot="title">应用管理</span>
+              </template>
+              <el-menu-item index="1-1">应用管理</el-menu-item>
+          </el-submenu>
+            <el-submenu index="5">
+              <template slot="title">
+                  <i class="el-icon-message"></i>
+                  <span slot="title">用户管理</span>
+              </template>
+              <el-menu-item index="1-1">用户管理</el-menu-item>
+          </el-submenu>
+        </el-menu>
+      </div>
+<!-- <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
   <el-radio-button :label="false">展开</el-radio-button>
   <el-radio-button :label="true">收起</el-radio-button>
 </el-radio-group>
@@ -217,7 +272,7 @@
     <i class="el-icon-setting"></i>
     <span slot="title">导航三</span>
   </el-menu-item>
-</el-menu>
+</el-menu> -->
 
 <style>
   .el-menu-vertical-demo:not(.el-menu--collapse) {

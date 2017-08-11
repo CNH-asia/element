@@ -57,8 +57,10 @@
 
       @when checked {
         .el-radio__inner {
-          border-color: var(--radio-checked-input-border-color);
-          background: var(--radio-checked-icon-color);
+          border-color: #399DE2;
+          background: #fff;
+          /*border-color: var(--radio-checked-input-border-color);
+          background: var(--radio-checked-icon-color);*/
 
           &::after {
             transform: translate(-50%, -50%) scale(1);
@@ -73,9 +75,12 @@
       }
     }
     @e inner {
+      width: 14px;
+      height: 14px;
+
       border: var(--radio-input-border);
       border-radius: var(--radio-input-border-radius);
-      circle: var(--radio-input-width) var(--radio-input-fill);
+      /*circle: var(--radio-input-width) var(--radio-input-fill);*/
       position: relative;
       cursor: pointer;
       display: inline-block;
@@ -86,13 +91,18 @@
       }
 
       &::after {
-        circle: 6px var(--color-white);
+        width: 8px;
+        height: 8px;
+        background: #399DE2;
+        border-radius: 50%;
+        /*circle: 6px var(--color-white);*/
         content: "";
         position: absolute;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%) scale(0);
-        transition: transform .15s cubic-bezier(.71,-.46,.88,.6);
+        /*transition: transform .15s cubic-bezier(.71,-.46,.88,.6);*/
+        transition: transform .15s ease;
       }
     }
 

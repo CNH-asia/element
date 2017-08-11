@@ -19,7 +19,8 @@
     }
 
     @modifier small {
-      width: var(--dialog-small-width);
+      width: 600px;
+      /*width: var(--dialog-small-width);*/
     }
 
     @modifier large {
@@ -38,13 +39,29 @@
       position: fixed 0 0 0 0;
       overflow: auto;
       margin: 0;
+     
+      /*opacity: 0.8;*/
     }
 
     @e header {
-      padding: 20px 20px 0;
+        position: relative;
+        height: 40px;
+        text-align: center;
+        background: #F2F2F2;
+        line-height: 40px;
+        padding: 0;
+        border-bottom: solid 1px #D7D7D7;
+          /*padding: 20px 20px 0;*/
     }
 
     @e headerbtn {
+      position: absolute;
+      right: 5px;
+      top: 1px;
+      /*height: 40px;*/
+      /*padding: 5px 0;*/
+      vertical-align: middle;
+      /*top: 5px;*/
       float: right;
       background: transparent;
       border: none;
@@ -53,6 +70,9 @@
       cursor: pointer;
 
       .el-dialog__close {
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
         color: var(--dialog-close-color);
       }
       
@@ -64,16 +84,17 @@
     }
 
     @e title {
+      color: #4A4A4A;
+      font-weight: normal;
       line-height: 1;
       font-size: var(--dialog-title-font-size);
-      font-weight: bold;
-      color: var(--color-base-black);
     }
 
     @e body {
       padding: 30px 20px;
-      color: var(--color-extra-light-black);
-      font-size: var(--dialog-font-size);
+      color: #48576a;
+      font-size: 16px;
+      text-align: center;
     }
 
     @e footer {
@@ -90,6 +111,7 @@
   .dialog-fade-leave-active {
     animation: dialog-fade-out .3s;
   }
+
 
   @keyframes dialog-fade-in {
     0% {
@@ -112,4 +134,5 @@
       opacity: 0;
     }
   }
+  
 }
