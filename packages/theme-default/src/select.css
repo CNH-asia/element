@@ -17,6 +17,9 @@
       .el-input__inner {
         border-color: var(--select-border-color-hover);
       }
+      span{
+        color:#399DE2;
+      }
     }
 
     & .el-input__inner {
