@@ -230,7 +230,7 @@
       }
 
       @when finish {
-        font-weight: 700;
+        font-weight: normal;
         color: var(--color-primary);
       }
     }
