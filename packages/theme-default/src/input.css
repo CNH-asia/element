@@ -9,15 +9,15 @@
     width: 100%;
 
     @e inner {
+      color: #4A4A4A; 
+      font-size: 14px;
       appearance: none;
       background-color: var(--input-fill);
       background-image: none;
-      border-radius: var(--input-border-radius);
+      border-radius: 2px;
       border: var(--input-border);
       box-sizing: border-box;
-      color: var(--input-color);
       display: inline-block;
-      font-size: inherit;
       height: var(--input-height);
       line-height: 1;
       outline: none;
@@ -34,8 +34,8 @@
       }
 
       &:focus {
-        outline: none;
-        border-color: var(--input-focus-border);
+        box-shadow: 0 0 4px 0 #399DE2;
+        border: 1px solid #399DE2;
       }
     }
 
