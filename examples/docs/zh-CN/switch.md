@@ -29,15 +29,22 @@
 
 ```html
 <el-switch
-  v-model="value1"
-  on-text=""
-  off-text="">
+width=54
+on-color=""
+off-color=""
+v-model="value1"
+on-text=""
+off-text="">
 </el-switch>
 <el-switch
-  v-model="value2"
-  on-color="#13ce66"
-  off-color="#ff4949">
+width=54
+v-model="value2"
+on-color=""
+off-color=""
+on-text="开"
+off-text="关">
 </el-switch>
+
 
 <script>
   export default {
@@ -60,8 +67,6 @@
 <el-tooltip :content="'Switch value: ' + value3" placement="top">
   <el-switch
     v-model="value3"
-    on-color="#13ce66"
-    off-color="#ff4949"
     on-value="100"
     off-value="0">
   </el-switch>
