@@ -14,12 +14,14 @@
     margin: 5px 0;
 
     @when multiple {
+
       & .el-select-dropdown__item.selected {
         color: var(--select-option-selected);
-        background-color: var(--select-dropdown-background);
+        background-color: #E7E7E7;
+
 
         &.hover {
-          background-color: var(--select-option-hover-background);
+          background-color: #E7E7E7;
         }
 
         &::after {
@@ -56,5 +58,9 @@
     padding: var(--select-dropdown-padding);
     margin: 0;
     box-sizing: border-box;
+    text-align: center;
+    & .el-select-dropdown__item:hover span{
+      color:#399DE2
+    }
   }
 }
