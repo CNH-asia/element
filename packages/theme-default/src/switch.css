@@ -7,8 +7,8 @@
     display: inline-block;
     position: relative;
     font-size: var(--switch-font-size);
-    line-height: var(--switch-height);
-    height: var(--switch-height);
+    line-height: 32px;
+    height: 32px;
     vertical-align: middle;
     @when disabled {
       & .el-switch__core,
@@ -20,7 +20,7 @@
     @e label {
       transition: .2s;
       position: absolute;
-      size: var(--switch-width) var(--switch-height);
+      size: 52px 32px;
       left: 0;
       top: 0;
       display: inline-block;
@@ -38,7 +38,7 @@
       }
       & * {
         line-height: 1;
-        top: 4px;
+        top: 9px;
         position: absolute;
         font-size: var(--switch-font-size);
         display: inline-block;
@@ -54,28 +54,31 @@
       margin: 0;
       display: inline-block;
       position: relative;
-      size: var(--switch-width) var(--switch-height);
-      border: 1px solid var(--switch-off-color);
+      size: 54px 32px;
+      border: 1px solid #dfdfdf;
       outline: none;
-      border-radius: var(--switch-core-border-radius);
+      border-radius: 20px;
       box-sizing: border-box;
-      background: var(--switch-off-color);
+      background: #64bd63;
       cursor: pointer;
       transition: border-color .3s, background-color .3s;
 
       & .el-switch__button {
-        position: absolute 0 * * 0;
+        position: absolute -2px * * -7px;
         border-radius: var(--border-radius-circle);
         transition: transform .3s;
-        size: var(--switch-button-size);
-        background-color: var(--color-white);
+        size: 28px;
+        background-color: #fff;
+        border: 1px solid #d7d7d7;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
       }
     }
 
     @when checked {
       .el-switch__core {
-        border-color: var(--switch-on-color);
-        background-color: var(--switch-on-color);
+        border: 1px solid #dfdfdf;
+        border-radius: 20px;
+        background-color: #64bd63;
       }
     }
 
