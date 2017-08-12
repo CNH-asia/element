@@ -1,14 +1,14 @@
 <template>
   <div
     class="el-step"
-    :style="[style,  isLast ? '' : { marginRight: - $parent.stepOffset + 'px' }]"
+    :style="[style,  { marginRight: - $parent.stepOffset + 'px' }]"
     :class="['is-' + $parent.direction]">
     <div
       class="el-step__head"
       :class="['is-' + currentStatus, { 'is-text': !icon }]">
       <div
         class="el-step__line"
-        :style="isLast ? '' : { marginRight: $parent.stepOffset + 'px' }"
+        :style="{ marginRight: $parent.stepOffset + 'px' }"
         :class="['is-' + $parent.direction, { 'is-icon': icon }]">
         <i class="el-step__line-inner" :style="lineStyle"></i>
       </div>
@@ -81,7 +81,11 @@ export default {
       return this.status || this.internalStatus;
     },
     prevStatus() {
-      const prevStep = this.$parent.steps[this.index - 1];
+      // const prevStep = this.$parent.steps[this.index - 1];
+      var prevStep = this.$parent.steps[this.index - 1];
+      if(this.index == 0) {
+        prevStep = this.$parent.steps[this.$parent.steps.length - 1];
+      }
       return prevStep ? prevStep.currentStatus : 'wait';
     },
     isLast: function() {
@@ -93,7 +97,7 @@ export default {
       const isCenter = parent.center;
       const len = parent.steps.length;
 
-      if (isCenter && this.isLast) {
+      if (isCenter ) {
         return {};
       }
 
@@ -114,8 +118,10 @@ export default {
 
   methods: {
     updateStatus(val) {
-      const prevChild = this.$parent.$children[this.index - 1];
-
+      var prevChild = this.$parent.$children[this.index - 1];
+      if(this.index == 0) {
+        prevChild = this.$parent.$children[this.$parent.$children.length-1];
+      }
       if (val > this.index) {
         this.internalStatus = this.$parent.finishStatus;
       } else if (val === this.index && this.prevStatus !== 'error') {
@@ -124,20 +130,28 @@ export default {
         this.internalStatus = 'wait';
       }
 
-      if (prevChild) prevChild.calcProgress(this.internalStatus);
+      
+      prevChild.calcProgress(this.internalStatus);
+      
+      if(this.index==this.$parent.$children.length-1) {
+        this.calcProgress(this.internalStatus);
+      }
     },
 
     calcProgress(status) {
       let step = 100;
       const style = {};
-
-      style.transitionDelay = 150 * this.index + 'ms';
+      var that = this;
+      // style.transitionDelay = 150 * (this.index) + 'ms';
+      style.transitionDelay = 150 + 'ms';
       if (status === this.$parent.processStatus) {
         step = this.currentStatus !== 'error' ? 50 : 0;
+        // style.transitionDelay = 150 * (this.index-2) + 'ms';
+        style.transitionDelay = 300 + 'ms';
       } else if (status === 'wait') {
         step = 0;
-        style.transitionDelay = (-150 * this.index) + 'ms';
-      }
+        // style.transitionDelay = (-150 * this.index) + 'ms';
+      } 
 
       style.borderWidth = step ? '1px' : 0;
       this.$parent.direction === 'vertical'

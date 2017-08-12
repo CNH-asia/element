@@ -104,32 +104,6 @@ LIGHT组件商店组件推荐卡片
     {{'列表内容 ' + o }}
   </div>
 </el-card>
-<el-card  type="comp">
-  <div class="text item">
-    <h1 title="elementui">elemntui000000000000000000000</h1>
-    <div class="describe">ID : 8112734868606389红红火火恍恍惚惚</div>
-    <div class="describe">2222222222222222哈哈哈哈哈</div>
-  </div>
-  <div class="hover-hide contentMsg">
-    <div class="line"></div>
-    <div class="tags">
-      <el-tag type=green>未发布</el-tag>
-      <el-tag type=grey>H5</el-tag>
-    </div>
-  </div>
-  <div class="hover-show">
-    <div class="bottom-menu">
-      <span class="bottom-menu-item">
-        <el-button type="text">编辑</el-button>
-        <img src="https://dashboard.lightyy.com/images/card-edit.svg">
-      </span>
-      <span class="bottom-menu-item">
-        <el-button type="text">删除</el-button>
-        <img src="https://dashboard.lightyy.com/images/card-delete.svg">
-      </span>       
-    </div>
-  </div>      
-</el-card>
 <style>
   .text {
     font-size: 14px;

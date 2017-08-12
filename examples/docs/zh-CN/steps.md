@@ -8,7 +8,7 @@
 
     methods: {
       next() {
-        if (this.active++ > 2) this.active = 0;
+        if (this.active++ > 4) this.active = 0;
       }
     }
   }
@@ -23,10 +23,12 @@
 
 :::demo 设置`active`属性，接受一个`Number`，表明步骤的 index，从 0 开始。需要定宽的步骤条时，设置`space`属性即可，它接受`Boolean`，单位为`px`，如果不设置，则为自适应。设置`finish-status`属性可以改变已经完成的步骤的状态。
 ```html
-<el-steps :space="200" :active="active" style="margin-top: 70px;">
+<el-steps  :active="active" style="margin-top: 70px;">
   <el-step title="测试版本"></el-step>
   <el-step title="待发布"></el-step>
   <el-step title="线上版本"></el-step>
+  <el-step title="最终版本"></el-step>
+  <el-step title="最终版本"></el-step>
 </el-steps>
 
 <el-button style="margin-top: 12px;" @click="next">下一步</el-button>
@@ -41,7 +43,7 @@
 
     methods: {
       next() {
-        if (this.active++ > 2) this.active = 0;
+        // if (this.active++ > 4) this.active = 0;
       }
     }
   }

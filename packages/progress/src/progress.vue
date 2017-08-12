@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="el-progress-circle" :style="{height: width + 'px', width: width + 'px'}" v-else>
-      <svg viewBox="0 0 100 100">
+      <svg viewBox="0 0 200 200">
         <path class="el-progress-circle__track" :d="trackPath" stroke="#e5e9f2" :stroke-width="relativeStrokeWidth" fill="none"></path>
         <path class="el-progress-circle__path" :d="trackPath" stroke-linecap="round" :stroke="stroke" :stroke-width="relativeStrokeWidth" fill="none" :style="circlePathStyle"></path>
       </svg>
@@ -80,7 +80,7 @@
       trackPath() {
         var radius = parseInt(50 - parseFloat(this.relativeStrokeWidth) / 2, 10);
 
-        return `M 50 50 m 0 -${radius} a ${radius} ${radius} 0 1 1 0 ${radius * 2} a ${radius} ${radius} 0 1 1 0 -${radius * 2}`;
+        return `M 100 100 m 0 -${radius} a ${radius} ${radius} 0 1 1 0 ${radius * 2} a ${radius} ${radius} 0 1 1 0 -${radius * 2}`;
       },
       perimeter() {
         var radius = 50 - parseFloat(this.relativeStrokeWidth) / 2;
