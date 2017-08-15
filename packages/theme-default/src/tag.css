@@ -4,8 +4,8 @@
 @component-namespace el {
 
   @b tag {
-    /*background-color: var(--tag-fill);
-    display: inline-block;*/
+    /*background-color: var(--tag-fill);*/
+    display: inline-block;
     padding: var(--tag-padding);
     height: 24px;
     /*line-height: calc(@height - 2);

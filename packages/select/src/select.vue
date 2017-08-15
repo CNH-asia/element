@@ -1,14 +1,16 @@
 <template>
   <div
     class="el-select"
-    v-clickoutside="handleClose">
+    v-clickoutside="handleClose"
+    :type="selectType"
+    :class=" stype ? 'el-select--' + stype : '' ">
     <div
       class="el-select__tags"
-      v-if="multiple"
+      v-if="multiple&&stype=='fixedWidth'"
       @click.stop="toggleMenu"
       ref="tags"
-      :style="{ 'max-width': inputWidth - 32 + 'px' }">
-      <transition-group @after-leave="resetInputHeight">
+      :style="stype=='fixedWidth'?{ 'max-width': inputWidth - 32 + 'px' }:{ 'max-height': inputHeight - 6 + 'px' }">
+      <transition-group @after-leave="resetInputHeight" :style=" stype=='fixedHeight' ? { 'max-height': inputHeight - 6 + 'px'} : {} ">
         <el-tag
           v-for="item in selected"
           :key="getValueKey(item)"
@@ -27,6 +29,7 @@
         :class="`is-${ size }`"
         @focus="visible = true"
         :disabled="disabled"
+        :title="title"
         @keyup="managePlaceholder"
         @keydown="resetInputState"
         @keydown.down.prevent="navigateOptions('next')"
@@ -48,7 +51,7 @@
       :name="name"
       :size="size"
       :disabled="disabled"
-      :readonly="!filterable || multiple"
+      :readonly="!filterable "
       :validate-event="false"
       @focus="handleFocus"
       @click="handleIconClick"
@@ -199,6 +202,18 @@
       valueKey: {
         type: String,
         default: 'value'
+      },
+      selectType: {
+        type: String,
+        default: 'fixedWidth'
+      },
+      stype: {
+        type: String,
+        default: ''
+      },
+      title: {
+        type: String,
+        default: 'hhhh'
       }
     },
 
@@ -212,7 +227,8 @@
         isSelect: true,
         inputLength: 20,
         inputWidth: 0,
-        cachedPlaceHolder: '',
+        inputHeight: 0,
+        cachedPlaceHolder: '33',
         optionsCount: 0,
         filteredOptionsCount: 0,
         visible: false,
@@ -221,25 +237,31 @@
         query: '',
         optionsAllDisabled: false,
         inputHovering: false,
-        currentPlaceholder: ''
+        currentPlaceholder: '',
+        type: ''
       };
     },
 
     watch: {
       placeholder(val) {
-        this.cachedPlaceHolder = this.currentPlaceholder = val;
+        // this.cachedPlaceHolder = this.currentPlaceholder = val;
       },
-
+      
       value(val) {
+        this.stype = this.$el.attributes[0].nodeValue;
+        this.setSelected();
         if (this.multiple) {
-          this.resetInputHeight();
-          if (val.length > 0 || (this.$refs.input && this.query !== '')) {
+          if(this.stype=='fixedWidth') {
+            this.resetInputHeight();
+          } 
+          
+          if (this.stype=='fixedWidth' && (val.length > 0 || (this.$refs.input && this.query !== ''))) {
             this.currentPlaceholder = '';
           } else {
             this.currentPlaceholder = this.cachedPlaceHolder;
           }
         }
-        this.setSelected();
+        
         if (this.filterable && !this.multiple) {
           this.inputLength = 20;
         }
@@ -255,7 +277,10 @@
         if (this.multiple && this.filterable) {
           this.inputLength = this.$refs.input.value.length * 15 + 20;
           this.managePlaceholder();
-          this.resetInputHeight();
+          if(this.stype=='fixedWidth') {
+            this.resetInputHeight();
+          }
+          
         }
         if (this.remote && typeof this.remoteMethod === 'function') {
           this.hoverIndex = -1;
@@ -326,7 +351,7 @@
       options(val) {
         if (this.$isServer) return;
         this.optionsAllDisabled = val.length === val.filter(item => item.disabled === true).length;
-        if (this.multiple) {
+        if (this.multiple && this.stype=='fixedWidth') {
           this.resetInputHeight();
         }
         let inputs = this.$el.querySelectorAll('input');
@@ -407,6 +432,9 @@
           return;
         }
         let result = [];
+        if(this.stype=='fixedHeight') {
+          this.$children[0].$refs.input.value = this.value.toString();
+        } 
         if (Array.isArray(this.value)) {
           this.value.forEach(value => {
             result.push(this.getOption(value));
@@ -414,7 +442,7 @@
         }
         this.selected = result;
         this.$nextTick(() => {
-          this.resetInputHeight();
+          if(this.stype=='fixedWidth') this.resetInputHeight();
         });
       },
 
@@ -471,26 +499,30 @@
 
       managePlaceholder() {
         if (this.currentPlaceholder !== '') {
-          this.currentPlaceholder = this.$refs.input.value ? '' : this.cachedPlaceHolder;
+          // this.currentPlaceholder = this.$refs.input.value ? '' : this.cachedPlaceHolder;
+          this.currentPlaceholder = this.cachedPlaceHolder;
         }
       },
 
       resetInputState(e) {
         if (e.keyCode !== 8) this.toggleLastOptionHitState(false);
         this.inputLength = this.$refs.input.value.length * 15 + 20;
-        this.resetInputHeight();
+        if(this.stype=='fixedWidth') this.resetInputHeight();
       },
 
       resetInputHeight() {
-        this.$nextTick(() => {
-          if (!this.$refs.reference) return;
-          let inputChildNodes = this.$refs.reference.$el.childNodes;
-          let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
-          input.style.height = Math.max(this.$refs.tags.clientHeight + 6, sizeMap[this.size] || 36) + 'px';
-          if (this.visible && this.emptyText !== false) {
-            this.broadcast('ElSelectDropdown', 'updatePopper');
-          }
-        });
+        if(this.stype=='fixedWidth') {
+          this.$nextTick(() => {
+            if (!this.$refs.reference) return;
+            let inputChildNodes = this.$refs.reference.$el.childNodes;
+            let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
+            input.style.height = Math.max(this.$refs.tags.clientHeight + 6, sizeMap[this.size] || 36) + 'px';
+            if (this.visible && this.emptyText !== false) {
+              this.broadcast('ElSelectDropdown', 'updatePopper');
+            }
+          });
+        }
+        
       },
 
       resetHoverIndex() {
@@ -636,7 +668,7 @@
 
       handleResize() {
         this.resetInputWidth();
-        if (this.multiple) this.resetInputHeight();
+        if (this.multiple && this.stype=='fixedWidth') this.resetInputHeight();
       },
 
       checkDefaultFirstOption() {
@@ -670,6 +702,7 @@
     },
 
     created() {
+      this.setSelected();
       this.cachedPlaceHolder = this.currentPlaceholder = this.placeholder;
       if (this.multiple && !Array.isArray(this.value)) {
         this.$emit('input', []);
@@ -677,7 +710,7 @@
       if (!this.multiple && Array.isArray(this.value)) {
         this.$emit('input', '');
       }
-      this.setSelected();
+      
 
       this.debouncedOnInputChange = debounce(this.debounce, () => {
         this.onInputChange();
@@ -689,11 +722,11 @@
     },
 
     mounted() {
-      if (this.multiple && Array.isArray(this.value) && this.value.length > 0) {
+      if (this.multiple && Array.isArray(this.value) && this.value.length > 0 && this.stype=='fixedWidth') {
         this.currentPlaceholder = '';
       }
       addResizeListener(this.$el, this.handleResize);
-      if (this.remote && this.multiple) {
+      if (this.remote && this.multiple && this.stype=='fixedWidth') {
         this.resetInputHeight();
       }
       this.$nextTick(() => {

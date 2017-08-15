@@ -13,6 +13,20 @@
     display: inline-block;
     position: relative;
 
+    @m fixedHeight .el-select__tags {
+      height: 100%;
+      max-height: inherit;
+    }
+
+    @m fixedHeight .el-tag {
+      display: inline;
+      border: none;
+      background: transparent;
+      margin: 0;
+    }
+    @m fixedHeight .el-tag .el-tag__close:before {
+      content: '';
+    }
     &:hover {
       .el-input__inner {
         border-color: var(--select-border-color-hover);
@@ -122,7 +136,6 @@
 
     & .el-tag {
       height: var(--select-tag-height);
-      line-height: var(--select-tag-height);
       box-sizing: border-box;
       margin: 3px 0 3px 6px;
     }

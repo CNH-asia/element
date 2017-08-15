@@ -169,9 +169,9 @@
         var t = this;
         var timer = null;
         console.log(t.modal);
-        timer=setTimeout(function() {
+        timer = setTimeout(function() {
           clearTimeout(timer);
-          if(t.visible) {
+          if (t.visible) {
             t.doClose();
           }
         }, 2000);

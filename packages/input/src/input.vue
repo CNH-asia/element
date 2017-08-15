@@ -111,6 +111,7 @@
         default: true
       },
       onIconClick: Function
+      // currentValue: String
     },
 
     computed: {

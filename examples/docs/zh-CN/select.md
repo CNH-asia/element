@@ -71,6 +71,12 @@
         }, {
           value: 'JavaScript',
           label: 'JavaScript'
+        }, {
+          value: 'Java',
+          label: 'Java'
+        }, {
+          value: 'Script',
+          label: 'Script'
         }],
         cities: [{
           value: 'Beijing',
@@ -101,6 +107,7 @@
         value8: '',
         value9: '',
         value10: [],
+        value11: [],
         loading: false,
         states: ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
       };
@@ -322,6 +329,8 @@
 :::demo 为`el-select`设置`multiple`属性即可启用多选，此时`v-model`的值为当前选中值所组成的数组
 ```html
 <template>
+<div>
+  固定宽度
   <el-select v-model="value5" multiple placeholder="请选择">
     <el-option
       v-for="item in options"
@@ -330,6 +339,20 @@
       :value="item.value">
     </el-option>
   </el-select>
+  <br>
+</div>
+  
+<div>
+  固定高度
+  <el-select v-model="value11" multiple placeholder="请选择" type="fixedHeight">
+    <el-option
+      v-for="item in options5"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+</div>
 </template>
 
 <script>
