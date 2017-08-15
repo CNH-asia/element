@@ -135,7 +135,7 @@
 
 <style>
   .demo-select .el-select {
-    width: 240px;
+    /*width: 240px;*/
   }
 </style>
 

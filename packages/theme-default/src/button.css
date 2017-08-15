@@ -9,11 +9,10 @@
     line-height: 1;
     white-space: nowrap;
     cursor: pointer;
-    background: var(--button-default-fill);
-    border: var(--border-base);
-    border-color: var(--button-default-border);
-    /*color: var(--button-default-color);*/
-    color: #399DE2;
+    background: #3BBAF4 ;
+    border: 1px solid #0AA9F1;
+    color: #fff;
+    letter-spacing: 0.21px;
     -webkit-appearance: none;
     text-align: center;
     box-sizing: border-box;
@@ -112,17 +111,56 @@
         background-color: rgba(255,255,255,.35);
       }
     }
+
+    @m default {
+      width: 200px;
+      height: 30px;
+      background: #3BBAF4;
+      border: 1px solid #0AA9F1;
+      padding: 4px 10px;
+      letter-spacing: 0.24px;
+      font-size: 16px;
+      color: #fff;
+      line-height: 22px;
+      &:hover {
+        background:#0AA9F1;
+        border: 1px solid #0997D8;
+      }
+      @when disabled {
+        &,
+        &:hover,
+        &:focus{
+          color: #fff;
+          background: #D2D9E3;
+          border: 1px solid #B5C1D4;
+        }     
+      }
+    }
+
     @m primary {
       @mixin button-variant var(--button-primary-color), var(--button-primary-fill), var(--button-primary-border);
+    &:hover {
+      background-color: #0AA9F1;
+      border-color: #0997D8;
+      }  
     }
     @m success {
       @mixin button-variant var(--button-success-color), var(--button-success-fill), var(--button-success-border);
+      &:hover {
+        background: rgba(125,206,35,0.8);
+      }
     }
     @m warning {
       @mixin button-variant var(--button-warning-color), var(--button-warning-fill), var(--button-warning-border);
+      &:hover {
+        background: rgba(241,174,64,0.8);
+      }
     }
     @m danger {
       @mixin button-variant var(--button-danger-color), var(--button-danger-fill), var(--button-danger-border);
+      &:hover {
+        background: rgba(247,113,129,0.8);
+      }
     }
     @m info {
       @mixin button-variant var(--button-info-color), var(--button-info-fill), var(--button-info-border);
@@ -141,19 +179,53 @@
     }
     @m text {
       border: none;
-      color: var(--color-primary);
+      color: #0AA9F1;
+      font-size: 14px;
+      line-height: 20px;
       background: transparent;
       padding-left: 0;
       padding-right: 0;
+      text-decoration: underline;
 
       &:hover,
       &:focus {
         background: transparent;
-        color: tint(var(--color-primary), var(--button-hover-tint-percent));
+        color: #0997D8;
+        /*color: tint(var(--color-primary), var(--button-hover-tint-percent));*/
       }
       &:active {
         background: transparent;
-        color: shade(var(--color-primary), var(--button-active-shade-percent));
+        color: #0997D8;
+        /*color: shade(var(--color-primary), var(--button-active-shade-percent));*/
+      }
+    }
+    @m card {
+      width: 116px;
+      height: 26px;
+      border-radius: 90px;
+      border-color: #0AA9F1;
+      background: #fff;
+      line-height: 20px;
+      font-size: 14px;
+      letter-spacing: 0px;
+      color: #0AA9F1;
+      padding: 3px;
+
+      &:hover {
+        background-color: #fff;
+        border-color: #0997D8;
+        color: #0997D8;
+      }
+
+      @when disabled {
+        &,
+        &:hover,
+        &:focus {
+          border-color: #B5C1D4;
+          background-color: #fff;
+          color: #B5C1D4;
+        }
+        
       }
     }
   }
@@ -169,7 +241,12 @@
       & + .el-button {
         margin-left: 0;
       }
-
+      & .el-icon--left {
+        margin-right: 8px;
+      }
+      & .el-icon--right {
+        margin-left: 8px;
+      }
       &:first-child {
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
@@ -199,10 +276,12 @@
     @each $type in (primary, success, warning, danger, info) {
       .el-button--$type {
         &:first-child {
-          border-right-color: rgba(var(--color-white), 0.5);
+          border-right-width: 1.5px;
+          border-right-color: rgba(var(--color-white), 0.6);
         }
         &:last-child {
-          border-left-color: rgba(var(--color-white), 0.5);
+          border-left-width: 1.5px;
+          border-left-color: rgba(var(--color-white), 0.6);
         }
         &:not(:first-child):not(:last-child) {
           border-left-color: rgba(var(--color-white), 0.5);

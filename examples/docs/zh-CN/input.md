@@ -126,13 +126,13 @@
 <style>
   .demo-input.demo-zh-CN {
     .el-select .el-input {
-      width: 110px;
+      /*width: 110px;*/
     }
     .el-input {
-      width: 180px;
+      /*width: 180px;*/
     }
     .el-textarea {
-      width: 414px;
+      /*width: 414px;*/
     }
     .el-input-group {
       width: 100%;

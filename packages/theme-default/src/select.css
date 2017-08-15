@@ -12,6 +12,7 @@
   @b select {
     display: inline-block;
     position: relative;
+    width: 180px;
 
     @m fixedHeight .el-select__tags {
       height: 100%;
@@ -29,7 +30,7 @@
     }
     &:hover {
       .el-input__inner {
-        border-color: var(--select-border-color-hover);
+        border-color: #B5C1D4;
       }
       span{
         color:#399DE2;
@@ -37,6 +38,7 @@
     }
 
     & .el-input__inner {
+      width: 180px;
       cursor: pointer;
       padding-right: 35px;
 
@@ -46,8 +48,9 @@
     }
 
     & .el-input {
+      width: 180px;
       & .el-input__icon {
-        color: var(--select-input-color);
+        color: #D2D9E3;
         font-size: var(--select-input-font-size);
         transition: transform .3s;
         transform: translateY(-50%) rotateZ(180deg);

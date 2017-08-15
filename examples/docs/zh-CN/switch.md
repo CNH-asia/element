@@ -29,7 +29,6 @@
 
 ```html
 <el-switch
-width=54
 on-color=""
 off-color=""
 v-model="value1"
@@ -37,7 +36,6 @@ on-text=""
 off-text="">
 </el-switch>
 <el-switch
-width=54
 v-model="value2"
 on-color=""
 off-color=""

@@ -6,22 +6,23 @@
   @b select-dropdown {
     position: absolute;
     z-index: 1001;
-    border: var(--select-dropdown-border);
-    border-radius: var(--border-radius-small);
-    background-color: var(--select-dropdown-background);
-    box-shadow: var(--select-dropdown-shadow);
+    border: 1px solid #D2D9E3;
+    border-radius: 2px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px 0 #B5C1D4;;
     box-sizing: border-box;
-    margin: 5px 0;
+    margin: 2px 0;
 
     @when multiple {
 
       & .el-select-dropdown__item.selected {
-        color: var(--select-option-selected);
-        background-color: #E7E7E7;
+        color: #fff;
+        background-color: #0AA9F1;
 
 
         &.hover {
-          background-color: #E7E7E7;
+          color: #fff;
+          background-color: #0997D8;
         }
 
         &::after {
@@ -60,7 +61,10 @@
     box-sizing: border-box;
     text-align: center;
     & .el-select-dropdown__item:hover span{
-      color:#399DE2
+      color:#606060;
+    }
+    & .el-select-dropdown__item.hover.selected span{
+      color:#fff;
     }
   }
 }

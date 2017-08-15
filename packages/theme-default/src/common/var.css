@@ -333,8 +333,8 @@
   -------------------------- */
   --button-font-size: 14px;
   --button-border-radius: 2px;
-  --button-padding-vertical: 10px;
-  --button-padding-horizontal: 15px;
+  --button-padding-vertical: 7px;
+  --button-padding-horizontal: 18px;
 
   --button-large-font-size: 16px;
   --button-large-padding-vertical: 20px;
@@ -362,22 +362,22 @@
   --button-disabled-border: var(--disabled-border-base);
 
   /*--button-primary-border: var(--color-primary);*/
-  --button-primary-border: #0785DB;
+  --button-primary-border: #0AA9F1;
   --button-primary-color: var(--color-white);
   /*--button-primary-fill: var(--color-primary);*/
-  --button-primary-fill: #0785DB;
+  --button-primary-fill: #3BBAF4;
 
-  --button-success-border: var(--color-success);
+  --button-success-border: #7DCE23;
   --button-success-color: var(--color-white);
-  --button-success-fill: var(--color-success);
+  --button-success-fill: #7DCE23;
 
-  --button-warning-border: var(--color-warning);
+  --button-warning-border: #F1AE40;
   --button-warning-color: var(--color-white);
-  --button-warning-fill: var(--color-warning);
+  --button-warning-fill: #F1AE40;
 
-  --button-danger-border: #E56250;
+  --button-danger-border: #F77181;
   --button-danger-color: var(--color-white);
-  --button-danger-fill: #E56250;
+  --button-danger-fill: #F77181;
 
   --button-info-border: var(--color-info);
   --button-info-color: var(--color-white);

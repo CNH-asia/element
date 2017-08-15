@@ -81,6 +81,7 @@
 <el-button>默认按钮</el-button>
 <el-button type="primary">主要按钮</el-button>
 <el-button type="text">文字按钮</el-button>
+<el-button type="card">卡片页面按钮</el-button>
 ```
 :::
 
@@ -91,9 +92,11 @@
 :::demo 你可以使用`disabled`属性来定义按钮是否可用，它接受一个`Boolean`值。
 
 ```html
-<el-button :plain="true" :disabled="true">主要按钮</el-button>
+<el-button :disabled="true">默认按钮</el-button>
+<!-- <el-button :plain="true" :disabled="true">主要按钮</el-button> -->
 <el-button type="primary" :disabled="true">主要按钮</el-button>
 <el-button type="text" :disabled="true">文字按钮</el-button>
+<el-button type="card" :disabled="true">卡片页面按钮</el-button>
 ```
 :::
 
@@ -110,7 +113,6 @@
     <el-button type="success">成功按钮</el-button>
     <el-button type="warning">警告按钮</el-button>
     <el-button type="danger">危险按钮</el-button>
-    <el-button type="info">信息按钮</el-button>
   </span>
 </div>
 <div class="block">
@@ -119,7 +121,6 @@
     <el-button :plain="true" type="success">成功按钮</el-button>
     <el-button :plain="true" type="warning">警告按钮</el-button>
     <el-button :plain="true" type="danger">危险按钮</el-button>
-    <el-button :plain="true" type="info">信息按钮</el-button>
   </span>
 </div>
 ```

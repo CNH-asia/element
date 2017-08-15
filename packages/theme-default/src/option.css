@@ -5,37 +5,45 @@
 
   @b select-dropdown {
     @e item {
-      font-size: var(--select-font-size);
-      padding: 8px 10px;
+      height: 36px;
+      font-size: 14px;
+      padding: 11px 10px;
       position: relative;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      color: var(--select-option-color);
+      color: #606060;
       height: var(--select-option-height);
       line-height: 1.5;
+      text-align: left;
       box-sizing: border-box;
       cursor: pointer;
+      box-shadow: inset 1px 0 0 0 #D3DCE6, inset -1px 0 0 0 #D3DCE6;
 
       @when disabled {
-        color: var(--select-option-disabled-color);
-        cursor: not-allowed;
-
-        &:hover {
+        &,
+        &:hover,
+        &:hover span {
+          color: var(--select-option-disabled-color);
+          cursor: not-allowed;
           background-color: var(--color-white);
         }
+        
+
       }
 
       &.hover, &:hover {
-        background-color: var(--select-option-hover-background);
+        color: #606060;
+        background-color: #ECEFF5;
       }
 
       &.selected {
         color: var(--color-white);
-        background-color: var(--select-option-selected);
+        background-color: #0AA9F1;
 
         &.hover {
-          background-color: var(--select-option-selected-hover);
+          color: #fff;
+          background-color: #0997D8;
         }
       }
 
