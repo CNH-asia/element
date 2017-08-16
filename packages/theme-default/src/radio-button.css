@@ -5,7 +5,16 @@
   @b radio-button {
     position: relative;
     display: inline-block;
-
+    border: 1px solid #B5C1D4 ;
+    border-right-color: transparent;
+    &:hover {
+      color: #0AA9F1;
+      border: 1px solid #0AA9F1;
+      border-right-color: #0AA9F1;
+    }
+    &:hover + .el-radio-button {
+      // border-left-color: transparent;
+    }
     @e inner {
       display: inline-block;
       width: 74px;
@@ -15,8 +24,7 @@
       vertical-align: middle;
       cursor: pointer;
       background: var(--button-default-fill);
-      border: 1px solid #B5C1D4 ;
-      border-left-color: transparent;
+     
       color: #606060;
       -webkit-appearance: none;
       text-align: center;
@@ -32,10 +40,9 @@
       font-size: 14px;
      
       &:hover {
-        color: #0AA9F1;
-        border: 1px solid #0AA9F1;
-        // border-left-width: 1px;
-        border-left-color: #0AA9F1;
+        // color: #0AA9F1;
+        // border: 1px solid #0AA9F1;
+        // border-left-color: #0AA9F1;
         // border-width: 1px;
         // border-color: #0AA9F1;
       }
@@ -78,15 +85,15 @@
     }
 
     &:first-child {
-      .el-radio-button__inner {
-        border-left: var(--border-base);
-        border-radius: 4px 0 0 4px;
-        box-shadow: none !important;
-      }
+      // border-left: var(--border-base);
+      border-radius: 2px 0 0 2px;
+     
     }
     &:last-child {
-      .el-radio-button__inner {
-        border-radius: 0 var(--border-radius-base) var(--border-radius-base) 0;
+      border-right: 1px solid #B5C1D4;
+      border-radius: 0 2px 2px 0;
+      &:hover {
+        border-color: #0AA9F1;
       }
     }
 

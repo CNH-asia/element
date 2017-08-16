@@ -3,35 +3,35 @@
     data() {
       return {
         tableData: [{
-          date: '2016-05-03',
-          name: '王小虎',
+          date: 'data地址',
+          name: 'data_service',
           province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
+          city: 'data_service',
+          address: 'http://l1.qinglight.com/data',
           zip: 200333,
           tag: '家'
         }, {
-          date: '2016-05-02',
-          name: '王小虎',
+          date: 'portal地址',
+          name: 'portal_prefix',
           province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
+          city: 'portal_prefix',
+          address: 'http://sno7vhnyc.lightyy.com/upd',
           zip: 200333,
           tag: '公司'
         }, {
-          date: '2016-05-04',
-          name: '王小虎',
+          date: 'log_level',
+          name: 'log_level',
           province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
+          city: 'log_level',
+          address: 'http://l1.qinglight.com/data',
           zip: 200333,
           tag: '家'
         }, {
-          date: '2016-05-01',
-          name: '王小虎',
+          date: 'version_detail',
+          name: 'version_detail',
           province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
+          city: 'version_detail',
+          address: '["管理中心，框架的调整","light门户中，应用装配的基本信息版块与基本装配版块的新版发布","其他部分体验优化"]',
           zip: 200333,
           tag: '公司'
         }],
@@ -362,17 +362,34 @@
       style="width: 100%">
       <el-table-column
         prop="date"
-        label="日期"
-        width="180">
+        label="配置项"
+        width="160">
       </el-table-column>
       <el-table-column
         prop="name"
-        label="姓名"
-        width="180">
+        label="配置代码"
+        width="160">
+      </el-table-column>
+      <el-table-column
+        prop="city"
+        label="配置说明"
+        width="160">
       </el-table-column>
       <el-table-column
         prop="address"
-        label="地址">
+        label="配置值"
+        width="250">
+      </el-table-column>
+      <el-table-column
+        label="操作">
+        <template scope="scope">
+        <el-button
+          @click.native.prevent="deleteRow(scope.$index, tableData4)"
+          type="text"
+          size="small">
+          编辑
+        </el-button>
+      </template>
       </el-table-column>
     </el-table>
   </template>

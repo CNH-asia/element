@@ -10,7 +10,7 @@
     <div class="el-form-item__content" v-bind:style="contentStyle">
       <slot></slot>
       <transition name="el-zoom-in-top">
-        <div class="el-form-item__error" v-if="validateState === 'error' && showMessage && form.showMessage">{{validateMessage}}</div>
+        <div class="el-form-item__error" v-if="validateState === 'error' && showMessage && form.showMessage">*{{validateMessage}}</div>
       </transition>
     </div>
   </div>
@@ -89,8 +89,9 @@
         if (this.form.labelPosition === 'top' || this.form.inline) return ret;
         if (!label && !this.labelWidth && this.isNested) return ret;
         var labelWidth = this.labelWidth || this.form.labelWidth;
+        console.log(labelWidth);
         if (labelWidth) {
-          ret.marginLeft = labelWidth;
+          ret.marginLeft = parseInt(labelWidth)+20 + 'px';
         }
         return ret;
       },

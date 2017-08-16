@@ -7,9 +7,12 @@
     display: inline-block;
 
     &.el-input {
-      width: 193px;
+      width: 152px;
     }
-
+    
+    &.el-input .el-input__inner {
+      border-radius: 2px;
+    }
     @m daterange {
       &.el-input {
         width: 220px;

@@ -125,21 +125,25 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
 <!-- Form -->
 <el-button type="text" @click="dialogFormVisible = true">打开嵌套表单的 Dialog</el-button>
 
-<el-dialog title="收货地址" :visible.sync="dialogFormVisible">
+<el-dialog title="创建组件" :visible.sync="dialogFormVisible">
   <el-form :model="form">
-    <el-form-item label="活动名称" :label-width="formLabelWidth">
+    <el-form-item label="组件名称" :label-width="formLabelWidth">
       <el-input v-model="form.name" auto-complete="off"></el-input>
     </el-form-item>
-    <el-form-item label="活动区域" :label-width="formLabelWidth">
-      <el-select v-model="form.region" placeholder="请选择活动区域">
-        <el-option label="区域一" value="shanghai"></el-option>
-        <el-option label="区域二" value="beijing"></el-option>
-      </el-select>
+    <el-form-item label="组件简介" :label-width="formLabelWidth">
+      <el-input type="textarea"></el-input>
+    </el-form-item>
+    <el-form-item label="标签选择（最多选择3个）" :label-width="formLabelWidth" style="border-bottom: 1px solid #DCE0E7; text-align: right;">
+      <el-button type="text">测试</el-button>
+      <el-button type="text">DEMO</el-button>
+      <el-button type="text">安卓</el-button>
+    </el-form-item>
+    <el-form-item label="" :label-width="formLabelWidth" style="text-align: left;">
+      同意<el-button type="text" style="margin-right: 20px;">《开发者协议》</el-button><el-checkbox></el-checkbox>
     </el-form-item>
   </el-form>
   <div slot="footer" class="dialog-footer">
-    <el-button @click="dialogFormVisible = false">取 消</el-button>
-    <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+    <el-button @click="dialogFormVisible = false">创建组件</el-button>
   </div>
 </el-dialog>
 

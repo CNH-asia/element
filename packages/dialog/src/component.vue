@@ -81,7 +81,7 @@
 
       top: {
         type: String,
-        default: '15%'
+        default: '60px'
       },
       beforeClose: Function
     },

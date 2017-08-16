@@ -1,6 +1,6 @@
 <template>
   <transition name="msgbox-fade">
-    <div class="el-message-box__wrapper" tabindex="-1" v-show="visible" @click.self="handleWrapperClick">
+    <div class="el-message-box__wrapper" tabindex="-1" v-show="visible" @click.self="handleWrapperClick" style="display: block;">
       <div class="el-message-box" :class="customClass">
         <div class="el-message-box__content" v-if="message !== ''">
           <div class="el-message-box__status" :class="[ typeClass ]"></div>
@@ -11,6 +11,23 @@
             <el-input v-model="inputValue" @keyup.enter.native="handleAction('confirm')" :placeholder="inputPlaceholder" ref="input"></el-input>
             <div class="el-message-box__errormsg" :style="{ visibility: !!editorErrorMessage ? 'visible' : 'hidden' }">{{ editorErrorMessage }}</div>
           </div>
+        </div>
+        <div class="el-message-box__btns">
+          <el-button
+            :loading="cancelButtonLoading"
+            :class="[ cancelButtonClasses ]"
+            v-show="showCancelButton"
+            @click.native="handleAction('cancel')">
+            {{ cancelButtonText || t('el.messagebox.cancel') }}
+          </el-button>
+          <el-button
+            :loading="confirmButtonLoading"
+            ref="confirm"
+            :class="[ confirmButtonClasses ]"
+            v-show="showConfirmButton"
+            @click.native="handleAction('confirm')">
+            {{ confirmButtonText || t('el.messagebox.confirm') }}
+          </el-button>
         </div>
       </div>
     </div>
@@ -174,7 +191,7 @@
           if (t.visible) {
             t.doClose();
           }
-        }, 2000);
+        }, 20000000);
 
         // if (val) this.uid++;
         // if (this.$type === 'alert' || this.$type === 'confirm') {

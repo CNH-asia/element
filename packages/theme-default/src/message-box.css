@@ -9,21 +9,23 @@
   @b message-box {
     display: inline-block;
     transform: translate(-50%, -50%);
-    min-width: 421px;
-    min-height: 140px;
+    min-width: 400px;
+    min-height: 130px;
+    width: 400px;
+    height: 130px;
     position: fixed;
     top: 50%;
     left: 50%;
     z-index: 60;
     background: #FFFFFF;
-    border: 1px solid #D7D7D7;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.20);
+    border: 1px solid #D2D9E3;
+    box-shadow: 0 2px 4px 0 #B5C1D4;
     border-radius: 2px;
+    padding: 80px 100px 60px;
 
     text-align: left;
    
     vertical-align: middle;
-    width: var(--msgbox-width);
     font-size: var(--msgbox-font-size);
     overflow: hidden;
     backface-visibility: hidden;
@@ -68,11 +70,13 @@
     }
 
     @e content {
-      height: 100%;
+      width: 400px;
       padding: 0;
-      color: #48576a;
+      color: #606060;
       font-size: 14px;
+      letter-spacing: 0.21px;
       position: relative; 
+      margin-bottom: 60px;
     }
 
     @e input {
@@ -103,7 +107,7 @@
 
     @e message {
       position: relative;
-      padding: 60px 80px;
+      width: 400px;
       margin: 0;
       text-align: justify;
       vertical-align: middle;
@@ -115,8 +119,8 @@
     }
 
     @e btns {
-      padding: 10px 20px 15px;
-      text-align: right;
+      // padding: 10px 20px 15px;
+      text-align: center;
 
       & button:nth-child(2) {
         margin-left: 10px;

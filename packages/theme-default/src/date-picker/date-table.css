@@ -13,7 +13,10 @@
         }
 
         &.current {
-          background-color: var(--datepicker-inrange-color);
+          background-color: #0AA9F1;
+        }
+        &.current:hover {
+           background-color: #0997D8;
         }
       }
     }
@@ -24,6 +27,7 @@
       box-sizing: border-box;
       text-align: center;
       cursor: pointer;
+      color: #606060;
 
       &.next-month,
       &.prev-month {
@@ -31,22 +35,16 @@
       }
 
       &.today {
-        color: var(--datepicker-text-hover-color);
+        color: #0AA9F1;
         position: relative;
-        &:before {
-          content: " ";
-          position: absolute;
-          top: 0px;
-          right: 0px;
-          width: 0;
-          height: 0;
-          border-top: 0.5em solid var(--datepicker-active-color);
-          border-left: .5em solid transparent;
-        }
+       
       }
 
       &.available:hover {
-        background-color: var(--datepicker-cell-hover-color);
+        background-color: #ECEFF5;
+      }
+      &.available.current:hover {
+        background-color: #0997D8;
       }
 
       &.in-range {
@@ -59,7 +57,8 @@
       &.current:not(.disabled),
       &.start-date,
       &.end-date {
-        background-color: var(--datepicker-active-color) !important;
+        background-color: #0AA9F1;
+        // background-color: #0AA9F1  !important;
         color: var(--color-white);
       }
 

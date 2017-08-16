@@ -44,29 +44,31 @@
     }
 
     @e label {
-      text-align: right;
+      text-align: left;
       vertical-align: middle;
       float: left;
       font-size: 14px;
       color: var(--color-extra-light-black);
       line-height: 1;
-      padding: 11px 12px 11px 0;
+      padding: 11px 0px 11px 0;
       box-sizing: border-box;
     }
     @e content {
+      width: 300px;
       line-height: 36px;
       position: relative;
       font-size: 14px;
       @utils-clearfix;
     }
     @e error {
-      color: var(--color-danger);
+      color: #D55363;
       font-size: 12px;
       line-height: 1;
       padding-top: 4px;
       position: absolute;
       top: 100%;
       left: 0;
+      letter-spacing: 0.18px;
     }
 
     @when required {
@@ -80,8 +82,8 @@
     @when error {
       & .el-input__inner,
       & .el-textarea__inner {
-        border-color: var(--color-danger);
-        box-shadow: 0 0  4px 0 #ff4949;
+        border: 2px solid #F77181;
+        // box-shadow: 0 0  4px 0 #ff4949;
       }
       & .el-input-group__append,
       & .el-input-group__prepend, {
