@@ -56,7 +56,6 @@
       display: inline-block;
       position: relative;
       size: 46px 22px;
-      border: 1px solid #dfdfdf;
       outline: none;
       border-radius: 22px;
       box-sizing: border-box;
@@ -65,7 +64,7 @@
       transition: border-color .3s, background-color .3s;
 
       & .el-switch__button {
-        position: absolute -2px * * -2px;
+        position: absolute -1px * * -1px;
         border-radius: 10px;
         transition: transform .3s;
         size: 20px;

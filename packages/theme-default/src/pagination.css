@@ -19,14 +19,20 @@
       vertical-align: top;
       box-sizing: border-box;
     }
-
+    
+    .el-select {
+      width: 100px;
+    }
     .el-select .el-input {
-      width: 110px;
+      width: 100px;
       input {
         padding-right: 25px;
         border-radius: var(--border-radius-small);
         height: 28px;
       }
+    }
+    .el-select .el-input .el-input__inner {
+      width: 100px;
     }
 
     button {

@@ -170,6 +170,8 @@
 
           callback(this.validateMessage);
         });
+
+        // if(validateState === 'error' && showMessage && form.showMessage)
       },
       resetField() {
         this.validateState = '';

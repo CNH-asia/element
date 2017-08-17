@@ -99,9 +99,9 @@
 ```html
 <template>
   <el-radio-group v-model="radio3">
-    <el-radio-button label="上海"></el-radio-button>
-    <el-radio-button label="北京"></el-radio-button>
-    <el-radio-button label="广州"></el-radio-button>
+    <el-radio-button label="IOS"></el-radio-button>
+    <el-radio-button label="H5"></el-radio-button>
+    <el-radio-button label="Android"></el-radio-button>
     <el-radio-button label="深圳"></el-radio-button>
   </el-radio-group>
   <div style="margin: 15px 0;"></div>

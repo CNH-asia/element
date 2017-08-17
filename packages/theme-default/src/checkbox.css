@@ -69,6 +69,18 @@
           border-color: var(--checkbox-checked-input-border-color);*/
 
           &::after {
+            content: '';
+        width: 4px;
+        height: 8px;
+        border: 2px solid #fff;
+        border-left: 0;
+        border-top: 0;
+        position: absolute;
+        left: 5px;
+        top: 1px;
+        transition: all 0.15s ease;
+        transform-origin: center;
+        box-sizing: content-box;
             transform: rotate(45deg) scaleY(1);
           }
         }
@@ -118,19 +130,7 @@
       }
 
       &:after {
-        content: '';
-        width: 4px;
-        height: 8px;
-        transform: rotate(45deg);
-        border: 2px solid #fff;
-        border-left: 0;
-        border-top: 0;
-        position: absolute;
-        left: 5px;
-        top: 1px;
-        transition: all 0.15s ease;
-        transform-origin: center;
-        box-sizing: content-box;
+        
       }
     }
 

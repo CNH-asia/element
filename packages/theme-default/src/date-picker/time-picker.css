@@ -27,14 +27,17 @@
         font-size: 14px;
         margin-top: -15px;
         line-height: 16px;
-        background-color: var(--datepicker-active-color);
-        height: 32px;
+        background-color: #0AA9F1;
+        height: 33px;
         z-index: -1;
         left: 0;
         right: 0;
         box-sizing: border-box;
         padding-top: 6px;
         text-align: left;
+      }
+      &:hover::after, &:hover::before {
+        // background: #0997D8; 
       }
 
       &::after {

@@ -36,12 +36,13 @@
     }
   }
   @b form-item {
-    margin-bottom: 22px;
+    margin-bottom: 25px;
     @utils-clearfix;
 
     & .el-form-item {
       margin-bottom: 0;
     }
+
 
     @e label {
       text-align: left;
@@ -59,13 +60,14 @@
       position: relative;
       font-size: 14px;
       @utils-clearfix;
+
     }
     @e error {
       color: #D55363;
       font-size: 12px;
       line-height: 1;
       padding-top: 4px;
-      position: absolute;
+      // position: absolute;
       top: 100%;
       left: 0;
       letter-spacing: 0.18px;

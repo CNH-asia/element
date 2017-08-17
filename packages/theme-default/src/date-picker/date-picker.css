@@ -6,7 +6,7 @@
     min-width: 256px;
     height: 256px;
     margin: 2px 0;
-    // padding: 19px 26px 18px;
+    overflow-y: hidden;
 
     &.has-sidebar.has-time {
       min-width: 434px;
