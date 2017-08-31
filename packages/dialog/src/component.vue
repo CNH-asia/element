@@ -3,7 +3,7 @@
     <div class="el-dialog__wrapper" v-show="visible" @click.self="handleWrapperClick">
       <div
         class="el-dialog"
-        :class="[sizeClass, customClass]"
+        :class="[sizeClass, customClass, typeClass]"
         ref="dialog"
         :style="style">
         <div class="el-dialog__header">
@@ -15,7 +15,10 @@
             <i class="el-dialog__close el-icon el-icon-close"></i>
           </button>
         </div>
-        <div class="el-dialog__body" v-if="rendered"><slot></slot></div>
+        <div class="el-dialog__body" v-if="rendered">
+          <div :class="{ warning : typeClass}"></div>
+          <slot></slot>
+        </div>
         <div class="el-dialog__footer" v-if="$slots.footer">
           <slot name="footer"></slot>
         </div>
@@ -73,7 +76,10 @@
         type: String,
         default: 'small'
       },
-
+      type: {
+        type: String,
+        default: ''
+      },
       customClass: {
         type: String,
         default: ''
@@ -108,6 +114,12 @@
       },
       style() {
         return this.size === 'full' ? {} : { 'top': this.top };
+      },
+      typeClass() {
+        if(this.type == 'warning') {
+          return `el-dialog--warning`;
+        }
+        return;
       }
     },
 

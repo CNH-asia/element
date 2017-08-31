@@ -127,7 +127,22 @@
       border-radius: var(--border-radius-circle);
       background-color: var(--slider-stop-background-color);
       transform: translateX(-50%);
+
+      &.actived {
+        
+        background-color: #20a0ff !important;
+      }
     }
+    .el-slider__stop__tip {
+        position: absolute;
+        top: 10px;
+        left: -14px;
+        font-size: 12px;
+        text-align: center;
+        width: 21px;
+        padding: 0 5px;
+        display: inline-block;
+      }
 
     @when vertical {
       position: relative;
@@ -149,6 +164,7 @@
       .el-slider__stop {
         transform: translateY(50%);
       }
+
       &.el-slider--with-input {
         padding-bottom: calc(var(--input-large-height) + 22px);
         .el-slider__input {

@@ -137,6 +137,23 @@
       }
     }
 
+    @m plain {
+        height: 30px;
+        background: #fff;
+        border-color: #0AA9F1;
+        color: #0AA9F1;
+        padding: 4px 10px;
+        letter-spacing: 0.24px;
+        font-size: 16px;
+
+        &:active,
+        &:focus,
+        &:hover {
+             background-color: #fff;
+             border-color: #0997D8;
+             color: #0997D8;
+         }
+    }
     @m primary {
       @mixin button-variant var(--button-primary-color), var(--button-primary-fill), var(--button-primary-border);
     &:hover {
@@ -200,22 +217,25 @@
       }
     }
     @m card {
-      width: 116px;
-      height: 26px;
-      border-radius: 90px;
-      border-color: #0AA9F1;
-      background: #fff;
-      line-height: 20px;
-      font-size: 14px;
-      letter-spacing: 0px;
-      color: #0AA9F1;
-      padding: 3px;
+        width: 116px;
+        height: 26px;
+        border-radius: 90px;
+        border-color: #0AA9F1;
+        background: #fff;
+        line-height: 20px;
+        font-size: 14px;
+        letter-spacing: 0px;
+        color: #0AA9F1;
+        padding: 3px;
 
-      &:hover {
-        background-color: #fff;
-        border-color: #0997D8;
-        color: #0997D8;
-      }
+
+        &:hover,
+        &:focus,
+        &:active {
+            background-color: #fff;
+            border-color: #0997D8;
+            color: #0997D8;
+         }
 
       @when disabled {
         &,

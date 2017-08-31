@@ -8,13 +8,13 @@
 
   @b message-box {
     display: inline-block;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 0%);
     min-width: 400px;
     min-height: 130px;
     width: 400px;
     height: 130px;
     position: fixed;
-    top: 50%;
+    top: 60px;
     left: 50%;
     z-index: 60;
     background: #FFFFFF;

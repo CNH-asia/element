@@ -1,6 +1,7 @@
 <template>
   <div class="el-slider"
-    :class="{ 'is-vertical': vertical, 'el-slider--with-input': showInput }">
+    :class="{ 'is-vertical': vertical, 'el-slider--with-input': showInput }"
+    >
     <el-input-number
       v-model="firstValue"
       v-if="showInput && !range"
@@ -38,6 +39,12 @@
         v-for="item in stops"
         :style="vertical ? { 'bottom': item + '%' } : { 'left': item + '%' }"
         v-if="showStops">
+        <div class="el-slider__stop__tip">{{ item * max / 100 }}</div>
+      </div>
+      <div class="el-slider__stop"
+        v-for="i in tipPos"
+        :style="vertical ? { 'bottom': i + '%' } : { 'left': stepWidth*(i-min)/step + '%' }">
+        <div class="el-slider__stop__tip">{{ i }}</div>
       </div>
     </div>
   </div>
@@ -101,6 +108,10 @@
       },
       height: {
         type: String
+      },
+      disableMin: {
+        type: Boolean,
+        default: false
       }
     },
 
@@ -115,19 +126,43 @@
         secondValue: null,
         oldValue: null,
         dragging: false,
-        sliderSize: 1
+        sliderSize: 1,
+        tipPos: null,
+        isActived: false,
+          stepWidth: 0
       };
     },
 
     watch: {
       value(val, oldVal) {
+          let index = this.tipPos.indexOf(this.value);
+          for(let i = 0; i < index; i++) {
+              this.$el.querySelectorAll('.el-slider__stop')[i].classList.add('actived');
+          }
+        let oldIndex = this.tipPos.indexOf(oldVal);
+        let newIndex = this.tipPos.indexOf(val);
+        if (val > oldVal) { // 右滑
+            for(let i = oldIndex; i < newIndex; i++) {
+                this.$el.querySelectorAll('.el-slider__stop')[i].className = 'el-slider__stop actived';
+            }
+
+        } else if (val < oldVal) {
+            for(let j = oldIndex; j > newIndex; j--) {
+                this.$el.querySelectorAll('.el-slider__stop')[j].className = 'el-slider__stop';
+            }
+        }
+
         if (this.dragging ||
           Array.isArray(val) &&
           Array.isArray(oldVal) &&
           val.every((item, index) => item === oldVal[index])) {
           return;
+        } else {
+            return val;
         }
+
         this.setValues();
+
       },
 
       dragging(val) {
@@ -155,6 +190,31 @@
       },
 
       max() {
+          let stopCount = (this.max - this.min) / this.step;
+          let stepWidth = 100 * this.step / (this.max - this.min);
+          this.stepWidth = stepWidth;
+
+          let result = [0];
+          for (let i = 1; i < stopCount; i++) {
+              result.push(i * stepWidth);
+          }
+          result.push(100);
+          this.tipPos = [];
+          for(let j = 0; j <= stopCount; j++) {
+              this.tipPos.push(this.min + j * this.step);
+          }
+          let idx = this.tipPos.indexOf(this.value);
+          for(let i = 0; i < this.tipPos.length; i++) {
+              if(i < idx) {
+                  if(this.$el.querySelectorAll('.el-slider__stop')[i].classList)
+                    this.$el.querySelectorAll('.el-slider__stop')[i].classList.add('actived');
+              } else {
+                  if(this.$el.querySelectorAll('.el-slider__stop')[i].classList)
+                    this.$el.querySelectorAll('.el-slider__stop')[i].classList.remove('actived');
+              }
+
+          }
+
         this.setValues();
       }
     },
@@ -188,7 +248,7 @@
               this.oldValue = val.slice();
             }
           }
-        } else if (!this.range && typeof val === 'number' && !isNaN(val)) {
+        } else if (!this.range && typeof val === 'number') {
           if (val < this.min) {
             this.$emit('input', this.min);
           } else if (val > this.max) {
@@ -201,6 +261,7 @@
               this.oldValue = val;
             }
           }
+
         }
       },
 
@@ -220,14 +281,16 @@
       },
 
       onSliderClick(event) {
+        let _this = this;
         if (this.disabled || this.dragging) return;
         if (this.vertical) {
           const sliderOffsetBottom = this.$refs.slider.getBoundingClientRect().bottom;
-          this.setPosition((sliderOffsetBottom - event.clientY) / this.sliderSize * 100);
+          _this.setPosition((sliderOffsetBottom - event.clientY) / (_this.sliderSize || _this.$el.offsetHeight) * 100);
         } else {
-          const sliderOffsetLeft = this.$refs.slider.getBoundingClientRect().left;
-          this.setPosition((event.clientX - sliderOffsetLeft) / this.sliderSize * 100);
+            const sliderOffsetLeft = this.$refs.slider.getBoundingClientRect().left;
+            this.setPosition((event.clientX - sliderOffsetLeft) / (this.sliderSize || this.$el.offsetWidth) * 100);
         }
+
       },
 
       resetSize() {
@@ -244,19 +307,30 @@
           console.warn('[Element Warn][Slider]step should not be 0.');
           return [];
         }
-        const stopCount = (this.max - this.min) / this.step;
-        const stepWidth = 100 * this.step / (this.max - this.min);
-        const result = [];
+
+        let stopCount = (this.max - this.min) / this.step;
+        let stepWidth = 100 * this.step / (this.max - this.min);
+        this.stepWidth = stepWidth;
+
+        let result = [0];
         for (let i = 1; i < stopCount; i++) {
           result.push(i * stepWidth);
         }
+        result.push(100);
+        this.tipPos = [];
+        for(let j = 0; j <= stopCount; j++) {
+            this.tipPos.push(this.min + j * this.step);
+        }
+
         if (this.range) {
-          return result.filter(step => {
-            return step < 100 * (this.minValue - this.min) / (this.max - this.min) ||
-              step > 100 * (this.maxValue - this.min) / (this.max - this.min);
-          });
+          // return result.filter(step => {
+          //   return step < 100 * (this.minValue - this.min) / (this.max - this.min) ||
+          //     step > 100 * (this.maxValue - this.min) / (this.max - this.min);
+          // });
+          return [];
         } else {
-          return result.filter(step => step > 100 * (this.firstValue - this.min) / (this.max - this.min));
+          // return result.filter(step => step > 100 * (this.firstValue - this.min) / (this.max - this.min));
+          return [];
         }
       },
 
@@ -305,6 +379,7 @@
     },
 
     mounted() {
+
       if (this.range) {
         if (Array.isArray(this.value)) {
           this.firstValue = Math.max(this.min, this.value[0]);
@@ -313,17 +388,33 @@
           this.firstValue = this.min;
           this.secondValue = this.max;
         }
+        
         this.oldValue = [this.firstValue, this.secondValue];
+        let x = this.tipPos.indexOf(this.firstValue*100/this.max);
+        let y = this.tipPos.indexOf(this.secondValue*100/this.max);
+        for(let j = x; j < y; j++) {
+            this.$el.querySelectorAll('.el-slider__stop')[j].classList.add('actived');
+        }
       } else {
+
         if (typeof this.value !== 'number' || isNaN(this.value)) {
           this.firstValue = this.min;
         } else {
           this.firstValue = Math.min(this.max, Math.max(this.min, this.value));
         }
         this.oldValue = this.firstValue;
+          let index = this.tipPos.indexOf(this.value);
+          for(let i = 0; i < index; i++) {
+              if(this.$el.querySelectorAll('.el-slider__stop')[i].classList)
+                  this.$el.querySelectorAll('.el-slider__stop')[i].classList.add('actived');
+          }
+
+
       }
+
       this.resetSize();
       window.addEventListener('resize', this.resetSize);
+      
     },
 
     beforeDestroy() {

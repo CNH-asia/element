@@ -207,10 +207,10 @@
         type: String,
         default: 'fixedWidth'
       },
-      stype: {
-        type: String,
-        default: ''
-      },
+      // stype: {
+      //   type: String,
+      //   default: ''
+      // },
       title: {
         type: String,
         default: 'hhhh'
@@ -238,7 +238,8 @@
         optionsAllDisabled: false,
         inputHovering: false,
         currentPlaceholder: '',
-        type: ''
+        type: '',
+        stype: ''
       };
     },
 
@@ -417,6 +418,7 @@
         return newOption;
       },
 
+
       setSelected() {
         if (!this.multiple) {
           let option = this.getOption(this.value);
@@ -432,13 +434,16 @@
           return;
         }
         let result = [];
-        if(this.stype=='fixedHeight') {
-          this.$children[0].$refs.input.value = this.value.toString();
-        } 
+        let result1 = [];
+
         if (Array.isArray(this.value)) {
           this.value.forEach(value => {
             result.push(this.getOption(value));
+            result1.push(this.getOption(value).currentLabel);
           });
+        }
+        if(this.stype=='fixedHeight') {
+          this.$children[0].$refs.input.value = result1.toString();
         }
         this.selected = result;
         this.$nextTick(() => {

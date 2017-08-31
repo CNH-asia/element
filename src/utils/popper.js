@@ -420,14 +420,17 @@
             popperOffsets.top = referenceOffsets.top + referenceOffsets.height / 2 - popperRect.height / 2;
             if (placement === 'left') {
                 popperOffsets.left = referenceOffsets.left - popperRect.width;
+
             } else {
                 popperOffsets.left = referenceOffsets.right;
+
             }
         } else {
             popperOffsets.left = referenceOffsets.left + referenceOffsets.width / 2 - popperRect.width / 2;
+
+            popperOffsets.left = parseInt(popperOffsets.left)+8+'px';
             if (placement === 'top') {
                 popperOffsets.top = referenceOffsets.top - popperRect.height;
-            } else {
                 popperOffsets.top = referenceOffsets.bottom;
             }
         }

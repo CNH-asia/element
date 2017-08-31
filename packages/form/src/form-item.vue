@@ -89,7 +89,6 @@
         if (this.form.labelPosition === 'top' || this.form.inline) return ret;
         if (!label && !this.labelWidth && this.isNested) return ret;
         var labelWidth = this.labelWidth || this.form.labelWidth;
-        console.log(labelWidth);
         if (labelWidth) {
           ret.marginLeft = parseInt(labelWidth)+20 + 'px';
         }

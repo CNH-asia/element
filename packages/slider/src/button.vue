@@ -88,13 +88,17 @@
 
       wrapperStyle() {
         return this.vertical ? { bottom: this.currentPosition } : { left: this.currentPosition };
+      },
+
+      newPos() {
+
       }
     },
 
     watch: {
-      dragging(val) {
-        this.$parent.dragging = val;
-      }
+        dragging(val) {
+          this.$parent.dragging = val;
+        }
     },
 
     methods: {
@@ -118,8 +122,8 @@
 
       onButtonDown(event) {
         if (this.disabled) return;
-        event.preventDefault();
         this.onDragStart(event);
+        event.preventDefault();
         window.addEventListener('mousemove', this.onDragging);
         window.addEventListener('mouseup', this.onDragEnd);
         window.addEventListener('contextmenu', this.onDragEnd);
@@ -127,6 +131,7 @@
 
       onDragStart(event) {
         this.dragging = true;
+
         if (this.vertical) {
           this.startY = event.clientY;
         } else {
@@ -141,18 +146,19 @@
           let diff = 0;
           if (this.vertical) {
             this.currentY = event.clientY;
-            diff = (this.startY - this.currentY) / this.$parent.sliderSize * 100;
+            diff = (this.startY - this.currentY) / (this.$parent.sliderSize || this.$parent.$el.offsetWidth) * 100;
           } else {
             this.currentX = event.clientX;
-            diff = (this.currentX - this.startX) / this.$parent.sliderSize * 100;
+            diff = (this.currentX - this.startX) / (this.$parent.sliderSize || this.$parent.$el.offsetWidth) * 100;
           }
           this.newPosition = this.startPosition + diff;
           this.setPosition(this.newPosition);
         }
       },
 
-      onDragEnd() {
+      onDragEnd(event) {
         if (this.dragging) {
+
           /*
            * 防止在 mouseup 后立即触发 click，导致滑块有几率产生一小段位移
            * 不使用 preventDefault 是因为 mouseup 和 click 没有注册在同一个 DOM 上
@@ -162,6 +168,7 @@
             this.hideTooltip();
             this.setPosition(this.newPosition);
           }, 0);
+
           window.removeEventListener('mousemove', this.onDragging);
           window.removeEventListener('mouseup', this.onDragEnd);
           window.removeEventListener('contextmenu', this.onDragEnd);

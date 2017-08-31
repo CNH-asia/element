@@ -63,19 +63,19 @@
         }],
         options4: [],
         options5: [{
-          value: 'HTML',
+          value: '1',
           label: 'HTML'
         }, {
-          value: 'CSS',
+          value: '2',
           label: 'CSS'
         }, {
-          value: 'JavaScript',
+          value: '3',
           label: 'JavaScript'
         }, {
-          value: 'Java',
+          value: '4',
           label: 'Java'
         }, {
-          value: 'Script',
+          value: '5',
           label: 'Script'
         }],
         cities: [{

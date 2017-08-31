@@ -82,11 +82,17 @@ Dialog 弹出一个对话框，适合需要定制性更大的场景。
 <el-button type="text" @click="dialogVisible = true">点击打开 Dialog</el-button>
 
 <el-dialog
-  title="提示"
+  type="warning"
   :visible.sync="dialogVisible"
 >
-  <span>这是一段信息</span>
 
+  <p>您确定要重置该容器吗？</p>
+  <br>
+  <p class="muted">重置后，该容器内的所有实例将被强制更新</p>
+  <div slot="footer" class="dialog-footer">
+    <el-button @click="dialogFormVisible = false" type="plain">取 消</el-button>
+    <el-button @click="dialogFormVisible = false">重 置</el-button>
+  </div>
 </el-dialog>
 
 <script>

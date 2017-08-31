@@ -8,16 +8,51 @@
         value4: 48,
         value5: 42,
         value6: 0,
-        value7: 0,
+        value7: 300,
         value8: 0,
         value9: [4, 8],
-        value10: 0
+        value10: 0,
+        max_value: 400,
+        warn_value: 10,
+        max_warn_value: 100,
+        fluidFormVisible: false,
+        step: 10,
+        contMax: 300,
+        conWarnValue: 80,
+        step_of_conWarnValue: 10
       };
     },
+    watch: {
+        max_value: function(val, oldVal) {
+            var _this = this;
+                window.aaab = _this;
+            if (val == 0) {
+                _this.$message.error('QPS不能为0!');
+                _this.max_value = 100;
+            } else {
+                _this.warn_value = _this.max_value * 0.8;
+                _this.step = _this.max_value / 10;
+                _this.max_warn_value = _this.max_value;
+            }
+        },
+        warn_value: function(val) {
+            var _this = this;
+            if (val == 0) {
+                _this.$message.error('QPS不能为0!');
+                _this.warn_value = _this.max_value * 0.8;
+                _this.$refs.button.setPosition(80);//targetValue * 100 / max
+            }
+        },
+        
+    },
+    
     methods: {
       formatTooltip(val) {
         return val / 100;
-      }
+      },
+      tabClick() {
+        console.log('click');
+       }
     }
   }
 </script>
@@ -59,7 +94,7 @@
 
 :::demo 通过设置绑定值自定义滑块的初始值
 ```html
-<template>
+<!-- <template>
   <div class="block">
     <span class="demonstration">默认</span>
     <el-slider v-model="value1"></el-slider>
@@ -80,7 +115,7 @@
     <span class="demonstration">禁用</span>
     <el-slider v-model="value5" disabled></el-slider>
   </div>
-</template>
+</template> -->
 
 <script>
   export default {
@@ -110,21 +145,56 @@
 :::demo 改变`step`的值可以改变步长，通过设置`show-step`属性可以显示间断点
 ```html
 <template>
-  <div class="block">
+  <!--<div class="block">
     <span class="demonstration">不显示间断点</span>
     <el-slider
       v-model="value6"
-      :step="10">
+      :step="100">
     </el-slider>
-  </div>
+  </div>-->
+  
+    <div class="block" wid>
+    <el-form>
+        <el-form-item>
+            <el-slider v-model="max_value" :step="100" :max="1000" :min="100" show-stops>
+            </el-slider>
+        </el-form-item>
+
+        <el-form-item>
+            <p>流量阈值：</p>
+            <el-slider v-model="warn_value" ref="button" :step="step" :max="max_warn_value" show-stops disable-min>
+            </el-slider>
+        </el-form-item>
+        <el-form-item class="tcenter">
+            <el-button @click='fluidControl()'>确定</el-button>
+        </el-form-item>
+    </el-form>
+        
   <div class="block">
     <span class="demonstration">显示间断点</span>
-    <el-slider
-      v-model="value7"
-      :step="10"
-      show-stops>
-    </el-slider>
+    <el-tabs  @tab-click="tabClick">
+        <el-tab-pane label="规则" name="rule" class="rule">
+            <el-slider
+                  v-model="value7"
+                  :step="100"
+                  :min="100"
+                  :max="900"
+                  show-stops>
+                </el-slider>
+        </el-tab-pane>
+        <el-tab-pane label="shili" name="shili" class="rule">
+                    <el-slider
+                          v-model="value7"
+                          :step="100"
+                          :min="100"
+                          :max="900"
+                          show-stops>
+                        </el-slider>
+                </el-tab-pane>
+    </el-tabs>
+    
   </div>
+  
 </template>
 
 <script>
@@ -132,7 +202,7 @@
     data() {
       return {
         value6: 0,
-        value7: 0
+        value7: 20
       }
     }
   }
@@ -146,14 +216,14 @@
 
 :::demo 设置`show-input`属性会在右侧显示一个输入框
 ```html
-<template>
+<!-- <template>
   <div class="block">
     <el-slider
       v-model="value8"
       show-input>
     </el-slider>
   </div>
-</template>
+</template> -->
 
 <script>
   export default {
@@ -174,14 +244,14 @@
 :::demo 设置`range`即可开启范围选择，此时绑定值是一个数组，其元素分别为最小边界值和最大边界值
 ```html
 <template>
-  <div class="block">
+  <!--<div class="block">
     <el-slider
       v-model="value9"
       range
       show-stops
       :max="10">
     </el-slider>
-  </div>
+  </div>-->
 </template>
 
 <script>
@@ -200,7 +270,7 @@
 
 :::demo 设置`vertical`可使 Slider 变成竖向模式，此时必须设置高度`height`属性
 ```html
-<template>
+<!-- <template>
   <div class="block">
     <el-slider
       v-model="value10"
@@ -208,7 +278,7 @@
       height="200px">
     </el-slider>
   </div>
-</template>
+</template> -->
 
 <script>
   export default {
