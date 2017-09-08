@@ -3,7 +3,7 @@
     data() {
       return {
         value1: 0,
-        value2: 50,
+        value2: 134,
         value3: 36,
         value4: 48,
         value5: 42,
@@ -42,7 +42,7 @@
                 _this.warn_value = _this.max_value * 0.8;
                 _this.$refs.button.setPosition(80);//targetValue * 100 / max
             }
-        },
+        }
         
     },
     
@@ -52,6 +52,9 @@
       },
       tabClick() {
         console.log('click');
+       },
+       changeVal() {
+       this.value2 = this.value2 * 0.8;
        }
     }
   }
@@ -94,14 +97,15 @@
 
 :::demo 通过设置绑定值自定义滑块的初始值
 ```html
-<!-- <template>
+<template>
+    <div class="block"><el-button @click="changeVal">click</el-button></div>
   <div class="block">
     <span class="demonstration">默认</span>
-    <el-slider v-model="value1"></el-slider>
+    <el-slider v-model="value1" :step="20"></el-slider>
   </div>
   <div class="block">
     <span class="demonstration">自定义初始值</span>
-    <el-slider v-model="value2"></el-slider>
+    <el-slider v-model="value2" :min="100" :max="600"></el-slider>
   </div>
   <div class="block">
     <span class="demonstration">隐藏 Tooltip</span>
@@ -115,7 +119,7 @@
     <span class="demonstration">禁用</span>
     <el-slider v-model="value5" disabled></el-slider>
   </div>
-</template> -->
+</template>
 
 <script>
   export default {
@@ -152,8 +156,8 @@
       :step="100">
     </el-slider>
   </div>-->
-  
-    <div class="block" wid>
+  <el-slider v-model="value1"></el-slider>
+    <div class="block">
     <el-form>
         <el-form-item>
             <el-slider v-model="max_value" :step="100" :max="1000" :min="100" show-stops>
@@ -162,7 +166,7 @@
 
         <el-form-item>
             <p>流量阈值：</p>
-            <el-slider v-model="warn_value" ref="button" :step="step" :max="max_warn_value" show-stops disable-min>
+            <el-slider v-model="warn_value" ref="button" :step="step" :max="max_warn_value"  disable-min show-stops>
             </el-slider>
         </el-form-item>
         <el-form-item class="tcenter">
@@ -250,8 +254,8 @@
       range
       show-stops
       :max="10">
-    </el-slider>
-  </div>-->
+    </el-slider>-->
+  </div>
 </template>
 
 <script>

@@ -207,14 +207,11 @@
         type: String,
         default: 'fixedWidth'
       },
-      // stype: {
-      //   type: String,
-      //   default: ''
-      // },
       title: {
         type: String,
         default: 'hhhh'
-      }
+      },
+      showbtn: Boolean
     },
 
     data() {

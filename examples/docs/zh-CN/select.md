@@ -149,7 +149,7 @@
 :::demo `v-model`的值为当前被选中的`el-option`的 value 属性值
 ```html
 <template>
-  <el-select v-model="value" placeholder="请选择">
+  <el-select v-model="value" placeholder="请选择"  multiple showbtn>
     <el-option
       v-for="item in options"
       :key="item.value"

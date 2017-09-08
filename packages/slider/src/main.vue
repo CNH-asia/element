@@ -39,12 +39,13 @@
         v-for="item in stops"
         :style="vertical ? { 'bottom': item + '%' } : { 'left': item + '%' }"
         v-if="showStops">
-        <div class="el-slider__stop__tip">{{ item * max / 100 }}</div>
+        <div class="el-slider__stop__tip" v-if="showStops">{{ item * max / 100 }}</div>
       </div>
       <div class="el-slider__stop"
+           v-if="showStops"
         v-for="i in tipPos"
         :style="vertical ? { 'bottom': i + '%' } : { 'left': stepWidth*(i-min)/step + '%' }">
-        <div class="el-slider__stop__tip">{{ i }}</div>
+        <div class="el-slider__stop__tip" v-if="showStops">{{ i }}</div>
       </div>
     </div>
   </div>
@@ -135,22 +136,29 @@
 
     watch: {
       value(val, oldVal) {
-          let index = this.tipPos.indexOf(this.value);
-          for(let i = 0; i < index; i++) {
-              this.$el.querySelectorAll('.el-slider__stop')[i].classList.add('actived');
-          }
-        let oldIndex = this.tipPos.indexOf(oldVal);
-        let newIndex = this.tipPos.indexOf(val);
-        if (val > oldVal) { // 右滑
-            for(let i = oldIndex; i < newIndex; i++) {
-                this.$el.querySelectorAll('.el-slider__stop')[i].className = 'el-slider__stop actived';
-            }
+        if(this.showStops==true) {
+          for(let i = 0; i < this.tipPos.length; i++) {
+              if(this.tipPos[i] <= this.value) {
+                  this.$el.querySelectorAll('.el-slider__stop')[i].classList.add('actived');
+              }
 
-        } else if (val < oldVal) {
-            for(let j = oldIndex; j > newIndex; j--) {
-                this.$el.querySelectorAll('.el-slider__stop')[j].className = 'el-slider__stop';
-            }
+          }
+          let oldIndex = this.tipPos.indexOf(oldVal);
+          let newIndex = this.tipPos.indexOf(val);
+          if (val > oldVal) { // 右滑
+              for(let i = oldIndex; i < newIndex; i++) {
+                  if(this.$el.querySelectorAll('.el-slider__stop')[i].classList)
+                      this.$el.querySelectorAll('.el-slider__stop')[i].classList.add('actived');
+              }
+
+          } else if (val < oldVal) {
+              for(let j = oldIndex; j > newIndex; j--) {
+                  if(this.$el.querySelectorAll('.el-slider__stop')[j].classList)
+                      this.$el.querySelectorAll('.el-slider__stop')[j].classList.remove('actived');
+              }
+          }
         }
+          this.$refs.button1.setPosition((val-this.min)*100/(this.max-this.min));
 
         if (this.dragging ||
           Array.isArray(val) &&
@@ -203,18 +211,19 @@
           for(let j = 0; j <= stopCount; j++) {
               this.tipPos.push(this.min + j * this.step);
           }
-          let idx = this.tipPos.indexOf(this.value);
-          for(let i = 0; i < this.tipPos.length; i++) {
-              if(i < idx) {
-                  if(this.$el.querySelectorAll('.el-slider__stop')[i].classList)
-                    this.$el.querySelectorAll('.el-slider__stop')[i].classList.add('actived');
-              } else {
-                  if(this.$el.querySelectorAll('.el-slider__stop')[i].classList)
-                    this.$el.querySelectorAll('.el-slider__stop')[i].classList.remove('actived');
+
+          if(this.showStops==true) {
+              for(let i = 0; i < this.tipPos.length; i++) {
+                  if(this.tipPos[i] <= this.value) {
+                          if(this.$el.querySelectorAll('.el-slider__stop')[i].classList)
+                              this.$el.querySelectorAll('.el-slider__stop')[i].classList.add('actived');
+                  } else {
+                      if(this.$el.querySelectorAll('.el-slider__stop')[i].classList)
+                        this.$el.querySelectorAll('.el-slider__stop')[i].classList.remove('actived');
+                  }
               }
-
           }
-
+          this.$refs.button1.setPosition((this.value-this.min)*100/(this.max-this.min));
         this.setValues();
       }
     },
@@ -390,11 +399,21 @@
         }
         
         this.oldValue = [this.firstValue, this.secondValue];
-        let x = this.tipPos.indexOf(this.firstValue*100/this.max);
-        let y = this.tipPos.indexOf(this.secondValue*100/this.max);
-        for(let j = x; j < y; j++) {
-            this.$el.querySelectorAll('.el-slider__stop')[j].classList.add('actived');
+        if(this.showStops == true) {
+//            let x = this.tipPos.indexOf(this.firstValue*100/this.max);
+//            let y = this.tipPos.indexOf(this.secondValue*100/this.max);
+//            for(let j = x; j < y; j++) {
+//                this.$el.querySelectorAll('.el-slider__stop')[j].classList.add('actived');
+//            }
+            for(let j = 0; j < this.tipPos.length; j++) {
+                if(this.tipPos[j]>=this.firstValue && this.tipPos[j]<=this.secondValue) {
+                    this.$el.querySelectorAll('.el-slider__stop')[j].classList.add('actived');
+                } else {
+                    this.$el.querySelectorAll('.el-slider__stop')[j].classList.remove('actived');
+                }
+            }
         }
+
       } else {
 
         if (typeof this.value !== 'number' || isNaN(this.value)) {
@@ -403,13 +422,17 @@
           this.firstValue = Math.min(this.max, Math.max(this.min, this.value));
         }
         this.oldValue = this.firstValue;
-          let index = this.tipPos.indexOf(this.value);
-          for(let i = 0; i < index; i++) {
-              if(this.$el.querySelectorAll('.el-slider__stop')[i].classList)
-                  this.$el.querySelectorAll('.el-slider__stop')[i].classList.add('actived');
-          }
 
-
+        this.$refs.button1.setPosition((this.value-this.min) * 100 / (this.max-this.min));
+        if(this.showStops == true) {
+//            let index = this.tipPos.indexOf(this.value);
+            for(let i = 0; i < this.tipPos.length; i++) {
+                if(this.tipPos[i] <= this.value) {
+                    if(this.$el.querySelectorAll('.el-slider__stop')[i].classList)
+                        this.$el.querySelectorAll('.el-slider__stop')[i].classList.add('actived');
+                }
+            }
+        }
       }
 
       this.resetSize();

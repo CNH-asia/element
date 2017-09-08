@@ -428,10 +428,13 @@
         } else {
             popperOffsets.left = referenceOffsets.left + referenceOffsets.width / 2 - popperRect.width / 2;
 
-            popperOffsets.left = parseInt(popperOffsets.left)+8+'px';
+            // popperOffsets.left = parseInt(popperOffsets.left)+8+'px';
+            // popperOffsets.top = parseInt(popperOffsets.top)+8+'px';
             if (placement === 'top') {
                 popperOffsets.top = referenceOffsets.top - popperRect.height;
+            } else {
                 popperOffsets.top = referenceOffsets.bottom;
+                // popperOffsets.top = parseInt(popperOffsets.top)+8+'px';
             }
         }
 

@@ -42,10 +42,9 @@ export default {
   render(h) {
     let gutter = scrollbarWidth();
     let style = this.wrapStyle;
-
     if (gutter) {
-      const gutterWith = `-${gutter}px`;
-      const gutterStyle = `margin-bottom: ${gutterWith}; margin-right: ${gutterWith};`;
+      const gutterWith = `-${gutter+1}px`;
+      const gutterStyle = `margin-bottom: ${gutterWith}; margin-right: ${gutterWith}; margin-left: -1px;`;
 
       if (Array.isArray(this.wrapStyle)) {
         style = toObject(this.wrapStyle);
@@ -56,6 +55,7 @@ export default {
         style = gutterStyle;
       }
     }
+
     const view = h(this.tag, {
       class: ['el-scrollbar__view', this.viewClass],
       style: this.viewStyle,
