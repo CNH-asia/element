@@ -12,6 +12,8 @@
     background: #3BBAF4 ;
     border: 1px solid #0AA9F1;
     color: #fff;
+    font-size: 14px;
+    font-family: "PingFang-SC-Regular";
     letter-spacing: 0.21px;
     -webkit-appearance: none;
     text-align: center;
@@ -120,8 +122,9 @@
       padding: 4px 10px;
       letter-spacing: 0.24px;
       font-size: 16px;
+      font-family: "PingFang-SC-Semibold";
       color: #fff;
-      line-height: 22px;
+      /*line-height: 22px;*/
       &:hover {
         background:#0AA9F1;
         border: 1px solid #0997D8;
@@ -138,13 +141,13 @@
     }
 
     @m plain {
-        height: 30px;
+        /*height: 30px;*/
         background: #fff;
         border-color: #0AA9F1;
         color: #0AA9F1;
-        padding: 4px 10px;
-        letter-spacing: 0.24px;
-        font-size: 16px;
+        /*padding: 4px 10px;*/
+        /*letter-spacing: 0.24px;*/
+        /*font-size: 16px;*/
 
         &:active,
         &:focus,
@@ -217,7 +220,6 @@
       }
     }
     @m card {
-        width: 116px;
         height: 26px;
         border-radius: 90px;
         border-color: #0AA9F1;
@@ -226,7 +228,7 @@
         font-size: 14px;
         letter-spacing: 0px;
         color: #0AA9F1;
-        padding: 3px;
+        padding: 3px 30px;
 
 
         &:hover,
@@ -256,16 +258,17 @@
     vertical-align: middle;
 
     & .el-button {
+        padding:7px 16px;
       float: left;
       position: relative;
       & + .el-button {
         margin-left: 0;
       }
       & .el-icon--left {
-        margin-right: 8px;
+        margin-right: 5px;
       }
       & .el-icon--right {
-        margin-left: 8px;
+        margin-left: 5px;
       }
       &:first-child {
         border-top-right-radius: 0;
@@ -296,16 +299,16 @@
     @each $type in (primary, success, warning, danger, info) {
       .el-button--$type {
         &:first-child {
-          border-right-width: 1.5px;
+          border-right-width: 0.5px;
           border-right-color: rgba(var(--color-white), 0.6);
         }
         &:last-child {
-          border-left-width: 1.5px;
+          border-left-width: 0.5px;
           border-left-color: rgba(var(--color-white), 0.6);
         }
         &:not(:first-child):not(:last-child) {
-          border-left-color: rgba(var(--color-white), 0.5);
-          border-right-color: rgba(var(--color-white), 0.5);
+          border-left-color: rgba(var(--color-white), 0.6);
+          border-right-color: rgba(var(--color-white), 0.6);
         }
       }
     }

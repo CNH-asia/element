@@ -5,11 +5,16 @@
   @b date-editor {
     position: relative;
     display: inline-block;
-
+    /*el-date-editor el-input el-date-editor--datetime*/
     &.el-input {
       width: 152px;
     }
-    
+    &.el-input.el-date-editor--datetime {
+       width:190px;
+     }
+    &.el-input.el-date-editor--timerange {
+       width:190px;
+     }
     &.el-input .el-input__inner {
       border-radius: 2px;
     }

@@ -244,7 +244,6 @@ export default {
     objectAssign(column, forced[type] || {});
 
     this.columnConfig = column;
-
     let renderCell = column.renderCell;
     let _self = this;
 

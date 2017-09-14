@@ -49,14 +49,14 @@
       vertical-align: middle;
       float: left;
       font-size: 14px;
-      color: var(--color-extra-light-black);
+      color: #606060;
       line-height: 1;
-      padding: 11px 0px 11px 0;
+      padding: 9px 0px 9px 0;
       box-sizing: border-box;
     }
     @e content {
       width: 300px;
-      line-height: 36px;
+      line-height: 32px;
       position: relative;
       font-size: 14px;
       @utils-clearfix;

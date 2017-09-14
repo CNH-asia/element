@@ -16,6 +16,23 @@
         display: table;
         clear: both;
       }
+      & .el-date-range-picker__time-header .el-input {
+          width:150px;
+        }
+      & .el-date-picker__time-header .el-input {
+          width:150px;
+      }
+      & .el-date-picker__time-header .el-time-panel {
+        width:150px;
+          left:4px;
+      }
+      & .el-picker-panel__content {
+          height:185px;
+      }
+      & .el-picker-panel__content.el-date-range-picker__content {
+          height:240px;
+          overflow: hidden;
+        }
     }
 
     @e content {

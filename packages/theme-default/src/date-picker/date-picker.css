@@ -18,7 +18,20 @@
 
     &.has-time {
       min-width: 324px;
+      width:330px !important;
+      height:auto;
     }
+
+    /*.el-date-picker.has-time .el-date-picker__time-header .el-input.el-input--small {*/
+      /*width:150px;*/
+    /*}*/
+    /*.el-date-picker.has-time .el-date-picker__time-header .el-time-panel {*/
+      /*width:150px;*/
+      /*left:4px;*/
+    /*}*/
+    /*.el-date-picker.has-time .el-picker-panel__content {*/
+      /*height:185px;*/
+    /*}*/
 
     .el-picker-panel__content {
       min-width: 224px;

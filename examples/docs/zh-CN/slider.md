@@ -220,14 +220,14 @@
 
 :::demo 设置`show-input`属性会在右侧显示一个输入框
 ```html
-<!-- <template>
+<template>
   <div class="block">
     <el-slider
       v-model="value8"
       show-input>
     </el-slider>
   </div>
-</template> -->
+</template> 
 
 <script>
   export default {

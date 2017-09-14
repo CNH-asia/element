@@ -167,14 +167,24 @@
 
       &.el-slider--with-input {
         padding-bottom: calc(var(--input-large-height) + 22px);
+
         .el-slider__input {
           overflow: visible;
           float: none;
           position: absolute;
           bottom: 22px;
-          width: 36px;
+          width: 130px;
           margin-top: 15px;
+
+            /*& .el-input.el-input--small {*/
+              /*width:130px !important;*/
+              /*& .el-input__inner {*/
+                  /*width:130px !important;*/
+                /*}*/
+            /*}*/
+
           .el-input__inner {
+            width:130px !important;
             text-align: center;
             padding-left: 5px;
             padding-right: 5px;
@@ -197,7 +207,11 @@
           .el-input-number__increase {
             width: 19px;
             border-bottom-right-radius: var(--input-border-radius);
-            & ~ .el-input .el-input__inner {
+            & ~ .el-input.el-input--small{
+                width: 130px !important;
+              }
+            & ~ .el-input.el-input--small .el-input__inner {
+                width:130px !important;
               border-bottom-left-radius: 0;
               border-bottom-right-radius: 0;
             }
@@ -217,7 +231,11 @@
             }
           }
         }
+
       }
     }
+  }
+.el-slider__input .el-input.el-input--small{
+    width: 130px !important;
   }
 }
