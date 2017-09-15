@@ -11,7 +11,7 @@
         value7: 300,
         value8: 0,
         value9: [4, 8],
-        value10: 0,
+        value10: 200,
         max_value: 400,
         warn_value: 10,
         max_warn_value: 100,
@@ -149,18 +149,18 @@
 :::demo 改变`step`的值可以改变步长，通过设置`show-step`属性可以显示间断点
 ```html
 <template>
-  <!--<div class="block">
+  <div class="block">
     <span class="demonstration">不显示间断点</span>
     <el-slider
       v-model="value6"
       :step="100">
     </el-slider>
-  </div>-->
-  <el-slider v-model="value1"></el-slider>
+  </div>
+  
     <div class="block">
     <el-form>
         <el-form-item>
-            <el-slider v-model="max_value" :step="100" :max="1000" :min="100" show-stops>
+            <el-slider v-model="max_value" :step="10" :max="1000" :min="100" :client-stops="[100,200,300,500,800,1000]">
             </el-slider>
         </el-form-item>
 
@@ -176,8 +176,17 @@
         
   <div class="block">
     <span class="demonstration">显示间断点</span>
+    <el-slider
+      v-model="value10"
+      show-input
+      :max="1000"
+      :client-stops="[111,234,568,602,760,890,1000]">
+    </el-slider>
     <el-tabs  @tab-click="tabClick">
         <el-tab-pane label="规则" name="rule" class="rule">
+            
+        </el-tab-pane>
+        <el-tab-pane label="shili" name="shili" class="rule">
             <el-slider
                   v-model="value7"
                   :step="100"
@@ -186,15 +195,6 @@
                   show-stops>
                 </el-slider>
         </el-tab-pane>
-        <el-tab-pane label="shili" name="shili" class="rule">
-                    <el-slider
-                          v-model="value7"
-                          :step="100"
-                          :min="100"
-                          :max="900"
-                          show-stops>
-                        </el-slider>
-                </el-tab-pane>
     </el-tabs>
     
   </div>

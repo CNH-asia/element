@@ -47,6 +47,12 @@
         :style="vertical ? { 'bottom': i + '%' } : { 'left': stepWidth*(i-min)/step + '%' }">
         <div class="el-slider__stop__tip" v-if="showStops">{{ i }}</div>
       </div>
+      <div class="el-slider__stop"
+           v-if="clientStops"
+           v-for="i in clientStops"
+           :style="vertical ? { 'bottom': i + '%' } : { 'left': (i-min)*100/(max-min) + '%' }">
+          <div class="el-slider__stop__tip" v-if="clientStops">{{ i }}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -90,6 +96,9 @@
         type: Boolean,
         default: false
       },
+      clientStops:{
+        type: Array
+      },
       showTooltip: {
         type: Boolean,
         default: true
@@ -128,9 +137,10 @@
         oldValue: null,
         dragging: false,
         sliderSize: 1,
-        tipPos: null,
+        tipPos: null,//默认等距刻度
+        clientPos: null,//自定义刻度
         isActived: false,
-          stepWidth: 0
+        stepWidth: 0
       };
     },
 
@@ -326,11 +336,16 @@
           result.push(i * stepWidth);
         }
         result.push(100);
+        //默认等距刻度
         this.tipPos = [];
         for(let j = 0; j <= stopCount; j++) {
             this.tipPos.push(this.min + j * this.step);
         }
-
+        //用户自定义刻度
+//        this.clientPos = [];
+//        if(this.clientStops) {
+//          this.clientPos = this.clientStops;
+//        }
         if (this.range) {
           // return result.filter(step => {
           //   return step < 100 * (this.minValue - this.min) / (this.max - this.min) ||
