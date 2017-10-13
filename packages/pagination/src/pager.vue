@@ -129,7 +129,6 @@
 
         this.showPrevMore = showPrevMore;
         this.showNextMore = showNextMore;
-
         return array;
       }
     },

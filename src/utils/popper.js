@@ -622,6 +622,7 @@
     Popper.prototype.modifiers.applyStyle = function(data) {
         // apply the final offsets to the popper
         // NOTE: 1 DOM access here
+
         var styles = {
             position: data.offsets.popper.position
         };
@@ -629,6 +630,15 @@
         // round top and left to avoid blurry text
         var left = Math.round(data.offsets.popper.left);
         var top = Math.round(data.offsets.popper.top);
+        if(new RegExp('el-popover').test(data.instance._popper.className)) {
+            if(new RegExp('-start').test(data.placement)) {
+                left = left -6;
+            }
+            if(new RegExp('-end').test(data.placement)) {
+                left += 6;
+            }
+        }
+
 
         // if gpuAcceleration is set to true and transform is supported, we use `translate3d` to apply the position to the popper
         // we automatically use the supported prefixed version if needed
@@ -687,11 +697,10 @@
                     end:    { top: reference.top + reference.height - popper.height }
                 },
                 x: {
-                    start:  { left: reference.left },
-                    end:    { left: reference.left + reference.width - popper.width }
+                    start:  { left: reference.left},
+                    end:    { left: reference.left + reference.width - popper.width}
                 }
             };
-
             var axis = ['bottom', 'top'].indexOf(basePlacement) !== -1 ? 'x' : 'y';
 
             data.offsets.popper = Object.assign(popper, shiftOffsets[axis][shiftVariation]);

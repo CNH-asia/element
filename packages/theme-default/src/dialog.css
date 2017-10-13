@@ -124,7 +124,7 @@
   }
 
   .el-dialog--warning .el-dialog__header {
-    display: none;
+    /*display: none;*/
   }
   .el-dialog--warning .el-dialog__body {
     text-align: left;
@@ -146,6 +146,7 @@
 
     & button {
       width: 140px;
+        height:30px;
     }
     & button:first-child {
       margin-right: 20px !important;

@@ -38,7 +38,7 @@
 
     &[x-placement^="top"] .popper__arrow {
       bottom: -var(--popover-arrow-size);
-      left: 50%;
+      left:50%;
       margin-right: calc(var(--tooltip-arrow-size) / 2);
       border-top-color: var(--popover-border-color);
       border-bottom-width: 0;
@@ -50,6 +50,7 @@
         border-bottom-width: 0;
       }
     }
+
 
     &[x-placement^="bottom"] {
       margin-top: calc(var(--popover-arrow-size) + 6);
@@ -107,6 +108,12 @@
         border-right-width: 0;
         border-left-color: var(--popover-fill);
       }
+    }
+    &[x-placement$="start"] .popper__arrow{
+       margin-left: 15px;
+    }
+    &[x-placement$="end"] .popper__arrow{
+     margin-right: 15px;
     }
 
     @e title {

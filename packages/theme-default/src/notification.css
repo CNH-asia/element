@@ -5,11 +5,14 @@
 
   @b notification {
     width: var(--notification-width);
-    padding: var(--notification-padding);
+    /*padding: var(--notification-padding);*/
+    padding: 10px 12px;
     box-sizing: border-box;
     border-radius: var(--border-radius-small);
     position: fixed;
-    right: 16px;
+    /*right: 16px;*/
+    left: 50%;
+    transform: translateX(-50%);
     background-color: var(--color-white);
     box-shadow: var(--notification-shadow);
     transition: opacity 0.3s, transform .3s, right .3s, top 0.4s;
@@ -31,22 +34,26 @@
 
     @e content {
       font-size: var(--notification-font-size);
-      line-height: 21px;
-      margin: 10px 0 0 0;
+      line-height: 20px;
+      /*margin: 10px 0 0 0;*/
+      margin: 0;
       color: var(--notification-color);
       text-align: justify;
     }
 
     @e icon {
-      size: var(--notification-icon-size);
-      font-size: var(--notification-icon-size);
+      width: 20px;
+      height: 20px;
+      font-size: 20px;
+      /*size: var(--notification-icon-size);*/
+      /*font-size: var(--notification-icon-size);*/
       float: left;
       position: relative;
-      top: 3px;
+      top: 0px;
     }
 
     @e closeBtn {
-      position: absolute 20px 20px * *;
+      position: absolute 13px 20px * *;
       cursor: pointer;
       color: var(--notification-close-color);
       font-size: var(--notification-font-size);
@@ -74,8 +81,11 @@
   }
 
   .el-notification-fade-enter {
-    transform: translateX(100%);
-    right: 0;
+    transform: translateX(-50%);
+    top: 0;
+    left: 50%;
+
+    /*right: 0;*/
   }
 
   .el-notification-fade-leave-active {

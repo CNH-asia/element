@@ -31,8 +31,12 @@
         color: var(--color-primary);
 
         &:not(.is-disabled) ~ .el-input .el-input__inner:not(.is-disabled) {
-          border-color: var(--input-focus-border);
+          /*border-color: var(--input-focus-border);*/
+           border-color: #B5C1D4;
         }
+        &.is-disabled ~ .el-input .el-input__inner{
+          border-color: #B5C1D4;
+         }
       }
 
       @when disabled {

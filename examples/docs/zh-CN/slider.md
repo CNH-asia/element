@@ -177,6 +177,7 @@
   <div class="block">
     <span class="demonstration">显示间断点</span>
     <el-slider
+  
       v-model="value10"
       show-input
       :max="1000"

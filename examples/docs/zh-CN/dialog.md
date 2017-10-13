@@ -32,7 +32,9 @@
           resource: '',
           desc: ''
         },
-        formLabelWidth: '80px'
+        formLabelWidth: '80px',
+        currentPage: 1,
+        total: 120
       };
     },
     methods: {
@@ -42,7 +44,14 @@
             done();
           })
           .catch(_ => {});
-      }
+      },
+       handleSizeChange: function() {
+                      console.log('change');
+      
+                  },
+                  handleCurrentChange: function() {
+      
+                  },
     }
   };
 </script>
@@ -94,7 +103,17 @@ Dialog 弹出一个对话框，适合需要定制性更大的场景。
     <el-button @click="dialogFormVisible = false">重 置</el-button>
   </div>
 </el-dialog>
-
+ <div class="ver-page mgt30 tcenter" v-show="total>100">
+    <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="currentPage"
+            :page-sizes="[10, 20, 30, 40]"
+            :page-size="10"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="100">
+    </el-pagination>
+</div>
 <script>
   export default {
     data() {

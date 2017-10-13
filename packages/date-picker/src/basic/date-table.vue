@@ -186,8 +186,13 @@
         }
 
         rows.firstDayPosition = firstDayPosition;
+//        if (rows[0][6].type === 'prev-month') {
+//          return rows.slice(1);
+//        } else {
+//            return rows;
+//        }
+          return rows;
 
-        return rows;
       }
     },
 

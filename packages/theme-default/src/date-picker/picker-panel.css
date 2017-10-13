@@ -30,8 +30,8 @@
           height:185px;
       }
       & .el-picker-panel__content.el-date-range-picker__content {
-          height:240px;
-          overflow: hidden;
+          height:auto;
+          /*overflow: hidden;*/
         }
     }
 

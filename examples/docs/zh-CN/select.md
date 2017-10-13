@@ -97,6 +97,7 @@
           value: 'Guangzhou',
           label: '广州'
         }],
+        currentPage: 1,
         value: '',
         value2: '',
         value3: '',
@@ -118,6 +119,10 @@
     },
 
     methods: {
+    
+      handleSizeChange(val) {
+        console.log(val);
+      },
       remoteMethod(query) {
         if (query !== '') {
           this.loading = true;
@@ -149,7 +154,7 @@
 :::demo `v-model`的值为当前被选中的`el-option`的 value 属性值
 ```html
 <template>
-  <el-select v-model="value" placeholder="请选择"  multiple showbtn>
+  <el-select v-model="value" placeholder="请选择" scroll-type="scroller">
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -157,6 +162,16 @@
       :value="item.value">
     </el-option>
   </el-select>
+  <div class="ver-page mgt30 tcenter">
+      <el-pagination
+          @size-change="handleSizeChange"
+          :current-page="currentPage"
+          :page-sizes="[10, 20, 30, 40]"
+          :page-size="10"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="100">
+      </el-pagination>
+  </div>
 </template>
 
 <script>
@@ -440,7 +455,7 @@
 :::demo 使用`el-option-group`对备选项进行分组，它的`label`属性为分组名
 ```html
 <template>
-  <el-select v-model="value7" placeholder="请选择">
+  <el-select v-model="value7" placeholder="请选择" multiple :multiple-limit="2" :group-limit="[1,1]">
     <el-option-group
       v-for="group in options3"
       :key="group.label"

@@ -78,7 +78,7 @@
           tag="ul"
           wrap-class="el-select-dropdown__wrap"
           view-class="el-select-dropdown__list"
-          :class="{ 'is-empty': !allowCreate && filteredOptionsCount === 0 }"
+          :class=" [{'is-empty': !allowCreate && filteredOptionsCount === 0}, {'scroll-fixed':sctype!=''}]"
           v-show="options.length > 0 && !loading">
           <el-option
             :value="query"
@@ -192,6 +192,7 @@
         type: Number,
         default: 0
       },
+      groupLimit: Array,
       placeholder: {
         type: String,
         default() {
@@ -211,7 +212,11 @@
         type: String,
         default: 'hhhh'
       },
-      showbtn: Boolean
+      showbtn: Boolean,
+      scrollType: {
+        type: String,
+        default: 'scroll'
+      }
     },
 
     data() {
@@ -236,13 +241,14 @@
         inputHovering: false,
         currentPlaceholder: '',
         type: '',
-        stype: ''
+        stype: '',
+        sctype: ''
       };
     },
 
     watch: {
       placeholder(val) {
-        // this.cachedPlaceHolder = this.currentPlaceholder = val;
+//         this.cachedPlaceHolder = this.currentPlaceholder = val;
       },
       
       value(val) {
@@ -349,7 +355,7 @@
       options(val) {
         if (this.$isServer) return;
         this.optionsAllDisabled = val.length === val.filter(item => item.disabled === true).length;
-        if (this.multiple && this.stype=='fixedWidth') {
+        if (this.multiple && this.stype == 'fixedWidth') {
           this.resetInputHeight();
         }
         let inputs = this.$el.querySelectorAll('input');
@@ -439,12 +445,12 @@
             result1.push(this.getOption(value).currentLabel);
           });
         }
-        if(this.stype=='fixedHeight') {
+        if (this.stype == 'fixedHeight') {
           this.$children[0].$refs.input.value = result1.toString();
         }
         this.selected = result;
         this.$nextTick(() => {
-          if(this.stype=='fixedWidth') this.resetInputHeight();
+          if (this.stype == 'fixedWidth') this.resetInputHeight();
         });
       },
 
@@ -509,11 +515,11 @@
       resetInputState(e) {
         if (e.keyCode !== 8) this.toggleLastOptionHitState(false);
         this.inputLength = this.$refs.input.value.length * 15 + 20;
-        if(this.stype=='fixedWidth') this.resetInputHeight();
+        if (this.stype == 'fixedWidth') this.resetInputHeight();
       },
 
       resetInputHeight() {
-        if(this.stype=='fixedWidth') {
+        if (this.stype == 'fixedWidth') {
           this.$nextTick(() => {
             if (!this.$refs.reference) return;
             let inputChildNodes = this.$refs.reference.$el.childNodes;
@@ -524,7 +530,6 @@
             }
           });
         }
-        
       },
 
       resetHoverIndex() {
@@ -557,7 +562,7 @@
           }
           if (this.filterable) this.$refs.input.focus();
         } else {
-          this.$emit('input', option.value);
+          this.$emit('input', option.value);//向父组件传递值
           this.visible = false;
         }
         this.$nextTick(() => this.scrollToOption(option));
@@ -704,6 +709,7 @@
     },
 
     created() {
+      this.sctype = this.scrollType;
       this.setSelected();
       this.cachedPlaceHolder = this.currentPlaceholder = this.placeholder;
       if (this.multiple && !Array.isArray(this.value)) {

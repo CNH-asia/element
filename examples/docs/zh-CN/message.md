@@ -36,7 +36,8 @@
       open5() {
         this.$message({
           showClose: true,
-          message: '这是一条消息提示'
+          message: '这是一条消息提示',
+          duration: 0
         });
       },
 
@@ -166,7 +167,8 @@
       open5() {
         this.$message({
           showClose: true,
-          message: '这是一条消息提示'
+          message: '这是一条消息提示',
+          duration: 0
         });
       },
 

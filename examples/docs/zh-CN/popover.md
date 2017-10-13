@@ -126,12 +126,12 @@ Popover 的属性与 Tooltip 很类似，它们都是基于`Vue-popper`开发的
   title="标题"
   width="200"
   trigger="hover"
-  content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。">
+  content="从元素起始位置开始的提示框">
 </el-popover>
 
 <el-popover
   ref="popover2"
-  placement="bottom"
+  placement="bottom-start"
   title="标题"
   width="200"
   trigger="click"

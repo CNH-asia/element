@@ -78,9 +78,19 @@
 
       limitReached() {
         if (this.parent.multiple) {
+
+          let options = this.$parent.$children; // 各组内的项
+          let hasSelected = 0;
+          for (let i = 0; i < options.length; i++) {
+            if (options[i].itemSelected === true) {
+              hasSelected += 1;
+            }
+          }
+          let index = this.$parent.$parent.$children.indexOf(this.$parent);
           return !this.itemSelected &&
-            this.parent.value.length >= this.parent.multipleLimit &&
-            this.parent.multipleLimit > 0;
+              ((this.parent.groupLimit && this.parent.groupLimit[index] > 0 && hasSelected >= this.parent.groupLimit[index]) ||
+              (this.parent.value.length >= this.parent.multipleLimit && this.parent.multipleLimit > 0))
+              ;
         } else {
           return false;
         }
@@ -128,7 +138,7 @@
       },
 
       selectOptionClick() {
-        if (this.disabled !== true && this.groupDisabled !== true) {
+        if (this.disabled !== true && this.groupDisabled !== true && this.limitReached !== true) {
           this.dispatch('ElSelect', 'handleOptionClick', this);
         }
       },

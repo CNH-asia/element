@@ -30,7 +30,7 @@ export default {
     pageSizes: {
       type: Array,
       default() {
-        return [10, 20, 30, 40, 50, 100];
+        return [ 10, 20, 30, 40, 50, 100];
       }
     }
   },
@@ -138,6 +138,7 @@ export default {
                 ? this.$parent.pageSize
                 : this.pageSizes[0];
             }
+
           }
         }
       },
@@ -170,6 +171,7 @@ export default {
         handleChange(val) {
           if (val !== this.$parent.internalPageSize) {
             this.$parent.internalPageSize = val = parseInt(val, 10);
+            // console.log(this.$parent.internalPageSize);
             this.$parent.$emit('size-change', val);
           }
         }
@@ -299,6 +301,7 @@ export default {
     },
 
     pageSize: {
+      // 立即以当前值触发回调
       immediate: true,
       handler(val) {
         this.internalPageSize = val;

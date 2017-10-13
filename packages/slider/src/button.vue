@@ -96,9 +96,9 @@
     },
 
     watch: {
-        dragging(val) {
-          this.$parent.dragging = val;
-        }
+      dragging(val) {
+        this.$parent.dragging = val;
+      }
     },
 
     methods: {
