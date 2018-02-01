@@ -220,18 +220,20 @@
      * @memberof Popper
      */
     Popper.prototype.update = function() {
+        // debugger
+        let _this = this;
         var data = { instance: this, styles: {} };
 
         // store placement inside the data object, modifiers will be able to edit `placement` if needed
         // and refer to _originalPlacement to know the original value
-        data.placement = this._options.placement;
-        data._originalPlacement = this._options.placement;
+        data.placement = _this._options.placement;
+        data._originalPlacement = _this._options.placement;
 
         // compute the popper and reference offsets and put them inside data.offsets
         data.offsets = this._getOffsets(this._popper, this._reference, data.placement);
-
+        
         // get boundaries
-        data.boundaries = this._getBoundaries(data, this._options.boundariesPadding, this._options.boundariesElement);
+        data.boundaries = _this._getBoundaries(data, _this._options.boundariesPadding, this._options.boundariesElement);
 
         data = this.runModifiers(data, this._options.modifiers);
 
@@ -395,6 +397,7 @@
      * @returns {Object} An object containing the offsets which will be applied to the popper
      */
     Popper.prototype._getOffsets = function(popper, reference, placement) {
+       
         placement = placement.split('-')[0];
         var popperOffsets = {};
 
@@ -405,7 +408,7 @@
         // Get reference element position
         //
         var referenceOffsets = getOffsetRectRelativeToCustomParent(reference, getOffsetParent(popper), isParentFixed);
-
+       
         //
         // Get popper sizes
         //
@@ -426,8 +429,9 @@
 
             }
         } else {
-            popperOffsets.left = referenceOffsets.left + referenceOffsets.width / 2 - popperRect.width / 2;
+            popperOffsets.left = referenceOffsets.left + referenceOffsets.width / 2  - popperRect.width / 2;
 
+            
             // popperOffsets.left = parseInt(popperOffsets.left)+8+'px';
             // popperOffsets.top = parseInt(popperOffsets.top)+8+'px';
             if (placement === 'top') {
@@ -437,12 +441,10 @@
                 // popperOffsets.top = parseInt(popperOffsets.top)+8+'px';
             }
         }
-
         // Add width and height to our offsets object
         popperOffsets.width   = popperRect.width;
         popperOffsets.height  = popperRect.height;
-
-
+        
         return {
             popper: popperOffsets,
             reference: referenceOffsets
@@ -458,8 +460,12 @@
      */
     Popper.prototype._setupEventListeners = function() {
         // NOTE: 1 DOM access here
-        this.state.updateBound = this.update.bind(this);
-        root.addEventListener('resize', this.state.updateBound);
+        var _this = this;
+        _this.state.updateBound = this.update.bind(this);
+        // var _this = this;
+        // debugger
+        root.addEventListener('resize', _this.state.updateBound);
+        
         // if the boundariesElement is window we don't need to listen for the scroll event
         if (this._options.boundariesElement !== 'window') {
             var target = getScrollParent(this._reference);
@@ -479,7 +485,7 @@
      */
     Popper.prototype._removeEventListeners = function() {
         // NOTE: 1 DOM access here
-        root.removeEventListener('resize', this.state.updateBound);
+        // root.removeEventListener('resize', this.state.updateBound);
         if (this._options.boundariesElement !== 'window') {
             var target = getScrollParent(this._reference);
             // here it could be both `body` or `documentElement` thanks to Firefox, we then check both
@@ -622,7 +628,7 @@
     Popper.prototype.modifiers.applyStyle = function(data) {
         // apply the final offsets to the popper
         // NOTE: 1 DOM access here
-
+        // debugger
         var styles = {
             position: data.offsets.popper.position
         };
@@ -682,6 +688,7 @@
      * @returns {Object} The data object, properly modified
      */
     Popper.prototype.modifiers.shift = function(data) {
+        // debugger
         var placement = data.placement;
         var basePlacement = placement.split('-')[0];
         var shiftVariation = placement.split('-')[1];
@@ -767,6 +774,7 @@
      * @returns {Object} The data object, properly modified
      */
     Popper.prototype.modifiers.keepTogether = function(data) {
+        // debugger
         var popper  = getPopperClientRect(data.offsets.popper);
         var reference = data.offsets.reference;
         var f = Math.floor;
@@ -849,7 +857,6 @@
                     data.placement += '-' + variation;
                 }
                 data.offsets.popper = this._getOffsets(this._popper, this._reference, data.placement).popper;
-
                 data = this.runModifiers(data, this._options.modifiers, this._flip);
             }
         }.bind(this));
@@ -893,7 +900,7 @@
      */
     Popper.prototype.modifiers.arrow = function(data) {
         var arrow  = this._options.arrowElement;
-
+        
         // if the arrowElement is a string, suppose it's a CSS selector
         if (typeof arrow === 'string') {
             arrow = this._popper.querySelector(arrow);
@@ -1207,8 +1214,8 @@
      * @return {Object} rect
      */
     function getOffsetRectRelativeToCustomParent(element, parent, fixed) {
-        var elementRect = getBoundingClientRect(element);
-        var parentRect = getBoundingClientRect(parent);
+        var elementRect = getBoundingClientRect(element);//三角reference
+        var parentRect = getBoundingClientRect(parent);//窗口
 
         if (fixed) {
             var scrollParent = getScrollParent(parent);

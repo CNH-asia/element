@@ -53,7 +53,8 @@ export default {
                 on-contextmenu={ ($event) => this.handleContextMenu($event, row) }
                 on-mouseenter={ _ => this.handleMouseEnter($index) }
                 on-mouseleave={ _ => this.handleMouseLeave() }
-                class={ [this.getRowClass(row, $index)] }>
+                // class={ [this.getRowClass(row, $index)] }
+                class={[this.getRowClass(row, $index), this.table.store.states.expandRows.indexOf(row) > -1 ? 'tr-expanded' : '']}>
                 {
                   this._l(this.columns, (column, cellIndex) =>
                     <td
@@ -134,6 +135,7 @@ export default {
 
     columnsCount() {
       return this.store.states.columns.length;
+
     },
 
     leftFixedCount() {

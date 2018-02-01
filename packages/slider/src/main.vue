@@ -148,7 +148,10 @@
       value(val, oldVal) {
         if(this.showStops==true) {
           for(let i = 0; i < this.tipPos.length; i++) {
-              if(this.tipPos[i] <= this.value) {
+              // if(this.tipPos[i] <= this.value) {
+              //     this.$el.querySelectorAll('.el-slider__stop')[i].classList.add('actived');
+              // }
+              if(this.tipPos[i] <= this.value&&this.$el.querySelectorAll('.el-slider__stop')[i]&&this.$el.querySelectorAll('.el-slider__stop')[i].classList) {
                   this.$el.querySelectorAll('.el-slider__stop')[i].classList.add('actived');
               }
 
@@ -157,13 +160,15 @@
           let newIndex = this.tipPos.indexOf(val);
           if (val > oldVal) { // 右滑
               for(let i = oldIndex; i < newIndex; i++) {
-                  if(this.$el.querySelectorAll('.el-slider__stop')[i].classList)
+                  if(this.$el.querySelectorAll('.el-slider__stop')[i]&&this.$el.querySelectorAll('.el-slider__stop')[i].classList)
                       this.$el.querySelectorAll('.el-slider__stop')[i].classList.add('actived');
               }
 
           } else if (val < oldVal) {
               for(let j = oldIndex; j > newIndex; j--) {
-                  if(this.$el.querySelectorAll('.el-slider__stop')[j].classList)
+                  // if(this.$el.querySelectorAll('.el-slider__stop')[j].classList)
+                  //     this.$el.querySelectorAll('.el-slider__stop')[j].classList.remove('actived');
+                  if(this.$el.querySelectorAll('.el-slider__stop')[j]&&this.$el.querySelectorAll('.el-slider__stop')[j].classList)
                       this.$el.querySelectorAll('.el-slider__stop')[j].classList.remove('actived');
               }
           }
@@ -225,10 +230,12 @@
           if(this.showStops==true) {
               for(let i = 0; i < this.tipPos.length; i++) {
                   if(this.tipPos[i] <= this.value) {
-                          if(this.$el.querySelectorAll('.el-slider__stop')[i].classList)
-                              this.$el.querySelectorAll('.el-slider__stop')[i].classList.add('actived');
+                    // if(this.$el.querySelectorAll('.el-slider__stop')[i].classList)
+                    //     this.$el.querySelectorAll('.el-slider__stop')[i].classList.add('actived');
+                    if(this.$el.querySelectorAll('.el-slider__stop')[i]&&this.$el.querySelectorAll('.el-slider__stop')[i].classList)
+                        this.$el.querySelectorAll('.el-slider__stop')[i].classList.add('actived');
                   } else {
-                      if(this.$el.querySelectorAll('.el-slider__stop')[i].classList)
+                      if(this.$el.querySelectorAll('.el-slider__stop')[i]&&this.$el.querySelectorAll('.el-slider__stop')[i].classList)
                         this.$el.querySelectorAll('.el-slider__stop')[i].classList.remove('actived');
                   }
               }
@@ -422,9 +429,14 @@
 //            }
             for(let j = 0; j < this.tipPos.length; j++) {
                 if(this.tipPos[j]>=this.firstValue && this.tipPos[j]<=this.secondValue) {
-                    this.$el.querySelectorAll('.el-slider__stop')[j].classList.add('actived');
+                    // this.$el.querySelectorAll('.el-slider__stop')[j].classList.add('actived');
+                    if(this.$el.querySelectorAll('.el-slider__stop')[j]&&this.$el.querySelectorAll('.el-slider__stop')[j].classList) {
+                      this.$el.querySelectorAll('.el-slider__stop')[j].classList.add('actived');
+                    }
                 } else {
+                  if(this.$el.querySelectorAll('.el-slider__stop')[j]&&this.$el.querySelectorAll('.el-slider__stop')[j].classList) {
                     this.$el.querySelectorAll('.el-slider__stop')[j].classList.remove('actived');
+                  }
                 }
             }
         }
@@ -443,7 +455,7 @@
 //            let index = this.tipPos.indexOf(this.value);
             for(let i = 0; i < this.tipPos.length; i++) {
                 if(this.tipPos[i] <= this.value) {
-                    if(this.$el.querySelectorAll('.el-slider__stop')[i].classList)
+                    if(this.$el.querySelectorAll('.el-slider__stop')[i]&&this.$el.querySelectorAll('.el-slider__stop')[i].classList)
                         this.$el.querySelectorAll('.el-slider__stop')[i].classList.add('actived');
                 }
             }

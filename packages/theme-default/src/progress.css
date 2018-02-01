@@ -117,12 +117,9 @@
     box-sizing: border-box;
 
     @e outer {
-      border: 1px solid #0785DB;
       background: #F9F9F9;
       border-radius: 0px;
       height: 10px;
-      /*border-radius: 100px;*/
-      /*background-color: var(--color-light-gray);*/
       overflow: hidden;
       position: relative;
       vertical-align: middle;

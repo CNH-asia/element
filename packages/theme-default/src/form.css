@@ -67,25 +67,42 @@
       font-size: 12px;
       line-height: 1;
       padding-top: 4px;
-      // position: absolute;
-      top: 100%;
-      left: 0;
+      /* position: relative; */
+      position: absolute;
+      
+      margin-left: 15px;
       letter-spacing: 0.18px;
+    }
+    @e tip {
+      color: #909090;
+      font-size: 12px;
+      line-height: 1;
+      padding-top: 4px;
+      /* position: relative; */
+      position: absolute;
+      
+      margin-left: 15px;
+      letter-spacing: 0.18px;
+    }
+    @e icon {
+      position: absolute;
+      left: -15px;
+      width: 12px;
+      height: 12px;
     }
 
     @when required {
-      .el-form-item__label:before {
+      /* .el-form-item__label:before {
         content: '*';
         color: var(--color-danger);
         margin-right: 4px;
-      }
+      } */
     }
 
     @when error {
       & .el-input__inner,
       & .el-textarea__inner {
-        border: 2px solid #F77181;
-        // box-shadow: 0 0  4px 0 #ff4949;
+        border: 1px solid #D55363;
       }
       & .el-input-group__append,
       & .el-input-group__prepend, {

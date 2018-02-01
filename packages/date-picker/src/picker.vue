@@ -10,7 +10,7 @@
     @focus="handleFocus"
     @blur="handleBlur"
     @keydown.native="handleKeydown"
-    :value="displayValue"
+    :value="displayLabel==''?displayValue:displayLabel"
     @change.native="displayValue = $event.target.value"
     :validateEvent="false"
     ref="reference">
@@ -223,7 +223,17 @@ export default {
     rangeSeparator: {
       default: ' - '
     },
-    pickerOptions: {}
+    pickerOptions: {
+        type: Object,
+        default: function() {
+            return {
+                disabledDate: function (date) {
+                    return date.getTime() > new Date().getTime() || date.getTime() < new Date('2014-12-31').getTime();
+                }
+            }
+
+        }
+    }
   },
 
   components: { ElInput },
@@ -235,7 +245,8 @@ export default {
       pickerVisible: false,
       showClose: false,
       currentValue: '',
-      unwatchPickerOptions: null
+      unwatchPickerOptions: null,
+      displayLabel: ''
     };
   },
 
@@ -324,6 +335,13 @@ export default {
         ).formatter;
         const format = DEFAULT_FORMATS[this.type];
 
+        if(value[2]) {
+          this.displayLabel = value[2];
+          value.pop();
+        } else {
+          this.displayLabel = '';
+        }
+
         return formatter(value, this.format || format, this.rangeSeparator);
       },
 
@@ -335,7 +353,6 @@ export default {
             TYPE_VALUE_RESOLVER_MAP['default']
           ).parser;
           const parsedValue = parser(value, this.format || DEFAULT_FORMATS[type], this.rangeSeparator);
-
           if (parsedValue && this.picker) {
             this.picker.value = parsedValue;
           }
@@ -347,14 +364,26 @@ export default {
       }
     }
   },
-
+ 
   created() {
+    var that = this;
+    if(this.pickerOptions && this.pickerOptions.shortcuts && this.pickerOptions.shortcuts.length>0) {
+      var shortcuts = that.pickerOptions.shortcuts;
+      var label = '';
+      for(let i = 0; i < shortcuts.length; i++) {
+        if(shortcuts[i].label) {
+          that.displayLabel = shortcuts[i].text;
+        }
+      }
+    }
+    
     // vue-popper
     this.popperOptions = {
       boundariesPadding: 0,
       gpuAcceleration: false
     };
     this.placement = PLACEMENT_MAP[this.align] || PLACEMENT_MAP.left;
+
   },
 
   methods: {
@@ -474,6 +503,8 @@ export default {
               // 忽略 time-picker 的该配置项
               option !== 'selectableRange') {
             this.picker[option] = options[option];
+
+
           }
         }
       };
@@ -492,7 +523,8 @@ export default {
         this.pickerVisible = this.picker.visible = visible;
         this.picker.resetView && this.picker.resetView();
       });
-
+     
+      
       this.picker.$on('select-range', (start, end) => {
         this.refInput.setSelectionRange(start, end);
         this.refInput.focus();

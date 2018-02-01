@@ -20,8 +20,12 @@
     }
     @m daterange {
       &.el-input {
-        width: 220px;
+        width: 200px;
+        & .el-input__inner {
+          width:200px;
+         }
       }
+
     }
 
     @m datetimerange {

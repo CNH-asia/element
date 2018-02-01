@@ -63,7 +63,7 @@ const forced = {
       const expanded = store.states.expandRows.indexOf(row) > -1;
       return <div class={ 'el-table__expand-icon ' + (expanded ? 'el-table__expand-icon--expanded' : '') }
                   on-click={ () => proxy.handleExpandClick(row) }>
-        <i class='el-icon el-icon-arrow-right'></i>
+        <i class='el-icon el-icon-caret-bottom'></i>
       </div>;
     },
     sortable: false,
@@ -148,6 +148,10 @@ export default {
     filterMultiple: {
       type: Boolean,
       default: true
+    },
+    noHighlight: {
+      type: String,
+      default: ''
     }
   },
 
@@ -181,6 +185,7 @@ export default {
 
   created() {
     this.customRender = this.$options.render;
+
     this.$options.render = h => h('div', this.$slots.default);
     this.columnId = (this.$parent.tableId || (this.$parent.columnId + '_')) + 'column_' + columnIdSeed++;
 
@@ -238,10 +243,13 @@ export default {
       filterMultiple: this.filterMultiple,
       filterOpened: false,
       filteredValue: this.filteredValue || [],
-      filterPlacement: this.filterPlacement || ''
+      filterPlacement: this.filterPlacement || '',
+      noHighlight: this.noHighlight || ''
     });
 
+
     objectAssign(column, forced[type] || {});
+
 
     this.columnConfig = column;
     let renderCell = column.renderCell;
@@ -376,6 +384,7 @@ export default {
     const owner = this.owner;
     const parent = this.$parent;
     let columnIndex;
+
 
     if (!this.isSubColumn) {
       columnIndex = [].indexOf.call(parent.$refs.hiddenColumns.children, this.$el);

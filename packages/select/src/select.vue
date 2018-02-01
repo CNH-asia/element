@@ -6,12 +6,13 @@
     :class=" stype ? 'el-select--' + stype : '' ">
     <div
       class="el-select__tags"
-      v-if="multiple&&stype=='fixedWidth'"
+      v-if="multiple"
       @click.stop="toggleMenu"
       ref="tags"
-      :style="stype=='fixedWidth'?{ 'max-width': inputWidth - 32 + 'px' }:{ 'max-height': inputHeight - 6 + 'px' }">
-      <transition-group @after-leave="resetInputHeight" :style=" stype=='fixedHeight' ? { 'max-height': inputHeight - 6 + 'px'} : {} ">
+      :style="{ 'max-width': inputWidth - 32 + 'px' }">
+      <transition-group @after-leave="resetInputHeight">
         <el-tag
+          v-if="stype!=='fixedHeight'"
           v-for="item in selected"
           :key="getValueKey(item)"
           :closable="!disabled"
@@ -21,6 +22,7 @@
           close-transition>
           <span class="el-select__tags-text">{{ item.currentLabel }}</span>
         </el-tag>
+        <el-input class="input-strwrap" key="hhhh" :disabled="disabled" v-if="stype=='fixedHeight' && selected.length>0" v-model="selectedStr"></el-input>
       </transition-group>
 
       <input
@@ -29,7 +31,6 @@
         :class="`is-${ size }`"
         @focus="visible = true"
         :disabled="disabled"
-        :title="title"
         @keyup="managePlaceholder"
         @keydown="resetInputState"
         @keydown.down.prevent="navigateOptions('next')"
@@ -43,6 +44,7 @@
         :style="{ width: inputLength + 'px', 'max-width': inputWidth - 42 + 'px' }"
         ref="input">
     </div>
+
     <el-input
       ref="reference"
       v-model="selectedLabel"
@@ -51,9 +53,10 @@
       :name="name"
       :size="size"
       :disabled="disabled"
-      :readonly="!filterable "
+      :readonly="!filterable || multiple"
       :validate-event="false"
       @focus="handleFocus"
+      @blur="handleBlur"
       @click="handleIconClick"
       @mousedown.native="handleMouseDown"
       @keyup.native="debouncedOnInputChange"
@@ -208,11 +211,6 @@
         type: String,
         default: 'fixedWidth'
       },
-      title: {
-        type: String,
-        default: 'hhhh'
-      },
-      showbtn: Boolean,
       scrollType: {
         type: String,
         default: 'scroll'
@@ -229,8 +227,7 @@
         isSelect: true,
         inputLength: 20,
         inputWidth: 0,
-        inputHeight: 0,
-        cachedPlaceHolder: '33',
+        cachedPlaceHolder: '',
         optionsCount: 0,
         filteredOptionsCount: 0,
         visible: false,
@@ -242,35 +239,33 @@
         currentPlaceholder: '',
         type: '',
         stype: '',
-        sctype: ''
+        sctype: '',
+        selectedStr: ''
+
       };
     },
 
     watch: {
       placeholder(val) {
-//         this.cachedPlaceHolder = this.currentPlaceholder = val;
+        this.cachedPlaceHolder = this.currentPlaceholder = val;
       },
-      
+
       value(val) {
         this.stype = this.$el.attributes[0].nodeValue;
-        this.setSelected();
         if (this.multiple) {
-          if(this.stype=='fixedWidth') {
-            this.resetInputHeight();
-          } 
-          
-          if (this.stype=='fixedWidth' && (val.length > 0 || (this.$refs.input && this.query !== ''))) {
+          this.resetInputHeight();
+          if (val.length > 0 || (this.$refs.input && this.query !== '')) {
             this.currentPlaceholder = '';
           } else {
             this.currentPlaceholder = this.cachedPlaceHolder;
           }
         }
-        
+        this.setSelected();
         if (this.filterable && !this.multiple) {
           this.inputLength = 20;
         }
         this.$emit('change', val);
-        this.dispatch('ElFormItem', 'el.form.change', val);
+        // this.dispatch('ElFormItem', 'el.form.change', val);
       },
 
       query(val) {
@@ -281,14 +276,20 @@
         if (this.multiple && this.filterable) {
           this.inputLength = this.$refs.input.value.length * 15 + 20;
           this.managePlaceholder();
-          if(this.stype=='fixedWidth') {
-            this.resetInputHeight();
-          }
-          
+          this.resetInputHeight();
         }
         if (this.remote && typeof this.remoteMethod === 'function') {
           this.hoverIndex = -1;
           this.remoteMethod(val);
+
+          if(val=='' || val.length == 0) {
+              // debugger
+              this.selectedLabel = '';
+              this.options = [];
+              this.cachedOptions = [];
+          }
+          // console.log(123);
+
           this.broadcast('ElOption', 'resetIndex');
         } else if (typeof this.filterMethod === 'function') {
           this.filterMethod(val);
@@ -349,13 +350,20 @@
             }
           }
         }
+        // debugger
+        // console.log(this.selected.currentValue);
         this.$emit('visible-change', val);
+        if(!val) {
+            this.dispatch('ElFormItem', 'el.form.visiblechange', this.selected.currentValue);
+        } else {
+            this.dispatch('ElFormItem', 'el.form.novisiblechange', this.value);
+        }
       },
 
       options(val) {
         if (this.$isServer) return;
         this.optionsAllDisabled = val.length === val.filter(item => item.disabled === true).length;
-        if (this.multiple && this.stype == 'fixedWidth') {
+        if (this.multiple) {
           this.resetInputHeight();
         }
         let inputs = this.$el.querySelectorAll('input');
@@ -421,7 +429,6 @@
         return newOption;
       },
 
-
       setSelected() {
         if (!this.multiple) {
           let option = this.getOption(this.value);
@@ -438,25 +445,28 @@
         }
         let result = [];
         let result1 = [];
-
         if (Array.isArray(this.value)) {
           this.value.forEach(value => {
             result.push(this.getOption(value));
             result1.push(this.getOption(value).currentLabel);
           });
         }
-        if (this.stype == 'fixedHeight') {
-          this.$children[0].$refs.input.value = result1.toString();
-        }
         this.selected = result;
+        this.selectedStr = result1.toString();
         this.$nextTick(() => {
-          if (this.stype == 'fixedWidth') this.resetInputHeight();
+          this.resetInputHeight();
         });
       },
 
       handleFocus() {
         this.visible = true;
+        // this.dispatch('ElFormItem', 'el.form.focus', this.value);
+
       },
+      handleBlur() {
+        // this.dispatch('ElFormItem', 'el.form.blur', this.value);
+      },
+
 
       handleIconClick(event) {
         if (this.iconClass.indexOf('circle-close') > -1) {
@@ -504,32 +514,38 @@
           this.$emit('input', value);
         }
       },
+      deletePrevLabel(e) {
+//          const value1 = e.target.value.slice(0, e.target.value.length - 1);
+//          e.target.value = e.target.value.slice(0, e.target.value.length - 1);
+          this.query = e.target.value;
+//          this.$emit('input', value1);
+      },
 
       managePlaceholder() {
         if (this.currentPlaceholder !== '') {
-          // this.currentPlaceholder = this.$refs.input.value ? '' : this.cachedPlaceHolder;
-          this.currentPlaceholder = this.cachedPlaceHolder;
+          this.currentPlaceholder = this.$refs.input.value ? '' : this.cachedPlaceHolder;
         }
       },
 
       resetInputState(e) {
         if (e.keyCode !== 8) this.toggleLastOptionHitState(false);
         this.inputLength = this.$refs.input.value.length * 15 + 20;
-        if (this.stype == 'fixedWidth') this.resetInputHeight();
+        this.resetInputHeight();
       },
 
       resetInputHeight() {
-        if (this.stype == 'fixedWidth') {
+        if(this.stype=='fixedWidth') {
           this.$nextTick(() => {
-            if (!this.$refs.reference) return;
-            let inputChildNodes = this.$refs.reference.$el.childNodes;
-            let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
-            input.style.height = Math.max(this.$refs.tags.clientHeight + 6, sizeMap[this.size] || 36) + 'px';
-            if (this.visible && this.emptyText !== false) {
-              this.broadcast('ElSelectDropdown', 'updatePopper');
-            }
+              if (!this.$refs.reference) return;
+              let inputChildNodes = this.$refs.reference.$el.childNodes;
+              let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
+              input.style.height = Math.max(this.$refs.tags.clientHeight + 6, sizeMap[this.size] || 36) + 'px';
+              if (this.visible && this.emptyText !== false) {
+                  this.broadcast('ElSelectDropdown', 'updatePopper');
+              }
           });
         }
+
       },
 
       resetHoverIndex() {
@@ -562,7 +578,7 @@
           }
           if (this.filterable) this.$refs.input.focus();
         } else {
-          this.$emit('input', option.value);//向父组件传递值
+          this.$emit('input', option.value);
           this.visible = false;
         }
         this.$nextTick(() => this.scrollToOption(option));
@@ -675,7 +691,7 @@
 
       handleResize() {
         this.resetInputWidth();
-        if (this.multiple && this.stype=='fixedWidth') this.resetInputHeight();
+        if (this.multiple) this.resetInputHeight();
       },
 
       checkDefaultFirstOption() {
@@ -709,8 +725,6 @@
     },
 
     created() {
-      this.sctype = this.scrollType;
-      this.setSelected();
       this.cachedPlaceHolder = this.currentPlaceholder = this.placeholder;
       if (this.multiple && !Array.isArray(this.value)) {
         this.$emit('input', []);
@@ -718,7 +732,7 @@
       if (!this.multiple && Array.isArray(this.value)) {
         this.$emit('input', '');
       }
-      
+      this.setSelected();
 
       this.debouncedOnInputChange = debounce(this.debounce, () => {
         this.onInputChange();
@@ -730,11 +744,11 @@
     },
 
     mounted() {
-      if (this.multiple && Array.isArray(this.value) && this.value.length > 0 && this.stype=='fixedWidth') {
+      if (this.multiple && Array.isArray(this.value) && this.value.length > 0) {
         this.currentPlaceholder = '';
       }
       addResizeListener(this.$el, this.handleResize);
-      if (this.remote && this.multiple && this.stype=='fixedWidth') {
+      if (this.remote && this.multiple) {
         this.resetInputHeight();
       }
       this.$nextTick(() => {

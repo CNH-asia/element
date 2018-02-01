@@ -4,7 +4,8 @@
 @component-namespace el {
   @b date-picker {
     min-width: 256px;
-    height: 256px;
+    /*height: 256px;*/
+    height: 290px;
     margin: 2px 0;
     overflow-y: hidden;
 
@@ -19,7 +20,13 @@
     &.has-time {
       min-width: 324px;
       width:330px !important;
-      height:auto;
+      height:372px !important;
+
+      &.el-picker-panel__content {
+        min-width: 224px;
+        height: 210px;
+      }
+
     }
 
     /*.el-date-picker.has-time .el-date-picker__time-header .el-input.el-input--small {*/

@@ -14,20 +14,6 @@
     position: relative;
     width: 180px;
 
-    @m fixedHeight .el-select__tags {
-      height: 100%;
-      max-height: inherit;
-    }
-
-    @m fixedHeight .el-tag {
-      display: inline;
-      border: none;
-      background: transparent;
-      margin: 0;
-    }
-    @m fixedHeight .el-tag .el-tag__close:before {
-      content: '';
-    }
     &:hover {
       .el-input__inner {
         border-color: #B5C1D4;
@@ -124,9 +110,10 @@
       }
     }
 
+
     @e tags {
       position: absolute;
-      line-height: normal;
+      line-height: inherit;
       white-space: normal;
       z-index: var(--index-normal);
       top: 50%;
@@ -155,6 +142,10 @@
       & .el-icon-close {
         font-size: var(--select-input-font-size);
       }
+    }
+
+    &.el-select--fixedHeight .el-select__tags {
+      height: 32px;
     }
   }
 }

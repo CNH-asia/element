@@ -324,6 +324,10 @@ export default {
   <el-input placeholder="请输入内容" v-model="input3">
     <template slot="prepend">Http://</template>
   </el-input>
+
+  <el-input placeholder="发布包" v-model="input3" icon="search" :on-icon-click="handleIconClick">
+    <template slot="prepend">查询</template>
+  </el-input>
 </div>
 <div style="margin-top: 15px;">
   <el-input placeholder="请输入内容" v-model="input4">

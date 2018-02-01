@@ -74,13 +74,13 @@
     @e expand-icon {
       position: relative;
       cursor: pointer;
-      color: #666;
+      color: #D2D9E3;
       font-size: 12px;
       transition: transform 0.2s ease-in-out;
       height: 40px;
 
       @m expanded {
-        transform: rotate(90deg);
+        transform: rotate(180deg);
       }
 
       > .el-icon {
@@ -297,7 +297,6 @@
 
       & tbody td {
         background-color: #F9F9F9;
-        /*background-color: var(--table-footer-background);*/
         color: var(--table-text-color);
       }
     }
@@ -350,7 +349,7 @@
       height: 30px;
       overflow: initial;
     }
-
+  
     & .sort-caret {
       display: inline-block;
       width: 0;
@@ -375,7 +374,10 @@
         border-right: 5px solid transparent;
         border-bottom: none;
         border-left: 5px solid transparent;
+
+  
       }
+
     }
 
     & .ascending .sort-caret.ascending {
@@ -385,6 +387,7 @@
     & .descending .sort-caret.descending {
       border-top-color: var(--color-extra-light-black);
     }
+    
 
     & th.gutter, td.gutter {
       width: 15px;
@@ -409,7 +412,6 @@
       text-overflow: ellipsis;
       white-space: normal;
       word-break: break-all;
-      // height: 20px;
       line-height: 20px;
       padding-left: 0px;
       padding-right: 20px;
@@ -423,20 +425,36 @@
 
     & tr {
       background-color: #F9F9F9;
-      /*background-color: var(--color-white);*/
       height: 26px;
-      /*// line-height: 26px;*/
       color: #4a4a4a;
       position: relative;
       z-index: 20;
       font-weight: normal;
+
+      &.tr-expanded, &.tr-expanded:hover {
+        background-color: rgba(10,169,241,0.10);
+
+        & td {
+          background: transparent;
+          border-top: 1px solid rgba(10,169,241,0.20);
+          border-bottom: 1px solid rgba(10,169,241,0.20);
+
+          &:first-child {
+            border-left: 1px solid rgba(10,169,241,0.20);
+          }
+          &:last-child {
+            border-right: 1px solid rgba(10,169,241,0.20);
+          }
+
+        }
+      }
     }
+
 
     @modifier striped {
       & .el-table__body {
         & tr.el-table__row--striped {
           td {
-            /*background: #FAFAFA;*/
             background: #F9F9F9;
             background-clip: padding-box;
           }
@@ -485,6 +503,15 @@
       line-height: 34px;
       margin-left: 5px;
       cursor: pointer;
+      /* position: relative;
+      display: inline-block;
+      line-height: 34px;
+      width: 10px;
+      height: 5px; */
+      /* margin-left: 5px; */
+      /* cursor: pointer; */
+
+     
 
       & i {
         color: var(--color-light-silver);
@@ -508,12 +535,16 @@
 
     @modifier enable-row-hover {
       .el-table__body tr:hover > td {
-        /*background: rgba(61,161,230,0.05);*/
         background: #F5F7FA;
         background-clip: padding-box;
       }
+      
     }
-
+    @modifier enable-row-hover {
+      .el-table__body tr.tr-expanded:hover > td {
+        background: transparent;
+      }
+    }
     @modifier fluid-height {
       .el-table__fixed,
       .el-table__fixed-right {

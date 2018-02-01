@@ -25,12 +25,16 @@
       showMessage: {
         type: Boolean,
         default: true
+      },
+      showTip:{
+        type: Boolean,
+        default: true
       }
     },
     watch: {
-      rules() {
-        this.validate();
-      }
+      // rules() {
+      //   this.validate();
+      // }
     },
     data() {
       return {

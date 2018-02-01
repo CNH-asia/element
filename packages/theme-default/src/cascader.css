@@ -112,6 +112,25 @@
       box-sizing: border-box;
       cursor: pointer;
 
+      &.is-multiple.is-active {
+        padding-left: 40px;
+      }
+      &.is-multiple.is-hover {
+        background-color: #e4e8f1; 
+      }
+      &.is-multiple.is-active.is-hover
+      {
+        background-color: #1C8DE0;
+      }
+
+      &.is-multiple.is-active:before {
+        position: absolute;
+        left: 10px;
+        font-family: 'element-icons';
+        content: "\E608";
+        -webkit-font-smoothing: antialiased;
+      }
+
       @e keyword {
         font-weight: bold;
       }

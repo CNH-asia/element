@@ -2,6 +2,7 @@
   export default {
     data() {
       return {
+      isdisabled:false,
         list: null,
         options: [{
           value: '选项1',
@@ -100,7 +101,7 @@
         currentPage: 1,
         value: '',
         value2: '',
-        value3: '',
+        value3: [],
         value4: '',
         value5: [],
         value6: '',
@@ -124,6 +125,7 @@
         console.log(val);
       },
       remoteMethod(query) {
+        console.log('111111');
         if (query !== '') {
           this.loading = true;
           setTimeout(() => {
@@ -133,6 +135,7 @@
         } else {
           this.options4 = [];
         }
+        console.log(this.options4);
       }
     }
   };
@@ -162,15 +165,6 @@
       :value="item.value">
     </el-option>
   </el-select>
-  <div class="ver-page mgt30 tcenter">
-      <el-pagination
-          @size-change="handleSizeChange"
-          :current-page="currentPage"
-          :page-sizes="[10, 20, 30, 40]"
-          :page-size="10"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="100">
-      </el-pagination>
   </div>
 </template>
 
@@ -254,7 +248,8 @@
 :::demo 为`el-select`设置`disabled`属性，则整个选择器不可用
 ```html
 <template>
-  <el-select v-model="value3" disabled placeholder="请选择">
+<el-button @click="isdisabled=!isdisabled">禁用</el-button>
+  <el-select v-model="value3" multiple type="fixedHeight" :disabled="isdisabled" placeholder="请选择">
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -284,7 +279,7 @@
           value: '选项5',
           label: '北京烤鸭'
         }],
-        value3: ''
+        value3: []
       }
     }
   }
@@ -354,9 +349,9 @@
       :value="item.value">
     </el-option>
   </el-select>
-  <br>
-</div>
   
+</div>
+  <br><br>
 <div>
   固定高度
   <el-select v-model="value11" multiple placeholder="请选择" type="fixedHeight">
@@ -455,7 +450,7 @@
 :::demo 使用`el-option-group`对备选项进行分组，它的`label`属性为分组名
 ```html
 <template>
-  <el-select v-model="value7" placeholder="请选择" multiple :multiple-limit="2" :group-limit="[1,1]">
+  <el-select v-model="value7" placeholder="请选择" multiple type="fixedHeight" :multiple-limit="3" :group-limit="[1,2]">
     <el-option-group
       v-for="group in options3"
       :key="group.label"
@@ -560,7 +555,7 @@
 <template>
   <el-select
     v-model="value9"
-    multiple
+    type="fixedHeight"
     filterable
     remote
     placeholder="请输入关键词"
@@ -609,6 +604,7 @@
     },
     methods: {
       remoteMethod(query) {
+          console.log('dooooooo');
         if (query !== '') {
           this.loading = true;
           setTimeout(() => {

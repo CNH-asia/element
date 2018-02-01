@@ -31,11 +31,11 @@ cooking.set({
   hash: true,
   devServer: {
     hostname: '0.0.0.0',
-    port: 8085,
+    port: 1128,
     log: false,
     publicPath: '/'
   },
-  minimize: true,
+  minimize: false,
   chunk: isProd ? {
     'common': { name: ['element-ui', 'manifest'] }
   } : false,

@@ -1,5 +1,5 @@
 {
-  "name": "element-ui",
+  "name": "light-ui",
   "version": "1.4.2",
   "description": "A Component Library for Vue.js.",
   "main": "lib/element-ui.common.js",
@@ -54,6 +54,7 @@
     "vue": "^2.3.0"
   },
   "devDependencies": {
+    "compression": "^1.5.2",
     "babel-cli": "^6.14.0",
     "babel-core": "^6.14.0",
     "babel-loader": "^6.2.5",

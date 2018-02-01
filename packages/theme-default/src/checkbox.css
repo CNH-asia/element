@@ -4,7 +4,7 @@
 @component-namespace el {
 
   @b checkbox {
-    color: var(--checkbox-color);
+    color: #606060;
     position: relative;
     cursor: pointer;
     display: inline-block;

@@ -6,7 +6,7 @@ const defaults = {
   showClose: true,
   modalFade: true,
   lockScroll: true,
-  closeOnClickModal: true,
+  closeOnClickModal: false,
   closeOnPressEscape: true,
   inputValue: null,
   inputPlaceholder: '',

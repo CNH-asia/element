@@ -231,7 +231,7 @@
           column: null
         },
         showTime: false,
-        shortcuts: '',
+        shortcuts: [],
         value: '',
         visible: '',
         disabledDate: '',
@@ -460,11 +460,31 @@
         this.$emit('pick', [this.minDate, this.maxDate], visible);
       },
 
+
       resetDate() {
         this.date = new Date(this.date);
       }
     },
 
-    components: { TimePicker, DateTable, ElInput }
+    components: { TimePicker, DateTable, ElInput },
+   
+    updated () {
+      var that = this;
+      if(!this.minDate && !this.maxDate) {
+       if(this.shortcuts && this.shortcuts.length>0) {
+        var shortcuts = this.shortcuts;
+        var label = '';
+        for(let i = 0; i < shortcuts.length; i++) {
+          if(shortcuts[i].label) {
+            const end = new Date();
+            const start = new Date();
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * parseInt(shortcuts[i].period));
+            that.minDate = start;
+            that.maxDate = end;
+          }
+        }
+      }
+    }
+    }
   };
 </script>

@@ -156,50 +156,31 @@
       :step="100">
     </el-slider>
   </div>
-  
-    <div class="block">
-    <el-form>
-        <el-form-item>
-            <el-slider v-model="max_value" :step="10" :max="1000" :min="100" :client-stops="[100,200,300,500,800,1000]">
-            </el-slider>
-        </el-form-item>
 
-        <el-form-item>
-            <p>流量阈值：</p>
-            <el-slider v-model="warn_value" ref="button" :step="step" :max="max_warn_value"  disable-min show-stops>
-            </el-slider>
-        </el-form-item>
-        <el-form-item class="tcenter">
-            <el-button @click='fluidControl()'>确定</el-button>
-        </el-form-item>
-    </el-form>
-        
   <div class="block">
     <span class="demonstration">显示间断点</span>
     <el-slider
-  
       v-model="value10"
       show-input
       :max="1000"
-      :client-stops="[111,234,568,602,760,890,1000]">
-    </el-slider>
-    <el-tabs  @tab-click="tabClick">
-        <el-tab-pane label="规则" name="rule" class="rule">
-            
-        </el-tab-pane>
-        <el-tab-pane label="shili" name="shili" class="rule">
-            <el-slider
-                  v-model="value7"
-                  :step="100"
-                  :min="100"
-                  :max="900"
-                  show-stops>
-                </el-slider>
-        </el-tab-pane>
-    </el-tabs>
-    
+      :client-stops="[111,234,468,602,760,890,1000]">
+    </el-slider> 
   </div>
-  
+
+  <div class="block">
+    <span class="demonstration">联动的滑块</span>
+    <el-form label-width="80px">
+        <el-form-item label="阈值上限">
+            <el-slider v-model="max_value" :step="10" :max="1000" :min="100" :client-stops="[100,200,300,500,800,1000]">
+            </el-slider>
+        </el-form-item>
+        <el-form-item label="流量阈值">
+            <el-slider v-model="warn_value" ref="button" :step="step" :max="max_warn_value"  disable-min show-stops :disabled="false">
+            </el-slider>
+        </el-form-item>
+        <el-form-item class="tcenter">
+        </el-form-item>
+    </el-form>
 </template>
 
 <script>
@@ -249,14 +230,14 @@
 :::demo 设置`range`即可开启范围选择，此时绑定值是一个数组，其元素分别为最小边界值和最大边界值
 ```html
 <template>
-  <!--<div class="block">
+  <!-- <div class="block">
     <el-slider
       v-model="value9"
       range
       show-stops
       :max="10">
-    </el-slider>-->
-  </div>
+    </el-slider>
+  </div> -->
 </template>
 
 <script>

@@ -25,10 +25,9 @@
 </template>
 
 <script>
-  import { getFirstDayOfMonth, getDayCountOfMonth, getWeekNumber, getStartDateOfMonth, DAY_DURATION } from '../util';
+  import { getFirstDayOfMonth, getDayCountOfMonth, getWeekNumber, getStartDateOfMonth,formatDate, parseDate, DAY_DURATION } from '../util';
   import { hasClass } from 'element-ui/src/utils/dom';
   import Locale from 'element-ui/src/mixins/locale';
-
   const WEEKS = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
   const clearHours = function(time) {
     const cloneDate = new Date(time);
@@ -82,6 +81,18 @@
     },
 
     computed: {
+      dateLabels() {
+          const shortcuts = this.$parent.shortcuts;
+          if(shortcuts.length>0) {
+              shortcuts.forEach(function(shortcut) {
+                  shortcut.end = new Date();
+                  var period = parseInt(shortcut.period); 
+                  shortcut.end = Math.floor(shortcut.end.getTime() / 3600000 / 24);
+              });
+              return shortcuts;
+          } else {return [];}
+
+      },
       offsetDay() {
         const week = this.firstDayOfWeek;
         // 周日为界限，左右偏移的天数，3217654 例如周一就是 -1，目的是调整前两行日期的位置
@@ -137,6 +148,7 @@
 
             const index = i * 7 + j;
             const time = startDate.getTime() + DAY_DURATION * (index - offset);
+          
             cell.inRange = time >= clearHours(this.minDate) && time <= clearHours(this.maxDate);
             cell.start = this.minDate && time === clearHours(this.minDate);
             cell.end = this.maxDate && time === clearHours(this.maxDate);
@@ -195,7 +207,7 @@
 
       }
     },
-
+   
     watch: {
       'rangeState.endDate'(newVal) {
         this.markRange(newVal);
@@ -217,6 +229,7 @@
         if (newVal && !oldVal) {
           this.rangeState.selecting = false;
           this.markRange(newVal);
+
           this.$emit('pick', {
             minDate: this.minDate,
             maxDate: this.maxDate
@@ -272,7 +285,6 @@
 
       getDateOfCell(row, column) {
         const startDate = this.startDate;
-
         return new Date(startDate.getTime() + (row * 7 + (column - (this.showWeekNumber ? 1 : 0)) - this.offsetDay) * DAY_DURATION);
       },
 
@@ -353,7 +365,6 @@
         if (oldRow !== row || oldColumn !== column) {
           this.rangeState.row = row;
           this.rangeState.column = column;
-
           this.rangeState.endDate = this.getDateOfCell(row, column);
         }
       },
@@ -405,22 +416,41 @@
         newDate.setDate(parseInt(text, 10));
 
         if (this.selectionMode === 'range') {
+
           if (this.minDate && this.maxDate) {
             const minDate = new Date(newDate.getTime());
             const maxDate = null;
-
-            this.$emit('pick', { minDate, maxDate }, false);
+            this.$emit('pick', { minDate, maxDate}, false);
             this.rangeState.selecting = true;
             this.markRange(this.minDate);
           } else if (this.minDate && !this.maxDate) {
             if (newDate >= this.minDate) {
-              const maxDate = new Date(newDate.getTime());
+              const maxDate = new Date(newDate.getTime() + DAY_DURATION - 1000);
               this.rangeState.selecting = false;
+                var that = this;
+                // var new_mindate=Math.floor(this.minDate.getTime()/36000/2400);
+                var new_maxdate=Math.floor(maxDate.getTime()/36000/2400);
+                var new_period = Math.floor((maxDate.getTime() - this.minDate.getTime())/36000/2400);
+                var new_text = '';
 
-              this.$emit('pick', {
-                minDate: this.minDate,
-                maxDate
-              });
+                if(this.dateLabels.length>0) {
+                    this.dateLabels.forEach(function(date) {
+                        if(new_period==date.period && new_maxdate==date.end) {
+                            new_text = date.text;
+                        }
+                    });
+                }
+
+                if(new_text=='') {
+                    that.$emit('pick', {
+                        minDate: that.minDate,
+                        maxDate
+                    });
+                } else {
+                    that.$parent.$emit('pick',[that.minDate,maxDate,new_text]);
+
+                }
+
             } else {
               const minDate = new Date(newDate.getTime());
 

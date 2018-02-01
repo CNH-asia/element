@@ -103,7 +103,7 @@ export default {
                     on-mousedown={ ($event) => this.handleMouseDown($event, column) }
                     on-click={ ($event) => this.handleHeaderClick($event, column) }
                     class={ [column.id, column.order, column.headerAlign, column.className || '', rowIndex === 0 && this.isCellHidden(cellIndex, columns) ? 'is-hidden' : '', !column.children ? 'is-leaf' : '', column.labelClassName] }>
-                    <div class={ ['cell', column.filteredValue && column.filteredValue.length > 0 ? 'highlight' : '', column.labelClassName] }>
+                      <div class={['cell', column.filteredValue && column.filteredValue.length > 0 && column.filteredValue.indexOf(column.noHighlight) === -1 ? 'highlight' : '', column.labelClassName] }>
                     {
                       column.renderHeader
                         ? column.renderHeader.call(this._renderProxy, h, { column, $index: cellIndex, store: this.store, _self: this.$parent.$vnode.context })
@@ -119,7 +119,13 @@ export default {
                     }
                     {
                       column.filterable
-                         ? <span class="el-table__column-filter-trigger" on-click={ ($event) => this.handleFilterClick($event, column) }><i class={ ['el-icon-arrow-down', column.filterOpened ? 'el-icon-arrow-up' : ''] }></i></span>
+                            ?  
+                            <span class="el-table__column-filter-trigger" on-click={($event) => this.handleFilterClick($event, column)}>
+                              <i class={['el-icon-caret-bottom', column.filterOpened ? 'el-icon-caret-top' : ''] } style='font-size:6px;'></i>
+                            </span>
+                            // <span class="caret-wrapper" on-click={($event) => this.handleFilterClick($event, column)}>
+                            //   <i class='sort-caret descending' style="bottom: 12px;"></i>
+                            // </span>
                         : ''
                     }
                     </div>

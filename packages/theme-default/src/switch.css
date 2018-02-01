@@ -38,8 +38,10 @@
         }
       }
       & * {
-        line-height: 6px;
-        top: 9px;
+        /*line-height: 6px;*/
+        /*top: 9px;*/
+        line-height: 22px;
+
         position: absolute;
         font-size: var(--switch-font-size);
         display: inline-block;

@@ -47,6 +47,8 @@
       text-align: center;
       color: var(--input-icon-color);
       transition: all .3s;
+      cursor: pointer;
+      z-index: 1;
 
       &:after {
         content: '';
@@ -120,21 +122,26 @@
     width: 100%;
     border-collapse: separate;
 
+  
     & > .el-input__inner {
       vertical-align: middle;
       display: table-cell;
     }
     @e append, prepend {
-      background-color: var(--color-dark-white);
-      color: var(--color-light-silver);
+      color: #303030;
       vertical-align: middle;
       display: table-cell;
       position: relative;
-      border: var(--border-base);
-      border-radius: var(--input-border-radius);
+      border: 1px solid #D2D9E3;
+      border-radius: 2px;
       padding: 0 10px;
       width: 1px;
       white-space: nowrap;
+      line-height: 30px;
+
+      /* &:hover {
+        border-color: #B5C1D4;
+      } */
 
       & .el-select,
       & .el-button {
@@ -169,16 +176,27 @@
 
     @m prepend {
       .el-input__inner {
+        /* border: none; */
+        border-left: none;
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
       }
     }
     @m append {
       .el-input__inner {
+        /* border: none; */
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
       }
     }
+
+    /* &:hover .el-input-group__prepend, &:hover .el-input__inner {
+      border-color: #B5C1D4;
+    }
+
+    &:focus .el-input-group__prepend, &:focus .el-input__inner {  
+      border-color: #0AA9F1;
+    } */
   }
 
   @b textarea {

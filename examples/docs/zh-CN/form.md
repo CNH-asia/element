@@ -71,7 +71,26 @@
         ruleForm2: {
           pass: '',
           checkPass: '',
-          age: ''
+          age: '',
+          search: '',
+          region: '',
+          bgcolor: 1,
+          bgcolors: [{
+              value: '1',
+              label: '蓝色'
+          }, {
+              value: '2',
+              label: '黄色'
+          }, {
+              value: '3',
+              label: '紫色'
+          }, {
+              value: '4',
+              label: '绿色'
+          }, {
+              value: '5',
+              label: '橙色'
+          }]
         },
         formLabelWidth: '80px',
         rules: {
@@ -107,8 +126,38 @@
           ],
           age: [
             { validator: checkAge, trigger: 'blur' }
+          ],
+          search: [
+            { required: true, trigger: 'visible-change', message: '请输入'}
+          ],
+          bgcolor:[
+            { required: true, trigger: 'visible-change', message: '背景色不能为空' }
+          ],
+          region: [
+            { required: true, message: '活动区域不能为空', trigger: 'visible-change' }
           ]
         },
+        options4: [],
+        value9: [],
+        list: [],
+        loading: false,
+        states: ["Alabama", "Alaska", "Arizona",
+        "Arkansas", "California", "Colorado",
+        "Connecticut", "Delaware", "Florida",
+        "Georgia", "Hawaii", "Idaho", "Illinois",
+        "Indiana", "Iowa", "Kansas", "Kentucky",
+        "Louisiana", "Maine", "Maryland",
+        "Massachusetts", "Michigan", "Minnesota",
+        "Mississippi", "Missouri", "Montana",
+        "Nebraska", "Nevada", "New Hampshire",
+        "New Jersey", "New Mexico", "New York",
+        "North Carolina", "North Dakota", "Ohio",
+        "Oklahoma", "Oregon", "Pennsylvania",
+        "Rhode Island", "South Carolina",
+        "South Dakota", "Tennessee", "Texas",
+        "Utah", "Vermont", "Virginia",
+        "Washington", "West Virginia", "Wisconsin",
+        "Wyoming"],
         dynamicValidateForm: {
           domains: [{
             value: '',
@@ -122,6 +171,23 @@
       };
     },
     methods: {
+      remoteMethod(query) {
+        if (query !== '') {
+          this.loading = true;
+          setTimeout(() => {
+            this.loading = false;
+            this.options4 = this.list.filter(item => {
+              return item.label.toLowerCase()
+                .indexOf(query.toLowerCase()) > -1;
+            });
+          }, 200);
+        } else {
+          this.options4 = [];
+        }
+      },
+      show_tip(e) {
+        // console.log(e);
+      },
       onSubmit() {
         console.log('submit!');
       },
@@ -150,6 +216,11 @@
           key: Date.now()
         });
       }
+    },
+    mounted() {
+      this.list = this.states.map(item => {
+        return { value: item, label: item };
+      });
     }
   }
 </script>
@@ -401,6 +472,7 @@
       <el-option label="区域二" value="beijing"></el-option>
     </el-select>
   </el-form-item>
+ 
   <el-form-item label="活动时间" required>
     <el-col :span="11">
       <el-form-item prop="date1">
@@ -438,7 +510,7 @@
     <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
     <el-button @click="resetForm('ruleForm')">重置</el-button>
   </el-form-item>
-</el-form>
+</el-form-item>
 <script>
   export default {
     data() {
@@ -459,7 +531,7 @@
             { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
           ],
           region: [
-            { required: true, message: '请选择活动区域', trigger: 'change' }
+            { required: true, message: '请选择活动区域', trigger: 'visible-change' }
           ],
           date1: [
             { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
@@ -504,16 +576,53 @@
 ::: demo 这个例子中展示了如何使用自定义验证规则来完成密码的二次验证
 ```html
 <el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
-  <el-form-item label="密码" prop="pass">
+  <el-form-item label="密码" prop="pass" tip="请输入密码">
     <el-input type="password" v-model="ruleForm2.pass" auto-complete="off"></el-input>
   </el-form-item>
-  <el-form-item label="确认密码" prop="checkPass">
+  <el-form-item label="确认密码" prop="checkPass" tip="请确认密码">
     <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off"></el-input>
   </el-form-item>
-  <el-form-item label="年龄" prop="age">
+  <el-form-item label="年龄" prop="age" tip="请输入年龄">
     <el-input v-model.number="ruleForm2.age"></el-input>
   </el-form-item>
-  <el-form-item>
+
+  <el-form-item label="远程搜索" prop="search" tip="8888888888">
+    <el-select
+      type="fixedHeight"
+      v-model="ruleForm2.search"
+      remote
+      filterable
+      placeholder="请输入关键词"
+      :remote-method="remoteMethod"
+      :loading="loading">
+      <el-option
+        v-for="item in options4"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value">
+      </el-option>
+    </el-select>
+  </el-form-item>
+  
+  <el-form-item label="活动区域" prop="region">
+      <el-select v-model="ruleForm2.region" type="fixedHeight" placeholder="请选择活动区域">
+        <el-option
+        v-for="item in ruleForm2.bgcolors"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value">
+      </el-option>
+      
+          <!-- <el-option label="区域一" value="shanghai"></el-option>
+          <el-option label="区域二" value="beijing"></el-option>  -->
+      </el-select>
+  </el-form-item>
+  
+ 
+  
+  
+  
+  
     <el-button type="primary" @click="submitForm('ruleForm2')">提交</el-button>
     <el-button @click="resetForm('ruleForm2')">重置</el-button>
   </el-form-item>
@@ -560,7 +669,8 @@
         ruleForm2: {
           pass: '',
           checkPass: '',
-          age: ''
+          age: '',
+          search: ''
         },
         rules2: {
           pass: [
@@ -571,6 +681,9 @@
           ],
           age: [
             { validator: checkAge, trigger: 'blur' }
+          ],
+          search: [
+            {required: true, trigger: 'blur,change', message: '请输入'}
           ]
         }
       };

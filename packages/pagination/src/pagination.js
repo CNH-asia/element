@@ -79,8 +79,8 @@ export default {
     if (haveRightWrapper) {
       template.children.unshift(rightWrapper);
     }
-
     return template;
+
   },
 
   components: {

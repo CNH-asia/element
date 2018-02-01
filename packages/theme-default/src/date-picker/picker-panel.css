@@ -27,7 +27,7 @@
           left:4px;
       }
       & .el-picker-panel__content {
-          height:185px;
+          /*height: 210px;*/
       }
       & .el-picker-panel__content.el-date-range-picker__content {
           height:auto;

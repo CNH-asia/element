@@ -18,14 +18,14 @@
     </div>
     <div class="el-table-filter" v-else v-show="showPopper">
       <ul class="el-table-filter__list">
-        <li class="el-table-filter__list-item"
-            :class="{ 'is-active': !filterValue }"
-            @click="handleSelect(null)">{{ t('el.table.clearFilter') }}</li>
+        <!--// <li class="el-table-filter__list-item"
+        //     :class="{ 'is-active': !filterValue }"
+        //     @click="handleSelect(null)">{{ t('el.table.clearFilter') }}</li>-->
         <li class="el-table-filter__list-item"
             v-for="filter in filters"
             :label="filter.value"
             :key="filter.value"
-            :class="{ 'is-active': isActive(filter) }"
+            :class="{ 'is-active': isActive(filter) || (filter.value == noHighlight && !filterValue)}"
             @click="handleSelect(filter.value)" >{{ filter.text }}</li>
       </ul>
     </div>
@@ -95,7 +95,7 @@
 
       handleSelect(filterValue) {
         this.filterValue = filterValue;
-
+      
         if ((typeof filterValue !== 'undefined') && (filterValue !== null)) {
           this.confirmFilter(this.filteredValue);
         } else {
@@ -124,6 +124,9 @@
     computed: {
       filters() {
         return this.column && this.column.filters;
+      },
+      noHighlight() {
+        return this.column && this.column.noHighlight;
       },
 
       filterValue: {

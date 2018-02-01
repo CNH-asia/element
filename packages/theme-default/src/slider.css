@@ -24,6 +24,10 @@
       &.disabled {
         cursor: default;
 
+        .el-slider__stop.actived {
+          background-color: rgb(191, 203, 217);
+        }
+
         .el-slider__bar, .el-slider__button {
           background-color: var(--slider-disable-color);
         }
@@ -74,7 +78,7 @@
     @e button-wrapper {
       size: var(--slider-button-wrapper-size);
       position: absolute;
-      z-index: 1001;
+      z-index: 20;
       top: var(--slider-button-wrapper-offset);
       transform: translateX(-50%);
       background-color: transparent;
@@ -129,8 +133,7 @@
       transform: translateX(-50%);
 
       &.actived {
-        
-        background-color: #20a0ff !important;
+        background-color: #20a0ff ;
       }
     }
     .el-slider__stop__tip {

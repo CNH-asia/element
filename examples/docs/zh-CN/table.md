@@ -231,6 +231,9 @@
     },
 
     methods: {
+    handleExpand(row,expanded) {
+    console.log(row,expanded);
+    },
       getSummaries(param) {
         const { columns, data } = param;
         const sums = [];
@@ -295,7 +298,8 @@
       },
 
       filterTag(value, row) {
-        return row.tag === value;
+        console.log(11);
+        // return row.tag === value;
       },
 
       tableRowClassName(row, index) {
@@ -486,7 +490,7 @@
 
 :::demo 默认情况下，Table 组件是不具有竖直方向的边框的，如果需要，可以使用`border`属性，它接受一个`Boolean`，设置为`true`即可启用。
 ```html
-<!--<template>
+<template>
   <el-table
     :data="tableData"
     border
@@ -506,7 +510,7 @@
       label="地址">
     </el-table-column>
   </el-table>
-</template>-->
+</template>
 
 <script>
   export default {
@@ -542,7 +546,7 @@
 
 :::demo 可以通过指定 Table 组件的 `row-class-name` 属性来为 Table 中的某一行添加 class，表明该行处于某种状态。
 ```html
-<!--<template>
+<template>
   <el-table
     :data="tableData2"
     style="width: 100%"
@@ -562,7 +566,7 @@
       label="地址">
     </el-table-column>
   </el-table>
-</template>-->
+</template>
 
 <style>
   .el-table .info-row {
@@ -618,7 +622,7 @@
 
 :::demo 只要在`el-table`元素中定义了`height`属性，即可实现固定表头的表格，而不需要额外的代码。
 ```html
-<!--<template>
+<template>
   <el-table
     :data="tableData3"
     height="250"
@@ -639,7 +643,7 @@
       label="地址">
     </el-table-column>
   </el-table>
-</template>-->
+</template>
 
 <script>
   export default {
@@ -687,7 +691,7 @@
 
 :::demo 固定列需要使用`fixed`属性，它接受 Boolean 值或者`left` `right`，表示左边固定还是右边固定。
 ```html
-<!--<template>
+<template>
   <el-table
     :data="tableData"
     border
@@ -733,7 +737,7 @@
       </template>
     </el-table-column>
   </el-table>
-</template>-->
+</template>
 
 <script>
   export default {
@@ -787,7 +791,7 @@
 
 :::demo 固定列和表头可以同时使用，只需要将上述两个属性分别设置好即可。
 ```html
-<!--<template>
+<template>
   <el-table
     :data="tableData3"
     border
@@ -825,7 +829,7 @@
       width="120">
     </el-table-column>
   </el-table>
-</template>-->
+</template>
 
 <script>
   export default {
@@ -894,7 +898,7 @@
 
 :::demo 通过设置`max-height`属性为 Table 指定最大高度。此时若表格所需的高度大于最大高度，则会显示一个滚动条。
 ```html
-<!--<template>
+<template>
   <el-table
     :data="tableData4"
     border
@@ -945,7 +949,7 @@
       </template>
     </el-table-column>
   </el-table>
-</template>-->
+</template>
 
 <script>
   export default {
@@ -1019,7 +1023,7 @@
 
 :::demo 只需要在 el-table-column 里面嵌套 el-table-column，就可以实现多级表头。
 ```html
-<!--<template>
+<template>
   <el-table
     :data="tableData3"
     border
@@ -1059,7 +1063,7 @@
       </el-table-column>
     </el-table-column>
   </el-table>
-</template>-->
+</template>
 
 <script>
   export default {
@@ -1128,7 +1132,7 @@
 
 :::demo Table 组件提供了单选的支持，只需要配置`highlight-current-row`属性即可实现单选。之后由`current-change`事件来管理选中时触发的事件，它会传入`currentRow`，`oldCurrentRow`。如果需要显示索引，可以增加一列`el-table-column`，设置`type`属性为`index`即可显示从 1 开始的索引号。
 ```html
-<!--<template>
+<template>
   <el-table
     ref="singleTable"
     :data="tableData"
@@ -1158,7 +1162,7 @@
     <el-button @click="setCurrent(tableData[1])">选中第二行</el-button>
     <el-button @click="setCurrent()">取消选择</el-button>
   </div>
-</template>-->
+</template>
 
 <script>
   export default {
@@ -1204,7 +1208,7 @@
 
 :::demo 实现多选非常简单: 手动添加一个`el-table-column`，设`type`属性为`selection`即可；默认情况下若内容过多会折行显示，若需要单行显示可以使用`show-overflow-tooltip`属性，它接受一个`Boolean`，为`true`时多余的内容会在 hover 时以 tooltip 的形式显示出来。
 ```html
-<!--<template>
+<template>
   <el-table
     ref="multipleTable"
     :data="tableData3"
@@ -1235,7 +1239,7 @@
     <el-button @click="toggleSelection([tableData3[1], tableData3[2]])">切换第二、第三行的选中状态</el-button>
     <el-button @click="toggleSelection()">取消选择</el-button>
   </div>
-</template>-->
+</template>
 
 <script>
   export default {
@@ -1299,7 +1303,7 @@
 
 :::demo 在列中设置`sortable`属性即可实现以该列为基准的排序，接受一个`Boolean`，默认为`false`。可以通过 Table 的`default-sort`属性设置默认的排序列和排序顺序。可以使用`sort-method`使用自定义的排序规则。如果需要后端排序，需将`sortable`设置为`custom`，同时在 Table 上监听`sort-change`事件，在事件回调中可以获取当前排序的字段名和排序顺序，从而向接口请求排序后的表格数据。在本例中，我们还使用了`formatter`属性，它用于格式化指定列的值，接受一个`Function`，会传入两个参数：`row`和`column`，可以根据自己的需求进行处理。
 ```html
-<!--<template>
+<template>
   <el-table
     :data="tableData"
     border
@@ -1324,7 +1328,7 @@
       :formatter="formatter">
     </el-table-column>
   </el-table>
-</template>-->
+</template>
 
 <script>
   export default {
@@ -1365,7 +1369,7 @@
 
 :::demo 在列中设置`filters` `filter-method`属性即可开启该列的筛选，filters 是一个数组，`filter-method`是一个方法，它用于决定某些数据是否显示，会传入两个参数：`value`和`row`。
 ```html
-<!--<template>
+<template>
   <el-table
     :data="tableData"
     border
@@ -1390,17 +1394,15 @@
       prop="tag"
       label="标签"
       width="100"
-      :filters="[{ text: '家', value: '家' }, { text: '公司', value: '公司' }]"
+      no-highlight="全部"
+      :filter-multiple=false
+      :filters="[{text: '全部', value: '全部'},{ text: '家', value: '家' }, { text: '公司', value: '公司' }]"
       :filter-method="filterTag"
       filter-placement="bottom-end">
-      <template scope="scope">
-        <el-tag
-          :type="scope.row.tag === '家' ? 'primary' : 'success'"
-          close-transition>{{scope.row.tag}}</el-tag>
-      </template>
+     
     </el-table-column>
   </el-table>
-</template>-->
+</template>
 
 <script>
   export default {
@@ -1434,7 +1436,13 @@
         return row.address;
       },
       filterTag(value, row) {
-        return row.tag === value;
+        if(value=='全部') {
+          return true;
+        } else {
+          return row.tag === value;
+        }
+        
+        
       }
     }
   }
@@ -1447,7 +1455,7 @@
 自定义列的显示内容，可组合其他组件使用。
 :::demo 通过 `Scoped slot` 可以获取到 row, column, $index 和 store（table 内部的状态管理）的数据，用法参考 demo。(`1.1` 后支持通过 [Scoped slot](https://vuejs.org/v2/guide/components.html#Scoped-Slots) 自定义模板。之前的 `inline-template` 同样适用，但不推荐。)
 ```html
-<!--<template>
+<template>
   <el-table
     :data="tableData"
     border
@@ -1485,7 +1493,7 @@
       </template>
     </el-table-column>
   </el-table>
-</template>-->
+</template>
 
 <script>
   export default {
@@ -1528,37 +1536,11 @@
 当行内容过多并且不想显示横向滚动条时，可以使用 Table 展开行功能。
 :::demo 通过设置 type="expand" 和 `Scoped slot` 可以开启展开行功能，`el-table-column` 的模板会被渲染成为展开行的内容，展开行可访问的属性与使用自定义列模板时的 `Scoped slot` 相同。
 ```html
-<!--<template>
+<template>
   <el-table
+    @expand="handleExpand"
     :data="tableData5"
     style="width: 100%">
-    <el-table-column type="expand">
-      <template scope="props">
-        <el-form label-position="left" inline class="demo-table-expand">
-          <el-form-item label="商品名称">
-            <span>{{ props.row.name }}</span>
-          </el-form-item>
-          <el-form-item label="所属店铺">
-            <span>{{ props.row.shop }}</span>
-          </el-form-item>
-          <el-form-item label="商品 ID">
-            <span>{{ props.row.id }}</span>
-          </el-form-item>
-          <el-form-item label="店铺 ID">
-            <span>{{ props.row.shopId }}</span>
-          </el-form-item>
-          <el-form-item label="商品分类">
-            <span>{{ props.row.category }}</span>
-          </el-form-item>
-          <el-form-item label="店铺地址">
-            <span>{{ props.row.address }}</span>
-          </el-form-item>
-          <el-form-item label="商品描述">
-            <span>{{ props.row.desc }}</span>
-          </el-form-item>
-        </el-form>
-      </template>
-    </el-table-column>
     <el-table-column
       label="商品 ID"
       prop="id">
@@ -1571,8 +1553,35 @@
       label="描述"
       prop="desc">
     </el-table-column>
+    <el-table-column type="expand">
+          <template scope="props">
+            <el-form label-position="left" inline class="demo-table-expand">
+              <el-form-item label="商品名称">
+                <span>{{ props.row.name }}</span>
+              </el-form-item>
+              <el-form-item label="所属店铺">
+                <span>{{ props.row.shop }}</span>
+              </el-form-item>
+              <el-form-item label="商品 ID">
+                <span>{{ props.row.id }}</span>
+              </el-form-item>
+              <el-form-item label="店铺 ID">
+                <span>{{ props.row.shopId }}</span>
+              </el-form-item>
+              <el-form-item label="商品分类">
+                <span>{{ props.row.category }}</span>
+              </el-form-item>
+              <el-form-item label="店铺地址">
+                <span>{{ props.row.address }}</span>
+              </el-form-item>
+              <el-form-item label="商品描述">
+                <span>{{ props.row.desc }}</span>
+              </el-form-item>
+            </el-form>
+          </template>
+        </el-table-column>
   </el-table>
-</template>-->
+</template>
 
 <style>
   .demo-table-expand {
@@ -1638,7 +1647,7 @@
 若表格展示的是各类数字，可以在表尾显示各列的合计。
 :::demo 将`show-summary`设置为`true`就会在表格尾部展示合计行。默认情况下，对于合计行，第一列不进行数据求合操作，而是显示「合计」二字（可通过`sum-text`配置），其余列会将本列所有数值进行求合操作，并显示出来。当然，你也可以定义自己的合计逻辑。使用`summary-method`并传入一个方法，返回一个数组，这个数组中的各项就会显示在合计行的各列中，具体可以参考本例中的第二个表格。
 ```html
-<!--<template>
+<template>
   <el-table
     :data="tableData6"
     border
@@ -1699,7 +1708,7 @@
       label="数值 3（元）">
     </el-table-column>
   </el-table>
-</template>-->
+</template>
 
 <script>
   export default {

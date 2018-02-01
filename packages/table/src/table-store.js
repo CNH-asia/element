@@ -166,9 +166,13 @@ TableStore.prototype.mutations = {
       if (!values || values.length === 0) return;
       const column = getColumnById(this.states, columnId);
       if (column && column.filterMethod) {
-        data = data.filter((row) => {
-          return values.some(value => column.filterMethod.call(null, value, row));
-        });
+        if (data.length > 0) {
+          data = data.filter((row) => {
+            return values.some(value => column.filterMethod.call(null, value, row));
+          });
+        } else {
+          return values.some(value => column.filterMethod.call(null, value));
+        }
       }
     });
 
@@ -302,6 +306,7 @@ const doFlattenColumns = (columns) => {
 TableStore.prototype.updateColumns = function() {
   const states = this.states;
   const _columns = states._columns || [];
+
   states.fixedColumns = _columns.filter((column) => column.fixed === true || column.fixed === 'left');
   states.rightFixedColumns = _columns.filter((column) => column.fixed === 'right');
 

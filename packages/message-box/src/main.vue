@@ -185,7 +185,6 @@
       visible(val) {
         var t = this;
         var timer = null;
-        console.log(t.modal);
         timer = setTimeout(function() {
           clearTimeout(timer);
           if (t.visible) {

@@ -10,7 +10,14 @@
     <div class="el-form-item__content" v-bind:style="contentStyle">
       <slot></slot>
       <transition name="el-zoom-in-top">
-        <div class="el-form-item__error" v-if="validateState === 'error' && showMessage && form.showMessage">*{{validateMessage}}</div>
+        <div class="el-form-item__tip" v-if="validateState !== 'error' && showTip && form.showTip && isShowTip && tip">
+            <img class="el-form-item__icon" :src="typeImg" alt="">
+            {{tip}}
+        </div>
+        <div class="el-form-item__error" v-if="validateState === 'error' && showMessage && form.showMessage">
+           <img class="el-form-item__icon" :src="typeImg" alt="">
+          {{validateMessage}}
+        </div>
       </transition>
     </div>
   </div>
@@ -62,7 +69,9 @@
       showMessage: {
         type: Boolean,
         default: true
-      }
+      },
+      tip:String
+      
     },
     watch: {
       error(value) {
@@ -74,6 +83,9 @@
       }
     },
     computed: {
+      typeImg() {
+        return require(`../assets/${ this.type }.svg`);
+      },
       labelStyle() {
         var ret = {};
         if (this.form.labelPosition === 'top') return ret;
@@ -109,6 +121,9 @@
       fieldValue: {
         cache: false,
         get() {
+          // if(this.form.rules&&this.form.rules.length>0) {
+          //   debugger
+          // }
           var model = this.form.model;
           if (!model || !this.prop) { return; }
 
@@ -142,11 +157,16 @@
         validateMessage: '',
         validateDisabled: false,
         validator: {},
-        isNested: false
+        isNested: false,
+        isShowTip: false,
+        showTip: false,
+        type:'success'
       };
     },
     methods: {
+     
       validate(trigger, callback = noop) {
+        // debugger
         var rules = this.getFilteredRule(trigger);
         if (!rules || rules.length === 0) {
           callback();
@@ -166,11 +186,12 @@
         validator.validate(model, { firstFields: true }, (errors, fields) => {
           this.validateState = !errors ? 'success' : 'error';
           this.validateMessage = errors ? errors[0].message : '';
+          this.type = !errors ? 'success' : 'error';
 
           callback(this.validateMessage);
         });
 
-        // if(validateState === 'error' && showMessage && form.showMessage)
+
       },
       resetField() {
         this.validateState = '';
@@ -205,19 +226,47 @@
         var rules = this.getRules();
 
         return rules.filter(rule => {
+          // console.log(!rule.trigger || rule.trigger.indexOf(trigger) !== -1);
           return !rule.trigger || rule.trigger.indexOf(trigger) !== -1;
         });
       },
       onFieldBlur() {
         this.validate('blur');
+        this.type = 'error';
+        this.showTip = false;
+        this.isShowTip = false;
+      },
+      onFieldFocus() {
+        this.validateState = 'success';
+        this.type = 'success';
+        this.showTip = true;
+        this.isShowTip = true;
       },
       onFieldChange() {
         if (this.validateDisabled) {
           this.validateDisabled = false;
           return;
         }
-
         this.validate('change');
+        // this.type = 'error';
+        // this.showTip = false;
+        // this.isShowTip = false;
+      },
+      onFieldVisibleChange() {
+        if (this.validateDisabled) {
+          this.validateDisabled = false;
+          return;
+        }
+        this.validate('visible-change');
+        // this.type = 'error';
+        // this.showTip = false;
+        // this.isShowTip = false;
+      },
+      onFieldNoVisibleChange() {
+        this.validateState = 'success';
+        this.type = 'success';
+        this.showTip = true;
+        this.isShowTip = true;
       }
     },
     mounted() {
@@ -225,6 +274,7 @@
         this.dispatch('ElForm', 'el.form.addField', [this]);
 
         let initialValue = this.fieldValue;
+       
         if (Array.isArray(initialValue)) {
           initialValue = [].concat(initialValue);
         }
@@ -237,6 +287,10 @@
         if (rules.length) {
           this.$on('el.form.blur', this.onFieldBlur);
           this.$on('el.form.change', this.onFieldChange);
+          this.$on('el.form.focus', this.onFieldFocus);
+          this.$on('el.form.visiblechange', this.onFieldVisibleChange);
+          this.$on('el.form.novisiblechange', this.onFieldNoVisibleChange);       
+          
         }
       }
     },

@@ -111,7 +111,6 @@
         default: true
       },
       onIconClick: Function
-      // currentValue: String
     },
 
     computed: {
@@ -150,10 +149,14 @@
       },
       handleFocus(event) {
         this.$emit('focus', event);
+        if (this.validateEvent) {
+          this.dispatch('ElFormItem', 'el.form.focus', [this.currentValue]);
+        }
       },
       handleInput(event) {
         const value = event.target.value;
         this.$emit('input', value);
+        this.currentValue = value;
         this.setCurrentValue(value);
         this.$emit('change', value);
       },
