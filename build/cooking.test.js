@@ -5,7 +5,9 @@ var jsLoader = process.env.CI_ENV ? 'isparta-loader' : 'isparta-loader!eslint-lo
 
 cooking.set({
   entry: './src/index.js',
-  extends: process.env.CI_ENV ? ['vue2'] : ['vue2', 'lint'],
+  // extends: process.env.CI_ENV ? ['vue2'] : ['vue2', 'lint'],
+  extends: ['vue2'],
+  
   minimize: false,
   alias: Object.assign(config.alias, {
     'vue$': 'vue/dist/vue.common.js'

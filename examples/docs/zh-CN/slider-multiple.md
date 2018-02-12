@@ -2,6 +2,28 @@
   export default {
     data() {
       return {
+        buttons:[{
+          name: '版本一',
+          percent: 40,
+          desc: '默认版本'
+        }
+        , {
+          name: '版本二',
+          percent: 40
+        }
+        , {
+          name: '版本三',
+          percent: 10
+        }
+        , {
+          name: '版本四',
+          percent: 10,
+        }, {
+          name: '版本5',
+          percent: 0,
+        }
+        ],
+        value_multi: [10,20,30,40,0],
         value1: 0,
         value2: 134,
         value3: 36,
@@ -22,30 +44,6 @@
         step_of_conWarnValue: 10
       };
     },
-    watch: {
-        max_value: function(val, oldVal) {
-            var _this = this;
-                window.aaab = _this;
-            if (val == 0) {
-                _this.$message.error('QPS不能为0!');
-                _this.max_value = 100;
-            } else {
-                _this.warn_value = _this.max_value * 0.8;
-                _this.step = _this.max_value / 10;
-                _this.max_warn_value = _this.max_value;
-            }
-        },
-        warn_value: function(val) {
-            var _this = this;
-            if (val == 0) {
-                _this.$message.error('QPS不能为0!');
-                _this.warn_value = _this.max_value * 0.8;
-                _this.$refs.button.setPosition(80);//targetValue * 100 / max
-            }
-        }
-        
-    },
-    
     methods: {
       formatTooltip(val) {
         return val / 100;
@@ -54,8 +52,16 @@
         console.log('click');
        },
        changeVal() {
-       this.value2 = this.value2 * 0.8;
+        this.value_multi = [10,10,30,50];
        }
+    },
+    watch: {
+      "value_multi":{
+        deep: true,
+        handler: function(val) {
+          console.log(val);
+        }
+      }
     }
   }
 </script>
@@ -100,10 +106,9 @@
 <template>
     <div class="block"><el-button @click="changeVal">click</el-button></div>
   <div class="block">
-    <span class="demonstration">默认</span>
-    <el-slider v-model="value1" :step="20"></el-slider>
+    <el-slider-multiple :buttons="buttons" v-model="value_multi" :step="10"></el-slider-multiple>
   </div>
-  <div class="block">
+  <!-- <div class="block">
     <span class="demonstration">自定义初始值</span>
     <el-slider v-model="value2" :min="100" :max="600"></el-slider>
   </div>
@@ -118,7 +123,7 @@
   <div class="block">
     <span class="demonstration">禁用</span>
     <el-slider v-model="value5" disabled></el-slider>
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -148,7 +153,7 @@
 
 :::demo 改变`step`的值可以改变步长，通过设置`show-step`属性可以显示间断点
 ```html
-<template>
+<!-- <template>
   <div class="block">
     <span class="demonstration">不显示间断点</span>
     <el-slider
@@ -181,7 +186,7 @@
         <el-form-item class="tcenter">
         </el-form-item>
     </el-form>
-</template>
+</template> -->
 
 <script>
   export default {
@@ -202,14 +207,14 @@
 
 :::demo 设置`show-input`属性会在右侧显示一个输入框
 ```html
-<template>
+<!-- <template>
   <div class="block">
     <el-slider
       v-model="value8"
       show-input>
     </el-slider>
   </div>
-</template> 
+</template>  -->
 
 <script>
   export default {
@@ -230,14 +235,14 @@
 :::demo 设置`range`即可开启范围选择，此时绑定值是一个数组，其元素分别为最小边界值和最大边界值
 ```html
 <template>
-  <div class="block">
+  <!-- <div class="block">
     <el-slider
       v-model="value9"
       range
       show-stops
       :max="10">
     </el-slider>
-  </div>
+  </div> -->
 </template>
 
 <script>

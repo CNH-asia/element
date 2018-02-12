@@ -40,6 +40,8 @@
 @import "./alert.css";
 @import "./notification.css";
 @import "./slider.css";
+@import "./slider-multiple.css";
+@import "./ratio-controller.css";
 @import "./loading.css";
 @import "./row.css";
 @import "./col.css";

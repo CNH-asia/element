@@ -40,7 +40,6 @@
       value: {
         immediate: true,
         handler(value) {
-          // console.log(value);
           //会影响状态的回显
           var that = this;
           var tmp = [];

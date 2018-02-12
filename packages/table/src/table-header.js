@@ -3,6 +3,8 @@ import ElCheckbox from 'element-ui/packages/checkbox';
 import ElTag from 'element-ui/packages/tag';
 import Vue from 'vue';
 import FilterPanel from './filter-panel.vue';
+import Clickoutside from 'element-ui/src/utils/clickoutside';
+
 
 const getAllColumns = (columns) => {
   const result = [];
@@ -120,12 +122,11 @@ export default {
                     {
                       column.filterable
                             ?  
-                            <span class="el-table__column-filter-trigger" on-click={($event) => this.handleFilterClick($event, column)}>
-                              <i class={['el-icon-caret-bottom', column.filterOpened ? 'el-icon-caret-top' : ''] } style='font-size:6px;'></i>
+                            <span class="el-table__column-filter-trigger" on-click={($event) => this.handleFilterClick($event, column)} v-clickoutside={($event) => this.handleFilterClickOut($event)}>
+                              <i class={['el-icon-caret-bottom', this.showPopper ? 'el-icon-caret-top' : ''] } style='font-size:6px;'></i>
+                              <filter-panel showPopper={this.showPopper} table={this.$parent} column={column} filters={column && column.filters}></filter-panel>
                             </span>
-                            // <span class="caret-wrapper" on-click={($event) => this.handleFilterClick($event, column)}>
-                            //   <i class='sort-caret descending' style="bottom: 12px;"></i>
-                            // </span>
+    
                         : ''
                     }
                     </div>
@@ -143,6 +144,9 @@ export default {
         </thead>
       </table>
     );
+  },
+  directives: {
+    Clickoutside
   },
 
   props: {
@@ -167,7 +171,8 @@ export default {
 
   components: {
     ElCheckbox,
-    ElTag
+    ElTag,
+    FilterPanel
   },
 
   computed: {
@@ -228,6 +233,9 @@ export default {
   },
 
   methods: {
+    handleFilterClickOut() {
+      this.showPopper = false;
+    },
     isCellHidden(index, columns) {
       if (this.fixed === true || this.fixed === 'left') {
         return index >= this.leftFixedCount;
@@ -245,42 +253,50 @@ export default {
     toggleAllSelection() {
       this.store.commit('toggleAllSelection');
     },
-
-    handleFilterClick(event, column) {
+    handleFilterClick(event) {
       event.stopPropagation();
-      const target = event.target;
-      const cell = target.parentNode;
-      const table = this.$parent;
-
-      let filterPanel = this.filterPanels[column.id];
-
-      if (filterPanel && column.filterOpened) {
-        filterPanel.showPopper = false;
-        return;
-      }
-
-      if (!filterPanel) {
-        filterPanel = new Vue(FilterPanel);
-        this.filterPanels[column.id] = filterPanel;
-        if (column.filterPlacement) {
-          filterPanel.placement = column.filterPlacement;
-        }
-        filterPanel.table = table;
-        filterPanel.cell = cell;
-        filterPanel.column = column;
-        !this.$isServer && filterPanel.$mount(document.createElement('div'));
-      }
-
-      setTimeout(() => {
-        filterPanel.showPopper = true;
-      }, 16);
+      this.showPopper = !this.showPopper;
     },
+
+    // handleFilterClick(event, column) {
+    //   console.log(column);
+    //   event.stopPropagation();
+    //   const target = event.target;
+    //   const cell = target.parentNode;
+    //   const table = this.$parent;
+
+    //   let filterPanel = this.filterPanels[column.id];
+
+    //   if (filterPanel && column.filterOpened) {
+    //     filterPanel.showPopper = false;
+    //     return;
+    //   }
+
+    //   if (!filterPanel) {
+    //     filterPanel = new Vue(FilterPanel);
+    //     debugger
+    //     console.log(filterPanel);
+    //     this.filterPanels[column.id] = filterPanel;
+    //     if (column.filterPlacement) {
+    //       filterPanel.placement = column.filterPlacement;
+    //     }
+    //     filterPanel.table = table;
+    //     filterPanel.cell = cell;
+    //     filterPanel.column = column;
+    //     !this.$isServer && filterPanel.$mount(document.createElement('div'));
+    //   }
+
+    //   setTimeout(() => {
+    //     filterPanel.showPopper = true;
+    //     console.log('444444444');
+    //   }, 16);
+    // },
 
     handleHeaderClick(event, column) {
       if (!column.filters && column.sortable) {
         this.handleSortClick(event, column);
       } else if (column.filters && !column.sortable) {
-        this.handleFilterClick(event, column);
+        // this.handleFilterClick(event, column);
       }
 
       this.$parent.$emit('header-click', column, event);
@@ -442,7 +458,8 @@ export default {
     return {
       draggingColumn: null,
       dragging: false,
-      dragState: {}
+      dragState: {},
+      showPopper: false
     };
   }
 };

@@ -34,7 +34,8 @@
         state1: '',
         state2: '',
         state3: '',
-        state4: ''
+        state4: '',
+        innerinput: ''
       };
     },
     methods: {
@@ -203,6 +204,23 @@ export default {
 ```
 :::
 
+### 标题在内部
+
+::: demo
+```html
+<!-- <el-input type="inner" v-model="innerinput" label="查询" icon="search" placeholder="请输入用户名/手机浩/邮箱查询" :on-icon-click="handleIconClick"></el-input> -->
+
+<script>
+export default {
+  data() {
+    return {
+      innerinput: ''
+    }
+  }
+}
+</script>
+```
+:::
 
 ### 禁用状态
 
@@ -321,15 +339,15 @@ export default {
 ::: demo 可通过 slot 来指定在 input 中前置或者后置内容。
 ```html
 <div>
-  <el-input placeholder="请输入内容" v-model="input3">
-    <template slot="prepend">Http://</template>
+  <el-input placeholder="请输入内容" v-model="input3" icon="search">
+    <span slot="prepend">立即查询</span>
   </el-input>
 
-  <el-input placeholder="发布包" v-model="input3" icon="search" :on-icon-click="handleIconClick">
+  <!-- <el-input placeholder="发布包" v-model="input3" icon="search" :on-icon-click="handleIconClick">
     <template slot="prepend">查询</template>
-  </el-input>
+  </el-input> -->
 </div>
-<div style="margin-top: 15px;">
+<!-- <div style="margin-top: 15px;">
   <el-input placeholder="请输入内容" v-model="input4">
     <template slot="append">.com</template>
   </el-input>
@@ -343,7 +361,7 @@ export default {
     </el-select>
     <el-button slot="append" icon="search"></el-button>
   </el-input>
-</div>
+</div> -->
 <style>
   .el-select .el-input {
     width: 110px;

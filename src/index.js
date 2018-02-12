@@ -43,6 +43,8 @@ import Tree from '../packages/tree/index.js';
 import Alert from '../packages/alert/index.js';
 import Notification from '../packages/notification/index.js';
 import Slider from '../packages/slider/index.js';
+import SliderMultiple from '../packages/slider-multiple/index.js';
+import RatioController from '../packages/ratio-controller/index.js';
 import Loading from '../packages/loading/index.js';
 import Icon from '../packages/icon/index.js';
 import Row from '../packages/row/index.js';
@@ -110,6 +112,8 @@ const components = [
   Tree,
   Alert,
   Slider,
+  SliderMultiple,
+  RatioController,
   Icon,
   Row,
   Col,
@@ -209,6 +213,8 @@ module.exports = {
   Alert,
   Notification,
   Slider,
+  SliderMultiple,
+  RatioController,
   Icon,
   Row,
   Col,

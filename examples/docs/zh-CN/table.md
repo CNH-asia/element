@@ -2,6 +2,7 @@
   export default {
     data() {
       return {
+        showTable: true,
         tableData: [{
           date: 'data地址',
           name: 'data_service',
@@ -231,6 +232,10 @@
     },
 
     methods: {
+      toggleTable() {
+        console.log('44444');
+        this.showTable=!this.showTable;
+      },
     handleExpand(row,expanded) {
     console.log(row,expanded);
     },
@@ -299,6 +304,12 @@
 
       filterTag(value, row) {
         console.log(11);
+        console.log(value, row);
+        if(value=='全部') {
+          return true;
+        } else {
+          return row.tag === value;
+        }
         // return row.tag === value;
       },
 
@@ -1370,7 +1381,9 @@
 :::demo 在列中设置`filters` `filter-method`属性即可开启该列的筛选，filters 是一个数组，`filter-method`是一个方法，它用于决定某些数据是否显示，会传入两个参数：`value`和`row`。
 ```html
 <template>
+  <el-button @click="toggleTable">显隐</el-button>
   <el-table
+    v-show="showTable"
     :data="tableData"
     border
     style="width: 100%">
@@ -1397,8 +1410,8 @@
       no-highlight="全部"
       :filter-multiple=false
       :filters="[{text: '全部', value: '全部'},{ text: '家', value: '家' }, { text: '公司', value: '公司' }]"
-      :filter-method="filterTag"
-      filter-placement="bottom-end">
+      :filter-reset="true"
+      :filter-method="filterTag">
      
     </el-table-column>
   </el-table>
@@ -1436,6 +1449,7 @@
         return row.address;
       },
       filterTag(value, row) {
+        console.log(value, row);
         if(value=='全部') {
           return true;
         } else {

@@ -41,7 +41,9 @@ cooking.set({
   } : false,
   extractCSS: true,
   alias: config.alias,
-  extends: ['vue2', 'lint'],
+  // extends: ['vue2', 'lint'],
+  extends: ['vue2'],
+  
   postcss: config.postcss
 });
 

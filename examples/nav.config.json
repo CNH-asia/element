@@ -86,7 +86,11 @@
             },
             {
               "path": "/cascader",
-              "title": "Cascader 级联选择器"
+              "title": "Cascader 级联单项选择器"
+            },
+            {
+              "path": "/cascader-multiple",
+              "title": "CascaderMultiple 级联多项选择器"
             },
             {
               "path": "/switch",
@@ -95,6 +99,14 @@
             {
               "path": "/slider",
               "title": "Slider 滑块"
+            },
+            {
+              "path": "/slider-multiple",
+              "title": "SliderMultiple 多按钮滑块"
+            },
+            {
+              "path": "/ratio-controller",
+              "title": "RatioController 比例调节器"
             },
             {
               "path": "/time-picker",
@@ -331,12 +343,24 @@
               "title": "Cascader"
             },
             {
+              "path": "/cascader-multiple",
+              "title": "CascaderMultiple"
+            },
+            {
               "path": "/switch",
               "title": "Switch"
             },
             {
               "path": "/slider",
               "title": "Slider"
+            },
+            {
+              "path": "/slider-multiple",
+              "title": "SliderMultiple"
+            },
+            {
+              "path": "/ratio-controller",
+              "title": "RatioController"
             },
             {
               "path": "/time-picker",

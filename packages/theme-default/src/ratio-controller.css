@@ -1,0 +1,200 @@
+@charset "UTF-8";
+/* @import "./tooltip.css"; */
+@import "./common/var.css";
+
+@component-namespace el {
+
+  @b ratio-controller {
+    @utils-clearfix;
+      
+    @e runway {
+      width: 100%;
+      height: 14px;
+      background: #0AA9F1;
+      border-radius: 43px;
+      position: relative;
+      vertical-align: middle;
+
+      &.disabled {
+        cursor: default;
+
+        .el-ratio-controller__bar, .el-ratio-controller__button {
+          background-color: #909090;
+        }
+
+        .el-ratio-controller__button-wrapper {
+          &:hover,
+          &.hover {
+            cursor: not-allowed;
+          }
+
+          &.dragging {
+            cursor: not-allowed;
+          }
+        }
+
+        .el-ratio-controller__button {
+
+          &:hover,
+          &.hover {
+            cursor: not-allowed;
+          }
+
+          &.dragging {
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+
+    @e bar {
+      height: 5px;
+      background: #d2d9e3;
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+      display: inline-block;
+      position: relative;
+    }
+
+    @e bar-text {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 14px;
+      width: auto;
+      display: inline-block;
+      text-align: center;
+      font-size: 12px;
+      line-height: 17px;
+      color: #0AA9F1;
+      letter-spacing: 0;
+    }
+    .bar-text-red {
+      color: #F77181;
+    }
+    
+    @e bar-tip {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      /* bottom: 14px; */
+      width: auto;
+      display: inline-block;
+      text-align: center;
+      font-size: 14px;
+      color: #FFFFFF;
+      letter-spacing: 0;
+    }
+
+    @e bar-desc {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -15px;
+        width: auto;
+        display: inline-block;
+        text-align: center;
+        font-size: 12px;
+        color: #909090;
+        letter-spacing: 0;
+    }
+
+    @e wrap {
+      display: inline-block;
+    }
+
+    @e button-wrapper {
+        width: 14px;
+        height: 14px;
+        background: #FFFFFF;
+        box-shadow: 0 1px 4px 0 rgba(0,0,0,0.50);
+        border-radius: 49px;
+        position: absolute;
+        z-index: 20;
+        top: 0px;
+        transform: translateX(-50%);
+      /* width: 36px;
+      height: 20px;
+      position: absolute;
+      z-index: 20;
+      top: 0px;
+      transform: translateX(-50%);
+      background-color: transparent;
+      text-align: center;
+      user-select: none;
+      @utils-vertical-center; */
+
+
+      &:hover,
+      &.hover {
+        cursor: grab;
+      }
+
+      &.dragging {
+        cursor: grabbing;
+      }
+
+    }
+    
+    @e button {
+      width: 20px;
+      height: 20px;
+      background-color: #0AA9F1;
+      border-radius: 50%;
+      transition: .2s;
+      user-select: none;
+
+      &:hover,
+      &.hover,
+      &.dragging {
+        background-color: #0AA9F1;
+      }
+
+      &:hover,
+      &.hover {
+        cursor: grab;
+      }
+
+      &.dragging {
+        cursor: grabbing;
+      }
+      
+      &.nodrag, &.nodrag:hover {
+        cursor: not-allowed;
+      }
+    }
+
+
+    @e label {
+      color: #fff;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    @e desc {
+      transform: translate(-25%,10px);
+      width: 72px;
+      display: inline-block;
+      cursor: default;
+
+      & .desc-title {
+        display: inline-block;
+        font-weight: bold;
+        font-size: 14px;
+        color: #606060;
+        letter-spacing: 0;
+        line-height: 20px;
+        
+      }
+      & .desc-text {
+        display: inline-block;
+        font-size: 12px;
+        color: #909090;
+        letter-spacing: 0;
+        line-height: 20px;
+      }
+    }
+
+
+  }
+}

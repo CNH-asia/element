@@ -7,7 +7,7 @@
 
   @b table {
     position: relative;
-    overflow: hidden;
+    /* overflow-x: hidden; */
     box-sizing: border-box;
     width: 100%;
     max-width: 100%;
@@ -148,7 +148,7 @@
       padding: 3px 0px;
       border-bottom: 1px solid #D2D9E3;
       background-color: #FDFDFD;
-      /*background: rgba(61,161,230,0.1);*/
+      overflow: visible;
     }
 
     .el-table__header th:first-child, .el-table__body td:first-child {
@@ -271,7 +271,11 @@
       z-index: 3;
     }
 
-    @e header-wrapper, body-wrapper, footer-wrapper {
+    /* @e header-wrapper, body-wrapper, footer-wrapper {
+      width: 100%;
+      overflow:hidden;
+    } */
+     @e body-wrapper, footer-wrapper {
       width: 100%;
       overflow:hidden;
     }
@@ -299,6 +303,9 @@
         background-color: #F9F9F9;
         color: var(--table-text-color);
       }
+    }
+    @e header-wrapper {
+      overflow: visible;
     }
 
     @e body-wrapper {
@@ -331,6 +338,7 @@
       background: transparent;
       font-weight:normal;
       color: #303030;
+      overflow: visible;
 
 
       &.highlight {
@@ -499,6 +507,7 @@
     }
 
     @e column-filter-trigger {
+      position: relative;
       display: inline-block;
       line-height: 34px;
       margin-left: 5px;

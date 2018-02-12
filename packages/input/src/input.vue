@@ -31,6 +31,7 @@
         v-bind="$props"
         :autocomplete="autoComplete"
         :value="currentValue"
+        :style="prependStyle"
         ref="input"
         @input="handleInput"
         @focus="handleFocus"
@@ -70,7 +71,8 @@
     data() {
       return {
         currentValue: this.value,
-        textareaCalcStyle: {}
+        textareaCalcStyle: {},
+        prependStyle: {}
       };
     },
 
@@ -184,6 +186,18 @@
 
     mounted() {
       this.resizeTextarea();
+      var that = this;
+      this.$nextTick(function() {
+        if(that.$slots.prepend) {
+          const prependItem = that.$el.querySelector('.el-input-group__prepend').offsetWidth;        
+          const prependLeft = prependItem + 'px';
+          that.prependStyle = { paddingLeft: prependLeft }
+        } else {
+          that.prependStyle = {};
+        }
+      })
+      
+      
     }
   };
 </script>

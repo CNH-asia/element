@@ -42,6 +42,8 @@
   "alert": "./packages/alert/index.js",
   "notification": "./packages/notification/index.js",
   "slider": "./packages/slider/index.js",
+  "slider-multiple": "./packages/slider-multiple/index.js",  
+  "ratio-controller": "./packages/ratio-controller/index.js",  
   "loading": "./packages/loading/index.js",
   "icon": "./packages/icon/index.js",
   "row": "./packages/row/index.js",

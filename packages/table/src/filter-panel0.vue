@@ -1,6 +1,6 @@
 <template>
   <transition name="el-zoom-in-top">
-    <!-- <div class="el-table-filter" v-if="multiple" v-show="showPopper">
+    <div class="el-table-filter" v-if="multiple" v-show="showPopper">
       <div class="el-table-filter__content">
         <el-checkbox-group class="el-table-filter__checkbox-group" v-model="filteredValue">
           <el-checkbox
@@ -15,9 +15,12 @@
           :disabled="filteredValue.length === 0">{{ t('el.table.confirmFilter') }}</button>
         <button @click="handleReset">{{ t('el.table.resetFilter') }}</button>
       </div>
-    </div> -->
-    <div class="el-table-filter-fix">
-      <ul class="el-table-filter__list" v-show="showIt">
+    </div>
+    <div class="el-table-filter" v-else v-show="showPopper">
+      <ul class="el-table-filter__list">
+        <!--// <li class="el-table-filter__list-item"
+        //     :class="{ 'is-active': !filterValue }"
+        //     @click="handleSelect(null)">{{ t('el.table.clearFilter') }}</li>-->
         <li class="el-table-filter__list-item"
             v-for="filter in filters"
             :label="filter.value"
@@ -30,8 +33,8 @@
 </template>
 
 <script type="text/babel">
-//   import Popper from 'element-ui/src/utils/vue-popper';
-//   import { PopupManager } from 'element-ui/src/utils/popup';
+  import Popper from 'element-ui/src/utils/vue-popper';
+  import { PopupManager } from 'element-ui/src/utils/popup';
   import Locale from 'element-ui/src/mixins/locale';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import Dropdown from './dropdown';
@@ -41,9 +44,7 @@
   export default {
     name: 'ElTableFilterPanel',
 
-    // mixins: [Popper, Locale],
-    mixins: [Locale],
-    
+    mixins: [Popper, Locale],
 
     directives: {
       Clickoutside
@@ -58,15 +59,7 @@
       placement: {
         type: String,
         default: 'bottom-end'
-      },
-    //   filters: {
-    //       type: Array,
-    //       default: []
-    //   },
-      filters: Array,
-      column: Object,
-      table: Object,
-      showPopper: Boolean
+      }
     },
 
     customRender(h) {
@@ -86,7 +79,7 @@
       },
 
       handleOutsideClick() {
-        // this.showPopper = false;
+        this.showPopper = false;
       },
 
       handleConfirm() {
@@ -122,31 +115,16 @@
 
     data() {
       return {
-        // table: null,
-        // cell: null,
-        // column: {},
-        // showThis: false
+        table: null,
+        cell: null,
+        column: null
       };
     },
 
     computed: {
-        showIt: {
-            get() {
-                return this.showPopper;
-            },
-            set(value) {
-                // return value;
-                if(!value) {
-                    this.showPopper = value;
-                }
-                
-            }
-            
-        },
-    //   filters() {
-    //     console.log(this.column && this.column.filters);
-    //     return this.column && this.column.filters;
-    //   },
+      filters() {
+        return this.column && this.column.filters;
+      },
       noHighlight() {
         return this.column && this.column.noHighlight;
       },
@@ -189,26 +167,27 @@
     },
 
     mounted() {
-    //   this.popperElm = this.$el;
-    //   this.referenceElm = this.cell;
-    //   this.table.bodyWrapper.addEventListener('scroll', () => {
-    //     this.updatePopper();
-    //   });
-      this.$watch('showIt', (value) => {
+      this.popperElm = this.$el;
+      this.referenceElm = this.cell;
+      this.table.bodyWrapper.addEventListener('scroll', () => {
+        this.updatePopper();
+      });
+
+      this.$watch('showPopper', (value) => {
         if (this.column) this.column.filterOpened = value;
         if (value) {
-        //   Dropdown.open(this);
+          Dropdown.open(this);
         } else {
-        //   Dropdown.close(this);
+          Dropdown.close(this);
         }
       });
     },
     watch: {
-    //   showPopper(val) {
-    //     if (val === true && parseInt(this.popperJS._popper.style.zIndex, 10) < PopupManager.zIndex) {
-    //       this.popperJS._popper.style.zIndex = PopupManager.nextZIndex();
-    //     }
-    //   }
+      showPopper(val) {
+        if (val === true && parseInt(this.popperJS._popper.style.zIndex, 10) < PopupManager.zIndex) {
+          this.popperJS._popper.style.zIndex = PopupManager.nextZIndex();
+        }
+      }
     }
   };
 </script>
