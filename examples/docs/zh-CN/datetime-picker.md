@@ -68,6 +68,17 @@
         value15: '',
         value16: ''
       };
+    },
+    methods: {
+      onChange(val, oldVal) {
+        if(!val || val=='') {
+          console.log('invalid');
+        }
+        console.log(val, oldVal);
+      },
+      onValidate(val) {
+        console.log(val)
+      }
     }
   };
 </script>
@@ -110,6 +121,9 @@
     <el-date-picker
       v-model="value1"
       type="datetime"
+      @change="onChange"
+      @pick="onValidate"
+      @validate="onValidate"
       placeholder="选择日期时间">
     </el-date-picker>
   </div>

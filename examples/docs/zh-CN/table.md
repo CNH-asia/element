@@ -2,6 +2,7 @@
   export default {
     data() {
       return {
+        filteredValue: ['家'],
         showTable: true,
         tableData: [{
           date: 'data地址',
@@ -1410,6 +1411,7 @@
       no-highlight="全部"
       :filter-multiple=false
       :filters="[{text: '全部', value: '全部'},{ text: '家', value: '家' }, { text: '公司', value: '公司' }]"
+      :filtered-value="filteredValue"
       :filter-reset="true"
       :filter-method="filterTag">
      

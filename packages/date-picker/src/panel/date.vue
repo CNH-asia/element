@@ -1,5 +1,6 @@
 <template>
   <transition name="el-zoom-in-top" @after-leave="$emit('dodestroy')">
+    
     <div
       v-show="visible"
       :style="{
@@ -16,7 +17,8 @@
           <button
             type="button"
             class="el-picker-panel__shortcut"
-            v-for="shortcut in shortcuts"
+            v-for="(shortcut,index) in shortcuts"
+            :key="index"
             @click="handleShortcutClick(shortcut)">{{ shortcut.text }}</button>
         </div>
         <div class="el-picker-panel__body">
@@ -25,7 +27,7 @@
               <el-input
                 :placeholder="t('el.datepicker.selectDate')"
                 :value="visibleDate"
-                size="small"
+                size="small"                
                 @change.native="visibleDate = $event.target.value" />
             </span>
             <span class="el-date-picker__editor-wrap">
@@ -139,6 +141,7 @@
     mixins: [Locale],
 
     watch: {
+     
       showTime(val) {
         /* istanbul ignore if */
         if (!val) return;

@@ -248,7 +248,7 @@
 :::demo 为`el-select`设置`disabled`属性，则整个选择器不可用
 ```html
 <template>
-<el-button @click="isdisabled=!isdisabled">禁用</el-button>
+<el-button type="primary" @click="isdisabled=!isdisabled">切换禁用状态</el-button>
   <el-select v-model="value3" multiple type="fixedHeight" :disabled="isdisabled" placeholder="请选择">
     <el-option
       v-for="item in options"

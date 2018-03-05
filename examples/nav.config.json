@@ -100,10 +100,7 @@
               "path": "/slider",
               "title": "Slider 滑块"
             },
-            {
-              "path": "/slider-multiple",
-              "title": "SliderMultiple 多按钮滑块"
-            },
+           
             {
               "path": "/ratio-controller",
               "title": "RatioController 比例调节器"

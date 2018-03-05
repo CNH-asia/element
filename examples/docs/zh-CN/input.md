@@ -208,7 +208,7 @@ export default {
 
 ::: demo
 ```html
-<!-- <el-input type="inner" v-model="innerinput" label="查询" icon="search" placeholder="请输入用户名/手机浩/邮箱查询" :on-icon-click="handleIconClick"></el-input> -->
+<el-input type="inner" v-model="innerinput" label="查询" icon="search" placeholder="请输入用户名/手机浩/邮箱查询" :on-icon-click="handleIconClick"></el-input>
 
 <script>
 export default {

@@ -12,7 +12,7 @@
     @keydown.native="handleKeydown"
     :value="displayLabel==''?displayValue:displayLabel"
     @change.native="displayValue = $event.target.value"
-    :validateEvent="false"
+    :validateEvent="true"
     ref="reference">
     <i slot="icon"
       class="el-input__icon"
@@ -229,6 +229,8 @@ export default {
             return {
                 disabledDate: function (date) {
                     return date.getTime() > new Date().getTime() || date.getTime() < new Date('2014-12-31').getTime();
+                    // return date.getTime() < new Date('2014-12-31').getTime();
+                  
                 }
             }
 
@@ -335,9 +337,12 @@ export default {
         ).formatter;
         const format = DEFAULT_FORMATS[this.type];
 
+        
         if(value[2]) {
-          this.displayLabel = value[2];
-          value.pop();
+          //modified for time-select
+          this.displayLabel = value;
+          // this.displayLabel = value[2];
+          // value.pop();
         } else {
           this.displayLabel = '';
         }

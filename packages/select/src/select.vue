@@ -283,12 +283,12 @@
           this.remoteMethod(val);
 
           if(val=='' || val.length == 0) {
-              // debugger
+              
               this.selectedLabel = '';
               this.options = [];
               this.cachedOptions = [];
           }
-          // console.log(123);
+        
 
           this.broadcast('ElOption', 'resetIndex');
         } else if (typeof this.filterMethod === 'function') {
@@ -350,9 +350,9 @@
             }
           }
         }
-        // debugger
-        // console.log(this.selected.currentValue);
+        
         this.$emit('visible-change', val);
+        
         if(!val) {
             this.dispatch('ElFormItem', 'el.form.visiblechange', this.selected.currentValue);
         } else {

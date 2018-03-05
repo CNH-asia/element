@@ -1,19 +1,23 @@
 @charset "UTF-8";
-/* @import "./tooltip.css"; */
 @import "./common/var.css";
 
 @component-namespace el {
 
   @b ratio-controller {
     @utils-clearfix;
+    height: 14px;
+    width: 398px;
+    /* box-sizing: border-box; */
       
     @e runway {
-      width: 100%;
+      /* width: 100%; */
+      width: 398px;
       height: 14px;
       background: #0AA9F1;
       border-radius: 43px;
       position: relative;
-      vertical-align: middle;
+      /* box-sizing: border-box; */
+      
 
       &.disabled {
         cursor: default;
@@ -48,19 +52,34 @@
     }
 
     @e bar {
-      height: 5px;
+      height: 14px;
       background: #d2d9e3;
-      border-top-left-radius: 4px;
-      border-bottom-left-radius: 4px;
       display: inline-block;
       position: relative;
+      vertical-align: top;
+      float: left;
+      /* box-sizing: border-box;
+      -webkit-box-sizing: border-box; */
+      
+    }
+
+    .left-radius {
+      border-top-left-radius: 43px;
+      border-bottom-left-radius: 43px;
+    }
+    .right-radius {
+      border-top-right-radius: 43px;
+      border-bottom-right-radius: 43px;
+    }
+    .nodrag {
+      cursor: not-allowed;
     }
 
     @e bar-text {
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
-      bottom: 14px;
+      bottom: 20px;
       width: auto;
       display: inline-block;
       text-align: center;
@@ -68,6 +87,11 @@
       line-height: 17px;
       color: #0AA9F1;
       letter-spacing: 0;
+      /* box-sizing: border-box; */
+      user-select: none;
+      cursor: default;
+      
+      
     }
     .bar-text-red {
       color: #F77181;
@@ -77,26 +101,38 @@
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
-      /* bottom: 14px; */
+      line-height: 14px;
       width: auto;
       display: inline-block;
       text-align: center;
       font-size: 14px;
+      font-weight: bold;
       color: #FFFFFF;
       letter-spacing: 0;
+      /* box-sizing: border-box; */
+      user-select: none;
+      cursor: default;
+      
     }
 
     @e bar-desc {
         position: absolute;
+        z-index: 1;
         left: 50%;
         transform: translateX(-50%);
-        bottom: -15px;
+        bottom: -32px;
+        line-height: 17px;
         width: auto;
-        display: inline-block;
+        min-width: 48px;
         text-align: center;
         font-size: 12px;
         color: #909090;
         letter-spacing: 0;
+        /* box-sizing: border-box; */
+        user-select: none;
+        cursor: default;
+        
+        
     }
 
     @e wrap {
@@ -113,16 +149,10 @@
         z-index: 20;
         top: 0px;
         transform: translateX(-50%);
-      /* width: 36px;
-      height: 20px;
-      position: absolute;
-      z-index: 20;
-      top: 0px;
-      transform: translateX(-50%);
-      background-color: transparent;
-      text-align: center;
-      user-select: none;
-      @utils-vertical-center; */
+      
+        user-select: none;
+        box-sizing: border-box;
+        
 
 
       &:hover,
@@ -132,6 +162,10 @@
 
       &.dragging {
         cursor: grabbing;
+      }
+
+      &.nodrag, &.nodrag:hover {
+        cursor: not-allowed;
       }
 
     }
@@ -160,7 +194,7 @@
       }
       
       &.nodrag, &.nodrag:hover {
-        cursor: not-allowed;
+        /* cursor: not-allowed; */
       }
     }
 

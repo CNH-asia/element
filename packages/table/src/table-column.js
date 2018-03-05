@@ -153,6 +153,10 @@ export default {
     noHighlight: {
       type: String,
       default: ''
+    },
+    filterValue: {
+      type: String,
+      default: ''
     }
   },
 
@@ -246,7 +250,9 @@ export default {
       filterOpened: false,
       filteredValue: this.filteredValue || [],
       filterPlacement: this.filterPlacement || '',
-      noHighlight: this.noHighlight || ''
+      noHighlight: this.noHighlight || '',
+      filterValue: this.filterValue || '',
+      
     });
 
 

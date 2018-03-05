@@ -11,7 +11,7 @@
         value7: 300,
         value8: 0,
         value9: [4, 8],
-        value10: 200,
+        value10: 20,
         max_value: 400,
         warn_value: 10,
         max_warn_value: 100,
@@ -25,23 +25,20 @@
     watch: {
         max_value: function(val, oldVal) {
             var _this = this;
-                window.aaab = _this;
-            if (val == 0) {
-                _this.$message.error('QPS不能为0!');
-                _this.max_value = 100;
-            } else {
+                // window.aaab = _this;
+             
                 _this.warn_value = _this.max_value * 0.8;
                 _this.step = _this.max_value / 10;
                 _this.max_warn_value = _this.max_value;
-            }
+            
         },
         warn_value: function(val) {
             var _this = this;
-            if (val == 0) {
-                _this.$message.error('QPS不能为0!');
-                _this.warn_value = _this.max_value * 0.8;
-                _this.$refs.button.setPosition(80);//targetValue * 100 / max
-            }
+            // if (val == 0) {
+            //     _this.$message.error('QPS不能为0!');
+            //     _this.warn_value = _this.max_value * 0.8;
+            //     _this.$refs.button.setPosition(80);//targetValue * 100 / max
+            // }
         }
         
     },
@@ -54,7 +51,7 @@
         console.log('click');
        },
        changeVal() {
-       this.value2 = this.value2 * 0.8;
+        this.value2 = this.value2 * 0.8;
        }
     }
   }
@@ -73,6 +70,12 @@
       border-bottom: none;
     }
   }
+
+
+  .demo-box.demo-slider .sub-block {
+    padding: 30px 74px;
+  }
+
 
   .demo-box.demo-slider .demonstration {
     font-size: 14px;
@@ -98,14 +101,13 @@
 :::demo 通过设置绑定值自定义滑块的初始值
 ```html
 <template>
-    <div class="block"><el-button @click="changeVal">click</el-button></div>
   <div class="block">
     <span class="demonstration">默认</span>
-    <el-slider v-model="value1" :step="20"></el-slider>
+    <el-slider v-model="value1"></el-slider>
   </div>
   <div class="block">
     <span class="demonstration">自定义初始值</span>
-    <el-slider v-model="value2" :min="100" :max="600"></el-slider>
+    <el-slider v-model="value2" :min="100" :max="300"></el-slider>
   </div>
   <div class="block">
     <span class="demonstration">隐藏 Tooltip</span>
@@ -126,7 +128,7 @@
     data() {
       return {
         value1: 0,
-        value2: 50,
+        value2: 134,
         value3: 36,
         value4: 48,
         value5: 42
@@ -146,41 +148,52 @@
 
 选项可以是离散的
 
-:::demo 改变`step`的值可以改变步长，通过设置`show-step`属性可以显示间断点
+:::demo 改变`step`的值可以改变步长，通过设置`show-stops`或`client-stops`属性可以显示间断点
 ```html
 <template>
   <div class="block">
     <span class="demonstration">不显示间断点</span>
     <el-slider
       v-model="value6"
-      :step="100">
+      :step="10">
     </el-slider>
   </div>
 
   <div class="block">
-    <span class="demonstration">显示间断点</span>
+    <span class="demonstration">显示所有间断点</span>
+    <el-slider 
+      v-model="value7" 
+      :step="10" 
+      show-stops>
+    </el-slider>
+  </div>
+
+  <div class="block">
+    <span class="demonstration">显示自定义的间断点</span>
     <el-slider
       v-model="value10"
-      show-input
-      :max="1000"
-      :client-stops="[111,234,468,602,760,890,1000]">
+      :max="100"
+      :client-stops="[11,23,46,60,76,89,100]">
     </el-slider> 
   </div>
 
   <div class="block">
-    <span class="demonstration">联动的滑块</span>
-    <el-form label-width="80px">
-        <el-form-item label="阈值上限">
-            <el-slider v-model="max_value" :step="10" :max="1000" :min="100" :client-stops="[100,200,300,500,800,1000]">
-            </el-slider>
-        </el-form-item>
-        <el-form-item label="流量阈值">
-            <el-slider v-model="warn_value" ref="button" :step="step" :max="max_warn_value"  disable-min show-stops :disabled="false">
-            </el-slider>
-        </el-form-item>
-        <el-form-item class="tcenter">
-        </el-form-item>
-    </el-form>
+    <div class="demonstration">联动的滑块</div>
+    <div class="sub-block">
+      <el-slider v-model="max_value" 
+        :step="100" 
+        :max="1000" 
+        :min="100" 
+        :client-stops="[100,200,300,500,800,1000]">
+      </el-slider>
+    </div>
+    <div class="sub-block">
+      <el-slider v-model="warn_value" ref="button" 
+      :step="step" :max="max_warn_value"  
+      show-stops>
+      </el-slider>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -223,7 +236,7 @@
 ```
 :::
 
-### 范围选择
+<!-- ### 范围选择
 
 支持选择某一数值范围
 
@@ -250,13 +263,13 @@
   }
 </script>
 ```
-:::
+::: -->
 
-### 竖向模式
+<!-- ### 竖向模式
 
 :::demo 设置`vertical`可使 Slider 变成竖向模式，此时必须设置高度`height`属性
 ```html
-<!-- <template>
+<template>
   <div class="block">
     <el-slider
       v-model="value10"
@@ -264,19 +277,19 @@
       height="200px">
     </el-slider>
   </div>
-</template> -->
+</template>
 
 <script>
   export default {
     data() {
       return {
-        value10: 0
+        value10: 20
       }
     }
   }
 </script>
 ```
-:::
+::: -->
 
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |

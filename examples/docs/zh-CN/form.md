@@ -102,7 +102,7 @@
             { required: true, message: '请选择活动区域', trigger: 'change' }
           ],
           date1: [
-            { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
+            { type: 'date', required: true, message: '请选择日期', trigger: 'blur' }
           ],
           date2: [
             { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
@@ -270,8 +270,25 @@
     .demo-form-inline {
       width: auto;
 
+      .el-form-item__content {
+        width: 150px;
+      }
+
+      .el-form-item:nth-child(2) .el-form-item__content {
+        width: 180px;
+      }
+
+      .el-button {
+        height: 32px;
+        margin-left: 10px;
+      }
+
       .el-input {
         width: 150px;
+      }
+
+      .el-select .el-input {
+        width: 180px;
       }
       > * {
         margin-right: 10px;
@@ -280,8 +297,8 @@
     .demo-ruleForm {
       width: 460px;
 
-      .el-select .el-input {
-        width: 360px;
+      .el-select, .el-select .el-input, .el-select .el-input .el-input__inner {
+        width: 300px;
       }
     }
     .demo-dynamic {
@@ -384,15 +401,16 @@
 ::: demo 设置 `inline` 属性可以让表单域变为行内的表单域
 ```html
 <el-form :inline="true" :model="formInline" class="demo-form-inline">
-  <el-form-item label="审批人">
+  <el-form-item label="审批人" label-width="50px">
     <el-input v-model="formInline.user" placeholder="审批人"></el-input>
   </el-form-item>
-  <el-form-item label="活动区域">
+  <el-form-item label="活动区域" label-width="70px">
     <el-select v-model="formInline.region" placeholder="活动区域">
       <el-option label="区域一" value="shanghai"></el-option>
       <el-option label="区域二" value="beijing"></el-option>
     </el-select>
-  </el-form-item><el-form-item>
+  </el-form-item>
+  <el-form-item>
     <el-button type="primary" @click="onSubmit">查询</el-button>
   </el-form-item>
 </el-form>
@@ -473,10 +491,13 @@
     </el-select>
   </el-form-item>
  
-  <el-form-item label="活动时间" required>
-    <el-col :span="11">
-      <el-form-item prop="date1">
-        <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
+  <el-form-item label="活动时间" required prop="date1" tip="选择今天以前的日期">
+    <!-- <el-form-item prop="date1" tip="选择今天以前的日期"> -->
+        <el-date-picker type="datetime" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
+      <!-- </el-form-item> -->
+    <!-- <el-col :span="11">
+      <el-form-item prop="date1" tip="选择今天以前的日期">
+        <el-date-picker type="datetime" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
       </el-form-item>
     </el-col>
     <el-col class="line" :span="2">-</el-col>
@@ -484,7 +505,7 @@
       <el-form-item prop="date2">
         <el-time-picker type="fixed-time" placeholder="选择时间" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
       </el-form-item>
-    </el-col>
+    </el-col> -->
   </el-form-item>
   <el-form-item label="即时配送" prop="delivery">
     <el-switch on-text="" off-text="" v-model="ruleForm.delivery"></el-switch>
@@ -507,8 +528,8 @@
     <el-input type="textarea" v-model="ruleForm.desc"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
-    <el-button @click="resetForm('ruleForm')">重置</el-button>
+    <el-button type="primary" @click="submitForm('ruleForm')">创建</el-button>
+    <el-button type="plain" @click="resetForm('ruleForm')">重置</el-button>
   </el-form-item>
 </el-form-item>
 <script>
@@ -534,7 +555,7 @@
             { required: true, message: '请选择活动区域', trigger: 'visible-change' }
           ],
           date1: [
-            { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
+            { type: 'date', required: true, message: '请选择日期', trigger: 'blur' }
           ],
           date2: [
             { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
@@ -586,7 +607,7 @@
     <el-input v-model.number="ruleForm2.age"></el-input>
   </el-form-item>
 
-  <el-form-item label="远程搜索" prop="search" tip="8888888888">
+  <el-form-item label="远程搜索" prop="search" tip="请输入关键词">
     <el-select
       type="fixedHeight"
       v-model="ruleForm2.search"
@@ -607,24 +628,16 @@
   <el-form-item label="活动区域" prop="region">
       <el-select v-model="ruleForm2.region" type="fixedHeight" placeholder="请选择活动区域">
         <el-option
-        v-for="item in ruleForm2.bgcolors"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value">
-      </el-option>
-      
-          <!-- <el-option label="区域一" value="shanghai"></el-option>
-          <el-option label="区域二" value="beijing"></el-option>  -->
+          v-for="item in ruleForm2.bgcolors"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value">
+        </el-option>
       </el-select>
-  </el-form-item>
-  
- 
-  
-  
-  
-  
+    </el-form-item>
+
     <el-button type="primary" @click="submitForm('ruleForm2')">提交</el-button>
-    <el-button @click="resetForm('ruleForm2')">重置</el-button>
+    <el-button type="plain" @click="resetForm('ruleForm2')">重置</el-button>
   </el-form-item>
 </el-form>
 <script>
@@ -732,12 +745,12 @@
       required: true, message: '域名不能为空', trigger: 'blur'
     }"
   >
-    <el-input v-model="domain.value"></el-input><el-button @click.prevent="removeDomain(domain)">删除</el-button>
+    <el-input style="width: 195px" v-model="domain.value"></el-input><el-button type="primary" @click.prevent="removeDomain(domain)">删除</el-button>
   </el-form-item>
   <el-form-item>
     <el-button type="primary" @click="submitForm('dynamicValidateForm')">提交</el-button>
-    <el-button @click="addDomain">新增域名</el-button>
-    <el-button @click="resetForm('dynamicValidateForm')">重置</el-button>
+    <el-button type="primary" @click="addDomain">新增域名</el-button>
+    <el-button type="plain" @click="resetForm('dynamicValidateForm')">重置</el-button>
   </el-form-item>
 </el-form>
 <script>
@@ -801,7 +814,7 @@
   </el-form-item>
   <el-form-item>
     <el-button type="primary" @click="submitForm('numberValidateForm')">提交</el-button>
-    <el-button @click="resetForm('numberValidateForm')">重置</el-button>
+    <el-button type="plain"  @click="resetForm('numberValidateForm')">重置</el-button>
   </el-form-item>
 </el-form>
 <script>
