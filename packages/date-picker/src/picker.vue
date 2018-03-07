@@ -12,7 +12,7 @@
     @keydown.native="handleKeydown"
     :value="displayLabel==''?displayValue:displayLabel"
     @change.native="displayValue = $event.target.value"
-    :validateEvent="true"
+    :validateEvent="false"
     ref="reference">
     <i slot="icon"
       class="el-input__icon"
@@ -254,7 +254,11 @@ export default {
 
   watch: {
     pickerVisible(val) {
-      if (!val) this.dispatch('ElFormItem', 'el.form.blur');
+      if (!val) { 
+        this.dispatch('ElFormItem', 'el.form.blur',this.displayValue);
+      } else {
+        this.dispatch('ElFormItem', 'el.form.focus',this.displayValue);
+      }
       if (this.readonly || this.disabled) return;
       val ? this.showPicker() : this.hidePicker();
     },
@@ -471,6 +475,7 @@ export default {
         this.picker.date = new Date(this.currentValue.getTime());
       } else {
         this.picker.value = this.currentValue;
+        this.picker.date = new Date();
       }
       this.picker.resetView && this.picker.resetView();
 

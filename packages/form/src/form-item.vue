@@ -226,7 +226,6 @@
         var rules = this.getRules();
 
         return rules.filter(rule => {
-          // console.log(!rule.trigger || rule.trigger.indexOf(trigger) !== -1);
           return !rule.trigger || rule.trigger.indexOf(trigger) !== -1;
         });
       },

@@ -86,7 +86,7 @@
           this.hoursPrivate = oldVal;
         }
         this.ajustElTop('hour', newVal);
-        this.$emit('change', { hours: newVal });
+        // this.$emit('change', { hours: newVal });
       },
 
       minutesPrivate(newVal, oldVal) {
@@ -94,7 +94,7 @@
           this.minutesPrivate = oldVal;
         }
         this.ajustElTop('minute', newVal);
-        this.$emit('change', { minutes: newVal });
+        // this.$emit('change', { minutes: newVal });
       },
 
       secondsPrivate(newVal, oldVal) {
@@ -102,7 +102,7 @@
           this.secondsPrivate = oldVal;
         }
         this.ajustElTop('second', newVal);
-        this.$emit('change', { seconds: newVal });
+        // this.$emit('change', { seconds: newVal });
       }
     },
 

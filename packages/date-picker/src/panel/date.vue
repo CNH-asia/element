@@ -141,6 +141,13 @@
     mixins: [Locale],
 
     watch: {
+      visible(val) {
+        if(val) {
+        } else {
+          this.timePickerVisible = val;
+        }
+        
+      },
      
       showTime(val) {
         /* istanbul ignore if */

@@ -53,7 +53,16 @@
 
     watch: {
       visible(val) {
+        this.currentDate = this.date;
         this.currentVisible = val;
+        this.hours = this.date.getHours();
+        this.minutes = this.date.getMinutes();
+        this.seconds = this.date.getSeconds();
+        if (val) {
+          this.oldHours = this.hours;
+          this.oldMinutes = this.minutes;
+          this.oldSeconds = this.seconds;
+        }
       },
 
       pickerWidth(val) {
@@ -89,6 +98,9 @@
         hours: 0,
         minutes: 0,
         seconds: 0,
+        oldHours: 0,
+        oldMinutes: 0,
+        oldSeconds: 0,
         selectableRange: [],
         currentDate: this.$options.defaultValue || this.date || new Date(),
         currentVisible: this.visible || false,
@@ -108,7 +120,17 @@
       },
 
       handleCancel() {
-        this.$emit('pick');
+        // this.$emit('pick');
+        
+        this.currentDate.setHours(this.oldHours);
+        this.currentDate.setMinutes(this.oldMinutes);
+        this.currentDate.setSeconds(this.oldSeconds);
+        this.hours = this.currentDate.getHours();
+        this.minutes = this.currentDate.getMinutes();
+        this.seconds = this.currentDate.getSeconds();
+        var date = new Date(limitRange(this.currentDate, this.selectableRange, 'HH:mm:ss'));
+        this.$emit('pick', date);
+
       },
 
       handleChange(date) {
@@ -125,7 +147,7 @@
           this.seconds = this.currentDate.getSeconds();
         }
 
-        this.handleConfirm(true);
+        this.handleConfirm(true);//选择后输入框显示新值
       },
 
       setSelectionRange(start, end) {
@@ -144,9 +166,12 @@
     },
 
     created() {
-      this.hours = this.currentDate.getHours();
-      this.minutes = this.currentDate.getMinutes();
-      this.seconds = this.currentDate.getSeconds();
+      // this.hours = this.currentDate.getHours();
+      // this.minutes = this.currentDate.getMinutes();
+      // this.seconds = this.currentDate.getSeconds();
+      this.hours = this.date.getHours();
+      this.minutes = this.date.getMinutes();
+      this.seconds = this.date.getSeconds();
     },
 
     mounted() {

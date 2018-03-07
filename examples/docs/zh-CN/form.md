@@ -102,7 +102,7 @@
             { required: true, message: '请选择活动区域', trigger: 'change' }
           ],
           date1: [
-            { type: 'date', required: true, message: '请选择日期', trigger: 'blur' }
+            { type: 'date', required: true, message: '请选择日期', trigger: 'change,blur' }
           ],
           date2: [
             { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
@@ -555,7 +555,7 @@
             { required: true, message: '请选择活动区域', trigger: 'visible-change' }
           ],
           date1: [
-            { type: 'date', required: true, message: '请选择日期', trigger: 'blur' }
+            { type: 'date', required: true, message: '请选择日期', trigger: 'change,blur' }
           ],
           date2: [
             { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
