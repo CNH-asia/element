@@ -89,6 +89,7 @@
                 sliderSize: 1,
                 startX: 0,
                 barLeft: 0,
+                oldSliderSize: this.sliderSize
             }
         },
         mounted() {
@@ -96,7 +97,7 @@
         methods:{
             resetSize() {
                 if(this.$refs.barWrap) {
-                    this.sliderSize = this.$refs.barWrap.offsetWidth||this.$refs.barWrap['clientWidth'];
+                    this.sliderSize = this.$refs.barWrap.offsetWidth||this.$refs.barWrap.clientWidth||this.oldSliderSize;
                 }
             },
             onDragEnd(event){
@@ -113,8 +114,6 @@
             onDragging(event){
                 var that = this;
                 if(that.moveBarIndex!==null) {
-                    // debugger
-                    // //console.log(that.moveBarIndex,that.startX,event.clientX, that.getLeft(that.moveBarIndex))
                     var getOffsetLeft =
                         function(obj){
                             var tmp = obj.offsetLeft;
@@ -169,7 +168,6 @@
          
 
                     if(Math.abs(diff)>that.$refs.barWrap.offsetWidth*0.05&&Math.floor(Math.abs(diff))>zeroWidth){
-                        // //console.log('====================')
                         let flag;
                         if(diff>0){
                             flag = 1
@@ -206,8 +204,6 @@
             
             getLeft(index){
                 let width = this.sliderSize;
-                // //console.log(width,'iiiiii');
-                
                 this.ratios.forEach(function (ratio) {
                     if(ratio.percent===0){
                         width-=zeroWidth;
@@ -267,8 +263,9 @@
             // this.sliderSize = this.$refs.barWrap.offsetWidth||this.$refs.barWrap['clientWidth'];
             
 
-            this.resetSize();
-            window.addEventListener('resize', this.resetSize);
+            that.resetSize();
+            that.oldSliderSize = that.sliderSize;
+            window.addEventListener('resize', that.resetSize);
         }
     }
 </script>

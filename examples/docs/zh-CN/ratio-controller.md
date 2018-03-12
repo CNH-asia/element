@@ -19,7 +19,7 @@
           percent: 0
         }],
         value_multi: [10,20,20,50,0],
-        dialogVisible: true,
+        dialogVisible: false,
         value1: 0,
         value2: 134,
         value3: 36,
@@ -119,17 +119,17 @@
 :::demo 通过设置绑定值自定义滑块的初始值
 ```html
 <template>
-    <!-- <div class="block"><el-button @click="changeVal">click</el-button></div> -->
+    <div class="block"><el-button @click="dialogVisible=!dialogVisible">click</el-button></div>
   <div class="block">
     <el-ratio-controller :ratios="ratios" v-model="value_multi"></el-ratio-controller>
   </div>
-  <!-- <el-dialog
+  <el-dialog
     :visible.sync="dialogVisible">
       <el-ratio-controller :ratios="ratios" v-model="value_multi" ></el-ratio-controller>
       <div slot="footer">
         <el-button @click="changeVal">click</el-button>
       </div>
-    </el-dialog> -->
+    </el-dialog>
 
  
 </template>

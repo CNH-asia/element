@@ -53,10 +53,10 @@
 
       &.active:not(.disabled) {
         color: var(--color-white);
-        // background: #0AA9F1;
+        /* background: #0AA9F1; */
 
         &:hover {
-          background: #0997D8;
+          /* background: #0997D8; */
         }
       }
 
