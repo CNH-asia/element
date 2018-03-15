@@ -34,6 +34,14 @@
         },
         pickerOptions2: {
           shortcuts: [{
+              text: '今日',
+              period: 0,
+              onClick(picker) {
+                  const end = new Date();
+                  const start = new Date();
+                  picker.$emit('pick', [start, end,'今日']);
+              }
+          },{
             text: '最近一周',
             period:7,
             onClick(picker) {

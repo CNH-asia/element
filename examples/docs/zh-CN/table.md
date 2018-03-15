@@ -1409,12 +1409,24 @@
       label="标签"
       width="100"
       no-highlight="全部"
+      :filter-order="0"
+      :filter-multiple=false
+      :filters="[{text: '全部1', value: '全部1'},{ text: '家1', value: '家1' }, { text: '公司', value: '公司' }]"
+      :filtered-value="filteredValue"
+      :filter-reset="true"
+      :filter-method="filterTag">
+    </el-table-column>
+    <el-table-column
+      prop="address"
+      label="标签"
+      width="100"
+      no-highlight="全部"
+      :filter-order="1"
       :filter-multiple=false
       :filters="[{text: '全部', value: '全部'},{ text: '家', value: '家' }, { text: '公司', value: '公司' }]"
       :filtered-value="filteredValue"
       :filter-reset="true"
       :filter-method="filterTag">
-     
     </el-table-column>
   </el-table>
 </template>

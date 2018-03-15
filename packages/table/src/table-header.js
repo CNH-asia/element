@@ -122,9 +122,9 @@ export default {
                     {
                       column.filterable
                             ?  
-                            <span class="el-table__column-filter-trigger" on-click={($event) => this.handleFilterClick($event, column)} v-clickoutside={($event) => this.handleFilterClickOut($event)}>
-                              <i class={['el-icon-caret-bottom', this.showPopper ? 'el-icon-caret-top' : ''] } style='font-size:6px;'></i>
-                              <filter-panel showPopper={this.showPopper} table={this.$parent} column={column} filters={column && column.filters}></filter-panel>
+                            <span class="el-table__column-filter-trigger" on-click={($event) => this.handleFilterClick($event, column)} v-clickoutside={($event) => this.handleFilterClickOut($event, column)}>
+                              <i class={['el-icon-caret-bottom', this.showPopper['showPopper_'+column.filterOrder] ? 'el-icon-caret-top' : ''] } style='font-size:6px;'></i>
+                              <filter-panel showPopper={this.showPopper['showPopper_' + column.filterOrder]} table={this.$parent} column={column} filters={column && column.filters}></filter-panel>
                             </span>
     
                         : ''
@@ -233,8 +233,8 @@ export default {
   },
 
   methods: {
-    handleFilterClickOut() {
-      this.showPopper = false;
+    handleFilterClickOut(event, column) {
+      this.showPopper['showPopper_' + column.filterOrder] = false;
     },
     isCellHidden(index, columns) {
       if (this.fixed === true || this.fixed === 'left') {
@@ -253,9 +253,9 @@ export default {
     toggleAllSelection() {
       this.store.commit('toggleAllSelection');
     },
-    handleFilterClick(event) {
+    handleFilterClick(event, column) {
       event.stopPropagation();
-      this.showPopper = !this.showPopper;
+      this.showPopper['showPopper_' + column.filterOrder] = !this.showPopper['showPopper_' + column.filterOrder];
     },
 
     // handleFilterClick(event, column) {
@@ -459,7 +459,14 @@ export default {
       draggingColumn: null,
       dragging: false,
       dragState: {},
-      showPopper: false
+      // showPopper: false,
+      showPopper: {
+        showPopper_0: false,
+        showPopper_1: false,
+        showPopper_2: false,
+        showPopper_3: false
+        
+      }
     };
   }
 };

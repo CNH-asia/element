@@ -341,10 +341,23 @@ export default {
         ).formatter;
         const format = DEFAULT_FORMATS[this.type];
 
-        
+        // if(typeof value == Object && value[2]) {
+        //   //modified for time-select
+        //   // this.displayLabel = value;
+        //   this.displayLabel = value[2];
+        //   value.pop();
+        // } else {
+        //   this.displayLabel = value;
+        // }
         if(value[2]) {
           //modified for time-select
-          this.displayLabel = value;
+          if(typeof value=="object") {
+            this.displayLabel = value[2];
+            value.pop();
+          } else {
+            this.displayLabel = value;
+          }
+          // this.displayLabel = value;
           // this.displayLabel = value[2];
           // value.pop();
         } else {

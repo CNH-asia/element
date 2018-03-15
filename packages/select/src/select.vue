@@ -214,6 +214,10 @@
       scrollType: {
         type: String,
         default: 'scroll'
+      },
+      zIndex20: {
+        type: Boolean,
+        default: false
       }
     },
 

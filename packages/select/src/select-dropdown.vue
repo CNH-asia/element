@@ -1,12 +1,17 @@
 <template>
   <div
     class="el-select-dropdown"
-    :class="[{ 'is-multiple': $parent.multiple }, popperClass]"
+    :class="[{ 'is-multiple': $parent.multiple }, popperClass, {'z20':$parent.zIndex20}]"
     :style="{ minWidth: minWidth }">
     <slot></slot>
   </div>
 </template>
+<style scoped>
 
+.z20 {
+  z-index: 20 !important;
+}
+</style>
 <script type="text/babel">
   import Popper from 'element-ui/src/utils/vue-popper';
 
