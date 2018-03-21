@@ -19,8 +19,8 @@
 :::demo Progress 组件设置`percentage`属性即可，表示进度条对应的百分比，**必填**，必须在 0-100。
 
 ```html
-<el-progress :percentage="0"></el-progress>
-<el-progress :percentage="70"></el-progress>
+<el-progress :percentage="40"></el-progress>
+<el-progress :percentage="100"></el-progress>
 <el-progress :percentage="100" status="success"></el-progress>
 <el-progress :percentage="50" status="exception"></el-progress>
 ```

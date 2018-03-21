@@ -116,8 +116,11 @@
         }
       },
       progressTextSize() {
+        // return this.type === 'line'
+        //   ? 12 + this.strokeWidth * 0.4
+        //   : this.width * 0.111111 + 2 ;
         return this.type === 'line'
-          ? 12 + this.strokeWidth * 0.4
+          ? 12
           : this.width * 0.111111 + 2 ;
       }
     }

@@ -7,43 +7,16 @@
     line-height: 1;
 
     @e text {
-     /* font-size:14px;
-      color:var(--color-extra-light-black);
-      display: inline-block;
-      vertical-align: middle;
-      margin-left: 10px;
-      line-height: 1;*/
-
       position: absolute;
-      width: 44px;
-      height: 18px;
-      padding: 0 5px;
-      line-height: 18px;
+      line-height: 17px;
       text-align: center;
       left: 50%;
-      margin-left: -22px;
-      background: #FFFFFF;
-      border: 1px solid #D7D7D7;
-      box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.10);
-      border-radius: 2px;
-      top: -30px;
-      color: #0785DB;
+      transform: translateX(-50%);
+      top: 22px;
+      color: #0AA9F1;
+      font-size: 12px;
+      letter-spacing: 0;
       z-index: 5;
-
-      &:after {
-        content: '';
-        display: inline-block;
-        background: url(https://dashboard.lightyy.com/icon.png?9bc13255721bf19a38bf178a395e1c1e) no-repeat;
-        background-position: 0 -222px;
-        width: 13px;
-        height: 13px;
-        position: absolute;
-        top: 18px;
-        left: 50%;
-        margin-left: -7px;
-        z-index: 10;
-        color: #0785DB;
-      }
 
       i {
         vertical-align: middle;
@@ -118,8 +91,9 @@
 
     @e outer {
       background: #F9F9F9;
-      border-radius: 0px;
-      height: 10px;
+      border: 1px solid #0AA9F1;
+      border-radius: 31px;
+      height: 12px;
       overflow: hidden;
       position: relative;
       vertical-align: middle;
@@ -129,12 +103,10 @@
       left: 0;
       top: 0;
       height: 100%;
-      /*border-radius: 2px 0 0 2px;*/
-      border-radius: 0px;
-      /*background-color: var(--color-primary);*/
-      background: #399DE2;
       text-align: right;
       line-height: 1;
+      background: #0AA9F1;
+      border-radius: 5px 0 0 5px;   
 
       @utils-vertical-center;
     }
