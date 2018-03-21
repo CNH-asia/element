@@ -78,7 +78,7 @@
         }
       }
       @when disabled {
-        cursor: default;
+        cursor: not-allowed;
         color: var(--color-extra-light-silver);
         pointer-events: none;
       }

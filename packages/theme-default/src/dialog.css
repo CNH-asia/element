@@ -14,7 +14,7 @@
     border:solid 1px #D2D9E3;
     box-sizing: border-box;
     margin-bottom: 50px;
-    padding-top: 20px;
+    padding: 20px 0 60px;
 
     @modifier tiny {
       width: var(--dialog-tiny-width);
@@ -91,7 +91,7 @@
     }
 
     @e body {
-      padding: 40px 100px 0px;
+      padding: 40px 100px 0;
       color: #606060;
       font-size: 14px;
       text-align: center;
@@ -117,7 +117,7 @@
     }
 
     @e footer {
-      padding: 40px 20px 60px;
+      padding: 40px 20px 0;
       text-align: center;
       box-sizing: border-box;
     }
@@ -142,7 +142,7 @@
   }
 
   .el-dialog--warning .el-dialog__footer {
-    padding: 60px 20px;
+    padding: 60px 20px 0;
 
     & button {
       width: 140px;

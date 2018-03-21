@@ -194,7 +194,7 @@
 
 ::: demo
 ```html
-<div class="h-menu">
+<!-- <div class="h-menu">
         <div class="h-menu-top">    
           <span style="margin-right: 53px;">运维管理</span>
           <el-radio-group v-model="isCollapse">
@@ -240,8 +240,8 @@
               <el-menu-item index="1-1">用户管理</el-menu-item>
           </el-submenu>
         </el-menu>
-      </div>
-<!-- <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
+      </div>-->
+<el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
   <el-radio-button :label="false">展开</el-radio-button>
   <el-radio-button :label="true">收起</el-radio-button>
 </el-radio-group>
@@ -272,7 +272,7 @@
     <i class="el-icon-setting"></i>
     <span slot="title">导航三</span>
   </el-menu-item>
-</el-menu> -->
+</el-menu>
 
 <style>
   .el-menu-vertical-demo:not(.el-menu--collapse) {

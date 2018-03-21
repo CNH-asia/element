@@ -14,6 +14,7 @@
         </div>
         <div class="el-message-box__btns">
           <el-button
+            type="plain"
             :loading="cancelButtonLoading"
             :class="[ cancelButtonClasses ]"
             v-show="showCancelButton"
@@ -21,6 +22,7 @@
             {{ cancelButtonText || t('el.messagebox.cancel') }}
           </el-button>
           <el-button
+            type="primary"
             :loading="confirmButtonLoading"
             ref="confirm"
             :class="[ confirmButtonClasses ]"

@@ -138,15 +138,15 @@ Popover 的属性与 Tooltip 很类似，它们都是基于`Vue-popper`开发的
   content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。">
 </el-popover>
 
-<el-button v-popover:popover1>hover 激活</el-button>
-<el-button v-popover:popover2>click 激活</el-button>
+<el-button type="primary" v-popover:popover1>hover 激活</el-button>
+<el-button type="primary" v-popover:popover2>click 激活</el-button>
 <el-popover
   placement="right"
   title="标题"
   width="200"
   trigger="focus"
   content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。">
-  <el-button slot="reference">focus 激活</el-button>
+  <el-button type="primary" slot="reference">focus 激活</el-button>
 </el-popover>
 ```
 :::
@@ -169,7 +169,7 @@ Popover 的属性与 Tooltip 很类似，它们都是基于`Vue-popper`开发的
   </el-table>
 </el-popover>
 
-<el-button v-popover:popover4>click 激活</el-button>
+<el-button type="primary" v-popover:popover4>click 激活</el-button>
 
 <script>
   export default {
@@ -212,12 +212,12 @@ Popover 的属性与 Tooltip 很类似，它们都是基于`Vue-popper`开发的
   v-model="visible2">
   <p>这是一段内容这是一段内容确定删除吗？</p>
   <div style="text-align: right; margin: 0">
-    <el-button size="mini" type="text" @click="visible2 = false">取消</el-button>
-    <el-button type="primary" size="mini" @click="visible2 = false">确定</el-button>
+    <el-button type="primary" size="mini" type="text" @click="visible2 = false">取消</el-button>
+    <el-button type="primary" type="primary" size="mini" @click="visible2 = false">确定</el-button>
   </div>
 </el-popover>
 
-<el-button v-popover:popover5>删除</el-button>
+<el-button type="primary" v-popover:popover5>删除</el-button>
 
 <script>
   export default {

@@ -76,12 +76,10 @@
 ```html
 <template>
   <el-button
-    plain
     @click="open">
     可自动关闭
   </el-button>
   <el-button
-    plain
     @click="open2">
     不会自动关闭
     </el-button>
@@ -120,22 +118,22 @@
 ```html
 <template>
   <el-button
-    plain
+    type="success"
     @click="open3">
     成功
   </el-button>
   <el-button
-    plain
+    type="warning"
     @click="open4">
     警告
   </el-button>
   <el-button
-    plain
+    type="primary"
     @click="open5">
     消息
   </el-button>
   <el-button
-    plain
+    type="danger"
     @click="open6">
     错误
   </el-button>
@@ -187,7 +185,6 @@
 ```html
 <template>
   <el-button
-    plain
     @click="open7">
     偏移的消息
   </el-button>

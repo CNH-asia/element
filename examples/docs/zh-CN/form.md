@@ -607,23 +607,6 @@
     <el-input v-model.number="ruleForm2.age"></el-input>
   </el-form-item>
 
-  <el-form-item label="远程搜索" prop="search" tip="请输入关键词">
-    <el-select
-      type="fixedHeight"
-      v-model="ruleForm2.search"
-      remote
-      filterable
-      placeholder="请输入关键词"
-      :remote-method="remoteMethod"
-      :loading="loading">
-      <el-option
-        v-for="item in options4"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value">
-      </el-option>
-    </el-select>
-  </el-form-item>
   
   <el-form-item label="活动区域" prop="region">
       <el-select v-model="ruleForm2.region" type="fixedHeight" placeholder="请选择活动区域">

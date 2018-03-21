@@ -50,7 +50,7 @@
     @m comp {
       /*position: relative;*/
       width: 173px;
-      height: 145px;
+      min-height: 145px;
       /*background: #FFFFFF;*/
       padding: 20px;
       border: 1px solid #D7D7D7;

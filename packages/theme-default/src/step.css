@@ -6,10 +6,6 @@
     position: relative;
     vertical-align: top;
 
-   /* &:first-child:before {
-      background:#0785DB;
-    }*/
-
     &:last-child .el-step__main {
       padding-right: 0;
     }
@@ -188,19 +184,7 @@
       text-align: left;
       position: relative;
 
-      &:after{
-        content: '';
-        display: inline-block;
-        background: url(https://dashboard.lightyy.com/icon.png?9bc13255721bf19a38bf178a395e1c1e) no-repeat;
-        background-position: 0 -222px;
-        width: 13px;
-        height: 13px;
-        position: absolute;
-        top: 0;
-        left: 0;
-        transform: translate(20%, -270%);
-        z-index: 10;
-      }
+      
     }
 
     @e title {
@@ -217,6 +201,35 @@
       padding: 10px 15px;
       top: -15px;
       z-index: 5;
+
+      &:before {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        content: '';
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-width: 4px;
+        border-color: #fff transparent transparent transparent;
+        border-style: solid dashed dashed dashed;
+        transform: translateX(-50%);
+        z-index: 11;
+      }
+      &:after {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        content: '';
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-width: 5px;
+        border-color: #D2D9E3 transparent transparent transparent;
+        border-style: solid dashed dashed dashed;
+        transform: translate(-50%, 1px);
+        z-index: 10;
+      }
 
       @when process {
         color: #7A7A7A;

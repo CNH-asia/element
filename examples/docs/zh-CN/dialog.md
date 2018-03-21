@@ -92,9 +92,7 @@ Dialog 弹出一个对话框，适合需要定制性更大的场景。
 
 <el-dialog
   type="warning"
-  :visible.sync="dialogVisible"
->
-
+  :visible.sync="dialogVisible">
   <p>您确定要重置该容器吗？</p>
   <br>
   <p class="muted">重置后，该容器内的所有实例将被强制更新</p>
@@ -103,17 +101,7 @@ Dialog 弹出一个对话框，适合需要定制性更大的场景。
     <el-button @click="dialogFormVisible = false">重 置</el-button>
   </div>
 </el-dialog>
- <div class="ver-page mgt30 tcenter" v-show="total>100">
-    <el-pagination
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
-            :current-page="currentPage"
-            :page-sizes="[10, 20, 30, 40]"
-            :page-size="10"
-            layout="total, sizes, prev, pager, next, jumper"
-            :total="100">
-    </el-pagination>
-</div>
+
 <script>
   export default {
     data() {
@@ -140,9 +128,9 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
 
 <el-dialog title="收货地址" :visible.sync="dialogTableVisible">
   <el-table :data="gridData">
-    <el-table-column property="date" label="日期" width="150"></el-table-column>
-    <el-table-column property="name" label="姓名" width="200"></el-table-column>
-    <el-table-column property="address" label="地址"></el-table-column>
+    <el-table-column property="date" label="日期" min-width="120"></el-table-column>
+    <el-table-column property="name" label="姓名" min-width="80"></el-table-column>
+    <el-table-column property="address" label="地址" min-width="180"></el-table-column>
   </el-table>
 </el-dialog>
 
@@ -157,7 +145,7 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
     <el-form-item label="组件简介" :label-width="formLabelWidth">
       <el-input type="textarea"></el-input>
     </el-form-item>
-    <el-form-item label="标签选择（最多选择3个）" :label-width="formLabelWidth" style="border-bottom: 1px solid #DCE0E7; text-align: right;">
+    <el-form-item label="标签选择" :label-width="formLabelWidth" style="border-bottom: 1px solid #DCE0E7; text-align: right;">
       <el-button type="text">测试</el-button>
       <el-button type="text">DEMO</el-button>
       <el-button type="text">安卓</el-button>
