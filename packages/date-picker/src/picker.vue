@@ -235,6 +235,10 @@ export default {
             }
 
         }
+    },
+    showNowBtn: {
+      type: Boolean,
+      default: true
     }
   },
 
@@ -501,6 +505,7 @@ export default {
       this.panel.defaultValue = this.defaultValue || this.currentValue;
       this.picker = new Vue(this.panel).$mount();
       this.picker.popperClass = this.popperClass;
+      this.picker.showNowBtn = this.showNowBtn;
       this.popperElm = this.picker.$el;
       this.picker.width = this.reference.getBoundingClientRect().width;
       this.picker.showTime = this.type === 'datetime' || this.type === 'datetimerange';

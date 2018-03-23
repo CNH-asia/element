@@ -116,6 +116,7 @@
         class="el-picker-panel__footer"
         v-show="footerVisible && currentView === 'date'">
         <a
+          v-if="showNowBtn"
           href="JavaScript:"
           class="el-picker-panel__link-btn"
           @click="changeToNow">{{ t('el.datepicker.now') }}</a>
@@ -385,7 +386,8 @@
         showWeekNumber: false,
         timePickerVisible: false,
         width: 0,
-        format: ''
+        format: '',
+        showNowBtn: true
       };
     },
 
