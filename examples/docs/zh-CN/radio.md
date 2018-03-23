@@ -3,7 +3,7 @@
     data() {
       return {
         radio: '1',
-        radio1: '选中且禁用',
+        radio1: '2',
         radio2: 3,
         radio3: '上海',
         radio4: '上海',
@@ -25,8 +25,8 @@
 
 ```html
 <template>
-  <el-radio class="radio" v-model="radio" label="1">备选项</el-radio>
-  <el-radio class="radio" v-model="radio" label="2">备选项</el-radio>
+  <el-radio class="radio" v-model="radio" label="1">备选项1</el-radio>
+  <el-radio class="radio" v-model="radio" label="2">备选项2</el-radio>
 </template>
 
 <script>
@@ -48,15 +48,15 @@
 :::demo 注意：请牢记，选中的条件是绑定的变量值等于`label`中的值。只要在`el-radio`元素中设置`disabled`属性即可，它接受一个`Boolean`，`true`为禁用。
 ```html
 <template>
-  <el-radio disabled v-model="radio1" label="禁用">备选项</el-radio>
-  <el-radio disabled v-model="radio1" label="选中且禁用">备选项</el-radio>
+  <el-radio disabled v-model="radio1" label="1">未选中禁用</el-radio>
+  <el-radio disabled v-model="radio1" label="2">选中禁用</el-radio>
 </template>
 
 <script>
   export default {
     data () {
       return {
-        radio1: '选中且禁用'
+        radio1: '2'
       };
     }
   }
@@ -73,9 +73,9 @@
 ```html
 <template>
   <el-radio-group v-model="radio2">
-    <el-radio :label="3">备选项</el-radio>
-    <el-radio :label="6">备选项</el-radio>
-    <el-radio :label="9">备选项</el-radio>
+    <el-radio :label="3">备选项1</el-radio>
+    <el-radio :label="6">备选项2</el-radio>
+    <el-radio :label="9">备选项3</el-radio>
   </el-radio-group>
 </template>
 
@@ -99,9 +99,9 @@
 ```html
 <template>
   <el-radio-group v-model="radio3">
-    <el-radio-button label="IOS"></el-radio-button>
-    <el-radio-button label="H5"></el-radio-button>
-    <el-radio-button label="Android"></el-radio-button>
+    <el-radio-button label="上海"></el-radio-button>
+    <el-radio-button label="北京"></el-radio-button>
+    <el-radio-button label="广州"></el-radio-button>
     <el-radio-button label="深圳"></el-radio-button>
   </el-radio-group>
   <div style="margin: 15px 0;"></div>

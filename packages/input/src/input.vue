@@ -144,6 +144,7 @@
         if (this.$isServer) return;
         var { autosize, type } = this;
         if (!autosize || type !== 'textarea') return;
+        debugger
         const minRows = autosize.minRows;
         const maxRows = autosize.maxRows;
 

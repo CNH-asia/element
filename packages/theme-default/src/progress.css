@@ -10,13 +10,18 @@
       position: absolute;
       line-height: 17px;
       text-align: center;
-      left: 50%;
       transform: translateX(-50%);
-      top: 22px;
+      top: -9px;
       color: #0AA9F1;
       font-size: 12px;
       letter-spacing: 0;
       z-index: 5;
+      min-width: 48px;
+      white-space: nowrap;
+
+      &.offset-left {
+        transform: translateX(-100%);
+      }
 
       i {
         vertical-align: middle;
@@ -82,7 +87,6 @@
   }
   @b progress-bar {
     padding-right: 0px;
-    /*padding-right: 50px;*/
     display: inline-block;
     vertical-align: middle;
     width: 100%;
@@ -90,25 +94,18 @@
     box-sizing: border-box;
 
     @e outer {
-      background: #F9F9F9;
-      border: 1px solid #0AA9F1;
-      border-radius: 31px;
-      height: 12px;
-      overflow: hidden;
       position: relative;
-      vertical-align: middle;
+      background: #DCE0E7;
+      height: 2px;
     }
     @e inner {
       position: absolute;
       left: 0;
-      top: 0;
-      height: 100%;
-      text-align: right;
-      line-height: 1;
-      background: #0AA9F1;
-      border-radius: 5px 0 0 5px;   
+      top: -1px;
+      height: 3px;
+      background: #0AA9F1; 
 
-      @utils-vertical-center;
+      /* @utils-vertical-center; */
     }
     @e innerText {
       display: inline-block;

@@ -204,23 +204,6 @@ export default {
 ```
 :::
 
-### 标题在内部
-
-::: demo
-```html
-<el-input type="inner" v-model="innerinput" label="查询" icon="search" placeholder="请输入用户名/手机浩/邮箱查询" :on-icon-click="handleIconClick"></el-input>
-
-<script>
-export default {
-  data() {
-    return {
-      innerinput: ''
-    }
-  }
-}
-</script>
-```
-:::
 
 ### 禁用状态
 
@@ -251,7 +234,7 @@ export default {
 ::: demo 可以通过 `icon` 属性在 input 组件尾部增加显示图标，可以通过 `on-icon-click` 钩子函数来在点击图标后执行需要的逻辑。
 ```html
 <el-input
-  placeholder="请选择日期"
+  placeholder="请输入内容"
   icon="search"
   v-model="input2"
   :on-icon-click="handleIconClick">

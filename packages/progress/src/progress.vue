@@ -25,10 +25,18 @@
     </div>
     <div
       class="el-progress__text"
+      :class="{'offset-left': percentage==100}"
       v-if="showText && !textInside"
-      :style="{fontSize: progressTextSize + 'px'}"
+      :style="[{fontSize: progressTextSize + 'px'},{left: percentage + '%'}]"
     >
-      <template v-if="!status">{{percentage}}%</template>
+      <template v-if="!status">
+        <template v-if="percentage<100">
+          {{ percentage }}%
+        </template>
+        <template v-else>
+          {{ successText }}
+        </template>
+      </template>
       <i v-else :class="iconClass"></i>
     </div>
   </div>
@@ -53,7 +61,7 @@
       },
       strokeWidth: {
         type: Number,
-        default: 10
+        default: 2
       },
       textInside: {
         type: Boolean,
@@ -66,6 +74,10 @@
       showText: {
         type: Boolean,
         default: true
+      },
+      successText: {
+        type: String,
+        default: '上传完成！'
       }
     },
     computed: {
@@ -120,7 +132,7 @@
         //   ? 12 + this.strokeWidth * 0.4
         //   : this.width * 0.111111 + 2 ;
         return this.type === 'line'
-          ? 12
+          ? 2
           : this.width * 0.111111 + 2 ;
       }
     }

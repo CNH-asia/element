@@ -9,7 +9,6 @@
     },
     methods: {
       handleClick(event) {
-        console.log(event);
         alert('button clicked!');
       }
     },
@@ -94,8 +93,8 @@
 
 ```html
 <el-button :disabled="true">默认按钮</el-button>
-<!-- <el-button :plain="true" :disabled="true">主要按钮</el-button> -->
 <el-button type="primary" :disabled="true">主要按钮</el-button>
+<el-button type="plain" :disabled="true">朴素按钮</el-button>
 <el-button type="text" :disabled="true">文字按钮</el-button>
 <el-button type="card" :disabled="true">卡片页面按钮</el-button>
 ```
@@ -190,7 +189,7 @@ Button 组件提供除了默认值以外的三种尺寸，可以在不同场景�
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | size     | 尺寸   | string  |   large,small,mini            |    —     |
-| type     | 类型   | string    |   primary,success,warning,danger,info,text |     —    |
+| type     | 类型   | string    |   primary,plain,success,warning,danger,text,card |     —    |
 | plain     | 是否朴素按钮   | Boolean    | — | false   |
 | loading     | 是否加载中状态   | Boolean    | — | false   |
 | disabled  | 是否禁用状态    | boolean   | —   | false   |

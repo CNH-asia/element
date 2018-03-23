@@ -48,7 +48,7 @@
   }
 </style>
 ## Checkbox 多选框
-一组备选项中进行多选
+在一组备选项中进行多选
 
 ### 基础用法
 
@@ -81,8 +81,8 @@
 
 ```html
 <template>
-  <el-checkbox v-model="checked1" disabled>备选项1</el-checkbox>
-  <el-checkbox v-model="checked2" disabled>备选项</el-checkbox>
+  <el-checkbox v-model="checked1" disabled>未选中禁用</el-checkbox>
+  <el-checkbox v-model="checked2" disabled>选中禁用</el-checkbox>
 </template>
 <script>
   export default {
@@ -109,8 +109,8 @@
     <el-checkbox label="复选框 A"></el-checkbox>
     <el-checkbox label="复选框 B"></el-checkbox>
     <el-checkbox label="复选框 C"></el-checkbox>
-    <el-checkbox label="禁用" disabled></el-checkbox>
-    <el-checkbox label="选中且禁用" disabled></el-checkbox>
+    <el-checkbox label="未选中禁用" disabled></el-checkbox>
+    <el-checkbox label="选中禁用" disabled></el-checkbox>
   </el-checkbox-group>
 </template>
 
@@ -118,7 +118,7 @@
   export default {
     data () {
       return {
-        checkList: ['选中且禁用','复选框 A']
+        checkList: ['选中禁用','复选框 A']
       };
     }
   };
