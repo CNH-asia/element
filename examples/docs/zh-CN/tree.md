@@ -260,7 +260,7 @@
 
 基础的树形结构展示。
 
-::: demo
+:::demo
 ```html
 <el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
 
@@ -323,7 +323,7 @@
 
 适用于需要选择层级时使用。在下例中，由于在点击时才进行该层数据的获取，导致层级不可预知，如果没有下层数据，则点击后下拉按钮会消失。
 
-::: demo
+:::demo
 ```html
 <el-tree
   :data="regions"
@@ -396,7 +396,7 @@
 ### 默认展开和默认选中
 可将 Tree 的某些节点设置为默认展开或默认选中
 
-::: demo 分别通过`default-expanded-keys`和`default-checked-keys`设置默认展开和默认选中的节点。需要注意的是，此时必须设置`node-key`，其值为节点数据中的一个字段名，该字段在整棵树中是唯一的。
+:::demo 分别通过`default-expanded-keys`和`default-checked-keys`设置默认展开和默认选中的节点。需要注意的是，此时必须设置`node-key`，其值为节点数据中的一个字段名，该字段在整棵树中是唯一的。
 ```html
 <el-tree
   :data="data2"
@@ -460,7 +460,7 @@
 ### 禁用状态
 可将 Tree 的某些节点设置为禁用状态
 
-::: demo 通过`disabled`设置禁用状态。
+:::demo 通过`disabled`设置禁用状态。
 ```html
 <el-tree
   :data="data3"
@@ -515,7 +515,7 @@
 
 ### 树节点的选择
 
-::: demo 本例展示如何获取和设置选中节点。获取和设置各有两种方式：通过 node 或通过 key。如果需要通过 key 来获取或设置，则必须设置`node-key`。
+:::demo 本例展示如何获取和设置选中节点。获取和设置各有两种方式：通过 node 或通过 key。如果需要通过 key 来获取或设置，则必须设置`node-key`。
 ```html
 <el-tree
   :data="data2"
@@ -612,7 +612,7 @@
 ### 自定义节点内容
 节点的内容支持自定义，可以在节点区添加按钮或图标等内容
 
-::: demo 使用`render-content`指定渲染函数，该函数返回需要的节点区内容即可。渲染函数的用法请参考 Vue 文档。注意：由于 jsfiddle 不支持 JSX 语法，所以本例在 jsfiddle 中无法运行。但是在实际的项目中，只要正确地配置了相关依赖，就可以正常运行。
+:::demo 使用`render-content`指定渲染函数，该函数返回需要的节点区内容即可。渲染函数的用法请参考 Vue 文档。注意：由于 jsfiddle 不支持 JSX 语法，所以本例在 jsfiddle 中无法运行。但是在实际的项目中，只要正确地配置了相关依赖，就可以正常运行。
 ```html
 <el-tree
   :data="data2"
@@ -702,7 +702,7 @@
 ### 节点过滤
 通过关键字过滤树节点
 
-::: demo 在需要对节点进行过滤时，调用 Tree 实例的`filter`方法，参数为关键字。需要注意的是，此时需要设置`filter-node-method`，值为过滤函数。
+:::demo 在需要对节点进行过滤时，调用 Tree 实例的`filter`方法，参数为关键字。需要注意的是，此时需要设置`filter-node-method`，值为过滤函数。
 ```html
 <el-input
   placeholder="输入关键字进行过滤"
@@ -786,7 +786,7 @@
 
 对于同一级的节点，每次只能展开一个
 
-::: demo
+:::demo
 ```html
 <el-tree
   :data="data"
@@ -879,7 +879,7 @@
 | children | 指定子树为节点对象的某个属性值 | string, function(data, node) | —    | —    |
 | disabled | 指定节点选择框是否禁用 |  boolean, function(data, node) | —    | —    |
 
-### 方法
+### Methods
 `Tree` 拥有如下方法，返回目前被选中的节点数组：
 | 方法名             | 说明                                       | 参数                                       |
 | --------------- | ---------------------------------------- | ---------------------------------------- |

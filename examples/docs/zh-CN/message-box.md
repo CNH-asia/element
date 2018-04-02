@@ -274,7 +274,7 @@ import { MessageBox } from 'element-ui';
 
 对应于上述四个全局方法的调用方法依次为：MessageBox, MessageBox.alert, MessageBox.confirm 和 MessageBox.prompt。
 
-### Options
+### Attributes
 
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |

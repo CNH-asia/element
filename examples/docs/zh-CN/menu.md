@@ -59,7 +59,7 @@
 
 适用广泛的基础用法。
 
-::: demo 导航菜单默认为垂直模式，通过 `mode` 属性可以使导航菜单变更为水平模式。另外，在菜单中通过 `submenu` 组件可以生成二级菜单。
+:::demo 导航菜单默认为垂直模式，通过 `mode` 属性可以使导航菜单变更为水平模式。另外，在菜单中通过 `submenu` 组件可以生成二级菜单。
 
 ```html
 <el-menu theme="dark" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
@@ -106,7 +106,7 @@
 
 垂直菜单，可内嵌子菜单。
 
-::: demo 通过 `el-menu-item-group` 组件可以实现菜单进行分组，分组名可以通过 `title` 属性直接设定也可以通过具名 slot 来设定。
+:::demo 通过 `el-menu-item-group` 组件可以实现菜单进行分组，分组名可以通过 `title` 属性直接设定也可以通过具名 slot 来设定。
 ```html
 <el-row class="tac">
   <el-col :span="8">
@@ -192,7 +192,7 @@
 
 ### 折叠
 
-::: demo
+:::demo
 ```html
 <!-- <div class="h-menu">
         <div class="h-menu-top">    
@@ -301,7 +301,7 @@
 ```
 :::
 
-### Menu Attribute
+### Menu Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | mode     | 模式   | string  |   horizontal,vertical   | vertical |
@@ -320,18 +320,18 @@
 | open  | SubMenu 展开的回调 | index: 打开的 subMenu 的 index， indexPath: 打开的 subMenu 的 index path  |
 | close  | SubMenu 收起的回调 | index: 收起的 subMenu 的 index， indexPath: 收起的 subMenu 的 index path  |
 
-### SubMenu Attribute
+### SubMenu Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | index     | 唯一标志   | string  | — | — |
 
-### Menu-Item Attribute
+### Menu-Item Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | index     | 唯一标志   | string  | — | — |
 | route     | Vue Router 路径对象 | Object | — | — |
 
-### Menu-Group Attribute
+### Menu-Group Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | title     | 分组标题   | string  | — | — |

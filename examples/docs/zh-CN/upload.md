@@ -123,7 +123,7 @@
 
 ### 点击上传
 
-::: demo 通过 slot 你可以传入自定义的上传按钮类型和文字提示。
+:::demo 通过 slot 你可以传入自定义的上传按钮类型和文字提示。
 ```html
 <el-upload
   class="upload-demo"
@@ -158,7 +158,7 @@
 
 使用 `before-upload` 限制用户上传的图片格式和大小。
 
-::: demo
+:::demo
 ```html
 <el-upload
   class="avatar-uploader"
@@ -229,7 +229,7 @@
 
 使用 `list-type` 属性来设置文件列表的样式。
 
-::: demo
+:::demo
 ```html
 <el-upload
   action="https://jsonplaceholder.typicode.com/posts/"
@@ -266,7 +266,7 @@
 
 ### 图片列表缩略图
 
-::: demo
+:::demo
 ```html
 <el-upload
   class="upload-demo"
@@ -302,7 +302,7 @@
 
 通过 `on-change` 钩子函数来对列表进行控制
 
-::: demo
+:::demo
 ```html
 <el-upload
   class="upload-demo"
@@ -339,7 +339,7 @@
 
 ### 拖拽上传
 
-::: demo
+:::demo
 ```html
 <el-upload
   class="upload-demo"
@@ -355,7 +355,7 @@
 
 ### 手动上传
 
-::: demo
+:::demo
 ```html
 <el-upload
   class="upload-demo"
@@ -392,7 +392,7 @@
 ```
 :::
 
-### Attribute
+### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | action | 必选参数, 上传的地址 | string | — | — |

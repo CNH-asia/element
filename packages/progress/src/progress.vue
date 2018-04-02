@@ -132,7 +132,7 @@
         //   ? 12 + this.strokeWidth * 0.4
         //   : this.width * 0.111111 + 2 ;
         return this.type === 'line'
-          ? 2
+          ? 12
           : this.width * 0.111111 + 2 ;
       }
     }

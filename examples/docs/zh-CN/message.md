@@ -216,7 +216,7 @@ import { Message } from 'element-ui';
 此时调用方法为 `Message(options)`。我们也为每个 type 定义了各自的方法，如 `Message.success(options)`。
 并且可以调用 `Message.closeAll()` 手动关闭所有实例。
 
-### Options
+### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | message | 消息文字 | string / VNode | — | — |
@@ -227,7 +227,7 @@ import { Message } from 'element-ui';
 | showClose | 是否显示关闭按钮 | boolean | — | false |
 | onClose | 关闭时的回调函数, 参数为被关闭的 message 实例 | function | — | — |
 
-### 方法
+### Methods
 调用 `Message` 或 `this.$message` 会返回当前 Message 的实例。如果需要手动关闭实例，可以调用它的 `close` 方法。
 | 方法名 | 说明 |
 | ---- | ---- |

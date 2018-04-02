@@ -236,60 +236,7 @@
 ```
 :::
 
-<!-- ### 范围选择
 
-支持选择某一数值范围
-
-:::demo 设置`range`即可开启范围选择，此时绑定值是一个数组，其元素分别为最小边界值和最大边界值
-```html
-<template>
-  <div class="block">
-    <el-slider
-      v-model="value9"
-      range
-      show-stops
-      :max="10">
-    </el-slider>
-  </div>
-</template>
-
-<script>
-  export default {
-    data() {
-      return {
-        value9: [4, 8]
-      }
-    }
-  }
-</script>
-```
-::: -->
-
-<!-- ### 竖向模式
-
-:::demo 设置`vertical`可使 Slider 变成竖向模式，此时必须设置高度`height`属性
-```html
-<template>
-  <div class="block">
-    <el-slider
-      v-model="value10"
-      vertical
-      height="200px">
-    </el-slider>
-  </div>
-</template>
-
-<script>
-  export default {
-    data() {
-      return {
-        value10: 20
-      }
-    }
-  }
-</script>
-```
-::: -->
 
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
