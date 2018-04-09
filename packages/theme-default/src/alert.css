@@ -69,6 +69,7 @@
       color: var(--color-white);
       opacity: 1;
       position: absolute 12px 15px * *;
+      line-height: 1;
       cursor: pointer;
 
       @when customed {

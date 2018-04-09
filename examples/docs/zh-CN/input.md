@@ -39,6 +39,9 @@
       };
     },
     methods: {
+      handleChange(e) {
+        console.log(e)
+      },
       loadAll() {
         return [
           { "value": "三全鲜食（北新泾店）", "address": "长宁区新渔路144号" },
@@ -190,7 +193,7 @@
 
 :::demo
 ```html
-<el-input v-model="input" placeholder="请输入内容"></el-input>
+<el-input v-model="input" placeholder="请输入内容" :clearable="true" @clear="handleChange"></el-input>
 
 <script>
 export default {
@@ -237,6 +240,7 @@ export default {
   placeholder="请输入内容"
   icon="search"
   v-model="input2"
+  :clearable="true"
   :on-icon-click="handleIconClick">
 </el-input>
 

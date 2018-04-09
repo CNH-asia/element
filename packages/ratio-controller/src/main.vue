@@ -14,7 +14,7 @@
             v-for="(ratio,index) in ratios" 
             v-if="index<ratios.length-1"
             :class="{'nodrag':ratio.percent===0&&ratios[index+1].percent===0}"
-            :key="index">
+            :key="'-'+index">
         </div>
     </div>
 </div>

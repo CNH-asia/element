@@ -106,7 +106,7 @@
       cursor: pointer;
       color: var(--color-primary);
       text-decoration: none;
-      padding: 15px;
+      padding: 0 15px;
       font-size: 12px;
     }
   }

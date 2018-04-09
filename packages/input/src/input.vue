@@ -28,6 +28,7 @@
       <input
         v-if="type !== 'textarea'"
         class="el-input__inner"
+        :class="[{'pdr25':clearable},{'pdr45':clearable&&icon}]"
         v-bind="$props"
         :autocomplete="autoComplete"
         :value="currentValue"
@@ -37,6 +38,11 @@
         @focus="handleFocus"
         @blur="handleBlur"
       >
+      <i v-if="clearable && showClear" 
+        @click="clearAll" 
+        class="el-input__clear el-icon-circle-close"
+        :class="{'right28':icon}">
+      </i>
       <i class="el-input__icon el-icon-loading" v-if="validating"></i>
       <!-- 后置元素 -->
       <div class="el-input-group__append" v-if="$slots.append">
@@ -112,7 +118,11 @@
         type: Boolean,
         default: true
       },
-      onIconClick: Function
+      onIconClick: Function,
+      clearable: {
+        type: Boolean,
+        default: false
+      }
     },
 
     computed: {
@@ -121,6 +131,13 @@
       },
       textareaStyle() {
         return merge({}, this.textareaCalcStyle, { resize: this.resize });
+      },
+      showClear() {
+        if(this.value!=='' || typeof this.value=='number'&&this.value!=undefined) {
+          return true;
+        } else {
+          return false;
+        }
       }
     },
 
@@ -144,7 +161,6 @@
         if (this.$isServer) return;
         var { autosize, type } = this;
         if (!autosize || type !== 'textarea') return;
-        debugger
         const minRows = autosize.minRows;
         const maxRows = autosize.maxRows;
 
@@ -178,6 +194,12 @@
         if (this.validateEvent) {
           this.dispatch('ElFormItem', 'el.form.change', [value]);
         }
+      },
+      clearAll(event) {
+        this.currentValue = '';
+        this.$emit('input', '');   
+        this.setCurrentValue('');
+        this.$emit('clear', event);
       }
     },
 

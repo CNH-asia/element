@@ -275,7 +275,7 @@
       width: 100%;
       overflow:hidden;
     } */
-     @e body-wrapper, footer-wrapper {
+    @e body-wrapper, footer-wrapper {
       width: 100%;
       overflow:hidden;
     }
@@ -305,7 +305,10 @@
       }
     }
     @e header-wrapper {
-      overflow: visible;
+      overflow: hidden;
+      &.show-filter {
+          overflow: visible;
+      }
     }
 
     @e body-wrapper {

@@ -25,6 +25,10 @@
       transition: var(--border-transition-base);
       width: 100%;
 
+      &.pdr25 {
+        padding-right: 30px;
+      }
+
       &::placeholder {
         color: #909090;
       }
@@ -35,6 +39,21 @@
 
       &:focus {
         border: 1px solid #0AA9F1;
+      }
+    }
+
+    @e clear {
+      color: lightgray;
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      &.right28 {
+        right: 30px;
+      }
+      &:hover {
+        color: gray;
       }
     }
 
@@ -60,6 +79,9 @@
 
       & + .el-input__inner {
         padding-right: 35px;
+        &.pdr45 {
+          padding-right: 50px;
+        }
       }
 
       @when clickable {

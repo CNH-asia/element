@@ -9,7 +9,6 @@
 <script>
 export default {
   name: 'ElSteps',
-
   props: {
     space: [Number, String],
     active: Number,
@@ -28,25 +27,22 @@ export default {
       default: 'process'
     }
   },
-
   data() {
     return {
       steps: [],
       stepOffset: 0
     };
   },
-
   watch: {
     active(newVal, oldVal) {
       this.$emit('change', newVal, oldVal);
     },
-
     steps(steps) {
       steps.forEach((child, index) => {
         child.index = index;
       });
-
-      if (this.center) {     
+      if (this.center) {
+        const len = steps.length;
         this.$nextTick(() => {
           this.stepOffset = steps[len - 1].$el.getBoundingClientRect().width / (len - 1);
         });

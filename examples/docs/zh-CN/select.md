@@ -2,7 +2,7 @@
   export default {
     data() {
       return {
-      isdisabled:false,
+        isdisabled:false,
         list: null,
         options: [{
           value: '选项1',

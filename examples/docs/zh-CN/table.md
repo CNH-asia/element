@@ -5,8 +5,8 @@
         filteredValue: ['家'],
         showTable: true,
         tableData: [{
-          date: 'data地址',
-          name: 'data_service',
+          'date': 'data地址',
+          'name': 'data_service',
           province: '上海',
           city: 'data_service',
           address: 'http://l1.qinglight.com/data',
@@ -234,7 +234,6 @@
 
     methods: {
       toggleTable() {
-        console.log('44444');
         this.showTable=!this.showTable;
       },
     handleExpand(row,expanded) {
@@ -304,7 +303,6 @@
       },
 
       filterTag(value, row) {
-        console.log(11);
         console.log(value, row);
         if(value=='全部') {
           return true;
@@ -338,7 +336,8 @@
 
 <style>
   .el-table .info-row {
-    background: #c9e5f5;
+    /* background: #c9e5f5; */
+    background: red;
   }
 
   .el-table .positive-row {
@@ -582,7 +581,7 @@
 
 <style>
   .el-table .info-row {
-    background: #c9e5f5;
+    background: red !important;
   }
 
   .el-table .positive-row {

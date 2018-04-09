@@ -1,14 +1,14 @@
 <template>
   <div
     class="el-step"
-    :style="[style,  { marginRight: - $parent.stepOffset + 'px' }]"
+    :style="[style,  isLast ? '' : { marginRight: - $parent.stepOffset + 'px' }]"
     :class="['is-' + $parent.direction]">
     <div
       class="el-step__head"
       :class="['is-' + currentStatus, { 'is-text': !icon }]">
       <div
         class="el-step__line"
-        :style="{ marginRight: $parent.stepOffset + 'px' }"
+        :style="isLast ? '' : { marginRight: $parent.stepOffset + 'px' }"
         :class="['is-' + $parent.direction, { 'is-icon': icon }]">
         <i class="el-step__line-inner" :style="lineStyle"></i>
       </div>
@@ -47,14 +47,12 @@
 <script>
 export default {
   name: 'ElStep',
-
   props: {
     title: String,
     icon: String,
     description: String,
     status: String
   },
-
   data() {
     return {
       index: -1,
@@ -63,11 +61,9 @@ export default {
       internalStatus: ''
     };
   },
-
   beforeCreate() {
     this.$parent.steps.push(this);
   },
-
   beforeDestroy() {
     const steps = this.$parent.steps;
     const index = steps.indexOf(this);
@@ -75,17 +71,12 @@ export default {
       steps.splice(index, 1);
     }
   },
-
   computed: {
     currentStatus() {
       return this.status || this.internalStatus;
     },
     prevStatus() {
-      // const prevStep = this.$parent.steps[this.index - 1];
-      var prevStep = this.$parent.steps[this.index - 1];
-      if(this.index == 0) {
-        prevStep = this.$parent.steps[this.$parent.steps.length - 1];
-      }
+      const prevStep = this.$parent.steps[this.index - 1];
       return prevStep ? prevStep.currentStatus : 'wait';
     },
     isLast: function() {
@@ -96,11 +87,9 @@ export default {
       const parent = this.$parent;
       const isCenter = parent.center;
       const len = parent.steps.length;
-
-      if (isCenter ) {
+      if (isCenter && this.isLast) {
         return {};
       }
-
       const space = (typeof parent.space === 'number'
         ? parent.space + 'px'
         : parent.space
@@ -115,13 +104,9 @@ export default {
       }
     }
   },
-
   methods: {
     updateStatus(val) {
-      var prevChild = this.$parent.$children[this.index - 1];
-      if(this.index == 0) {
-        prevChild = this.$parent.$children[this.$parent.$children.length-1];
-      }
+      const prevChild = this.$parent.$children[this.index - 1];
       if (val > this.index) {
         this.internalStatus = this.$parent.finishStatus;
       } else if (val === this.index && this.prevStatus !== 'error') {
@@ -129,48 +114,32 @@ export default {
       } else {
         this.internalStatus = 'wait';
       }
-
-      
-      prevChild.calcProgress(this.internalStatus);
-      
-      if(this.index==this.$parent.$children.length-1) {
-        this.calcProgress(this.internalStatus);
-      }
+      if (prevChild) prevChild.calcProgress(this.internalStatus);
     },
-
     calcProgress(status) {
       let step = 100;
       const style = {};
-      var that = this;
-      // style.transitionDelay = 150 * (this.index) + 'ms';
-      style.transitionDelay = 150 + 'ms';
+      style.transitionDelay = 150 * this.index + 'ms';
       if (status === this.$parent.processStatus) {
         step = this.currentStatus !== 'error' ? 50 : 0;
-        // style.transitionDelay = 150 * (this.index-2) + 'ms';
-        style.transitionDelay = 300 + 'ms';
       } else if (status === 'wait') {
         step = 0;
-        // style.transitionDelay = (-150 * this.index) + 'ms';
-      } 
-
+        style.transitionDelay = (-150 * this.index) + 'ms';
+      }
       style.borderWidth = step ? '1px' : 0;
       this.$parent.direction === 'vertical'
         ? style.height = step + '%'
         : style.width = step + '%';
-
       this.lineStyle = style;
     }
   },
-
   mounted() {
     const parent = this.$parent;
-
     if (parent.direction === 'horizontal') {
       if (parent.alignCenter) {
         this.mainOffset = -this.$refs.title.getBoundingClientRect().width / 2 + 16 + 'px';
       }
     }
-
     const unwatch = this.$watch('index', val => {
       this.$watch('$parent.active', this.updateStatus, { immediate: true });
       unwatch();

@@ -11,7 +11,7 @@
     }"
     @mouseleave="handleMouseLeave($event)">
     <div class="hidden-columns" ref="hiddenColumns"><slot></slot></div>
-    <div class="el-table__header-wrapper" ref="headerWrapper" v-if="showHeader">
+    <div class="el-table__header-wrapper" :class="{'show-filter':hasFilter}" ref="headerWrapper" v-if="showHeader">
       <table-header
         :store="store"
         :layout="layout"
@@ -428,6 +428,7 @@
       this.doLayout();
 
       // init filters
+      var count = 0;
       this.store.states.columns.forEach(column => {
         if (column.filteredValue && column.filteredValue.length) {
           this.store.commit('filterChange', {
@@ -437,6 +438,16 @@
           });
         }
       });
+      this.columns.forEach(function(column) {
+        if(column.filters && column.filters.length>0) {
+          count++;
+        }
+      })
+      if(count>0) {
+        this.hasFilter = true;
+      } else {
+        this.hasFilter = false;
+      }
 
       this.$ready = true;
     },
@@ -457,7 +468,8 @@
         layout,
         isHidden: false,
         renderExpanded: null,
-        resizeProxyVisible: false
+        resizeProxyVisible: false,
+        hasFilter: false
       };
     }
   };

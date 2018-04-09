@@ -169,8 +169,8 @@
     }"
     @change="handleChange"
     :data="data">
-    <el-button class="transfer-footer" slot="left-footer" size="small">操作</el-button>
-    <el-button class="transfer-footer" slot="right-footer" size="small">操作</el-button>
+    <el-button type="text" class="transfer-footer" slot="left-footer" size="small">操作</el-button>
+    <el-button type="text" class="transfer-footer" slot="right-footer" size="small">操作</el-button>
   </el-transfer>
 </template>
 

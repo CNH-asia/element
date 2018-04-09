@@ -10,7 +10,7 @@
     overflow-y: hidden;
 
     &.has-sidebar.has-time {
-      min-width: 434px;
+      min-width: 440px;
     }
 
     &.has-sidebar {

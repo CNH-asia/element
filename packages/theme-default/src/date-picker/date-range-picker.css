@@ -5,7 +5,7 @@
     min-width: 520px;
 
     &.has-sidebar.has-time {
-      min-width: 766px;
+      min-width: 780px;
     }
 
     &.has-sidebar {

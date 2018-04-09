@@ -19,11 +19,11 @@
       /*box-shadow: 0 0 4px 0 rgba(7, 133, 219, 0.60);*/
     }
 
-   /* @e header {
+   @e header {
       padding: calc(var(--card-padding) - 2) var(--card-padding);
       border-bottom: 1px solid var(--card-border-color);
       box-sizing: border-box;
-    }*/
+    }
 
     @e body {
       padding: 0;
@@ -32,12 +32,9 @@
     /*新增type：recommend、comp*/
     @m recommend {
       width: 458px;
-      height: 330px;
-      /*background: #FFFFFF;*/
+      height: auto;
       border: 1px solid #E5E5E5;
       border-radius: 2px;
-      /*cursor: pointer;*/
-      /*position: relative;*/
       top: 0;
       overflow: hidden;
     

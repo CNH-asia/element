@@ -9,29 +9,9 @@
     &:last-child .el-step__main {
       padding-right: 0;
     }
-    
+
     @when horizontal {
       display: inline-block;
-      &:first-child {
-        margin-left: 87px;
-        &:before {
-          content:'';
-          position: absolute;
-          top: 10px;
-          left: -87px;
-          width: 87px;
-          height: 2px;
-          /*background: #d7d7d7;*/
-          background: #0785DB;
-          transition: all 0.15s ease;
-        }
-       /* @when finish &:before {
-          background: #0785DB;
-        }*/
-      }
-      &:last-child .el-step__line{
-        width: 87px;
-      }
     }
 
     @when vertical {
@@ -49,7 +29,7 @@
       display: inline-block;
       position: absolute;
       border-color: inherit;
-      background-color: #d7d7d7;
+      background-color: var(--color-extra-light-silver);
 
       @when icon {
         @when horizontal {
@@ -58,9 +38,9 @@
       }
 
       @when horizontal {
-        top: 10px;
+        top: 15px;
         height: 2px;
-        left: 20px;
+        left: 32px;
         right: 0;
       }
 
@@ -89,39 +69,34 @@
       line-height: 28px;
 
       > * {
-        display:none;
         line-height: inherit;
         vertical-align: middle;
       }
     }
 
     @e head {
-      circle: 14px transparent;
+      circle: 28px transparent;
       text-align: center;
-      line-height: 14px;
-      font-size: 14px;
+      line-height: 28px;
+      font-size: 28px;
       vertical-align: top;
-      /*transition: all 150ms;*/
-      transition-delay: 170ms;
-      border: 5px solid #0785DB;
+      transition: all 150ms;
 
       @when text {
         font-size: 14px;
-        border-width: 3px;
+        border-width: 2px;
         border-style: solid;
 
         @when process {
           color: var(--color-white);
-          background: #fff;
-          border-color: #d7d7d7;
+          background-color: var(--color-extra-light-silver);
+          border-color: var(--color-extra-light-silver);
         }
 
         @when wait {
           color: var(--color-extra-light-silver);
-          /*background-color: #d7d7d7;
-          border-color: var(--color-extra-light-silver);*/
-          background: #fff;
-          border-color: #d7d7d7;
+          background-color: var(--color-white);
+          border-color: var(--color-extra-light-silver);
         }
 
         @when success {
@@ -137,24 +112,20 @@
         }
 
         @when finish {
-          color: #fff;
-          background: #fff;
-          border-color: #0785DB;
+          color: var(--color-white);
+          background-color: var(--color-primary);
+          border-color: var(--color-primary);
         }
       }
 
       @when process {
         color: var(--color-extra-light-silver);
-        /*border-color: var(--color-extra-light-silver);*/
-        background: #fff;
-        border-color: #d7d7d7;
+        border-color: var(--color-extra-light-silver);
       }
 
       @when wait {
-        /*color: var(--color-extra-light-silver);
-        border-color: var(--color-extra-light-silver);*/
-        background: #fff;
-        border-color: #d7d7d7;
+        color: var(--color-extra-light-silver);
+        border-color: var(--color-extra-light-silver);
       }
 
       @when success {
@@ -168,13 +139,8 @@
       }
 
       @when finish {
-        color: #fff;
-        background: #fff;
-        border-color: #0785DB;
-
-        & .el-step__line .el-step__line-inner{
-          background:#0785DB;
-        }
+        color: var(--color-primary);
+        border-color: var(--color-primary);
       }
     }
 
@@ -182,68 +148,26 @@
       white-space: normal;
       padding-right: 10px;
       text-align: left;
-      position: relative;
-
-      
     }
 
     @e title {
       font-size: 14px;
       line-height: 32px;
       display: inline-block;
-      transform: translate(-38%, -135%);
-      position: absolute;
-      left: 0;
-      background: #FFFFFF;
-      border: 1px solid #D7D7D7;
-      box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.10);
-      border-radius: 2px;
-      padding: 10px 15px;
-      top: -15px;
-      z-index: 5;
-
-      &:before {
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        content: '';
-        display: inline-block;
-        width: 0;
-        height: 0;
-        border-width: 4px;
-        border-color: #fff transparent transparent transparent;
-        border-style: solid dashed dashed dashed;
-        transform: translateX(-50%);
-        z-index: 11;
-      }
-      &:after {
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        content: '';
-        display: inline-block;
-        width: 0;
-        height: 0;
-        border-width: 5px;
-        border-color: #D2D9E3 transparent transparent transparent;
-        border-style: solid dashed dashed dashed;
-        transform: translate(-50%, 1px);
-        z-index: 10;
-      }
 
       @when process {
-        color: #7A7A7A;
-        font-weight: normal;
+        font-weight: 700;
+        color: var(--color-extra-light-black);
       }
 
       @when wait {
-        color: #7A7A7A;
         font-weight: normal;
+        color: var(--color-light-silver);
       }
 
       @when success {
-        color: #7A7A7A;
-        font-weight: normal;
+        font-weight: 700;
+        color: var(--color-success);
       }
 
       @when error {
@@ -252,7 +176,7 @@
       }
 
       @when finish {
-        font-weight: normal;
+        font-weight: 700;
         color: var(--color-primary);
       }
     }
