@@ -53,6 +53,7 @@
 
     watch: {
       visible(val) {
+        
         this.currentDate = this.date;
         this.currentVisible = val;
         this.hours = this.date.getHours();
@@ -166,12 +167,12 @@
     },
 
     created() {
-      // this.hours = this.currentDate.getHours();
-      // this.minutes = this.currentDate.getMinutes();
-      // this.seconds = this.currentDate.getSeconds();
-      this.hours = this.date.getHours();
-      this.minutes = this.date.getMinutes();
-      this.seconds = this.date.getSeconds();
+      this.hours = this.currentDate.getHours();
+      this.minutes = this.currentDate.getMinutes();
+      this.seconds = this.currentDate.getSeconds();
+      // this.hours = this.date.getHours();
+      // this.minutes = this.date.getMinutes();
+      // this.seconds = this.date.getSeconds();
     },
 
     mounted() {
