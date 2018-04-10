@@ -80,6 +80,12 @@
           const node = this.node;
           const data = node.data;
           const store = node.store;
+          if(parent.renderContent) {
+            // console.log(parent,node,data,store);
+            // console.log(h,parent._renderProxy);
+            console.log(parent.tree.$vnode.context);
+          }
+          
           return (
             parent.renderContent
               ? parent.renderContent.call(parent._renderProxy, h, { _self: parent.tree.$vnode.context, node, data, store })

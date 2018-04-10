@@ -218,6 +218,10 @@
       zIndex20: {
         type: Boolean,
         default: false
+      },
+      type: {
+        type: String,
+        default: 'fixedWidth'
       }
     },
 
@@ -241,7 +245,7 @@
         optionsAllDisabled: false,
         inputHovering: false,
         currentPlaceholder: '',
-        type: '',
+        // type: '',
         stype: '',
         sctype: '',
         selectedStr: ''
@@ -255,7 +259,9 @@
       },
 
       value(val) {
-        this.stype = this.$el.attributes[0].nodeValue;
+        
+        // this.stype = this.$el.attributes[0].nodeValue;
+        this.stype = this.type;
         if (this.multiple) {
           this.resetInputHeight();
           if (val.length > 0 || (this.$refs.input && this.query !== '')) {

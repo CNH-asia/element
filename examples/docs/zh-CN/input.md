@@ -119,6 +119,9 @@
       },
       handleIconClick(ev) {
         console.log(ev);
+      },
+      handleEnter() {
+        console.log('enter');
       }
     },
     mounted() {
@@ -193,7 +196,7 @@
 
 :::demo
 ```html
-<el-input v-model="input" placeholder="请输入内容" :clearable="true" @clear="handleChange"></el-input>
+<el-input v-model="input" placeholder="请输入内容" :clearable="true" @clear="handleChange" @keypress.enter.native="handleEnter"></el-input>
 
 <script>
 export default {
