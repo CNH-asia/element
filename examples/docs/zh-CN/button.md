@@ -9,7 +9,10 @@
     },
     methods: {
       handleClick(event) {
-        alert('button clicked!');
+        console.log('button clicked!');
+      },
+      handleEnter(event) {
+        console.log('enter');
       }
     },
     mounted() {

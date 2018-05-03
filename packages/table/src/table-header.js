@@ -104,7 +104,7 @@ export default {
                     on-mouseout={ this.handleMouseOut }
                     on-mousedown={ ($event) => this.handleMouseDown($event, column) }
                     on-click={ ($event) => this.handleHeaderClick($event, column) }
-                    class={ [column.id, column.order, column.headerAlign, column.className || '', rowIndex === 0 && this.isCellHidden(cellIndex, columns) ? 'is-hidden' : '', !column.children ? 'is-leaf' : '', column.labelClassName] }>
+                    class={ [column.id, column.order, column.headerAlign, column.className || '', rowIndex === 0 && this.isCellHidden(cellIndex, columns) ? 'is-hidden' : '', !column.children ? 'is-leaf' : '', column.sortable?'pointer':'', column.labelClassName] }>
                       <div class={['cell', column.filteredValue && column.filteredValue.length > 0 && column.filteredValue.indexOf(column.noHighlight) === -1 ? 'highlight' : '', column.labelClassName] }>
                     {
                       column.renderHeader
@@ -123,7 +123,7 @@ export default {
                       column.filterable
                             ?  
                             <span class="el-table__column-filter-trigger" on-click={($event) => this.handleFilterClick($event, column)} v-clickoutside={($event) => this.handleFilterClickOut($event, column)}>
-                              <i class={['el-icon-caret-bottom', this.showPopper['showPopper_'+column.filterOrder] ? 'el-icon-caret-top' : ''] } style='font-size:6px;'></i>
+                              <i class={['el-icon-caret-bottom', this.showPopper['showPopper_'+column.filterOrder] ? 'el-icon-caret-top' : ''] }></i>
                               <filter-panel showPopper={this.showPopper['showPopper_' + column.filterOrder]} table={this.$parent} column={column} filters={column && column.filters}></filter-panel>
                             </span>
     

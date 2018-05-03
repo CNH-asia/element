@@ -212,8 +212,9 @@
       var that = this;
       this.$nextTick(function() {
         if(that.$slots.prepend) {
-          const prependItem = that.$el.querySelector('.el-input-group__prepend').offsetWidth;        
-          const prependLeft = prependItem + 'px';
+          const prependItem = that.$el.querySelector('.el-input-group__prepend'); 
+          const prependWidth = prependItem.offsetWidth || prependItem.clientWidth || 44;  
+          const prependLeft = prependWidth + 'px';
           that.prependStyle = { paddingLeft: prependLeft }
         } else {
           that.prependStyle = {};

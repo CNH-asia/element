@@ -115,7 +115,7 @@
     }
 
     @m default {
-      width: 200px;
+      min-width: 200px;
       height: 30px;
       background: #3BBAF4;
       border: 1px solid #0AA9F1;

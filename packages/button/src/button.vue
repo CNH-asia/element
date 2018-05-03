@@ -1,6 +1,6 @@
 <template>
   <button :disabled="disabled" class="el-button"
-    @click="handleClick"
+    @click.prevent="handleClick"
     :autofocus="autofocus"
     :type="nativeType"
     :class="[
@@ -45,6 +45,7 @@
     methods: {
       handleClick(evt) {
         this.$emit('click', evt);
+        this.$el.blur();
       }
     }
   };

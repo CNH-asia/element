@@ -4,7 +4,8 @@
       return {
         filteredValue: ['家'],
         showTable: true,
-        tableData: [{
+        tableData: [
+          {
           'date': 'data地址',
           'name': 'data_service',
           province: '上海',
@@ -12,7 +13,8 @@
           address: 'http://l1.qinglight.com/data',
           zip: 2,
           tag: '家'
-        }, {
+        },
+        {
           date: 'portal地址',
           name: 'portal_prefix',
           province: '上海',
@@ -36,7 +38,8 @@
           address: '["管理中心，框架的调整","light门户中，应用装配的基本信息版块与基本装配版块的新版发布","其他部分体验优化"]',
           zip: 4,
           tag: '公司'
-        }],
+        }
+        ],
         tableData2: [{
           date: '2016-05-02',
           name: '王小虎',

@@ -7,12 +7,10 @@
 
   @b table {
     position: relative;
-    /* overflow-x: hidden; */
+    overflow-x: auto;
     box-sizing: border-box;
     width: 100%;
     max-width: 100%;
-    /*background-color: var(--color-white);
-    border: 1px solid var(--table-border-color);*/
     font-size: 14px;
     color: var(--table-text-color);
     margin: 0;
@@ -114,6 +112,10 @@
     & th {
       white-space: nowrap;
       overflow: hidden;
+      &.pointer {
+        cursor: pointer;
+        user-select: none;
+      }
     }
     & .el-table__body td {
       /*padding: 5.5px 0px;*/
@@ -277,7 +279,8 @@
     } */
     @e body-wrapper, footer-wrapper {
       width: 100%;
-      overflow:hidden;
+      /* overflow:hidden; */
+      overflow: visible;
     }
 
     @e footer-wrapper {
@@ -292,7 +295,8 @@
     }
 
     @e header-wrapper, footer-wrapper {
-      overflow: hidden;
+      /* overflow: hidden; */
+      overflow: visible;
 
       & thead div {
         color: #303030;
@@ -305,14 +309,15 @@
       }
     }
     @e header-wrapper {
-      overflow: hidden;
+      overflow: visible;
       &.show-filter {
           overflow: visible;
       }
     }
 
     @e body-wrapper {
-      overflow: auto;
+      /* overflow: auto; */
+      overflow: visible;
       position: relative;
       padding-top: 13px;
       background: #FDFDFD;
@@ -478,6 +483,9 @@
     }
 
     @e body {
+      position: relative;
+      z-index: 1;
+
       tr.hover-row {
         &, &.el-table__row--striped {
           &, &.current-row {
@@ -490,6 +498,9 @@
 
       tr.current-row > td {
         background: rgba(61,161,230,0.05);
+      }
+      tr:last-child td {
+        border-bottom: 1px solid #D2D9E3;
       }
     }
 
@@ -512,18 +523,9 @@
     @e column-filter-trigger {
       position: relative;
       display: inline-block;
-      line-height: 34px;
+      line-height: 28px;
       margin-left: 5px;
       cursor: pointer;
-      /* position: relative;
-      display: inline-block;
-      line-height: 34px;
-      width: 10px;
-      height: 5px; */
-      /* margin-left: 5px; */
-      /* cursor: pointer; */
-
-     
 
       & i {
         color: var(--color-light-silver);

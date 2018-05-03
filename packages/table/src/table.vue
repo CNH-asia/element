@@ -20,6 +20,7 @@
         :style="{ width: layout.bodyWidth ? layout.bodyWidth + 'px' : '' }">
       </table-header>
     </div>
+    
     <div
       class="el-table__body-wrapper"
       ref="bodyWrapper"
