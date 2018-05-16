@@ -1216,7 +1216,8 @@
     function getOffsetRectRelativeToCustomParent(element, parent, fixed) {
         var elementRect = getBoundingClientRect(element);//三角reference
         var parentRect = getBoundingClientRect(parent);//窗口
-
+        
+        
         if (fixed) {
             var scrollParent = getScrollParent(parent);
             parentRect.top += scrollParent.scrollTop;

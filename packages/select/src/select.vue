@@ -90,7 +90,8 @@
           </el-option>
           <slot></slot>
         </el-scrollbar>
-        <p class="el-select-dropdown__empty" v-if="emptyText && (allowCreate && options.length === 0 || !allowCreate)">{{ emptyText }}</p>
+        <p class="el-select-dropdown__empty" v-if="showEmptyText && emptyText && (allowCreate && options.length === 0 || !allowCreate)">{{ emptyText }}</p>
+        <slot name="nodata"></slot>
       </el-select-menu>
     </transition>
   </div>
@@ -222,6 +223,10 @@
       type: {
         type: String,
         default: 'fixedWidth'
+      },
+      showEmptyText: {
+        type: Boolean,
+        default: true
       }
     },
 
@@ -371,11 +376,35 @@
       },
 
       options(val) {
+        
         if (this.$isServer) return;
         this.optionsAllDisabled = val.length === val.filter(item => item.disabled === true).length;
         if (this.multiple) {
           this.resetInputHeight();
         }
+        if(this.groupLimit&&this.value.length>0) {
+
+          var tmp = this.value;
+          var tmp2 = [];
+
+          tmp.forEach(function(t, i) {
+            
+            let c = 0;
+            let idx = 0;
+            val.forEach(function(v) {
+              if(t == v.currentValue) {
+                c++;
+              }
+            })
+            
+            if(c > 0) {
+              tmp2.push(t);
+            }
+          })
+          
+          this.$emit('input', tmp2);
+        }
+        
         let inputs = this.$el.querySelectorAll('input');
         if ([].indexOf.call(inputs, document.activeElement) === -1) {
           this.setSelected();
@@ -581,6 +610,7 @@
           } else if (this.multipleLimit <= 0 || value.length < this.multipleLimit) {
             value.push(option.value);
           }
+          
           this.$emit('input', value);
           if (option.created) {
             this.query = '';

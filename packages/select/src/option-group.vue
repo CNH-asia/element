@@ -6,6 +6,8 @@
         <slot></slot>
       </ul>
     </li>
+    <slot name="empty"></slot>
+    
   </ul>
 </template>
 

@@ -37,31 +37,32 @@
           value: '选项5',
           label: '北京烤鸭'
         }],
-        options3: [{
-          label: '热门城市',
-          options: [{
-            value: 'Shanghai',
-            label: '上海'
-          }, {
-            value: 'Beijing',
-            label: '北京'
-          }]
-        }, {
-          label: '城市名',
-          options: [{
-            value: 'Chengdu',
-            label: '成都'
-          }, {
-            value: 'Shenzhen',
-            label: '深圳'
-          }, {
-            value: 'Guangzhou',
-            label: '广州'
-          }, {
-            value: 'Dalian',
-            label: '大连'
-          }]
-        }],
+        // options3: [{
+        //   label: '热门城市',
+        //   options: [{
+        //     value: 'Shanghai',
+        //     label: '上海'
+        //   }, {
+        //     value: 'Beijing',
+        //     label: '北京'
+        //   }]
+        // }, {
+        //   label: '城市名',
+        //   options: [{
+        //     value: 'Chengdu',
+        //     label: '成都'
+        //   }, {
+        //     value: 'Shenzhen',
+        //     label: '深圳'
+        //   }, {
+        //     value: 'Guangzhou',
+        //     label: '广州'
+        //   }, {
+        //     value: 'Dalian',
+        //     label: '大连'
+        //   }]
+        // }],
+        options3: [],
         options4: [],
         options5: [{
           value: '1',
@@ -120,6 +121,10 @@
     },
 
     methods: {
+      cutOptions() {
+        this.options3.pop();
+        console.log(this.options3);
+      },
     
       handleSizeChange(val) {
         console.log(val);
@@ -450,7 +455,8 @@
 :::demo 使用`el-option-group`对备选项进行分组，它的`label`属性为分组名
 ```html
 <template>
-  <el-select v-model="value7" placeholder="请选择" multiple type="fixedHeight" :multiple-limit="3" :group-limit="[1,2]">
+<el-button @click="cutOptions">减少选项</el-button>
+  <el-select v-model="value7" :show-empty-text="false" placeholder="请选择" multiple type="fixedHeight" :multiple-limit="3" :group-limit="[1,2]">
     <el-option-group
       v-for="group in options3"
       :key="group.label"
@@ -461,7 +467,9 @@
         :label="item.label"
         :value="item.value">
       </el-option>
+      <p slot="empty">8888</p>
     </el-option-group>
+    <p slot="nodata">nodata</p>
   </el-select>
 </template>
 
@@ -469,31 +477,32 @@
   export default {
     data() {
       return {
-        options3: [{
-          label: '热门城市',
-          options: [{
-            value: 'Shanghai',
-            label: '上海'
-          }, {
-            value: 'Beijing',
-            label: '北京'
-          }]
-        }, {
-          label: '城市名',
-          options: [{
-            value: 'Chengdu',
-            label: '成都'
-          }, {
-            value: 'Shenzhen',
-            label: '深圳'
-          }, {
-            value: 'Guangzhou',
-            label: '广州'
-          }, {
-            value: 'Dalian',
-            label: '大连'
-          }]
-        }],
+        options3: [],
+        // options3: [{
+        //   label: '热门城市',
+        //   options: [{
+        //     value: 'Shanghai',
+        //     label: '上海'
+        //   }, {
+        //     value: 'Beijing',
+        //     label: '北京'
+        //   }]
+        // }, {
+        //   label: '城市名',
+        //   options: [{
+        //     value: 'Chengdu',
+        //     label: '成都'
+        //   }, {
+        //     value: 'Shenzhen',
+        //     label: '深圳'
+        //   }, {
+        //     value: 'Guangzhou',
+        //     label: '广州'
+        //   }, {
+        //     value: 'Dalian',
+        //     label: '大连'
+        //   }]
+        // }],
         value7: ''
       }
     }
