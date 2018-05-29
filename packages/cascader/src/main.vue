@@ -43,7 +43,7 @@
       <template v-if="showAllLevels">
         <template v-for="(label, index) in currentLabels">
           {{ label }}
-          <span v-if="index < currentLabels.length - 1"> / </span>
+          <span v-if="index < currentLabels.length - 1" :key="index"> / </span>
         </template>
       </template>
       <template v-else>
@@ -92,9 +92,21 @@ export default {
   },
 
   props: {
-    options: {
+    // options: {
+    //   type: Array,
+    //   required: true
+    // },
+    testOptions: {
       type: Array,
       required: true
+    },
+    keys: {
+      type: Array,
+      required: true
+    },
+    all: {
+      type: Boolean,
+      default: false
     },
     props: {
       type: Object,
@@ -159,6 +171,104 @@ export default {
   },
 
   computed: {
+    level_arrs: function(){
+      var arr1 = [];
+      var arr2 = [];
+      var arr3 = [];
+      var val1 = [];
+      var val2 = [];
+      var val3 = [];
+      var arrs = [arr1, arr2, arr3];
+      var values = [val1,val2,val3];
+      var that = this;        
+      var keys = that.keys;
+      for (var i = 0; i < keys.length; i++) {
+        that.testOptions.forEach(function (option) {
+          if (option[keys[i]] && values[i].indexOf(option[keys[i]])==-1) {
+            values[i].push(option[keys[i]]);
+            var tmp = {};
+            tmp.value = option[keys[i]];
+            if (option['_' + keys[i]]) {
+              tmp.label = option['_' + keys[i]];
+            } else {
+              tmp.label = tmp.value;
+            }
+            if(i==0) {
+              tmp.pid = 0;
+            } else {
+              var value = option[keys[i-1]] || option[keys[i - 2]] || option[keys[i - 3]];
+              tmp.pid = value;
+            }
+            arrs[i].push(tmp);
+          }
+        })
+      }
+      // arrs.forEach(function(arr, idx) {
+      //   arr.unshift({
+      //     label: '全部',
+      //     value: 0,
+      //     pid: idx
+      //   })
+      // })
+      // console.log('level_arrs:',arrs);
+      return arrs;
+    },
+    options() {
+      var that = this;
+      function fn(data, pid) {
+        var result = [], temp;
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].pid == pid) {
+                var obj = { "label": data[i].label, "value": data[i].value, "pid": data[i].pid, "disabled": false, "level": 0 };
+                temp = fn(data, data[i].value);
+                if (temp.length > 0) {
+                    obj.children = temp;
+                }
+                result.push(obj);
+            }
+        }
+        return result;
+      } 
+      var temparr = [];
+      for(var i = 0; i < that.level_arrs.length; i++) {
+        temparr = temparr.concat(that.level_arrs[i]);
+      }
+      that.allarr = temparr;
+      var res = fn(temparr, 0);
+      if(that.all) {
+        res.unshift({
+          disabled: false,
+          label: '全部',
+          value: 0,
+          level: 0,
+          pid: 0
+        });
+        res.forEach(function(group, idx) {
+          if(idx>0&&group.children) {
+            group.children.unshift({
+              disabled: false,
+              label: '全部',
+              value: 0,
+              level: idx,
+              pid: idx
+            })
+            group.children.forEach(function(item,i) {
+              if(i>0&&item.children) {
+                item.children.unshift({
+                  disabled: false,
+                  label: '全部',
+                  value: 0,
+                  level: i,
+                  pid: i
+                })
+              }
+            })
+          }
+        })
+      }
+      
+      return res;
+    },
     labelKey() {
       return this.props.label || 'label';
     },

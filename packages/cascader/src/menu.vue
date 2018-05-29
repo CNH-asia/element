@@ -137,6 +137,9 @@
                 });
               };
             } else {
+              events.on.mouseenter = () => {
+                this.activeItem(item, menuIndex);
+              }
               events.on.click = () => {
                 this.select(item, menuIndex);
                 this.$nextTick(() => this.scrollMenu(this.$refs.menus[menuIndex]));

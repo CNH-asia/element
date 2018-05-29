@@ -5,16 +5,17 @@
       :style="{ width: width + 'px' }"
       class="el-picker-panel el-date-range-picker"
       :class="[{
-        'has-sidebar': $slots.sidebar || shortcuts,
+        'has-sidebar': $slots.sidebar || shortcuts&&shortcuts.length>0,
         'has-time': showTime
       }, popperClass]">
       <div class="el-picker-panel__body-wrapper">
         <slot name="sidebar" class="el-picker-panel__sidebar"></slot>
-        <div class="el-picker-panel__sidebar" v-if="shortcuts">
+        <div class="el-picker-panel__sidebar" v-if="shortcuts&&shortcuts.length>0">
           <button
             type="button"
             class="el-picker-panel__shortcut"
-            v-for="shortcut in shortcuts"
+            v-for="(shortcut,index) in shortcuts"
+            :key="index"
             @click="handleShortcutClick(shortcut)">{{shortcut.text}}</button>
         </div>
         <div class="el-picker-panel__body">

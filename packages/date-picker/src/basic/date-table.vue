@@ -416,6 +416,8 @@
         newDate.setDate(parseInt(text, 10));
 
         if (this.selectionMode === 'range') {
+          debugger
+          // console.log(date);
 
           if (this.minDate && this.maxDate) {
             const minDate = new Date(newDate.getTime());
@@ -425,19 +427,53 @@
             this.markRange(this.minDate);
           } else if (this.minDate && !this.maxDate) {
             if (newDate >= this.minDate) {
-              const maxDate = new Date(newDate.getTime() + DAY_DURATION - 1000);
-              this.rangeState.selecting = false;
+              	const maxDate = new Date(newDate.getTime() + DAY_DURATION -1000);
+              	this.rangeState.selecting = false;
                 var that = this;
                 // var new_mindate=Math.floor(this.minDate.getTime()/36000/2400);
-                var new_maxdate=Math.floor(maxDate.getTime()/36000/2400);
+                var new_maxdate = Math.floor(maxDate.getTime()/36000/2400);
                 var new_period = Math.floor((maxDate.getTime() - this.minDate.getTime())/36000/2400);
+                
                 var new_text = '';
+				
 
                 if(this.dateLabels.length>0) {
                     this.dateLabels.forEach(function(date) {
-                        if(new_period==date.period && new_maxdate==date.end) {
-                            new_text = date.text;
-                        }
+						var today = new Date().getTime();
+						
+						var real_period = Math.ceil((today - maxDate.getTime())/36000/2400);
+						// console.log(real_period, date.period);
+					  	// if(new_period == 0 && new_maxdate !== date.end) {
+						// 	console.log('------------');
+						// 	console.log(maxDate);
+						// 	var today = new Date().getTime();
+						// 	console.log(real_period);
+						// 	if(real_period == date.period) {
+
+						// 		new_text = date.text;
+						// 	}
+						// }
+						if(new_period == date.period) {
+							//时间间隔相等
+							if(new_period != 0 && new_maxdate == date.end) {
+								new_text = date.text;
+							} else if(new_period == 0 && real_period == date.range) {
+								new_text = date.text;
+							} 
+						}
+						// if(real_period == date.period && new_maxdate==date.end) {
+						// 	if(new_period==date.period) {
+						// 		console.log(new_period)
+						// 		new_text = date.text;
+						// 	} else {
+
+						// 	}
+                        //     new_text = date.text;
+							
+						// }
+                        // if(new_period == date.period && new_maxdate==date.end) {
+                        //     new_text = date.text;
+                        // }
                     });
                 }
 

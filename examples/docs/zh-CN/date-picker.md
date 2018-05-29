@@ -1,4 +1,21 @@
 <script>
+Date.prototype.Format = function(fmt) { //author: meizz
+    var o = {
+        "M+": this.getMonth() + 1, //月份
+        "d+": this.getDate(), //日
+        "h+": this.getHours(), //小时
+        "m+": this.getMinutes(), //分
+        "s+": this.getSeconds(), //秒
+        "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+        "S": this.getMilliseconds() //毫秒
+    };
+    if (/(y+)/.test(fmt))
+        fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var k in o)
+        if (new RegExp("(" + k + ")").test(fmt))
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    return fmt;
+};
   module.exports = {
     data() {
       return {
@@ -34,11 +51,34 @@
         },
         pickerOptions2: {
           shortcuts: [{
+            text: "昨日",
+			period: 0,
+			range: 1,
+            label: "昨日",
+            onClick(picker) {
+
+              const start = new Date(
+                new Date(new Date().Format("yyyy-MM-dd")).getTime() -
+                  24 * 3600 * 1000 -
+                  8 * 3600 * 1000);
+              const end = new Date(
+                new Date(new Date().Format("yyyy-MM-dd")).getTime() -
+                  8 * 3600 * 1000 -1
+              );
+              picker.$emit("pick", [start, end, "昨日"]);
+            }
+          },
+            {
               text: '今日',
-              period: 0,
+			  period: 0,
+			  range: 0,
               onClick(picker) {
                   const end = new Date();
-                  const start = new Date();
+				  const start = new Date();
+			// 	  const end = new Date(
+            //     new Date(new Date().Format("yyyy-MM-dd")).getTime() -
+            //       1
+            //   );
                   picker.$emit('pick', [start, end,'今日']);
               }
           },{
