@@ -416,7 +416,7 @@
         newDate.setDate(parseInt(text, 10));
 
         if (this.selectionMode === 'range') {
-          debugger
+        //   debugger
           // console.log(date);
 
           if (this.minDate && this.maxDate) {
@@ -427,7 +427,7 @@
             this.markRange(this.minDate);
           } else if (this.minDate && !this.maxDate) {
             if (newDate >= this.minDate) {
-              	const maxDate = new Date(newDate.getTime() + DAY_DURATION -1000);
+				const maxDate = new Date(newDate.getTime() + DAY_DURATION -1);
               	this.rangeState.selecting = false;
                 var that = this;
                 // var new_mindate=Math.floor(this.minDate.getTime()/36000/2400);
