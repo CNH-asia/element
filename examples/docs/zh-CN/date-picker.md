@@ -17,6 +17,7 @@ Date.prototype.Format = function(fmt) { //author: meizz
     return fmt;
 };
   module.exports = {
+
     data() {
       return {
         pickerOptions0: {
@@ -49,14 +50,56 @@ Date.prototype.Format = function(fmt) { //author: meizz
             }
           }]
         },
-        pickerOptions2: {
+         pickerOptions2: {
+                    shortcuts: [{
+                        text: '今日',
+                        period: 0,
+                        onClick(picker) {
+                            const end = new Date();
+                            const start = new Date();
+                            console.info(start.getTime());
+                            picker.$emit('pick', [start, end,'今日']);
+                        }
+                    }, {
+                        text: '最近7日',
+                        period: 6,
+                        label:'最近7日',
+                        onClick(picker) {
+                            const end = new Date();
+                            const start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 6);
+                            picker.$emit('pick', [start, end,'最近7日']);
+                        }
+                    }, {
+                        text: '最近30日',
+                        period: 29,
+                        onClick(picker) {
+                            const end = new Date();
+                            const start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 29);
+                            picker.$emit('pick', [start, end,'最近30日']);
+                        }
+                    }, {
+                        text: '最近90日',
+                        period: 89,
+                        onClick(picker) {
+                            const end = new Date();
+                            const start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 89);
+                            picker.$emit('pick', [start, end,'最近90日']);
+                        }
+                    }],
+                    disabledDate: function (date) {
+                        return date.getTime() > new Date().getTime() || date.getTime() < new Date(
+                            '2015-01-01 00:00:00').getTime();
+                    }
+                },
+        pickerOptions3: {
           shortcuts: [{
             text: "昨日",
-			period: 0,
-			range: 1,
-            label: "昨日",
+			      period: 0,
+			      range: 1,
             onClick(picker) {
-
               const start = new Date(
                 new Date(new Date().Format("yyyy-MM-dd")).getTime() -
                   24 * 3600 * 1000 -
@@ -70,20 +113,16 @@ Date.prototype.Format = function(fmt) { //author: meizz
           },
             {
               text: '今日',
-			  period: 0,
-			  range: 0,
+              period: 0,
+              range: 0,
               onClick(picker) {
                   const end = new Date();
-				  const start = new Date();
-			// 	  const end = new Date(
-            //     new Date(new Date().Format("yyyy-MM-dd")).getTime() -
-            //       1
-            //   );
+				          const start = new Date();
                   picker.$emit('pick', [start, end,'今日']);
               }
           },{
             text: '最近一周',
-            period:7,
+            period: 7,
             onClick(picker) {
               const end = new Date();
               const start = new Date();
@@ -92,8 +131,7 @@ Date.prototype.Format = function(fmt) { //author: meizz
             }
           }, {
             text: '最近一个月',
-            period:30,   
-            label: '最近一个月',       
+            period:30,       
             onClick(picker) {
               const end = new Date();
               const start = new Date();
@@ -123,11 +161,33 @@ Date.prototype.Format = function(fmt) { //author: meizz
     methods: {
       showChange: function(val) {
         
+      },
+      changeDate: function() {
+        // this.value7 = [
+        //   new Date(
+        //     new Date(new Date().Format("yyyy-MM-dd")).getTime() -
+        //     7 * 24 * 3600 * 1000 -
+        //     8 * 3600 * 1000
+        //   ),
+        //   new Date(
+        //     new Date(new Date().Format("yyyy-MM-dd")).getTime() +
+        //     24 * 3600 * 1000 -
+        //     8 * 3600 * 1000 -
+        //     1
+        //   )
+        // ]
+        this.value7 = [
+          new Date().getTime() - 3600 * 1000 * 24 * 7, new Date()
+        ]
+        console.log(this.value7);
       }
     },
     watch: {
-      'value6': function(val) {
-       
+      'value7': {
+        deep: true,
+        handler: function(val) {
+          console.log(val);
+        }
       }
     }
   };
@@ -302,6 +362,7 @@ Date.prototype.Format = function(fmt) { //author: meizz
       :picker-options="pickerOptions2">
     </el-date-picker>
   </div>
+  <el-button @click="changeDate">改变世界</el-button>
 </template>
 
 <script>
@@ -316,8 +377,7 @@ Date.prototype.Format = function(fmt) { //author: meizz
               const start = new Date();
               start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
               picker.$emit('pick', [start, end]);
-            },
-            default: 'true'
+            }
           }, {
             text: '最近一个月',
             onClick(picker) {
