@@ -117,10 +117,11 @@
         line-height: 1.4;
       }
     }
-
+    .w200 {
+      width: 200px;
+    }
     @e btns {
       
-      /* padding: 10px 20px 15px; */
       text-align: center;
       & button {
         width: 140px;
@@ -128,7 +129,7 @@
       }
 
       & button:nth-child(2) {
-        margin-left: 10px;
+        margin-left: 20px;
       }
 
     }

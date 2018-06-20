@@ -195,8 +195,12 @@ export default {
        
       for (var i = 0; i < keys.length; i++) {
         that.testOptions.forEach(function (option) {
-          if (option[keys[i]] && values[i].indexOf(option[keys[i]])==-1) {
+          // if (option[keys[i]] && values[i].indexOf(option[keys[i]])==-1 && (i==0||(i>0&&values[i-1].indexOf(option[keys[i-1]])==-1))) {
+          // if (option[keys[i]] && values[i].indexOf(option[keys[i]])==-1) {
+          if (option[keys[i]]) {
+            
             values[i].push(option[keys[i]]);
+
             var tmp = {};
             tmp.value = option[keys[i]];
             if (option['_' + keys[i]]) {
@@ -210,11 +214,33 @@ export default {
               var value = option[keys[i-1]] || option[keys[i - 2]] || option[keys[i - 3]];
               tmp.pid = value;
             }
-            arrs[i].push(tmp);
+              arrs[i].push(tmp);
+            
           }
+          
         })
       }
-      return arrs;
+     
+      let realArrs = [];
+      arrs.forEach(function(arr) {
+        let newArr = [];
+        let realArr = [];
+        
+        for(let t = 0; t < arr.length; t++) {
+          let str = "";
+          for(var n in arr[t]) {
+            str += arr[t][n];
+          }
+          
+          if(newArr.indexOf(str)==-1) {
+            newArr.push(str);
+            realArr.push(arr[t]);
+          }
+        }
+        realArrs.push(realArr);
+      })
+      
+      return realArrs;
     },
     options() {
       var that = this;

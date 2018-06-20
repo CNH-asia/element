@@ -16,7 +16,7 @@
           <el-button
             type="plain"
             :loading="cancelButtonLoading"
-            :class="[ cancelButtonClasses ]"
+            :class="[ cancelButtonClasses, {'w200':!showConfirmButton} ]"
             v-show="showCancelButton"
             @click.native="handleAction('cancel')">
             {{ cancelButtonText || t('el.messagebox.cancel') }}
@@ -25,7 +25,7 @@
             type="primary"
             :loading="confirmButtonLoading"
             ref="confirm"
-            :class="[ confirmButtonClasses ]"
+            :class="[ confirmButtonClasses, {'w200':!showCancelButton} ]"
             v-show="showConfirmButton"
             @click.native="handleAction('confirm')">
             {{ confirmButtonText || t('el.messagebox.confirm') }}

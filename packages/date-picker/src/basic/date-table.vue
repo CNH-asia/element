@@ -270,7 +270,8 @@ export default {
 
   data() {
     return {
-      tableRows: [[], [], [], [], [], []]
+      tableRows: [[], [], [], [], [], []],
+      isClicked: false
     };
   },
 
@@ -499,7 +500,7 @@ export default {
                     new_text = date.text;
                   } else if (new_period == 0 && real_period == date.range) {
                     new_text = date.text;
-                  }
+                  } 
                 }
               });
             }
@@ -507,7 +508,8 @@ export default {
             if (new_text == "") {
               that.$emit("pick", {
                 minDate: that.minDate,
-                maxDate
+                maxDate,
+                flag: true
               });
             } else {
               that.$parent.$emit("pick", [that.minDate, maxDate, new_text]);

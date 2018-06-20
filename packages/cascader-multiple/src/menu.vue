@@ -336,10 +336,12 @@
         var that = this;
         var selected = false;
         var index = [];
+        // debugger
 
         if(that.activeValue.length > 0) {
           that.activeValue.forEach(function(group,idx) {
-            if(group[menuIndex]===item.value) {
+            // console.log(group[menuIndex])
+            if(group[menuIndex]===item.value&&group[menuIndex-1]===item.pid) {
               index.push(idx);
             } 
           });

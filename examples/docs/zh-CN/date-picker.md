@@ -359,7 +359,7 @@ Date.prototype.Format = function(fmt) { //author: meizz
       type="daterange"
       align="right"
       placeholder="选择日期范围"
-      :picker-options="pickerOptions2">
+      :picker-options="pickerOptions3">
     </el-date-picker>
   </div>
   <el-button @click="changeDate">改变世界</el-button>

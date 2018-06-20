@@ -225,6 +225,7 @@
         date: new Date(),
         minDate: '',
         maxDate: '',
+        isClicked: false,
         rangeState: {
           endDate: null,
           selecting: false,
@@ -379,6 +380,8 @@
         this.onPick && this.onPick(val);
         this.maxDate = val.maxDate;
         this.minDate = val.minDate;
+        this.isClicked = val.flag;
+        // this.new_text = val.new_text;
         if (!close || this.showTime) return;
         this.handleConfirm();
       },
@@ -458,7 +461,7 @@
       },
 
       handleConfirm(visible = false) {
-        this.$emit('pick', [this.minDate, this.maxDate], visible);
+        this.$emit('pick', [this.minDate, this.maxDate, this.isClicked], visible);
       },
 
 

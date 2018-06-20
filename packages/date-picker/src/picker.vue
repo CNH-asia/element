@@ -304,7 +304,7 @@ export default {
           shortcut.end = new Date();
           var period = parseInt(shortcut.period);
           shortcut.end = Math.floor(shortcut.end.getTime() / 3600000 / 24);
-		});
+        });
         return shortcuts;
       } else {
         return [];
@@ -360,15 +360,24 @@ export default {
 
     displayValue: {
       get() {
-        const value = this.currentValue&&this.currentValue.length? this.currentValue.concat(): this.currentValue;
-	
-		if (!value) return;
+        const value =
+          this.currentValue && this.currentValue.length
+            ? this.currentValue.concat()
+            : this.currentValue;
+		// debugger
+        if (!value) return;
         const formatter = (
           TYPE_VALUE_RESOLVER_MAP[this.type] ||
           TYPE_VALUE_RESOLVER_MAP["default"]
         ).formatter;
-        const format = DEFAULT_FORMATS[this.type];
-
+		const format = DEFAULT_FORMATS[this.type];
+		// debugger
+		
+		if(value[2]==true) {
+			value.pop();
+			this.displayLabel="";
+        	return formatter(value, this.format || format, this.rangeSeparator);
+		}
         if (value[2]) {
           //modified for time-select
           if (typeof value == "object") {
@@ -378,25 +387,24 @@ export default {
             this.displayLabel = value;
           }
         } else if (value.length == 2) {
-			if(value[0]==null || value[1]==null) {
-				this.displayLabel = '';
-				return;
-			} 
-			// debugger
-			// var today = new Date();
-			var today = new Date(value[1]);
-			
-			let year = today.getFullYear();
-			let month = today.getMonth() + 1;
-			if(month<10) {
-				month = '0' + month;
-			}
-			let date = today.getDate();
-			if(date<10) {
-				date = '0'+date;
-			}
-		  const newDate = new Date(`${year}-${month}-${date}`);
-		  const maxDate = new Date(newDate.getTime() + DAY_DURATION - 1);
+          if (value[0] == null || value[1] == null) {
+            this.displayLabel = "";
+            return;
+          }
+          // var today = new Date();
+          var today = new Date(value[1]);
+
+          let year = today.getFullYear();
+          let month = today.getMonth() + 1;
+          if (month < 10) {
+            month = "0" + month;
+          }
+          let date = today.getDate();
+          if (date < 10) {
+            date = "0" + date;
+          }
+          const newDate = new Date(`${year}-${month}-${date}`);
+          const maxDate = new Date(newDate.getTime() + DAY_DURATION - 1);
           var that = this;
           var new_maxdate = Math.floor(maxDate.getTime() / 36000 / 2400);
           var new_period = Math.floor(
@@ -411,8 +419,8 @@ export default {
 
               var real_period = Math.floor(
                 (today - maxDate.getTime()) / 36000 / 2400
-			  );
-				// debugger
+              );
+              // debugger
               if (new_period == date.period) {
                 //时间间隔相等
                 if (new_period != 0 && new_maxdate == date.end) {
@@ -422,11 +430,12 @@ export default {
                 }
               }
             });
-		  }
-          this.displayLabel = new_text;		
+          }
+          this.displayLabel = new_text;
         } else {
           this.displayLabel = "";
-		}
+        }
+        
 
         return formatter(value, this.format || format, this.rangeSeparator);
       },

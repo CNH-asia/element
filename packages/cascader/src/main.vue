@@ -184,7 +184,9 @@ export default {
       var keys = that.keys;
       for (var i = 0; i < keys.length; i++) {
         that.testOptions.forEach(function (option) {
-          if (option[keys[i]] && values[i].indexOf(option[keys[i]])==-1) {
+          // if (option[keys[i]] && values[i].indexOf(option[keys[i]])==-1) {
+          if (option[keys[i]]) {
+            
             values[i].push(option[keys[i]]);
             var tmp = {};
             tmp.value = option[keys[i]];
@@ -203,15 +205,26 @@ export default {
           }
         })
       }
-      // arrs.forEach(function(arr, idx) {
-      //   arr.unshift({
-      //     label: '全部',
-      //     value: 0,
-      //     pid: idx
-      //   })
-      // })
-      // console.log('level_arrs:',arrs);
-      return arrs;
+      let realArrs = [];
+      arrs.forEach(function(arr) {
+        let newArr = [];
+        let realArr = [];
+        
+        for(let t = 0; t < arr.length; t++) {
+          let str = "";
+          for(var n in arr[t]) {
+            str += arr[t][n];
+          }
+          
+          if(newArr.indexOf(str)==-1) {
+            newArr.push(str);
+            realArr.push(arr[t]);
+          }
+        }
+        realArrs.push(realArr);
+      })
+      
+      return realArrs;
     },
     options() {
       var that = this;
