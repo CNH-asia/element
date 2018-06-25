@@ -196,7 +196,11 @@
 
 :::demo
 ```html
-<el-input v-model="input" placeholder="请输入内容" :clearable="true" @clear="handleChange" @keypress.enter.native="handleEnter"></el-input>
+<el-input v-model="input" placeholder="请输入内容" :clearable="true" @clear="handleChange" @keypress.enter.native="handleEnter">
+  <span slot="prepend" style="width: 50px;">
+    <i class="el-input__icon  el-icon-search  is-clickable"></i>
+  </span>
+</el-input>
 
 <script>
 export default {

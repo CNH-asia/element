@@ -3,13 +3,13 @@
     class="el-select"
     v-clickoutside="handleClose"
     :type="selectType"
-    :class=" stype ? 'el-select--' + stype : '' ">
+    :class=" [ stype ? 'el-select--' + stype : '', {'el-select-prepend': prepend}]">
     <div
       class="el-select__tags"
       v-if="multiple"
       @click.stop="toggleMenu"
       ref="tags"
-      :style="{ 'max-width': inputWidth - 32 + 'px' }">
+      :style="{ 'max-width': inputWidth - 32 - parseInt(prependLeft) + 'px', 'padding-left': prependLeft }">
       <transition-group @after-leave="resetInputHeight">
         <el-tag
           v-if="stype!=='fixedHeight'"
@@ -22,7 +22,7 @@
           close-transition>
           <span class="el-select__tags-text">{{ item.currentLabel }}</span>
         </el-tag>
-        <el-input class="input-strwrap" key="hhhh" :disabled="disabled" v-if="stype=='fixedHeight' && selected.length>0" v-model="selectedStr"></el-input>
+        <el-input class="input-strwrap" :style="{'width':inputWidth - 32 - parseInt(prependLeft)+30+'px'}" key="hhhh" :disabled="disabled" v-if="stype=='fixedHeight' && selected.length>0" v-model="selectedStr"></el-input>
       </transition-group>
 
       <input
@@ -42,6 +42,7 @@
         :debounce="remote ? 300 : 0"
         v-if="filterable"
         :style="{ width: inputLength + 'px', 'max-width': inputWidth - 42 + 'px' }"
+        
         ref="input">
     </div>
 
@@ -69,6 +70,7 @@
       @mouseenter.native="inputHovering = true"
       @mouseleave.native="inputHovering = false"
       :icon="iconClass">
+      <span slot="prepend" v-if="prepend">{{prepend}}</span>
     </el-input>
     <transition
       name="el-zoom-in-top"
@@ -174,6 +176,7 @@
     directives: { Clickoutside },
 
     props: {
+      prepend: String,
       name: String,
       value: {
         required: true
@@ -250,10 +253,10 @@
         optionsAllDisabled: false,
         inputHovering: false,
         currentPlaceholder: '',
-        // type: '',
         stype: '',
         sctype: '',
-        selectedStr: ''
+        selectedStr: '',
+        prependLeft: '0px'
 
       };
     },
@@ -511,7 +514,12 @@
         if (this.iconClass.indexOf('circle-close') > -1) {
           this.deleteSelected(event);
         } else {
-          this.toggleMenu();
+          // this.toggleMenu();
+          if (!this.disabled) {
+            this.visible = !this.visible;
+            event.cancelBubble = true;
+          }
+
         }
       },
 
@@ -795,7 +803,14 @@
         if (this.$refs.reference && this.$refs.reference.$el) {
           this.inputWidth = this.$refs.reference.$el.getBoundingClientRect().width;
         }
+        
       });
+      if(this.prepend) {
+        const prependItem = this.$el.querySelector('.el-input-group__prepend'); 
+        const prependWidth = prependItem.offsetWidth || prependItem.clientWidth || 44;  
+        this.prependLeft = prependWidth + 'px';
+      }
+      
     },
 
     beforeDestroy() {

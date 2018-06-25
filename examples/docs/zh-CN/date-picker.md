@@ -111,14 +111,26 @@ Date.prototype.Format = function(fmt) { //author: meizz
               picker.$emit("pick", [start, end, "昨日"]);
             }
           },
+          
             {
               text: '今日',
               period: 0,
               range: 0,
               onClick(picker) {
-                  const end = new Date();
-				          const start = new Date();
-                  picker.$emit('pick', [start, end,'今日']);
+                  // const end = new Date();
+				          // const start = new Date();
+                  // picker.$emit('pick', [start, end,'今日']);
+                  const end = new Date(
+                new Date(new Date().Format("yyyy-MM-dd")).getTime() +
+                  24 * 3600 * 1000 -
+                  8 * 3600 * 1000 -
+                  1
+              );
+              const start = new Date(
+                new Date(new Date().Format("yyyy-MM-dd")).getTime() -
+                  8 * 3600 * 1000
+              );
+              picker.$emit("pick", [start, end, "今日"]);
               }
           },{
             text: '最近一周',
@@ -176,9 +188,36 @@ Date.prototype.Format = function(fmt) { //author: meizz
         //     1
         //   )
         // ]
+        // this.value7 = [
+        //   new Date().getTime() - 3600 * 1000 * 24 * 7, new Date()
+        // ]
         this.value7 = [
-          new Date().getTime() - 3600 * 1000 * 24 * 7, new Date()
+          new Date(
+          new Date(
+            new Date(Number(1529424000000)).Format("yyyy-MM-dd")
+          ).getTime() -
+            8 * 3600 * 1000
+        ),
+        new Date(
+          new Date(
+            new Date(Number(1529424000000)).Format("yyyy-MM-dd")
+          ).getTime() +
+            16 * 3600 * 1000 -
+            1
+        )
         ]
+        // this.value7 = [
+        //   new Date(
+        //     new Date(new Date().Format("yyyy-MM-dd")).getTime() -
+        //       8 * 3600 * 1000
+        //   ),
+        //   new Date(
+        //     new Date(new Date().Format("yyyy-MM-dd")).getTime() +
+        //       24 * 3600 * 1000 -
+        //       8 * 3600 * 1000 -
+        //       1
+        //   )
+        // ]
         console.log(this.value7);
       }
     },

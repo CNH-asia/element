@@ -610,6 +610,9 @@
     :test-options="testOptions"
     :keys="keys"
     :all="true"
+    filterable
+    prepend="版本"
+    :clearable=true    
     v-model="selectedOptions2"
     @change="handleChange">
   </el-cascader>

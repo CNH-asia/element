@@ -162,7 +162,7 @@
 :::demo `v-model`的值为当前被选中的`el-option`的 value 属性值
 ```html
 <template>
-  <el-select v-model="value" placeholder="请选择" scroll-type="scroller">
+  <el-select prepend="产品版" v-model="value" placeholder="请选择" scroll-type="scroller">
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -206,7 +206,7 @@
 :::demo 在`el-option`中，设定`disabled`值为 true，即可禁用该选项
 ```html
 <template>
-  <el-select v-model="value2" placeholder="请选择">
+  <el-select prepend="版本" v-model="value2" placeholder="请选择">
     <el-option
       v-for="item in options2"
       :key="item.value"
@@ -346,7 +346,7 @@
 <template>
 <div>
   固定宽度
-  <el-select v-model="value5" multiple placeholder="请选择">
+  <el-select style="width:180px;" prepend="产品版" v-model="value5" multiple placeholder="请选择">
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -359,13 +359,14 @@
   <br><br>
 <div>
   固定高度
-  <el-select v-model="value11" multiple placeholder="请选择" type="fixedHeight">
+  <el-select style="width:300px;" prepend="产品版本55" v-model="value11" multiple placeholder="请选择" type="fixedHeight">
     <el-option
       v-for="item in options5"
       :key="item.value"
       :label="item.label"
       :value="item.value">
     </el-option>
+    <!-- <span slot="prepend">产品版本</span>     -->
   </el-select>
 </div>
 </template>

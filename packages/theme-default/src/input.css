@@ -114,6 +114,9 @@
           color: #B5C1D4;
         }
       }
+      .el-input__icon {
+        cursor: not-allowed;
+      }
     }
     @m large {
       font-size: var(--input-large-font-size);

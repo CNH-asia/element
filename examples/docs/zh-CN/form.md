@@ -192,7 +192,15 @@
         console.log('submit!');
       },
       submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
+        // this.$refs[formName].validate((valid) => {
+        //   if (valid) {
+        //     alert('submit!');
+        //   } else {
+        //     console.log('error submit!!');
+        //     return false;
+        //   }
+        // });
+        this.$refs[formName].validateFields(['age','pass'],(valid) => {
           if (valid) {
             alert('submit!');
           } else {
@@ -686,7 +694,15 @@
     },
     methods: {
       submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
+        // this.$refs[formName].validate((valid) => {
+        //   if (valid) {
+        //     alert('submit!');
+        //   } else {
+        //     console.log('error submit!!');
+        //     return false;
+        //   }
+        // });
+        this.$refs[formName].validateFields(['age','pass'],(valid) => {
           if (valid) {
             alert('submit!');
           } else {

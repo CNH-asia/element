@@ -391,7 +391,6 @@ export default {
             this.displayLabel = "";
             return;
           }
-          // var today = new Date();
           var today = new Date(value[1]);
 
           let year = today.getFullYear();
@@ -404,9 +403,12 @@ export default {
             date = "0" + date;
           }
           const newDate = new Date(`${year}-${month}-${date}`);
+          // const max
           const maxDate = new Date(newDate.getTime() + DAY_DURATION - 1);
           var that = this;
-          var new_maxdate = Math.floor(maxDate.getTime() / 36000 / 2400);
+          // var new_maxdate = Math.floor(maxDate.getTime() / 36000 / 2400);
+          var new_maxdate = Math.floor(newDate.getTime() / 36000 / 2400);
+          
           var new_period = Math.floor(
             (new Date(value[1]).getTime() - value[0]) / 36000 / 2400
           );
@@ -418,14 +420,16 @@ export default {
               var today = new Date().getTime();
 
               var real_period = Math.floor(
-                (today - maxDate.getTime()) / 36000 / 2400
+                // (today - maxDate.getTime()) / 36000 / 2400
+                (today - newDate.getTime()) / 36000 / 2400
+                
               );
               // debugger
               if (new_period == date.period) {
                 //时间间隔相等
                 if (new_period != 0 && new_maxdate == date.end) {
                   new_text = date.text;
-                } else if (new_period == 0 && real_period == date.range) {
+                } else if (new_period == 0 && real_period == date.range ) {
                   new_text = date.text;
                 }
               }

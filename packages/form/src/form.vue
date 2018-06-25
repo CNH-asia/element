@@ -92,7 +92,29 @@
         if (!field) { throw new Error('must call validateField with valid prop string!'); }
 
         field.validate('', cb);
-      }
+      },
+      validateFields(props, cb) {
+        var that = this;
+        let count = 0;
+        props.forEach(function(prop) {
+          var field = that.fields.filter(field => field.prop === prop)[0];
+          if (!field) { throw new Error('must call validateField with valid prop string!'); }
+          field.validate('');
+          debugger
+          if(field.type=='error') {
+            cb(false);
+            return;
+          } else {
+            count++;
+          }
+          
+        })
+        debugger
+        if(count==props.length) {
+          cb(true);
+        }
+        
+      },
     }
   };
 </script>

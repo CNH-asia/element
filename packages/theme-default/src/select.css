@@ -12,19 +12,20 @@
   @b select {
     display: inline-block;
     position: relative;
-    width: 180px;
+    width: 220px;
 
     &:hover {
       .el-input__inner {
         border-color: #B5C1D4;
       }
       span{
-        color:#399DE2;
+        /* color:#399DE2; */
       }
     }
 
     & .el-input__inner {
-      width: 180px;
+      /* width: 220px; */
+      width: 100%;
       cursor: pointer;
       padding-right: 35px;
 
@@ -34,7 +35,8 @@
     }
 
     & .el-input {
-      width: 180px;
+      /* width: 220px; */
+      width: 100%;
       & .el-input__icon {
         color: #D2D9E3;
         font-size: var(--select-input-font-size);
@@ -118,6 +120,10 @@
       z-index: var(--index-normal);
       top: 50%;
       transform: translateY(-50%);
+
+      & .el-input__inner {
+        border-right: none;
+      }
     }
 
     & .el-tag__close {
@@ -146,6 +152,17 @@
 
     &.el-select--fixedHeight .el-select__tags {
       height: 32px;
+    }
+
+    &.el-select--fixedHeight.el-select-prepend .el-select__tags .el-input__inner {
+      width: 100% !important;
+      border-left: none;
+      border-right: none;
+    }
+
+    &.el-select-prepend .el-select__tags {
+      max-width: 1px;
+      /* padding-left: 72px; */
     }
   }
 }

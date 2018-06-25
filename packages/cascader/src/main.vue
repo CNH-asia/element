@@ -34,12 +34,14 @@
         <i
           key="2"
           v-else
+          @click="toggleMenuVisible"
           class="el-input__icon el-icon-caret-bottom"
           :class="{ 'is-reverse': menuVisible }"
         ></i>
       </template>
+      <span slot="prepend">{{prepend}}</span>
     </el-input>
-    <span class="el-cascader__label" v-show="inputValue === ''">
+    <span class="el-cascader__label" :style="{'padding-left': prependLeft }" v-show="inputValue === ''">
       <template v-if="showAllLevels">
         <template v-for="(label, index) in currentLabels">
           {{ label }}
@@ -96,6 +98,7 @@ export default {
     //   type: Array,
     //   required: true
     // },
+    prepend:  String,
     testOptions: {
       type: Array,
       required: true
@@ -166,7 +169,8 @@ export default {
       menuVisible: false,
       inputHover: false,
       inputValue: '',
-      flatOptions: null
+      flatOptions: null,
+      prependLeft: '8px'
     };
   },
 
@@ -328,6 +332,13 @@ export default {
   },
 
   methods: {
+    toggleMenuVisible(e) {
+      if(this.filterable) {
+        if(this.disabled) return;
+        this.menuVisible = !this.menuVisible;
+        e.cancelBubble = true;
+      }
+    },
     initMenu() {
       this.menu = new Vue(ElCascaderMenu).$mount();
       this.menu.options = this.options;
@@ -484,6 +495,11 @@ export default {
 
   mounted() {
     this.flatOptions = this.flattenOptions(this.options);
+    if(this.prepend) {
+      const prependItem = this.$el.querySelector('.el-input-group__prepend'); 
+      const prependWidth = prependItem.offsetWidth || prependItem.clientWidth || 44;  
+      this.prependLeft = prependWidth + 'px';
+    }
   }
 };
 </script>

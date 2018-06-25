@@ -80,6 +80,7 @@
         demos[0].style.padding = '0';
         demos[demos.length - 1].style.padding = '0';
       });
+
     },
     methods: {
       handleChange(value) {
@@ -134,6 +135,8 @@
   <el-cascader-multiple
     :clearable=true
     :keys="keys"
+    prepend="产品版本"
+    filterable
     :test-options="testOptions"
     v-model="selectedOptions"
     @change="handleChange">

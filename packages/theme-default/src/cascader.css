@@ -34,9 +34,9 @@
       left: 0;
       top: 0;
       height: 100%;
-      line-height: 36px;
+      line-height: 32px;
       padding: 0 25px 0 10px;
-      color: var(--input-color);
+      color: #606060;
       width: 100%;
       white-space: nowrap;
       text-overflow: ellipsis;

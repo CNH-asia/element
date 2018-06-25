@@ -166,7 +166,6 @@
     methods: {
      
       validate(trigger, callback = noop) {
-        // debugger
         var rules = this.getFilteredRule(trigger);
         if (!rules || rules.length === 0) {
           callback();
