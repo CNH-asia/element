@@ -25,7 +25,7 @@
       transition: var(--border-transition-base);
       width: 100%;
 
-      &.pdr25 {
+      &.pdr30 {
         padding-right: 30px;
       }
 
@@ -79,7 +79,7 @@
 
       & + .el-input__inner {
         padding-right: 35px;
-        &.pdr45 {
+        &.pdr50 {
           padding-right: 50px;
         }
       }

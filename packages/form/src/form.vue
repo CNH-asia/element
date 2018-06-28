@@ -100,7 +100,6 @@
           var field = that.fields.filter(field => field.prop === prop)[0];
           if (!field) { throw new Error('must call validateField with valid prop string!'); }
           field.validate('');
-          debugger
           if(field.type=='error') {
             cb(false);
             return;
@@ -109,7 +108,6 @@
           }
           
         })
-        debugger
         if(count==props.length) {
           cb(true);
         }

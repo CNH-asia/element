@@ -34,6 +34,7 @@ const forced = {
   selection: {
     renderHeader: function(h) {
       return <el-checkbox
+        indeterminate={this.isIndeterminate}
         nativeOn-click={ this.toggleAllSelection }
         value={ this.isAllSelected } />;
     },

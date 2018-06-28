@@ -28,7 +28,7 @@
       <input
         v-if="type !== 'textarea'"
         class="el-input__inner"
-        :class="[{'pdr25':clearable},{'pdr45':clearable&&icon}]"
+        :class="[{'pdr30':clearable && showClear},{'pdr50':clearable && showClear && icon}]"
         v-bind="$props"
         :autocomplete="autoComplete"
         :value="currentValue"
