@@ -16,6 +16,7 @@
   export default {
     data() {
       return {
+        showinput: true,
         restaurants: [],
         input: '',
         input1: '',
@@ -333,7 +334,8 @@ export default {
 :::demo 可通过 slot 来指定在 input 中前置或者后置内容。
 ```html
 <div>
-  <el-input placeholder="请输入内容" v-model="input3" icon="search">
+  <el-button @click="showinput=!showinput">展开</el-button>
+  <el-input v-if="showinput" placeholder="请输入内容" v-model="input3" icon="search">
     <span slot="prepend">立即查询</span>
   </el-input>
 

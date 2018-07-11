@@ -167,7 +167,36 @@ Date.prototype.Format = function(fmt) { //author: meizz
         value4: '',
         value5: '',
         value6: '',
-        value7: ''
+        value7: [
+          new Date(
+          new Date(
+            new Date(Number(1529424000000)).Format("yyyy-MM-dd")
+          ).getTime() -
+            8 * 3600 * 1000
+        ),
+        new Date(
+          new Date(
+            new Date(Number(1529424000000)).Format("yyyy-MM-dd")
+          ).getTime() +
+            16 * 3600 * 1000 -
+            1
+        )
+        ],
+        defaultValue: [
+          new Date(
+          new Date(
+            new Date(Number(1529424000000)).Format("yyyy-MM-dd")
+          ).getTime() -
+            8 * 3600 * 1000
+        ),
+        new Date(
+          new Date(
+            new Date(Number(1529424000000)).Format("yyyy-MM-dd")
+          ).getTime() +
+            16 * 3600 * 1000 -
+            1
+        )
+        ],
       };
     },
     methods: {
@@ -200,7 +229,7 @@ Date.prototype.Format = function(fmt) { //author: meizz
         ),
         new Date(
           new Date(
-            new Date(Number(1529424000000)).Format("yyyy-MM-dd")
+            new Date(Number(1543333000000)).Format("yyyy-MM-dd")
           ).getTime() +
             16 * 3600 * 1000 -
             1
@@ -395,6 +424,7 @@ Date.prototype.Format = function(fmt) { //author: meizz
     <span class="demonstration">带快捷选项</span>
     <el-date-picker
       v-model="value7"
+      :default-value="defaultValue"
       type="daterange"
       align="right"
       placeholder="选择日期范围"

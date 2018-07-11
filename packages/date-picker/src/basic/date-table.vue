@@ -244,6 +244,11 @@ export default {
     },
 
     minDate(newVal, oldVal) {
+      if(newVal&&oldVal&&newVal.getTime()==oldVal.getTime()){
+        this.rangeState.selecting = true;
+        this.markRange(newVal);
+        return;
+      }
       if (newVal && !oldVal) {
         this.rangeState.selecting = true;
         this.markRange(newVal);
@@ -256,6 +261,12 @@ export default {
     },
 
     maxDate(newVal, oldVal) {
+      
+      if(newVal&&oldVal&&newVal.getTime()==oldVal.getTime()){
+        this.rangeState.selecting = false;
+        this.markRange(newVal);
+        return;
+      }
       if (newVal && !oldVal) {
         this.rangeState.selecting = false;
         this.markRange(newVal);
@@ -399,7 +410,6 @@ export default {
 
     handleMouseMove(event) {
       if (!this.rangeState.selecting) return;
-
       this.$emit("changerange", {
         minDate: this.minDate,
         maxDate: this.maxDate,

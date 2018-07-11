@@ -364,14 +364,13 @@ export default {
           this.currentValue && this.currentValue.length
             ? this.currentValue.concat()
             : this.currentValue;
-		// debugger
+
         if (!value) return;
         const formatter = (
           TYPE_VALUE_RESOLVER_MAP[this.type] ||
           TYPE_VALUE_RESOLVER_MAP["default"]
         ).formatter;
 		const format = DEFAULT_FORMATS[this.type];
-		// debugger
 		
 		if(value[2]==true) {
 			value.pop();
@@ -424,7 +423,7 @@ export default {
                 (today - newDate.getTime()) / 36000 / 2400
                 
               );
-              // debugger
+              
               if (new_period == date.period) {
                 //时间间隔相等
                 if (new_period != 0 && new_maxdate == date.end) {
@@ -566,17 +565,25 @@ export default {
       this.pickerVisible = this.picker.visible = true;
 
       this.updatePopper();
-
       if (this.currentValue instanceof Date) {
         this.picker.date = new Date(this.currentValue.getTime());
-      } else {
+      } else {//new
         this.picker.value = this.currentValue;
-        this.picker.date = new Date();
+        if(!this.currentValue||!this.currentValue[0]||!this.currentValue[1]) {
+          this.picker.date = new Date();
+          this.picker.minDate = null;
+          this.picker.maxDate = null;
+        } else {
+          this.picker.date = this.currentValue[0];
+          this.picker.minDate = this.currentValue[0];
+          this.picker.maxDate = this.currentValue[1];
+        }
+        
       }
+      
       this.picker.resetView && this.picker.resetView();
-
       this.$nextTick(() => {
-        this.picker.ajustScrollTop && this.picker.ajustScrollTop();
+        this.picker.ajustScrollTop && this.picker.ajustScrollTop();       
       });
     },
 
