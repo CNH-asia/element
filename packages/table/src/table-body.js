@@ -54,7 +54,7 @@ export default {
                 on-mouseenter={ _ => this.handleMouseEnter($index) }
                 on-mouseleave={ _ => this.handleMouseLeave() }
                 // class={ [this.getRowClass(row, $index)] }
-                class={[this.getRowClass(row, $index), this.table.store.states.expandRows.indexOf(row) > -1 ? 'tr-expanded' : '']}>
+                class={[this.getRowClass(row, $index), this.table.store.states.expandRows.indexOf(row) > -1 ? 'tr-expanded' : '', this.hasExpand?'tr-unexpanded':'']}>
                 {
                   this._l(this.columns, (column, cellIndex) =>
                     <td
@@ -148,6 +148,16 @@ export default {
 
     columns() {
       return this.store.states.columns;
+    },
+
+    hasExpand() {
+      let flag = false;
+      this.columns.forEach(function(column) {
+        if(column.type=='expand') {
+          flag = true;
+        }
+      })
+      return flag;
     }
   },
 
@@ -261,6 +271,7 @@ export default {
     handleClick(event, row) {
       this.store.commit('setCurrentRow', row);
       this.handleEvent(event, row, 'click');
+      this.handleExpandClick(row);
     },
 
     handleEvent(event, row, name) {

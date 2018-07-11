@@ -446,8 +446,12 @@
       position: relative;
       z-index: 20;
       font-weight: normal;
+      &.tr-unexpanded {
+        cursor: pointer;
+      }
 
       &.tr-expanded, &.tr-expanded:hover {
+        cursor: pointer;
         background-color: rgba(10,169,241,0.10);
 
         & td {
