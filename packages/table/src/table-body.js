@@ -271,7 +271,9 @@ export default {
     handleClick(event, row) {
       this.store.commit('setCurrentRow', row);
       this.handleEvent(event, row, 'click');
-      this.handleExpandClick(row);
+      if(this.hasExpand) {
+        this.handleExpandClick(row);
+      }
     },
 
     handleEvent(event, row, name) {
