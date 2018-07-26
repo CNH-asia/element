@@ -33,7 +33,8 @@
             <span class="el-date-picker__editor-wrap">
               <el-input
                 ref="input"
-                @focus="timePickerVisible = !timePickerVisible"
+                :readonly="true"
+                @click.native="handleFocus"
                 :placeholder="t('el.datepicker.selectTime')"
                 :value="visibleTime"
                 size="small"
@@ -156,7 +157,7 @@
         this.$nextTick(_ => {
           const inputElm = this.$refs.input.$el;
           if (inputElm) {
-            this.pickerWidth = inputElm.getBoundingClientRect().width + 10;
+            this.pickerWidth = inputElm.getBoundingClientRect().width + 0;
           }
         });
       },
@@ -199,6 +200,9 @@
     },
 
     methods: {
+      handleFocus() {
+        this.timePickerVisible = !this.timePickerVisible;
+      },
       handleClear() {
         this.date = this.$options.defaultValue ? new Date(this.$options.defaultValue) : new Date();
         this.$emit('pick');

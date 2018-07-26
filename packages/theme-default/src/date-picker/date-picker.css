@@ -10,7 +10,7 @@
     overflow-y: hidden;
 
     &.has-sidebar.has-time {
-      min-width: 440px;
+      min-width: 400px;
     }
 
     &.has-sidebar {
@@ -18,27 +18,46 @@
     }
 
     &.has-time {
-      min-width: 324px;
-      width:330px !important;
-      height:372px !important;
+      min-width: 256px;
+      width: 256px !important;
+      height: 310px !important;
 
       &.el-picker-panel__content {
         min-width: 224px;
         height: 210px;
       }
 
+      .el-date-picker__time-header {
+        padding: 5px;
+      }
+      .el-date-picker__header {
+        margin: 10px 26px;
+      }
+      .el-date-table td {
+        height: 26px;
+      }
+      .el-picker-panel__content {
+        margin: 10px 15px;
+      }
+
+      .el-input.el-input--small {
+        width: 100% !important;
+        .el-input__inner {
+          height: 26px;
+        }
+
+      }
+      .el-time-panel__footer {
+        line-height: 15px;
+        height: 32px;
+        padding: 8px 4px 8px 0;
+      }
+      .el-time-panel {
+        height: 219px;
+      }
+
     }
 
-    /*.el-date-picker.has-time .el-date-picker__time-header .el-input.el-input--small {*/
-      /*width:150px;*/
-    /*}*/
-    /*.el-date-picker.has-time .el-date-picker__time-header .el-time-panel {*/
-      /*width:150px;*/
-      /*left:4px;*/
-    /*}*/
-    /*.el-date-picker.has-time .el-picker-panel__content {*/
-      /*height:185px;*/
-    /*}*/
 
     .el-picker-panel__content {
       min-width: 224px;

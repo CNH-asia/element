@@ -119,6 +119,7 @@
   <div class="block">
     <span class="demonstration">默认</span>
     <el-date-picker
+      :editable="false"
       v-model="value1"
       type="datetime"
       @change="onChange"
