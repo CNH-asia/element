@@ -55,11 +55,14 @@
     }
 
     @e empty-text {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
+      display: inline-block;
       color: color(var(--color-primary) s(16%) l(44%));
+      &.slot-empty {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
     }
 
     @e expand-column {

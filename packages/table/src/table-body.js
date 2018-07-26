@@ -49,7 +49,7 @@ export default {
                 style={ this.rowStyle ? this.getRowStyle(row, $index) : null }
                 key={ this.table.rowKey ? this.getKeyOfRow(row, $index) : $index }
                 on-dblclick={ ($event) => this.handleDoubleClick($event, row) }
-                on-click={ ($event) => this.handleClick($event, row) }
+                on-click={ ($event) => this.handleClick($event, row, $index) }
                 on-contextmenu={ ($event) => this.handleContextMenu($event, row) }
                 on-mouseenter={ _ => this.handleMouseEnter($index) }
                 on-mouseleave={ _ => this.handleMouseLeave() }
@@ -163,12 +163,22 @@ export default {
 
   data() {
     return {
-      tooltipContent: ''
+      tooltipContent: '',
+      single: true
     };
   },
 
   created() {
     this.activateTooltip = debounce(50, tooltip => tooltip.handleShowPopper());
+  },
+  mounted () {
+    let flag = true;
+    this.columns.forEach(function (column) {
+      if (column.type == 'expand' && column.single == false) {
+        flag = false;
+      }
+    })
+    this.single = flag;
   },
 
   methods: {
@@ -268,12 +278,15 @@ export default {
       this.handleEvent(event, row, 'dblclick');
     },
 
-    handleClick(event, row) {
-      this.store.commit('setCurrentRow', row);
-      this.handleEvent(event, row, 'click');
-      if(this.hasExpand) {
-        this.handleExpandClick(row);
+    handleClick(event, row, index) {
+      if(event.target.tagName.toLowerCase() !== 'button' && event.target.parentNode.tagName.toLowerCase() !== 'button' && !event.target.classList.contains('self-click')) {
+        this.store.commit('setCurrentRow', row);
+        this.handleEvent(event, row, 'click');
+        if(this.hasExpand) {
+          this.handleExpandClick(row, index);
+        }
       }
+      
     },
 
     handleEvent(event, row, name) {
@@ -289,7 +302,7 @@ export default {
       table.$emit(`row-${name}`, row, event, column);
     },
 
-    handleExpandClick(row) {
+    handleExpandClick(row, index) {
       this.store.commit('toggleRowExpanded', row);
     }
   }

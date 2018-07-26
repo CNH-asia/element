@@ -32,7 +32,7 @@
     components: {
       'el-menu-collapse-transition': {
         functional: true,
-        render(createElement, context) {
+        render(createElement, context, width) {
           const data = {
             props: {
               mode: 'out-in'
@@ -69,7 +69,9 @@
               leave(el) {
                 if (!hasClass(el, 'el-menu--collapse')) {
                   addClass(el, 'horizontal-collapse-transition');
-                  el.style.width = '64px';
+                  // el.style.width = '64px';
+                  el.style.width = width;
+                  
                 } else {
                   addClass(el, 'horizontal-collapse-transition');
                   el.style.width = el.dataset.scrollWidth + 'px';
@@ -81,7 +83,9 @@
                 if (hasClass(el, 'el-menu--collapse')) {
                   el.style.width = el.dataset.scrollWidth + 'px';
                 } else {
-                  el.style.width = '64px';
+                  // el.style.width = '64px';
+                  el.style.width = width;
+                  
                 }
                 el.style.overflow = el.dataset.oldOverflow;
               }
@@ -112,7 +116,11 @@
         type: String,
         default: 'hover'
       },
-      collapse: Boolean
+      collapse: Boolean,
+      width: {
+        type: String,
+        default: '64px'
+      }
     },
     data() {
       return {

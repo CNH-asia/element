@@ -5,41 +5,53 @@
 @component-namespace el {
   @b input-number {
     display: inline-block;
-    width: 180px;
+    width: 160px;
+    height: 32px;
+    line-height: 32px;
     position: relative;
-    
-    & .el-input {
-      display: block;
-      width: 100%;
-    }
     & .el-input__inner {
       width: 100%;
       appearance: none;
-      padding-right: calc(var(--input-height) * 2 + 10);
-    }
-    @e increase, decrease {
-      height: auto;
-      border-left: var(--border-base);
-      width: var(--input-height);
-      /* line-height: calc(var(--input-height) - 2); */
-      line-height: 31px;
-      top: 1px;
+      padding: 0 32px;
       text-align: center;
-      color: var(--color-light-silver);
-      cursor: pointer;
+      border-color: #D2D9E3;
+    }
+    & .el-input {
+      display: block;
+      width: 100%;
+      &.focus {
+        .el-input__inner {
+          border-color: #0AA9F1 !important;
+        }
+      }
+    }
+    
+    @e increase, decrease {
       position: absolute;
       z-index: 1;
+      top: 1px;
+      height: 30px;
+      width: 30px;
+      line-height: 30px;
+      text-align: center;
+      background: #F9F9F9;
+      color: #B5C1D4;
+      cursor: pointer;
+      
 
       &:hover {
-        color: var(--color-primary);
+        color: #0AA9F1;
 
         &:not(.is-disabled) ~ .el-input .el-input__inner:not(.is-disabled) {
-          /*border-color: var(--input-focus-border);*/
            border-color: #B5C1D4;
         }
         &.is-disabled ~ .el-input .el-input__inner{
           border-color: #B5C1D4;
          }
+      }
+
+      &.hover {
+        color: #0AA9F1;
       }
 
       @when disabled {
@@ -49,13 +61,20 @@
     }
 
     @e increase {
-      right: 0;
+      right: 1px;
+      border-left: solid 1px #D2D9E3;
+      border-radius: 0px 2px 2px 0;
     }
     @e decrease {
-      right: calc(var(--input-height) + 1px);
+      left: 1px;
+      border-radius: 2px 0px 0px 2px;
+      border-right: solid 1px #D2D9E3;      
     }
 
     @when disabled {
+      & .el-input__inner {
+        background-color: #F9F9F9 !important;
+      }
       & .el-input-number__increase, .el-input-number__decrease {
         border-color: var(--disabled-border-base);
         color: var(--disabled-border-base);
@@ -75,10 +94,10 @@
         font-size: var(--input-large-font-size);
       }
       & .el-input-number__decrease {
-        right: calc(var(--input-large-height) + 1px);
+        left: 1px;
       }
       & .el-input__inner {
-        padding-right: calc(var(--input-large-height) * 2 + 10);
+        padding: 0 44px;
       }
     }
     @m small {
@@ -93,7 +112,7 @@
         right: calc(var(--input-small-height) + 1px);
       }
       & .el-input__inner {
-        padding-right: calc(var(--input-small-height) * 2 + 10);
+        padding: 0 32px;
       }
     }
     @when without-controls {

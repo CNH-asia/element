@@ -171,7 +171,7 @@ export default {
         handleChange(val) {
           if (val !== this.$parent.internalPageSize) {
             this.$parent.internalPageSize = val = parseInt(val, 10);
-            // console.log(this.$parent.internalPageSize);
+            
             this.$parent.$emit('size-change', val);
           }
         }
@@ -194,8 +194,12 @@ export default {
         handleKeyUp(event) {
           const key = event.key || '';
           const keyCode = event.keyCode || '';
+          
           if ((key && key === 'Enter') || (keyCode && keyCode === 13)) {
             this.handleChange({ target: event.target });
+          } else {
+            if(/^\d/.test(event.key)) return;
+            event.target.value = event.target.value.replace(/[^\d]/g, '');
           }
         },
         handleChange({ target }) {

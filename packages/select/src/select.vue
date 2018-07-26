@@ -9,7 +9,7 @@
       v-if="multiple"
       @click.stop="toggleMenu"
       ref="tags"
-      :style="{ 'max-width': inputWidth - 32 - parseInt(prependLeft) + 'px', 'padding-left': prependLeft }">
+      :style="{ 'max-width': inputWidth - 37 - parseInt(prependLeft) + 'px', 'padding-left': prependLeft }">
       <transition-group @after-leave="resetInputHeight">
         <el-tag
           v-if="stype!=='fixedHeight'"
@@ -22,7 +22,7 @@
           close-transition>
           <span class="el-select__tags-text">{{ item.currentLabel }}</span>
         </el-tag>
-        <el-input class="input-strwrap" :style="{'width':inputWidth - 32 - parseInt(prependLeft)+30+'px'}" key="hhhh" :disabled="disabled" v-if="stype=='fixedHeight' && selected.length>0" v-model="selectedStr"></el-input>
+        <el-input key="input" class="input-strwrap" :style="{'width': (prepend ? inputWidth - parseInt(prependLeft) - 2 + 'px' : inputWidth + 'px')}" :disabled="disabled" v-if="stype=='fixedHeight' && selected.length>0" v-model="selectedStr"></el-input>
       </transition-group>
 
       <input

@@ -345,6 +345,9 @@
       <el-time-picker type="fixed-time" placeholder="选择时间" v-model="form.time1" style="width: 100%;"></el-time-picker>
     </el-col>
   </el-form-item>
+  <el-form-item label="计数器">
+    <el-input-number></el-input-number>
+  </el-form-item>
   <el-form-item label="单选">
     <el-radio-group v-model="form.resource">
       <el-radio label="单选选项一"></el-radio>

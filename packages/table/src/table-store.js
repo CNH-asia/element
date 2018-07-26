@@ -71,7 +71,8 @@ const TableStore = function(table, initialState = {}) {
     hoverRow: null,
     filters: {},
     expandRows: [],
-    defaultExpandAll: false
+    defaultExpandAll: false,
+    single: true
   };
 
   for (let prop in initialState) {
@@ -246,22 +247,35 @@ TableStore.prototype.mutations = {
 
   toggleRowExpanded: function(states, row, expanded) {
     const expandRows = states.expandRows;
-    if (typeof expanded !== 'undefined') {
-      const index = expandRows.indexOf(row);
-      if (expanded) {
-        if (index === -1) expandRows.push(row);
+    if(states.single==false) {
+      if (typeof expanded !== 'undefined') {
+        const index = expandRows.indexOf(row);
+        if (expanded) {
+          if (index === -1) expandRows.push(row);
+        } else {
+          if (index !== -1) expandRows.splice(index, 1);
+        }
       } else {
-        if (index !== -1) expandRows.splice(index, 1);
+        const index = expandRows.indexOf(row);
+        if (index === -1) {
+          expandRows.push(row);
+        } else {
+          expandRows.splice(index, 1);
+        }
       }
+      this.table.$emit('expand', row, expandRows.indexOf(row) !== -1);
     } else {
-      const index = expandRows.indexOf(row);
-      if (index === -1) {
+      //single==true//new
+      let idx = expandRows.indexOf(row);
+      if(idx === -1) {
+        expandRows.pop();
         expandRows.push(row);
       } else {
-        expandRows.splice(index, 1);
+        expandRows.pop();
       }
+      this.table.$emit('expand', row, expandRows.indexOf(row) !== -1);         
     }
-    this.table.$emit('expand', row, expandRows.indexOf(row) !== -1);
+    
   },
 
   toggleAllSelection: debounce(10, function(states) {
@@ -317,6 +331,13 @@ TableStore.prototype.updateColumns = function() {
   states.originColumns = [].concat(states.fixedColumns).concat(_columns.filter((column) => !column.fixed)).concat(states.rightFixedColumns);
   states.columns = doFlattenColumns(states.originColumns);
   states.isComplex = states.fixedColumns.length > 0 || states.rightFixedColumns.length > 0;
+  //single
+  states.columns.forEach(function(column){
+    if(column.type=='expand'&&column.single==false) {
+      states.single = false
+    }
+  })
+  
 };
 
 TableStore.prototype.isSelected = function(row) {

@@ -1,5 +1,6 @@
 <template>
-  <transition name="el-notification-fade">
+  <!-- <transition name="el-notification-fade"> -->
+  <transition :name="transitionName">
     <div
       class="el-notification"
       :class="customClass"
@@ -10,7 +11,7 @@
       @click="click">
       <i
         class="el-notification__icon"
-        :class="[ typeClass, iconClass ]"
+        :class="[ typeClass, iconClass, mixedClass ]"
         v-if="type || iconClass">
       </i>
       <div class="el-notification__group" :class="{ 'is-with-icon': typeClass || iconClass }">
@@ -44,13 +45,18 @@
         onClick: null,
         closed: false,
         top: null,
-        timer: null
+        timer: null,
+        transitionName: 'el-notification-fade'
+        
       };
     },
 
     computed: {
       typeClass() {
         return this.type && typeMap[this.type] ? `el-icon-${ typeMap[this.type] }` : '';
+      },
+      mixedClass() {
+        return this.title && this.message ? 'icon-lg' : '';
       }
     },
 

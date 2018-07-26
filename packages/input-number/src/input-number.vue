@@ -1,5 +1,6 @@
 <template>
   <div class="el-input-number"
+    v-clickoutside="handleClickoutside"
     :class="[
       size ? 'el-input-number--' + size : '',
       { 'is-disabled': disabled },
@@ -9,7 +10,7 @@
     <span
       v-if="controls"
       class="el-input-number__decrease"
-      :class="{'is-disabled': minDisabled}"
+      :class="[{'is-disabled': minDisabled},{'hover':isDec}]"
       v-repeat-click="decrease"
     >
       <i class="el-icon-minus"></i>
@@ -17,7 +18,7 @@
     <span
       v-if="controls"
       class="el-input-number__increase"
-      :class="{'is-disabled': maxDisabled}"
+      :class="[{'is-disabled': maxDisabled},{'hover':isInc}]"
       v-repeat-click="increase"
     >
       <i class="el-icon-plus"></i>
@@ -27,12 +28,13 @@
       @keydown.up.native.prevent="increase"
       @keydown.down.native.prevent="decrease"
       @blur="handleBlur"
-      @input="debounceHandleInput"
+      @input="debounceHandleInput"         
       :disabled="disabled"
       :size="size"
       :max="max"
       :min="min"
       ref="input"
+      :class="{'focus': isInput}"
     >
         <template slot="prepend" v-if="$slots.prepend">
           <slot name="prepend"></slot>
@@ -47,6 +49,7 @@
   import ElInput from 'element-ui/packages/input';
   import { once, on } from 'element-ui/src/utils/dom';
   import debounce from 'throttle-debounce/debounce';
+  import Clickoutside from 'element-ui/src/utils/clickoutside';
 
   export default {
     name: 'ElInputNumber',
@@ -71,7 +74,8 @@
             interval = setInterval(handler, 100);
           });
         }
-      }
+      },
+      Clickoutside
     },
     components: {
       ElInput
@@ -105,7 +109,10 @@
     },
     data() {
       return {
-        currentValue: 0
+        currentValue: 0,
+        isInc: false,
+        isDec: false,
+        isInput: false
       };
     },
     watch: {
@@ -167,6 +174,9 @@
         const newVal = this._increase(value, this.step);
         if (newVal > this.max) return;
         this.setCurrentValue(newVal);
+        this.isDec = false;
+        this.isInc = true;
+        this.isInput = true;
       },
       decrease() {
         if (this.disabled || this.minDisabled) return;
@@ -174,9 +184,20 @@
         const newVal = this._decrease(value, this.step);
         if (newVal < this.min) return;
         this.setCurrentValue(newVal);
+        this.isDec = true;
+        this.isInc = false;
+        this.isInput = true;
       },
       handleBlur() {
         this.$refs.input.setCurrentValue(this.currentValue);
+        this.isInc = false;
+        this.isDec = false;
+        this.isInput = false;
+      },
+      handleClickoutside() {
+        this.isInput = false;
+        this.isInc = false;
+        this.isDec = false;
       },
       setCurrentValue(newVal) {
         const oldVal = this.currentValue;

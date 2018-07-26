@@ -163,6 +163,10 @@ export default {
     filterValue: {
       type: String,
       default: ''
+    },
+    single: {
+      type: Boolean,
+      default: true
     }
   },
 
@@ -259,6 +263,7 @@ export default {
       filterPlacement: this.filterPlacement || '',
       noHighlight: this.noHighlight || '',
       filterValue: this.filterValue || '',
+      single: this.single
       
     });
 

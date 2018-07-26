@@ -14,7 +14,8 @@
         this.$notify({
           title: '提示',
           message: '这是一条不会自动关闭的消息',
-          duration: 0
+          duration: 0,
+          transitionName: 'right'
         });
       },
 
@@ -31,7 +32,8 @@
         this.$notify({
           title: '警告',
           message: '这是一条警告的提示消息',
-          type: 'warning'
+          type: 'warning',
+          duration: 0
         });
       },
 

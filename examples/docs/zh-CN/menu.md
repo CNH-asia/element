@@ -245,7 +245,7 @@
   <el-radio-button :label="false">展开</el-radio-button>
   <el-radio-button :label="true">收起</el-radio-button>
 </el-radio-group>
-<el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
+<el-menu default-active="1-4-1" width="80px" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
   <el-submenu index="1">
     <template slot="title">
       <i class="el-icon-message"></i>
@@ -262,6 +262,8 @@
     <el-submenu index="1-4">
       <span slot="title">选项4</span>
       <el-menu-item index="1-4-1">选项1</el-menu-item>
+      <el-menu-item index="1-4-2">选项2</el-menu-item>
+      <el-menu-item index="1-4-3">选项3</el-menu-item>
     </el-submenu>
   </el-submenu>
   <el-menu-item index="2">

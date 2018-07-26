@@ -17,6 +17,10 @@
       rules: Object,
       labelPosition: String,
       labelWidth: String,
+      labelPrefix: {
+        type: String,
+        default: ''
+      },
       labelSuffix: {
         type: String,
         default: ''

@@ -121,7 +121,7 @@ export default {
                                                     column.filterable
                                                         ?
                                                         <span class="el-table__column-filter-trigger" on-click={($event) => this.handleFilterClick($event, column)}>
-                                                            <i class={['el-icon-caret-bottom', column.filterOpened ? 'el-icon-caret-top' : '']} style='font-size:6px;'></i>
+                                                            <i class={['el-icon-caret-bottom', column.filterOpened ? 'el-icon-caret-top' : '']} style='font-size:12px;'></i>
 
                                                            
 
