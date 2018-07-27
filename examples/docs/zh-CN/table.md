@@ -238,7 +238,7 @@
     methods: {
       toggleTable() {
         this.showTable=!this.showTable;
-        // this.tableData = [];
+        this.tableData = [];
       },
     handleExpand(row,expanded) {
     console.log(row, expanded);
@@ -461,6 +461,7 @@
 :::demo 当`el-table`元素中注入`data`对象数组后，在`el-table-column`中用`prop`属性来对应对象中的键名即可填入数据，用`label`属性来定义表格的列名。可以使用`width`属性来定义列宽。
 ```html
   <template>
+	  <el-button @click="toggleTable">显隐</el-button>
     <el-table
       :data="tableData"
       style="width: 100%">
@@ -647,7 +648,7 @@
 :::demo 可以通过指定 Table 组件的 `row-class-name` 属性来为 Table 中的某一行添加 class，表明该行处于某种状态。
 ```html
 <template>
-  <!-- <el-table
+  <el-table
     :data="tableData2"
     style="width: 100%"
     :row-class-name="tableRowClassName">
@@ -665,7 +666,7 @@
       prop="address"
       label="地址">
     </el-table-column>
-  </el-table> -->
+  </el-table>
 </template>
 
 <style>

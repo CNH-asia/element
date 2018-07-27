@@ -773,6 +773,7 @@
     },
 
     created() {
+      this.stype = this.type;
       this.cachedPlaceHolder = this.currentPlaceholder = this.placeholder;
       if (this.multiple && !Array.isArray(this.value)) {
         this.$emit('input', []);

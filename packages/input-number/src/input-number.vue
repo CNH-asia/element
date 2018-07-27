@@ -24,7 +24,7 @@
       <i class="el-icon-plus"></i>
     </span>
     <el-input
-      :value="currentValue"
+      :value="currentInputValue"
       @keydown.up.native.prevent="increase"
       @keydown.down.native.prevent="decrease"
       @blur="handleBlur"
@@ -105,6 +105,12 @@
       debounce: {
         type: Number,
         default: 300
+      },
+      precision: {
+        type: Number,
+        validator(val) {
+          return val >= 0 && val === parseInt(val, 10);
+        }
       }
     },
     data() {
@@ -135,16 +141,37 @@
       maxDisabled() {
         return this._increase(this.value, this.step) > this.max;
       },
-      precision() {
-        const { value, step, getPrecision } = this;
-        return Math.max(getPrecision(value), getPrecision(step));
+      numPrecision() {
+        const { value, step, getPrecision, precision } = this;
+        const stepPrecision = getPrecision(step);
+        if (precision !== undefined) {
+          if (stepPrecision > precision) {
+            console.warn('[Element Warn][InputNumber]precision should not be less than the decimal places of step');
+          }
+          return precision;
+        } else {
+          return Math.max(getPrecision(value), stepPrecision);
+        }
+      },
+      currentInputValue() {
+        const currentValue = this.currentValue;
+        if (typeof currentValue === 'number' && this.precision !== undefined) {
+          return currentValue.toFixed(this.precision);
+        } else {
+          return currentValue;
+        }
       }
+      // precision() {
+      //   const { value, step, getPrecision } = this;
+      //   return Math.max(getPrecision(value), getPrecision(step));
+      // }
     },
     methods: {
       toPrecision(num, precision) {
-        if (precision === undefined) precision = this.precision;
+        if (precision === undefined) precision = this.numPrecision;
         return parseFloat(parseFloat(Number(num).toFixed(precision)));
       },
+      
       getPrecision(value) {
         const valueString = value.toString();
         const dotPosition = valueString.indexOf('.');
@@ -157,14 +184,14 @@
       _increase(val, step) {
         if (typeof val !== 'number') return this.currentValue;
 
-        const precisionFactor = Math.pow(10, this.precision);
+        const precisionFactor = Math.pow(10, this.numPrecision);
 
         return this.toPrecision((precisionFactor * val + precisionFactor * step) / precisionFactor);
       },
       _decrease(val, step) {
         if (typeof val !== 'number') return this.currentValue;
 
-        const precisionFactor = Math.pow(10, this.precision);
+        const precisionFactor = Math.pow(10, this.numPrecision);
 
         return this.toPrecision((precisionFactor * val - precisionFactor * step) / precisionFactor);
       },
@@ -189,7 +216,7 @@
         this.isInput = true;
       },
       handleBlur() {
-        this.$refs.input.setCurrentValue(this.currentValue);
+        this.$refs.input.setCurrentValue(this.currentInputValue);
         this.isInc = false;
         this.isDec = false;
         this.isInput = false;
@@ -201,16 +228,31 @@
       },
       setCurrentValue(newVal) {
         const oldVal = this.currentValue;
+        if (typeof newVal === 'number' && this.precision !== undefined) {
+          newVal = this.toPrecision(newVal, this.precision);
+        }
         if (newVal >= this.max) newVal = this.max;
         if (newVal <= this.min) newVal = this.min;
         if (oldVal === newVal) {
-          this.$refs.input.setCurrentValue(this.currentValue);
+          this.$refs.input.setCurrentValue(this.currentInputValue);
           return;
         }
-        this.$emit('change', newVal, oldVal);
         this.$emit('input', newVal);
+        this.$emit('change', newVal, oldVal);
         this.currentValue = newVal;
       },
+      // setCurrentValue(newVal) {
+      //   const oldVal = this.currentValue;
+      //   if (newVal >= this.max) newVal = this.max;
+      //   if (newVal <= this.min) newVal = this.min;
+      //   if (oldVal === newVal) {
+      //     this.$refs.input.setCurrentValue(this.currentValue);
+      //     return;
+      //   }
+      //   this.$emit('change', newVal, oldVal);
+      //   this.$emit('input', newVal);
+      //   this.currentValue = newVal;
+      // },
       handleInput(value) {
         if (value === '') {
           return;

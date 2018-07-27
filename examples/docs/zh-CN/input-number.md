@@ -7,7 +7,8 @@
         num3: 5,
         num4: 1,
         num5: 1,
-        num6: 1
+        num6: 1,
+        num7: 5
       }
     },
     methods: {
@@ -95,6 +96,29 @@
 ```
 :::
 
+
+
+### 精度
+
+允许定义递增递减的步数控制
+
+:::demo 设置`precision`属性可以控制步长，接受一个`Number`。
+
+```html
+<template>
+  <el-input-number :max="10" :precision="4" v-model="num7" :step="1"></el-input-number>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        num7: 5
+      }
+    }
+  };
+</script>
+```
+:::
 ### 尺寸
 
 额外提供了 `large`、`small` 两种尺寸的数字输入框
