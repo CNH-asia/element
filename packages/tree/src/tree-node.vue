@@ -83,7 +83,7 @@
           if(parent.renderContent) {
             // console.log(parent,node,data,store);
             // console.log(h,parent._renderProxy);
-            console.log(parent.tree.$vnode.context);
+            // console.log(parent.tree.$vnode.context);
           }
           
           return (

@@ -123,9 +123,6 @@
       fieldValue: {
         cache: false,
         get() {
-          // if(this.form.rules&&this.form.rules.length>0) {
-          //   debugger
-          // }
           var model = this.form.model;
           if (!model || !this.prop) { return; }
 
@@ -166,9 +163,9 @@
       };
     },
     methods: {
-     
       validate(trigger, callback = noop) {
         var rules = this.getFilteredRule(trigger);
+        
         if (!rules || rules.length === 0) {
           callback();
           return true;
@@ -227,8 +224,11 @@
         var rules = this.getRules();
 
         return rules.filter(rule => {
-          return !rule.trigger || rule.trigger.indexOf(trigger) !== -1;
+          return rule.trigger && rule.trigger.indexOf(trigger) !== -1;
         });
+        // return rules.filter(rule => {
+        //   return !rule.trigger || rule.trigger.indexOf(trigger) !== -1;
+        // });
       },
       onFieldBlur() {
         this.validate('blur');
@@ -283,6 +283,7 @@
         });
 
         let rules = this.getRules();
+        
 
         if (rules.length) {
           this.$on('el.form.blur', this.onFieldBlur);

@@ -303,7 +303,6 @@
     created() {
       this.tableId = 'el-table_' + tableIdSeed + '_';
       this.debouncedLayout = debounce(50, () => this.doLayout());
-      console.log(this.$slots.empty)
     },
 
     computed: {

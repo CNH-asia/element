@@ -104,7 +104,7 @@
         value2: '',
         value3: [],
         value4: '',
-        value5: [],
+        value5: ['选项1'],
         value6: '',
         value7: '',
         value8: '',

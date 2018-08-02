@@ -4,7 +4,10 @@
 
 @component-namespace el {
   @b input-number {
-    display: inline-block;
+    /* display: inline-block; */
+    flex-direction: row;
+    display: flex;
+    align-items: center;
     width: 160px;
     height: 32px;
     line-height: 32px;
@@ -29,7 +32,7 @@
     @e increase, decrease {
       position: absolute;
       z-index: 1;
-      top: 1px;
+      /* top: 1px; */
       height: 30px;
       width: 30px;
       line-height: 30px;
@@ -87,6 +90,8 @@
     }
     @m large {
       width: 200px;
+      height: 42px;
+      line-height: 42px;
 
       & .el-input-number__increase, .el-input-number__decrease {
         line-height: calc(var(--input-large-height) - 2);
@@ -103,6 +108,8 @@
     }
     @m small {
       width: 130px;
+      height: 30px;
+      line-height: 30px;
 
       & .el-input-number__increase, .el-input-number__decrease {
         line-height: calc(var(--input-small-height) - 2);

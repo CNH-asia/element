@@ -37,6 +37,7 @@
         }
       };
       return {
+        showName: false,
         form: {
           name: '',
           region: '',
@@ -114,7 +115,7 @@
             { required: true, message: '请选择活动资源', trigger: 'change' }
           ],
           desc: [
-            { required: true, message: '请填写活动形式', trigger: 'blur' }
+            { required: true, message: '请填写活动形式' }
           ]
         },
         rules2: {
@@ -192,15 +193,7 @@
         console.log('submit!');
       },
       submitForm(formName) {
-        // this.$refs[formName].validate((valid) => {
-        //   if (valid) {
-        //     alert('submit!');
-        //   } else {
-        //     console.log('error submit!!');
-        //     return false;
-        //   }
-        // });
-        this.$refs[formName].validateFields(['age','pass'],(valid) => {
+        this.$refs[formName].validate((valid) => {
           if (valid) {
             alert('submit!');
           } else {
@@ -208,6 +201,7 @@
             return false;
           }
         });
+       
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();
@@ -491,8 +485,10 @@
 
 :::demo Form 组件提供了表单验证的功能，只需要通过 `rule` 属性传入约定的验证规则，并 Form-Item 的 `prop` 属性设置为需校验的字段名即可。校验规则参见 [async-validator](https://github.com/yiminghe/async-validator)
 ```html
+
+
 <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-  <el-form-item label="活动名称" prop="name">
+  <!-- <el-form-item label="活动名称" prop="name" v-if="ruleForm.delivery">
     <el-input v-model="ruleForm.name"></el-input>
   </el-form-item>
   <el-form-item label="活动区域" prop="region">
@@ -500,23 +496,10 @@
       <el-option label="区域一" value="shanghai"></el-option>
       <el-option label="区域二" value="beijing"></el-option>
     </el-select>
-  </el-form-item>
+  </el-form-item> -->
  
-  <el-form-item label="活动时间" required prop="date1" tip="选择今天以前的日期">
-    <!-- <el-form-item prop="date1" tip="选择今天以前的日期"> -->
-        <el-date-picker type="datetime" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
-      <!-- </el-form-item> -->
-    <!-- <el-col :span="11">
-      <el-form-item prop="date1" tip="选择今天以前的日期">
-        <el-date-picker type="datetime" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
-      </el-form-item>
-    </el-col>
-    <el-col class="line" :span="2">-</el-col>
-    <el-col :span="11">
-      <el-form-item prop="date2">
-        <el-time-picker type="fixed-time" placeholder="选择时间" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
-      </el-form-item>
-    </el-col> -->
+  <!-- <el-form-item label="活动时间" required prop="date1" tip="选择今天以前的日期">
+    <el-date-picker type="datetime" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
   </el-form-item>
   <el-form-item label="即时配送" prop="delivery">
     <el-switch on-text="" off-text="" v-model="ruleForm.delivery"></el-switch>
@@ -534,9 +517,9 @@
       <el-radio label="线上品牌商赞助"></el-radio>
       <el-radio label="线下场地免费"></el-radio>
     </el-radio-group>
-  </el-form-item>
+  </el-form-item> -->
   <el-form-item label="活动形式" prop="desc">
-    <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+    <el-input type="text" v-model="ruleForm.desc"></el-input>
   </el-form-item>
   <el-form-item>
     <el-button type="primary" @click="submitForm('ruleForm')">创建</el-button>
