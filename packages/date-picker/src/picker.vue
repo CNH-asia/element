@@ -7,7 +7,7 @@
     :size="size"
     v-clickoutside="handleClose"
     :placeholder="placeholder"
-    @focus="handleFocus"
+    @click.native="handleFocus"
     @blur="handleBlur"
     @keydown.native="handleKeydown"
     :value="displayLabel==''?displayValue:displayLabel"
@@ -498,6 +498,7 @@ export default {
       }
     },
 
+
     handleClickIcon() {
       if (this.readonly || this.disabled) return;
       if (this.showClose) {
@@ -526,13 +527,22 @@ export default {
       this.pickerVisible = false;
     },
 
-    handleFocus() {
-      const type = this.type;
 
-      if (HAVE_TRIGGER_TYPES.indexOf(type) !== -1 && !this.pickerVisible) {
-        this.pickerVisible = true;
+    handleFocus() {
+      if(this.editable) {
+        const type = this.type;
+
+        if (HAVE_TRIGGER_TYPES.indexOf(type) !== -1 && !this.pickerVisible) {
+          this.pickerVisible = true;
+        }
+        this.$emit("focus", this);
+      } else {
+        if (this.readonly || this.disabled) return;
+        this.pickerVisible = !this.pickerVisible;
+        this.$emit("focus", this);
       }
-      this.$emit("focus", this);
+      
+      
     },
 
     handleBlur() {

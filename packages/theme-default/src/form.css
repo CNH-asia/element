@@ -47,13 +47,13 @@
     @e label {
       position: relative;
       text-align: left;
-      vertical-align: middle;
+      /* vertical-align: middle; */
       float: left;
       font-size: 14px;
       color: #606060;
-      line-height: 1;
-      padding: 9px 0px 9px 0;
-      box-sizing: border-box;
+      line-height: 32px;
+      /* padding: 9px 0px 9px 0;
+      box-sizing: border-box; */
     }
     @e content {
       width: 300px;
