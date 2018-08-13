@@ -1,7 +1,7 @@
 <template>
   <el-input
     class="el-date-editor"
-    :class="'el-date-editor--' + type"
+    :class="['el-date-editor--' + type, {'pointer':!editable||readonly}]"
     :readonly="!editable || readonly"
     :disabled="disabled"
     :size="size"
@@ -499,7 +499,7 @@ export default {
     },
 
 
-    handleClickIcon() {
+    handleClickIcon(e) {
       if (this.readonly || this.disabled) return;
       if (this.showClose) {
         this.currentValue = this.$options.defaultValue || "";
@@ -528,7 +528,8 @@ export default {
     },
 
 
-    handleFocus() {
+    handleFocus(e) {
+      if(e.target.tagName.toLowerCase() !== 'input') return;
       if(this.editable) {
         const type = this.type;
 

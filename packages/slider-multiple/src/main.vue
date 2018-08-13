@@ -316,7 +316,7 @@
             pos: val/that.sliderSize*100,
             isZero: that.value[index]===0
           }
-          console.log(item.pos);
+          // console.log(item.pos);
           array.push(item);
         })
 

@@ -220,7 +220,7 @@
      * @memberof Popper
      */
     Popper.prototype.update = function() {
-        // debugger
+        
         let _this = this;
         var data = { instance: this, styles: {} };
 
@@ -376,15 +376,16 @@
      */
     Popper.prototype._getPosition = function(popper, reference) {
         var container = getOffsetParent(reference);
-
         if (this._options.forceAbsolute) {
             return 'absolute';
+            
         }
 
         // Decide if the popper will be fixed
         // If the reference element is inside a fixed context, the popper will be fixed as well to allow them to scroll together
         var isParentFixed = isFixed(reference, container);
         return isParentFixed ? 'fixed' : 'absolute';
+        
     };
 
     /**
@@ -463,7 +464,7 @@
         var _this = this;
         _this.state.updateBound = this.update.bind(this);
         // var _this = this;
-        // debugger
+        
         root.addEventListener('resize', _this.state.updateBound);
         
         // if the boundariesElement is window we don't need to listen for the scroll event
@@ -628,7 +629,7 @@
     Popper.prototype.modifiers.applyStyle = function(data) {
         // apply the final offsets to the popper
         // NOTE: 1 DOM access here
-        // debugger
+        
         var styles = {
             position: data.offsets.popper.position
         };
@@ -688,7 +689,7 @@
      * @returns {Object} The data object, properly modified
      */
     Popper.prototype.modifiers.shift = function(data) {
-        // debugger
+        
         var placement = data.placement;
         var basePlacement = placement.split('-')[0];
         var shiftVariation = placement.split('-')[1];
@@ -746,7 +747,7 @@
             top: function() {
                 var top = popper.top;
                 if (popper.top < data.boundaries.top) {
-                    top = Math.max(popper.top, data.boundaries.top);
+                    // top = Math.max(popper.top, data.boundaries.top);
                 }
                 return { top: top };
             },
@@ -774,7 +775,7 @@
      * @returns {Object} The data object, properly modified
      */
     Popper.prototype.modifiers.keepTogether = function(data) {
-        // debugger
+        
         var popper  = getPopperClientRect(data.offsets.popper);
         var reference = data.offsets.reference;
         var f = Math.floor;

@@ -5,7 +5,11 @@
   @b date-editor {
     position: relative;
     display: inline-block;
-    /*el-date-editor el-input el-date-editor--datetime*/
+    &.pointer {
+      .el-input__inner {
+        cursor: pointer;
+      }
+    }
     &.el-input {
       width: 152px;
     }

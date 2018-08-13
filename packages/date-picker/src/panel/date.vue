@@ -27,7 +27,8 @@
               <el-input
                 :placeholder="t('el.datepicker.selectDate')"
                 :value="visibleDate"
-                size="small"                
+                size="small"  
+                :readonly="true"              
                 @change.native="visibleDate = $event.target.value" />
             </span>
             <span class="el-date-picker__editor-wrap">

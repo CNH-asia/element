@@ -126,6 +126,7 @@
 :::demo 通过 slot 你可以传入自定义的上传按钮类型和文字提示。
 ```html
 <el-upload
+  :multiple="false"
   class="upload-demo"
   action="https://jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"

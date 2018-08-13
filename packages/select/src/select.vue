@@ -1,7 +1,8 @@
 <template>
+    <!-- v-on-click-outside="handleClose" -->
+<!-- v-clickoutside="handleClose"  -->
   <div
     class="el-select"
-    v-clickoutside="handleClose"
     :type="selectType"
     :class=" [ stype ? 'el-select--' + stype : '', {'el-select-prepend': prepend}]">
     <div
@@ -22,15 +23,16 @@
           close-transition>
           <span class="el-select__tags-text">{{ item.currentLabel }}</span>
         </el-tag>
-        <el-input key="input" class="input-strwrap" :style="{'width': (prepend ? inputWidth - parseInt(prependLeft) - 2 + 'px' : inputWidth + 'px')}" :disabled="disabled" v-if="stype=='fixedHeight' && selected.length>0" v-model="selectedStr"></el-input>
+        <el-input  @click.native="handleFilterFocus"  key="input" :readonly="!filterable" class="input-strwrap" :style="{'width': (prepend ? inputWidth - parseInt(prependLeft) - 2 + 'px' : inputWidth + 'px')}" :disabled="disabled" v-if="stype=='fixedHeight' && selected.length>0 && showValue" v-model="selectedStr"></el-input>
       </transition-group>
+      
 
       <input
         type="text"
         class="el-select__input"
         :class="`is-${ size }`"
-        @focus="visible = true"
         :disabled="disabled"
+        @focus="handleInputFocus"
         @keyup="managePlaceholder"
         @keydown="resetInputState"
         @keydown.down.prevent="navigateOptions('next')"
@@ -40,13 +42,14 @@
         @keydown.delete="deletePrevTag"
         v-model="query"
         :debounce="remote ? 300 : 0"
-        v-if="filterable"
+        v-show="filterable&&!showValue"
         :style="{ width: inputLength + 'px', 'max-width': inputWidth - 42 + 'px' }"
         
         ref="input">
     </div>
 
     <el-input
+      :style="getInputStyle()"
       ref="reference"
       v-model="selectedLabel"
       type="text"
@@ -114,6 +117,7 @@
   import { t } from 'element-ui/src/locale';
   import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
   import { getValueByPath } from 'element-ui/src/utils/util';
+  import { mixin as onClickOutside } from 'element-ui/src/utils/vue-on-click-outside.min.js';
 
   const sizeMap = {
     'large': 42,
@@ -122,8 +126,9 @@
   };
 
   export default {
-    mixins: [Emitter, Locale],
-
+    // mixins: [Emitter, Locale, onClickOutside],
+    mixins: [Emitter, Locale ],
+    
     name: 'ElSelect',
 
     componentName: 'ElSelect',
@@ -230,6 +235,10 @@
       showEmptyText: {
         type: Boolean,
         default: true
+      },
+      hideFilter: {
+        type: Boolean,
+        default: false
       }
     },
 
@@ -256,7 +265,8 @@
         stype: '',
         sctype: '',
         selectedStr: '',
-        prependLeft: '0px'
+        prependLeft: '0px',
+        showValue: true
 
       };
     },
@@ -292,7 +302,12 @@
         });
         this.hoverIndex = -1;
         if (this.multiple && this.filterable) {
-          this.inputLength = this.$refs.input.value.length * 15 + 20;
+          if(this.$refs.input) {
+            this.inputLength = this.$refs.input.value.length * 15 + 20;
+          }else {
+            this.inputLength = 20;
+          }
+          
           this.managePlaceholder();
           this.resetInputHeight();
         }
@@ -330,6 +345,7 @@
           if (this.$refs.input) {
             this.$refs.input.blur();
           }
+          this.showValue = true;
           this.query = '';
           this.selectedLabel = '';
           this.inputLength = 20;
@@ -358,7 +374,19 @@
           if (this.filterable) {
             this.query = this.selectedLabel;
             if (this.multiple) {
-              this.$refs.input.focus();
+              let _this = this;
+              
+              _this.$nextTick(()=>{
+                if(this.$refs.input) {
+                
+                setTimeout(() => {
+                  _this.$refs.input.focus();
+                }, 50);
+              }
+              this.showValue = false;
+              })
+              
+              
             } else {
               if (!this.remote) {
                 this.broadcast('ElOption', 'queryChange', '');
@@ -419,6 +447,34 @@
     },
 
     methods: {
+      getInputStyle() {
+        if(this.type=='fixedWidth') {
+          return {height: 'auto'};
+        } else {
+          return {height: '32px'};
+        }
+      },
+      handleInputFocus(e) {
+      },
+      handleFilterFocus(e) {
+        if(!this.filterable) return;
+       
+        
+        if(e.target.tagName == 'i'){
+          this.visible = true;
+        } else {
+          this.showValue = false;
+          this.$nextTick(()=>{
+            this.visible = true;
+          })
+        }
+        
+      },
+      handleFilterBlur() {
+        if(!this.filterable) return;
+        this.showValue = true;
+      },
+      
       handleIconHide() {
         let icon = this.$el.querySelector('.el-input__icon');
         if (icon) {
@@ -536,8 +592,12 @@
         this.dropdownUl = null;
       },
 
-      handleClose() {
-        this.visible = false;
+      handleClose(e) {
+        
+        if(this.visible) {
+          this.visible = false;
+        }
+        
       },
 
       toggleLastOptionHitState(hit) {
@@ -586,7 +646,9 @@
               if (!this.$refs.reference) return;
               let inputChildNodes = this.$refs.reference.$el.childNodes;
               let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
-              input.style.height = Math.max(this.$refs.tags.clientHeight + 6, sizeMap[this.size] || 36) + 'px';
+              // input.style.height = Math.max(this.$refs.tags.clientHeight + 6, sizeMap[this.size] || 32) + 'px';
+              input.style.height = Math.max(this.$refs.tags.clientHeight, sizeMap[this.size] || 32) + 'px';
+              
               if (this.visible && this.emptyText !== false) {
                   this.broadcast('ElSelectDropdown', 'updatePopper');
               }
@@ -624,7 +686,7 @@
             this.query = '';
             this.inputLength = 20;
           }
-          if (this.filterable) this.$refs.input.focus();
+          // if (this.filterable) this.$refs.input.focus();
         } else {
           this.$emit('input', option.value);
           this.visible = false;
@@ -769,6 +831,25 @@
         } else {
           return getValueByPath(item.value, this.valueKey);
         }
+      },
+      contains(parent, child) {
+        if(parent.contains(child)) {
+          return true;
+        } else {
+          return false;
+        }
+      },
+      handleClickOutside(e) {
+        if(this.visible) {
+          
+          let flag = this.$el.contains(e.target);
+          
+          if(!flag) {
+            this.visible = false;
+          }
+        }
+        
+
       }
     },
 
@@ -796,6 +877,7 @@
       if (this.multiple && Array.isArray(this.value) && this.value.length > 0) {
         this.currentPlaceholder = '';
       }
+      
       addResizeListener(this.$el, this.handleResize);
       if (this.remote && this.multiple) {
         this.resetInputHeight();
@@ -804,6 +886,11 @@
         if (this.$refs.reference && this.$refs.reference.$el) {
           this.inputWidth = this.$refs.reference.$el.getBoundingClientRect().width;
         }
+      
+
+        //new:my-clickoutside
+        document.addEventListener('click', this.handleClickOutside, false);
+
         
       });
       if(this.prepend) {
@@ -816,6 +903,8 @@
 
     beforeDestroy() {
       if (this.$el && this.handleResize) removeResizeListener(this.$el, this.handleResize);
+      document.removeEventListener('click', this.handleClickOutside, false);
+      
     }
   };
 </script>

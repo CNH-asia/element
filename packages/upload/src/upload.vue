@@ -64,6 +64,7 @@ export default {
       this.uploadFiles(files);
     },
     uploadFiles(files) {
+      debugger
       let postFiles = Array.prototype.slice.call(files);
       if (!this.multiple) { postFiles = postFiles.slice(0, 1); }
 

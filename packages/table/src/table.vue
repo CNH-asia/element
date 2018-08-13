@@ -11,7 +11,7 @@
     }"
     @mouseleave="handleMouseLeave($event)">
     <div class="hidden-columns" ref="hiddenColumns"><slot></slot></div>
-    <div class="el-table__header-wrapper" :class="{'show-filter':hasFilter}" ref="headerWrapper" v-if="showHeader">
+    <div class="el-table__header-wrapper" :class="[{'show-filter':hasFilter},{'first-row-expanded':hasExpand&&hasExpandedRows&&firstRowExpanded}]" ref="headerWrapper" v-if="showHeader">
       <table-header
         :store="store"
         :layout="layout"
@@ -23,6 +23,7 @@
     
     <div
       class="el-table__body-wrapper"
+      :class="[{'has-expanded':hasExpand && hasExpandedRows},{'first-row-expanded':hasExpand && hasExpandedRows && firstRowExpanded && store.states.expandRows && store.states.expandRows.length==1}]"
       ref="bodyWrapper"
       :style="[bodyHeight]">
       <table-body
@@ -324,6 +325,17 @@
         return this.store.states.columns;
       },
 
+      hasExpand() {
+        let flag = false;
+        this.columns.forEach(function(column) {
+          
+          if(column.type=='expand') {
+            flag = true;
+          }
+        })
+        return flag;
+      },
+
       tableData() {
         return this.store.states.data;
       },
@@ -417,6 +429,26 @@
 
       expandRowKeys(newVal) {
         this.store.setExpandRowKeys(newVal);
+      },
+
+      "store.states.expandRows": function(val) {
+        if(val.length > 0) {
+          this.hasExpandedRows = true;
+          if(this.store.states.data&&this.store.states.data[0]) {
+            let firstRow = this.store.states.data[0];
+            if(val.indexOf(firstRow) > -1) {
+              this.firstRowExpanded = true;
+            } else {
+              this.firstRowExpanded = false;
+            }
+          } else {
+            this.firstRowExpanded = false;
+          }
+        } else {
+          this.hasExpandedRows = false;
+          this.firstRowExpanded = false;
+        }
+        
       }
     },
 
@@ -470,7 +502,9 @@
         isHidden: false,
         renderExpanded: null,
         resizeProxyVisible: false,
-        hasFilter: false
+        hasFilter: false,
+        hasExpandedRows: false,
+        firstRowExpanded: false
       };
     }
   };

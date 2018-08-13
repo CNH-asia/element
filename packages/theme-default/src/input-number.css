@@ -32,7 +32,6 @@
     @e increase, decrease {
       position: absolute;
       z-index: 1;
-      /* top: 1px; */
       height: 30px;
       width: 30px;
       line-height: 30px;

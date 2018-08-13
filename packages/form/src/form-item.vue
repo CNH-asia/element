@@ -72,7 +72,11 @@
       },
       tip:String,
       labelPrefix: String,
-      labelSuffix: String
+      labelSuffix: String,
+      // alwaysShowTip: {
+      //   type: Boolean,
+      //   default: false
+      // }
       
     },
     watch: {
@@ -194,6 +198,7 @@
       resetField() {
         this.validateState = '';
         this.validateMessage = '';
+        // this.showTip = false;
 
         let model = this.form.model;
         let value = this.fieldValue;
@@ -253,14 +258,17 @@
         // this.isShowTip = false;
       },
       onFieldVisibleChange() {
+        
         if (this.validateDisabled) {
+        
           this.validateDisabled = false;
-          return;
+          // return;
         }
         this.validate('visible-change');
-        // this.type = 'error';
-        // this.showTip = false;
-        // this.isShowTip = false;
+        
+        this.type = 'error';
+        this.showTip = false;
+        this.isShowTip = false;
       },
       onFieldNoVisibleChange() {
         this.validateState = 'success';

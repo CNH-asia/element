@@ -67,7 +67,7 @@
           delivery: false,
           type: [],
           resource: '',
-          desc: ''
+          desc: '55555'
         },
         ruleForm2: {
           pass: '',
@@ -100,7 +100,7 @@
             { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
           ],
           region: [
-            { required: true, message: '请选择活动区域', trigger: 'change' }
+            { required: true, message: '请选择活动区域', trigger: 'visible-change' }
           ],
           date1: [
             { type: 'date', required: true, message: '请选择日期', trigger: 'change,blur' }
@@ -135,7 +135,7 @@
             { required: true, trigger: 'visible-change', message: '背景色不能为空' }
           ],
           region: [
-            { required: true, message: '活动区域不能为空', trigger: 'visible-change' }
+            { required: true, message: '活动区域不能为空', trigger: 'visible-change,blur' }
           ]
         },
         options4: [],
@@ -492,15 +492,27 @@
 
 
 <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-  <!-- <el-form-item label="活动名称" prop="name" v-if="ruleForm.delivery">
+  <el-form-item label="活动名称" prop="name" v-if="ruleForm.delivery">
     <el-input v-model="ruleForm.name"></el-input>
   </el-form-item>
   <el-form-item label="活动区域" prop="region">
-    <el-select v-model="ruleForm.region" placeholder="请选择活动区域">
-      <el-option label="区域一" value="shanghai"></el-option>
-      <el-option label="区域二" value="beijing"></el-option>
+    <el-select filterable multiple v-model="ruleForm.region" placeholder="请选择活动区域">
+      <el-option label="区域一区域一区域一好" value="shanghai"></el-option>
+      <el-option label="区域二区域一区域一" value="beijing"></el-option>
+      <el-option label="区域" value="shanghai1"></el-option>
+      <el-option label="区域二" value="beijing2"></el-option>
+      <el-option label="区域一" value="shanghai2"></el-option>
+      <el-option label="区域二" value="beijing4"></el-option>
+      <el-option label="区域二" value="beijing3"></el-option>
+      <el-option label="区域一" value="shanghai3"></el-option>
+      <el-option label="区域二" value="beijing3"></el-option>
+      <el-option label="区域二" value="beijing6"></el-option>
+      <el-option label="区域二" value="beijing5"></el-option>
+      <el-option label="区域一" value="shanghai6"></el-option>
+      <el-option label="区域二" value="beijing7"></el-option>
+
     </el-select>
-  </el-form-item> -->
+  </el-form-item>
  
   <!-- <el-form-item label="活动时间" required prop="date1" tip="选择今天以前的日期">
     <el-date-picker type="datetime" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
@@ -542,7 +554,7 @@
           delivery: false,
           type: [],
           resource: '',
-          desc: ''
+          desc: '444'
         },
         rules: {
           name: [
@@ -606,7 +618,7 @@
   </el-form-item>
 
   
-  <el-form-item label="活动区域" prop="region">
+  <el-form-item label="活动区域" prop="region" tip="jjjjj" :always-show-tip="true">
       <el-select v-model="ruleForm2.region" type="fixedHeight" placeholder="请选择活动区域">
         <el-option
           v-for="item in ruleForm2.bgcolors"

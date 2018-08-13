@@ -54,7 +54,7 @@ export default {
                 on-mouseenter={ _ => this.handleMouseEnter($index) }
                 on-mouseleave={ _ => this.handleMouseLeave() }
                 // class={ [this.getRowClass(row, $index)] }
-                class={[this.getRowClass(row, $index), this.table.store.states.expandRows.indexOf(row) > -1 ? 'tr-expanded' : '', this.hasExpand?'tr-unexpanded':'']}>
+                class={[this.getRowClass(row, $index), this.expandedRows.indexOf(row) > -1 ? 'tr-expanded' : '', this.hasExpand ? 'under-expand' : '', this.hasExpand && this.expandedRows.length > 0 && this.expandedRows.indexOf(row)==-1 ? 'tr-unexpanded' : '', $index==0&&this.table.store.states.expandRows.length>0?'has-expanded':'']}>
                 {
                   this._l(this.columns, (column, cellIndex) =>
                     <td
@@ -158,6 +158,10 @@ export default {
         }
       })
       return flag;
+    },
+
+    expandedRows() {
+      return this.table.store.states.expandRows;
     }
   },
 

@@ -38,6 +38,11 @@
       };
     },
     methods: {
+      closeDialog() {
+        this.$refs.select.visible = false;
+        // this.dialogFormVisible = false;
+      },
+      
       handleClose(done) {
         this.$confirm('确认关闭？')
           .then(_ => {
@@ -139,11 +144,21 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
 
 <el-dialog title="创建组件" :visible.sync="dialogFormVisible">
   <el-form :model="form">
-    <el-form-item label="组件名称" :label-width="formLabelWidth">
+    <!-- <el-form-item label="组件名称" :label-width="formLabelWidth">
       <el-input v-model="form.name" auto-complete="off"></el-input>
-    </el-form-item>
+    </el-form-item> -->
     <el-form-item label="组件简介" :label-width="formLabelWidth">
       <el-input type="textarea"></el-input>
+    </el-form-item>
+    <el-form-item label="组件简介" :label-width="formLabelWidth">
+      <el-select ref="select" v-model="form.name" multiple type="fixedHeight" :disabled="isdisabled" placeholder="请选择">
+        <el-option
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value">
+        </el-option>
+      </el-select>
     </el-form-item>
     <el-form-item label="标签选择" :label-width="formLabelWidth" style="border-bottom: 1px solid #DCE0E7; text-align: right;">
       <el-button type="text">测试</el-button>
@@ -155,7 +170,7 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
     </el-form-item>
   </el-form>
   <div slot="footer" class="dialog-footer">
-    <el-button @click="dialogFormVisible = false">创建组件</el-button>
+    <el-button @click="closeDialog">创建组件</el-button>
   </div>
 </el-dialog>
 

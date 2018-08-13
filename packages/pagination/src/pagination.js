@@ -44,6 +44,7 @@ export default {
 
   render(h) {
     let template = <div class='el-pagination'></div>;
+    template.children = [];
     const layout = this.layout || '';
     if (!layout) return;
     const TEMPLATE_MAP = {
@@ -68,9 +69,12 @@ export default {
         haveRightWrapper = true;
         return;
       }
+      
 
+      
       if (!haveRightWrapper) {
         template.children.push(TEMPLATE_MAP[compo]);
+        
       } else {
         rightWrapper.children.push(TEMPLATE_MAP[compo]);
       }
@@ -163,7 +167,7 @@ export default {
       },
 
       components: {
-        ElSelect,
+        // ElSelect,
         ElOption
       },
 

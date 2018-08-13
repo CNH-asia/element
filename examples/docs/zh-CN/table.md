@@ -1650,6 +1650,7 @@
   <el-table
     @expand="handleExpand"
     :data="tableData5"
+    stripe
     style="width: 100%">
     <el-table-column
       label="商品 ID"
