@@ -90,6 +90,7 @@
       appearance: none;
       height: 28px;
       background-color: transparent;
+      transform: translateY(-10px);
       @when mini {
         height: 14px;
       }
@@ -113,14 +114,31 @@
 
     @e tags {
       position: absolute;
-      line-height: inherit;
+      line-height: 1;
       white-space: normal;
       z-index: var(--index-normal);
       top: 50%;
       transform: translateY(-50%);
+      display: inline-block;
+      width: 100%;
 
-      & .el-input__inner {
-        /* border-right: none; */
+      & .el-tag {
+        position: relative;
+        display: inline-block;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-right: 20px;
+        
+        & .el-icon-close {
+          position: absolute;
+          top: 4px;
+          right: 2px;
+        }
+      }
+
+      .el-select__tags-text {
+
       }
     }
 

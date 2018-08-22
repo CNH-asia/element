@@ -6,13 +6,13 @@
         list: null,
         options: [{
           value: '选项1',
-          label: '黄金糕'
+          label: '黄金糕2222222'
         }, {
           value: '选项2',
-          label: '双皮奶'
+          label: '双皮奶222222222222'
         }, {
           value: '选项3',
-          label: '蚵仔煎'
+          label: '蚵仔煎4444'
         }, {
           value: '选项4',
           label: '龙须面'
@@ -162,14 +162,14 @@
 :::demo `v-model`的值为当前被选中的`el-option`的 value 属性值
 ```html
 <template>
-  <!-- <el-select prepend="产品版" v-model="value" placeholder="请选择" scroll-type="scroller">
+  <el-select prepend="产品版" v-model="value" placeholder="请选择" scroll-type="scroller">
     <el-option
       v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
     </el-option>
-  </el-select> -->
+  </el-select>
   </div>
 </template>
 
@@ -206,7 +206,7 @@
 :::demo 在`el-option`中，设定`disabled`值为 true，即可禁用该选项
 ```html
 <template>
-  <!-- <el-select prepend="版本" v-model="value2" placeholder="请选择">
+  <el-select prepend="版本" v-model="value2" placeholder="请选择">
     <el-option
       v-for="item in options2"
       :key="item.value"
@@ -214,7 +214,7 @@
       :value="item.value"
       :disabled="item.disabled">
     </el-option>
-  </el-select> -->
+  </el-select>
 </template>
 
 <script>
@@ -299,14 +299,14 @@
 :::demo 为`el-select`设置`clearable`属性，则可将选择器清空。需要注意的是，`clearable`属性仅适用于单选。
 ```html
 <template>
-  <!-- <el-select v-model="value4" clearable placeholder="请选择">
+  <el-select v-model="value4" clearable placeholder="请选择">
     <el-option
       v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
     </el-option>
-  </el-select> -->
+  </el-select>
 </template>
 
 <script>
@@ -346,7 +346,7 @@
 <template>
 <div>
   固定宽度
-  <el-select style="width:180px;" prepend="产品版" v-model="value5" multiple placeholder="请选择">
+  <el-select filterable style="width:180px;" prepend="产品版" v-model="value5" multiple placeholder="请选择">
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -359,14 +359,14 @@
   <br><br>
 <div>
   固定高度
-  <!-- <el-select style="width:300px;" prepend="产品版本55" v-model="value11" multiple placeholder="请选择" type="fixedHeight">
+  <el-select style="width:300px;" prepend="产品版本55" v-model="value11" multiple placeholder="请选择" type="fixedHeight">
     <el-option
       v-for="item in options5"
       :key="item.value"
       :label="item.label"
       :value="item.value">
     </el-option>
-  </el-select> -->
+  </el-select>
 </div>
 </template>
 
@@ -405,7 +405,7 @@
 :::demo 将自定义的 HTML 模板插入`el-option`的 slot 中即可。
 ```html
 <template>
-  <!-- <el-select v-model="value6" placeholder="请选择">
+  <el-select v-model="value6" placeholder="请选择">
     <el-option
       v-for="item in cities"
       :key="item.value"
@@ -414,7 +414,7 @@
       <span style="float: left">{{ item.label }}</span>
       <span style="float: right; color: #8492a6; font-size: 13px">{{ item.value }}</span>
     </el-option>
-  </el-select> -->
+  </el-select>
 </template>
 
 <script>
@@ -455,7 +455,7 @@
 :::demo 使用`el-option-group`对备选项进行分组，它的`label`属性为分组名
 ```html
 <template>
-  <!-- <el-select v-model="value7" :show-empty-text="false" placeholder="请选择" multiple type="fixedHeight" :multiple-limit="3" :group-limit="[1,2]">
+  <el-select v-model="value7" :show-empty-text="false" placeholder="请选择" multiple type="fixedHeight" :multiple-limit="3" :group-limit="[1,2]">
     <el-option-group
       v-for="group in options3"
       :key="group.label"
@@ -467,7 +467,7 @@
         :value="item.value">
       </el-option>
     </el-option-group>
-  </el-select> -->
+  </el-select>
 </template>
 
 <script>
@@ -515,7 +515,7 @@
 :::demo 为`el-select`添加`filterable`属性即可启用搜索功能。默认情况下，Select 会找出所有`label`属性包含输入值的选项。如果希望使用其他的搜索逻辑，可以通过传入一个`filter-method`来实现。`filter-method`为一个`Function`，它会在输入值发生变化时调用，参数为当前输入值。
 ```html
 <template>
-  <el-select style="width:220px;" v-model="value8" type="fixedHeight" filterable multiple placeholder="请选择">
+  <el-select style="width:220px;" v-model="value8" filterable multiple placeholder="请选择">
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -559,7 +559,7 @@
 :::demo 为了启用远程搜索，需要将`filterable`和`remote`设置为`true`，同时传入一个`remote-method`。`remote-method`为一个`Function`，它会在输入值发生变化时调用，参数为当前输入值。需要注意的是，如果`el-option`是通过`v-for`指令渲染出来的，此时需要为`el-option`添加`key`属性，且其值需具有唯一性，比如此例中的`item.value`。
 ```html
 <template>
-  <!-- <el-select
+  <el-select
     v-model="value9"
     type="fixedHeight"
     filterable
@@ -573,7 +573,7 @@
       :label="item.label"
       :value="item.value">
     </el-option>
-  </el-select> -->
+  </el-select>
 </template>
 
 <script>
@@ -635,7 +635,7 @@
 :::demo 使用`allow-create`属性即可通过在输入框中输入文字来创建新的条目。注意此时`filterable`必须为真。
 ```html
 <template>
-  <!-- <el-select
+  <el-select
     v-model="value10"
     multiple
     filterable
@@ -647,7 +647,7 @@
       :label="item.label"
       :value="item.value">
     </el-option>
-  </el-select> -->
+  </el-select>
 </template>
 
 <script>

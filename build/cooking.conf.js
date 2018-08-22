@@ -6,7 +6,7 @@ cooking.set({
   dist: './lib',
   clean: false,
   format: 'umd',
-  minimize: false,
+  // minimize: false,
   moduleName: 'ELEMENT',
   extends: ['vue2'],
   alias: config.alias,

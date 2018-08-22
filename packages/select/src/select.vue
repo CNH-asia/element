@@ -11,7 +11,9 @@
       @click.stop="toggleMenu"
       ref="tags"
       :style="{ 'max-width': inputWidth - 37 - parseInt(prependLeft) + 'px', 'padding-left': prependLeft }">
-      <transition-group @after-leave="resetInputHeight">
+      <!-- <transition-group @after-leave="resetInputHeight"> -->
+      <transition-group>
+        
         <el-tag
           v-if="stype!=='fixedHeight'"
           v-for="item in selected"
@@ -43,8 +45,7 @@
         v-model="query"
         :debounce="remote ? 300 : 0"
         v-show="filterable&&!showValue"
-        :style="{ width: inputLength + 'px', 'max-width': inputWidth - 42 + 'px' }"
-        
+        :style="{ width: inputLength + 'px', 'max-width': inputWidth - 42 + 'px', transform:'translateY(' + transY + 'px' }"
         ref="input">
     </div>
 
@@ -152,6 +153,7 @@
         if (this.loading) {
           return this.loadingText || this.t('el.select.loading');
         } else {
+          
           if (this.remote && this.query === '' && this.options.length === 0) return false;
           if (this.filterable && this.options.length > 0 && this.filteredOptionsCount === 0) {
             return this.noMatchText || this.t('el.select.noMatch');
@@ -167,6 +169,14 @@
         let hasExistingOption = this.options.filter(option => !option.created)
           .some(option => option.currentLabel === this.query);
         return this.filterable && this.allowCreate && this.query !== '' && !hasExistingOption;
+      },
+
+      transY() {
+        if(!this.value || this.value == '' || this.value.length==0 || this.type=='fixedHeight') {
+          return 0;
+        } else {
+          return -10;
+        }
       }
     },
 
@@ -278,10 +288,8 @@
 
       value(val) {
         
-        // this.stype = this.$el.attributes[0].nodeValue;
         this.stype = this.type;
         if (this.multiple) {
-          this.resetInputHeight();
           if (val.length > 0 || (this.$refs.input && this.query !== '')) {
             this.currentPlaceholder = '';
           } else {
@@ -293,7 +301,7 @@
           this.inputLength = 20;
         }
         this.$emit('change', val);
-        // this.dispatch('ElFormItem', 'el.form.change', val);
+       
       },
 
       query(val) {
@@ -368,6 +376,9 @@
               if (this.filterable) this.query = this.selectedLabel;
             }
           }
+          if(this.filterable&&this.multiple) {
+            this.resetInputHeight();
+          }
         } else {
           this.handleIconShow();
           this.broadcast('ElSelectDropdown', 'updatePopper');
@@ -379,11 +390,17 @@
               _this.$nextTick(()=>{
                 if(this.$refs.input) {
                 
-                setTimeout(() => {
-                  _this.$refs.input.focus();
-                }, 50);
-              }
-              this.showValue = false;
+                  setTimeout(() => {
+                    _this.$refs.input.focus();
+                    this.currentPlaceholder = '';
+                  }, 50);
+                
+                }
+                this.showValue = false;
+               
+                this.resetInputHeight();
+               
+              
               })
               
               
@@ -458,9 +475,7 @@
       },
       handleFilterFocus(e) {
         if(!this.filterable) return;
-       
-        
-        if(e.target.tagName == 'i'){
+        if(e.target.tagName == 'i') {
           this.visible = true;
         } else {
           this.showValue = false;
@@ -541,6 +556,7 @@
           if (this.filterable) this.query = this.selectedLabel;
           return;
         }
+        
         let result = [];
         let result1 = [];
         if (Array.isArray(this.value)) {
@@ -615,6 +631,7 @@
       },
 
       deletePrevTag(e) {
+        return;
         if (e.target.value.length <= 0 && !this.toggleLastOptionHitState()) {
           const value = this.value.slice();
           value.pop();
@@ -635,6 +652,7 @@
       },
 
       resetInputState(e) {
+        return;
         if (e.keyCode !== 8) this.toggleLastOptionHitState(false);
         this.inputLength = this.$refs.input.value.length * 15 + 20;
         this.resetInputHeight();
@@ -642,6 +660,7 @@
 
       resetInputHeight() {
         if(this.stype=='fixedWidth') {
+
           this.$nextTick(() => {
               if (!this.$refs.reference) return;
               let inputChildNodes = this.$refs.reference.$el.childNodes;
