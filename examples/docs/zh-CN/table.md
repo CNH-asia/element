@@ -1652,18 +1652,6 @@
     :data="tableData5"
     stripe
     style="width: 100%">
-    <el-table-column
-      label="商品 ID"
-      prop="id">
-    </el-table-column>
-    <el-table-column
-      label="商品名称"
-      prop="name">
-    </el-table-column>
-    <el-table-column
-      label="描述"
-      prop="desc">
-    </el-table-column>
     <el-table-column type="expand" :single="true">
           <template scope="props">
             <el-form label-position="left" inline class="demo-table-expand">
@@ -1691,6 +1679,19 @@
             </el-form>
           </template>
         </el-table-column>
+    <el-table-column
+      label="商品 ID"
+      prop="id">
+    </el-table-column>
+    <el-table-column
+      label="商品名称"
+      prop="name">
+    </el-table-column>
+    <el-table-column
+      label="描述"
+      prop="desc">
+    </el-table-column>
+    
   </el-table>
 </template>
 

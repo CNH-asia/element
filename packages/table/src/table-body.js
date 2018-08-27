@@ -72,12 +72,23 @@ export default {
                 }
               </tr>,
                 this.store.states.expandRows.indexOf(row) > -1
-                ? (<tr>
+                  ? (
+                <tr>
                     <td colspan={ this.columns.length } class="el-table__expanded-cell">
                       { this.table.renderExpanded ? this.table.renderExpanded(h, { row, $index, store: this.store }) : ''}
                     </td>
                   </tr>)
                 : ''
+                // <el-collapse-transition>
+                //   <div v-show={this.store.states.expandRows.indexOf(row) > -1} style="width:max-content;">
+                //     <tr>
+                //       <td colspan={this.columns.length} class="el-table__expanded-cell">
+                //         {this.table.renderExpanded ? this.table.renderExpanded(h, { row, $index, store: this.store }) : ''}
+                //       </td>
+                //     </tr>
+                //   </div>
+                // </el-collapse-transition>
+                  
               ]
             ).concat(
               this._self.$parent.$slots.append
@@ -289,6 +300,8 @@ export default {
         if(this.hasExpand) {
           this.handleExpandClick(row, index);
         }
+        
+        
       }
       
     },

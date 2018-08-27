@@ -75,17 +75,16 @@
     }
 
     @e expand-icon {
-      display: none;
       position: relative;
+      height: 45px;
+      color: #666;
       cursor: pointer;
-      color: #D2D9E3;
       font-size: 12px;
       transition: transform 0.2s ease-in-out;
-      color: #0AA9F1;
       text-align: center;
 
       @m expanded i {
-        transform: rotate(180deg);
+        transform: rotate(90deg);
       }
 
       > .el-icon {
@@ -93,9 +92,11 @@
         left: 0;
         top: 50%;
         margin-top: -5px;
+        transition: all 0.15s ease-in;
         &.reverse {
           margin-top: -8px;
         }
+        
       }
     }
 
@@ -474,6 +475,7 @@
 
         & .el-table__expand-icon {
           display: block;
+          
         }
 
         & td {

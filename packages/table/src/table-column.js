@@ -62,15 +62,16 @@ const forced = {
     },
     renderCell: function(h, { row, store }, proxy) {
       const expanded = store.states.expandRows.indexOf(row) > -1;
-      return <div class={ 'el-table__expand-icon ' + (expanded ? 'el-table__expand-icon--expanded' : '') }
-                  >
-        <i class={'el-icon el-icon-arrow-down ' + (expanded?'reverse':'')}></i>
-        <span style="margin-left:10px;">{(expanded ? '收起' : '展开')} </span>
-      </div>;
-      // return <div class={'el-table__expand-icon ' + (expanded ? 'el-table__expand-icon--expanded' : '')}
-      //   on-click={() => proxy.handleExpandClick(row)}>
-      //   <i class='el-icon el-icon-caret-bottom'></i>
+      // return <div class={ 'el-table__expand-icon ' + (expanded ? 'el-table__expand-icon--expanded' : '') }
+      //             >
+      //   <i class={'el-icon el-icon-arrow-down ' + (expanded?'reverse':'')}></i>
+      //   <span style="margin-left:10px;">{(expanded ? '收起' : '展开')} </span>
       // </div>;
+      return <div class={'el-table__expand-icon ' + (expanded ? 'el-table__expand-icon--expanded' : '')}
+        // on-click={() => proxy.handleExpandClick(row)}>
+        >
+        <i class='el-icon el-icon-arrow-right'></i>
+      </div>;
     },
     sortable: false,
     resizable: false,

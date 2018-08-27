@@ -12,8 +12,8 @@
       ref="tags"
       :style="{ 'max-width': inputWidth - 37 - parseInt(prependLeft) + 'px', 'padding-left': prependLeft }">
       <!-- <transition-group @after-leave="resetInputHeight"> -->
-      <transition-group>
-        
+      <!-- <transition-group> -->
+      <span style="float:left;float: left;max-width: 100%;">
         <el-tag
           v-if="stype!=='fixedHeight'"
           v-for="item in selected"
@@ -25,8 +25,9 @@
           close-transition>
           <span class="el-select__tags-text">{{ item.currentLabel }}</span>
         </el-tag>
-        <el-input  @click.native="handleFilterFocus"  key="input" :readonly="!filterable" class="input-strwrap" :style="{'width': (prepend ? inputWidth - parseInt(prependLeft) - 2 + 'px' : inputWidth + 'px')}" :disabled="disabled" v-if="stype=='fixedHeight' && selected.length>0 && showValue" v-model="selectedStr"></el-input>
-      </transition-group>
+      </span>
+      <el-input  @click.native="handleFilterFocus"  key="input" :readonly="!filterable" class="input-strwrap" :style="{'width': (prepend ? inputWidth - parseInt(prependLeft) - 2 + 'px' : inputWidth + 'px')}" :disabled="disabled" v-if="stype=='fixedHeight' && selected.length>0 && showValue" v-model="selectedStr"></el-input>
+      <!-- </transition-group> -->
       
 
       <input
@@ -175,7 +176,8 @@
         if(!this.value || this.value == '' || this.value.length==0 || this.type=='fixedHeight') {
           return 0;
         } else {
-          return -10;
+          // return -10;
+          return 0;
         }
       }
     },
@@ -820,7 +822,7 @@
 
       handleResize() {
         this.resetInputWidth();
-        if (this.multiple) this.resetInputHeight();
+        // if (this.multiple) this.resetInputHeight();
       },
 
       checkDefaultFirstOption() {
