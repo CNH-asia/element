@@ -518,7 +518,7 @@
       tr.current-row > td {
         background: rgba(61,161,230,0.05);
       }
-      tr:last-child td {
+      tr:last-child > td {
         border-bottom: 1px solid #D2D9E3;
       }
     }
