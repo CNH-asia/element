@@ -734,9 +734,15 @@
       },
 
       toggleMenu() {
-        if (this.filterable && this.query === '' && this.visible) {
+        // if (this.filterable && this.query === '' && this.visible) {
+        //   this.$refs.input.focus();
+        //   return;
+        // }
+        if (this.filterable && this.visible) {
+          this.$refs.input.focus();
           return;
         }
+        
         if (!this.disabled) {
           this.visible = !this.visible;
         }
