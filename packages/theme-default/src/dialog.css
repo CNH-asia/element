@@ -16,6 +16,8 @@
     margin-bottom: 50px;
     padding: 20px 0 60px;
 
+    
+
     @modifier tiny {
       width: var(--dialog-tiny-width);
     }
@@ -43,6 +45,16 @@
       margin: 0;
      
       /*opacity: 0.8;*/
+
+      &::after {
+        content: '';
+        position: relative;
+        height: 500px;
+        display: inline-block;
+        background: pink;
+      }
+
+      
     }
 
     @e header {

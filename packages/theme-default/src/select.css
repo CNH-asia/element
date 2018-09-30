@@ -166,6 +166,23 @@
       }
     }
 
+
+
+    &.el-select--fixedHeight {
+      cursor: pointer;
+      /* &.el-select .el-input__inner:focus {
+        border-color: red;
+      } */
+      /* &:focus {
+        .el-input__inner {
+          border-color: red;
+        }
+        
+      } */
+    }
+    
+    
+
     &.el-select--fixedHeight .el-select__tags {
       height: 32px;
     }

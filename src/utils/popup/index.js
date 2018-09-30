@@ -192,6 +192,7 @@ export default {
         }
         PopupManager.openModal(this._popupId, PopupManager.nextZIndex(), this.modalAppendToBody ? undefined : dom, props.modalClass, props.modalFade);
         if (props.lockScroll) {
+          // debugger
           if (!this.bodyOverflow) {
             this.bodyPaddingRight = document.body.style.paddingRight;
             this.bodyOverflow = document.body.style.overflow;

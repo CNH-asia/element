@@ -3,6 +3,7 @@
 <!-- v-clickoutside="handleClose"  -->
   <div
     class="el-select"
+    @click="handleSelectClick"
     :type="selectType"
     :class=" [ stype ? 'el-select--' + stype : '', {'el-select-prepend': prepend}]">
     <div
@@ -298,6 +299,7 @@
             this.currentPlaceholder = this.cachedPlaceHolder;
           }
         }
+        
         this.setSelected();
         if (this.filterable && !this.multiple) {
           this.inputLength = 20;
@@ -466,6 +468,9 @@
     },
 
     methods: {
+      handleSelectClick() {
+        
+      },
       getInputStyle() {
         if(this.type=='fixedWidth') {
           return {height: 'auto'};
@@ -569,9 +574,16 @@
         }
         this.selected = result;
         this.selectedStr = result1.toString();
-        this.$nextTick(() => {
-          this.resetInputHeight();
+        //changed by
+        
+          this.$nextTick(() => {
+          // debugger
+          // setTimeout(() => {
+            this.resetInputHeight();
+            //  }, 0);
         });
+       
+        
       },
 
       handleFocus() {
@@ -598,6 +610,7 @@
       },
 
       handleMouseDown(event) {
+        console.log('----------------------999----')
         if (event.target.tagName !== 'INPUT') return;
         if (this.visible) {
           this.handleClose();
@@ -664,6 +677,7 @@
         if(this.stype=='fixedWidth') {
 
           this.$nextTick(() => {
+            
               if (!this.$refs.reference) return;
               let inputChildNodes = this.$refs.reference.$el.childNodes;
               let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
@@ -738,6 +752,8 @@
         //   this.$refs.input.focus();
         //   return;
         // }
+        
+        
         if (this.filterable && this.visible) {
           this.$refs.input.focus();
           return;
@@ -746,6 +762,16 @@
         if (!this.disabled) {
           this.visible = !this.visible;
         }
+
+        if(this.selected.length==0) {
+          if(this.visible) {
+          this.$refs.reference.$refs.input.focus();
+        } else {
+          this.$refs.reference.$refs.input.blur();
+        }
+        }
+
+        
       },
 
       navigateOptions(direction) {
@@ -796,6 +822,7 @@
       },
 
       deleteTag(event, tag) {
+        
         let index = this.selected.indexOf(tag);
         if (index > -1 && !this.disabled) {
           const value = this.value.slice();

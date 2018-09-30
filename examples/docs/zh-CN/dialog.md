@@ -34,29 +34,43 @@
         },
         formLabelWidth: '80px',
         currentPage: 1,
-        total: 120
+        total: 120,
+        options: [
+        ]
       };
     },
     methods: {
-      closeDialog() {
-        this.$refs.select.visible = false;
-        // this.dialogFormVisible = false;
-      },
+        openFormDialog() {
+            console.log('uu')
+            for(var i= 0; i < 20; i++) {
+                let obj = {
+                    value: i,
+                    label: i + ''
+                }
+                this.options.push(obj);
+            }
+            console.log(this.options);
+            this.dialogFormVisible = true;
+        },
+        closeDialog() {
+            this.$refs.select.visible = false;
+            // this.dialogFormVisible = false;
+        },
       
-      handleClose(done) {
-        this.$confirm('确认关闭？')
-          .then(_ => {
-            done();
-          })
-          .catch(_ => {});
-      },
-       handleSizeChange: function() {
-                      console.log('change');
-      
-                  },
-                  handleCurrentChange: function() {
-      
-                  },
+        handleClose(done) {
+            this.$confirm('确认关闭？')
+            .then(_ => {
+                done();
+            })
+            .catch(_ => {});
+        },
+        handleSizeChange: function() {
+            console.log('change');
+
+        },
+        handleCurrentChange: function() {
+
+        },
     }
   };
 </script>
@@ -140,7 +154,7 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
 </el-dialog>
 
 <!-- Form -->
-<el-button type="text" @click="dialogFormVisible = true">打开嵌套表单的 Dialog</el-button>
+<el-button type="text" @click="openFormDialog">打开嵌套表单的 Dialog</el-button>
 
 <el-dialog title="创建组件" :visible.sync="dialogFormVisible">
   <el-form :model="form">
@@ -151,7 +165,7 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
       <el-input type="textarea"></el-input>
     </el-form-item>
     <el-form-item label="组件简介" :label-width="formLabelWidth">
-      <el-select ref="select" v-model="form.name" multiple type="fixedHeight" :disabled="isdisabled" placeholder="请选择">
+      <el-select ref="select" v-model="form.name" multiple type="fixedHeight" placeholder="请选择">
         <el-option
           v-for="item in options"
           :key="item.value"
