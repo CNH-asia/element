@@ -23,6 +23,8 @@
           <slot name="footer"></slot>
         </div>
       </div>
+      <!-- 181008 -->
+      <div ref="adjust" v-if="adjustHeight" style="position:relative;"></div>
     </div>
   </transition>
 </template>
@@ -37,6 +39,15 @@
     mixins: [Popup, emitter],
 
     props: {
+        //181008下拉菜单不遮挡
+      adjustHeight: {
+        type: Boolean,
+        default: false
+      },
+      customHeight: {
+          type: Number,
+          default: 100
+      },
       title: {
         type: String,
         default: ''
@@ -100,7 +111,14 @@
           this.$el.addEventListener('scroll', this.updatePopper);
           this.$nextTick(() => {
             this.$refs.dialog.scrollTop = 0;
+            if(this.adjustHeight) {
+                let top = this.$refs.dialog.clientHeight + 60 + 'px';
+                this.$refs.adjust.style.top = top;
+                this.$refs.adjust.style.height = this.customHeight + 'px';
+            }
+            
           });
+          
         } else {
           this.$el.removeEventListener('scroll', this.updatePopper);
           this.$emit('close');

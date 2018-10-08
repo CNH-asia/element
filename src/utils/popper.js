@@ -747,14 +747,17 @@
             top: function() {
                 var top = popper.top;
                 if (popper.top < data.boundaries.top) {
-                    // top = Math.max(popper.top, data.boundaries.top);
+                    //181008
+                    
+                    top = Math.max(popper.top, data.boundaries.top);
                 }
                 return { top: top };
             },
             bottom: function() {
                 var top = popper.top;
                 if (popper.bottom > data.boundaries.bottom) {
-                    top = Math.min(popper.top, data.boundaries.bottom - popper.height);
+                    //181008
+                    // top = Math.min(popper.top, data.boundaries.bottom - popper.height);
                 }
                 return { top: top };
             }

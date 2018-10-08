@@ -45,13 +45,14 @@
       margin: 0;
      
       /*opacity: 0.8;*/
-
+      /* 181008 下拉框不被遮挡 */
       &::after {
-        content: '';
+        /* content: '';
         position: relative;
+        width: 1px;
         height: 500px;
-        display: inline-block;
-        background: pink;
+        top: 500px;
+        display: inline-block; */
       }
 
       
