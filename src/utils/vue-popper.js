@@ -43,7 +43,12 @@ export default {
           gpuAcceleration: false
         };
       }
-    }
+    },
+    //181008
+    // fixed: {
+    //   type: Boolean,
+    //   default: true
+    // }
   },
 
   data() {

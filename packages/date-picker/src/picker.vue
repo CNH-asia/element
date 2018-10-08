@@ -249,6 +249,11 @@ export default {
     showNowBtn: {
       type: Boolean,
       default: true
+    },
+    //181008 时间选择器下拉框固定
+    fixedPanel: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -485,7 +490,9 @@ export default {
     // vue-popper
     this.popperOptions = {
       boundariesPadding: 0,
-      gpuAcceleration: false
+      gpuAcceleration: false,
+      //181008
+      fixedPanel: that.fixedPanel
     };
     this.placement = PLACEMENT_MAP[this.align] || PLACEMENT_MAP.left;
   },

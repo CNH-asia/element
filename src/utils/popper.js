@@ -408,6 +408,7 @@
         //
         // Get reference element position
         //
+       
         var referenceOffsets = getOffsetRectRelativeToCustomParent(reference, getOffsetParent(popper), isParentFixed);
        
         //
@@ -728,6 +729,7 @@
     Popper.prototype.modifiers.preventOverflow = function(data) {
         var order = this._options.preventOverflowOrder;
         var popper = getPopperClientRect(data.offsets.popper);
+        let that = this;
 
         var check = {
             left: function() {
@@ -757,6 +759,11 @@
                 var top = popper.top;
                 if (popper.bottom > data.boundaries.bottom) {
                     //181008
+                    
+                    if (!that._options.fixedPanel) {
+                        top = Math.min(popper.top, data.boundaries.bottom - popper.height);
+
+                    }
                     // top = Math.min(popper.top, data.boundaries.bottom - popper.height);
                 }
                 return { top: top };
