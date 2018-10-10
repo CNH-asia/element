@@ -193,6 +193,8 @@ export default {
             
             values[i].push(option[keys[i]]);
             var tmp = {};
+            //181010 允许上一级和下一级的值相同
+            tmp.level = i;
             tmp.value = option[keys[i]];
             if (option['_' + keys[i]]) {
               tmp.label = option['_' + keys[i]];
@@ -232,12 +234,13 @@ export default {
     },
     options() {
       var that = this;
-      function fn(data, pid) {
+      //181010 允许上一级和下一级的值相同
+      function fn(data, pid, level) {
         var result = [], temp;
         for (var i = 0; i < data.length; i++) {
-            if (data[i].pid == pid) {
+            if (data[i].pid == pid&&(pid==0?true:data[i].level!=level)) {
                 var obj = { "label": data[i].label, "value": data[i].value, "pid": data[i].pid, "disabled": false, "level": 0 };
-                temp = fn(data, data[i].value);
+                temp = fn(data, data[i].value, data[i].level);
                 if (temp.length > 0) {
                     obj.children = temp;
                 }
@@ -246,12 +249,26 @@ export default {
         }
         return result;
       } 
+      // function fn(data, pid) {
+      //   var result = [], temp;
+      //   for (var i = 0; i < data.length; i++) {
+      //       if (data[i].pid == pid) {
+      //           var obj = { "label": data[i].label, "value": data[i].value, "pid": data[i].pid, "disabled": false, "level": 0 };
+      //           temp = fn(data, data[i].value);
+      //           if (temp.length > 0) {
+      //               obj.children = temp;
+      //           }
+      //           result.push(obj);
+      //       }
+      //   }
+      //   return result;
+      // } 
       var temparr = [];
       for(var i = 0; i < that.level_arrs.length; i++) {
         temparr = temparr.concat(that.level_arrs[i]);
       }
       that.allarr = temparr;
-      var res = fn(temparr, 0);
+      var res = fn(temparr, 0, 0);
       if(that.all) {
         res.unshift({
           disabled: false,
