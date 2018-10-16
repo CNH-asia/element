@@ -336,12 +336,13 @@
         var that = this;
         var selected = false;
         var index = [];
-        // debugger
-
+        
         if(that.activeValue.length > 0) {
           that.activeValue.forEach(function(group,idx) {
-            // console.log(group[menuIndex])
-            if(group[menuIndex]===item.value&&group[menuIndex-1]===item.pid) {
+            //181016该元素的值匹配&&上一级的值匹配
+            if(group[menuIndex]===item.value&&(menuIndex==0?true:group[menuIndex-1]===item.pid)) {
+            
+            // if(group[menuIndex]===item.value&&group[menuIndex-1]===item.pid) {
               index.push(idx);
             } 
           });
@@ -484,13 +485,32 @@
       //   return this.total;
 
       // },
+      //181016 获取children个数
+      getChildrenCount(item, menuIndex) {
+        let c = 0;
+        function count(item) {
+          if(item.children) {
+            c += item.children.length;
+            let arr = item.children;
+            arr.forEach(function(a) {
+              if(a.children) c--;
+              count(a)            
+            })
+          }
+        }
+        count(item);
+        return c
+      },
 
       //子项是否全部被选中（包括最后一级）
       isAllSelected(item, menuIndex) {
         var that = this;
 
         if(item.children) {
-          if(item.childlen == that.isSelected(item, menuIndex).index.length) {
+         
+          // if(item.childlen == that.isSelected(item, menuIndex).index.length) {
+          //181016子元素的数量需要层级的叠加计算
+          if(this.getChildrenCount(item, menuIndex) == that.isSelected(item, menuIndex).index.length) {
             return true;
           } else {
             return false;
@@ -779,6 +799,9 @@
 
           return (
             <li
+              title={
+                item.label
+              }
               class={{
                 'el-cascader-menu__item': true,
                 'el-cascader-menu__item--extensible': item.children,

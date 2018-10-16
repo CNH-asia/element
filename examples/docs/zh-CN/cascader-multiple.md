@@ -4,13 +4,13 @@
       return {
         disabledOptions: ['iOS/iphone5','windows/ttt/a01', 'Android/OPPO/r7s','Android/OPPO/r9s'],
         allOptions:['iOS/iphone5','windows/ttt/a01', 'Android/OPPO/r7s','Android/OPPO/r9s'],
-        // keys: ['system', 'brand', 'type'],
-        keys: ['AppID','AppVersion'],
+        keys: ['system', 'brand', 'type'],
+        // keys: ['AppID','AppVersion'],
         levelLimit: [1,1,2],
         testOptions: [{"_AppID":"A_I12","AppID":"com.hundsun.niubeidemo","AppVersion":"1.1.1"},{"_AppID":"HATSUNEMIKU","AppID":"com.hundsun.android2","AppVersion":"1.1.2"},{"_AppID":"HASUNEMIKUandroid","AppID":"com.hundsun.android","AppVersion":"1.1.1"},{"_AppID":"A_I12","AppID":"com.hundsun.niubeidemo","AppVersion":"22.33.67"},{"_AppID":"helloH5","AppID":"wlp.wlp.pph","AppVersion":"0d.0.8"},{"_AppID":"A_I12","AppID":"com.hundsun.niubeidemo","AppVersion":"22.33.66"},{"_AppID":"获取地理定位","AppID":"com.hundsun.baidulocation.test","AppVersion":"4.4.4"},{"_AppID":"安卓微信支付测试","AppID":"com.hundsun.lwzl.project","AppVersion":"0.0.2"},{"_AppID":"A_I12","AppID":"com.hundsun.niubeidemo","AppVersion":"22.33.45"},{"_AppID":"LightViewTest","AppID":"com.hundsun.light.lightIn","AppVersion":"1.0.4"},{"_AppID":"A_I12","AppID":"com.hundsun.niubeidemo","AppVersion":"17.2"},{"_AppID":"国联投顾dev重构版","AppID":"com.hundsun.light.investing","AppVersion":"1.0.3"},{"_AppID":"A_I12","AppID":"com.hundsun.niubeidemo","AppVersion":"22.33.44"},{"_AppID":"阿萨","AppID":"com.hundsun.ssds","AppVersion":"1.0.3"},{"_AppID":"0907","AppID":"com.hs.net.hopesspecial","AppVersion":"1.0.3"},{"_AppID":"整包上传测试一下","AppID":"light.com.ls.aaa.vvv.cccc","AppVersion":"0.0.1"},{"_AppID":"Android自测","AppID":"com.hundsun.selftest","AppVersion":"1.1.1"},{"_AppID":"A_I12","AppID":"com.hundsun.niubeidemo","AppVersion":"22.33.33"},{"_AppID":"国联投顾dev重构版","AppID":"com.hundsun.light.investing","AppVersion":"1.0"},{"_AppID":"整包上传测试一下","AppID":"light.com.ls.aaa.vvv.cccc","AppVersion":"0.0.2"},{"_AppID":"调试使用","AppID":"com.hundsun.spotTrading.uat.com","AppVersion":"2.1.2"},{"_AppID":"获取地理定位","AppID":"com.hundsun.baidulocation.test","AppVersion":"11.2.2"},{"_AppID":"阿萨","AppID":"com.hundsun.ssds","AppVersion":"1.0.2"},{"_AppID":"helloH5","AppID":"wlp.wlp.pph","AppVersion":"0.0.8"},{"_AppID":"LightView","AppID":"com.hundsun.light.lightview.appstore","AppVersion":"1.0.4"},{"_AppID":"A_I12","AppID":"com.hundsun.niubeidemo","AppVersion":"3.5.1"}],
         testOptions2: [
-          { system: "iOS", type: "iphone5" },
-          { system: "ttt", type: "iphone5" },
+          { system: "iOS", type: "iphone5", title:"hhh" },
+          { system: "ios", type: "iphone5s" },
           { system: "iOS", type: "iphone6" },
           { system: "iOS", type: "iphone6s" },
           { system: "iOS", type: "iphone7" },
@@ -18,12 +18,13 @@
           { brand: "OPPO", system: "Android", type: "r7s" },
           { brand: "OPPO", system: "Android", type: "r9s" },
           { brand: "OPPO", system: "Android", type: "r11s" },
-          { brand: "ttt", system: "windows", type: "a01" },
+          { brand: "nnt", system: "windows", type: "a01" },
           { system: "Android", brand: "HUAWEI", type: "r9s", _brand: "华为" },
           { system: "Android", brand: "HUAWEI", type: "mate 10", _brand: "华为" },
           { system: "Android", brand: "SUMSUNG", type: "S10", _brand: "三星" },
           { system: "Android", brand: "SUMSUNG", type: "NOTE8", _brand: "三星" }
         ],
+        titles: ['label','value','label+value'],
         options: [
           {
             value: 'iOS',
@@ -135,12 +136,11 @@
   <el-cascader-multiple
     :clearable=true
     :keys="keys"
-    prepend="产品版本"
-    filterable
-    :test-options="testOptions"
+    :test-options="testOptions2"
     v-model="selectedOptions"
     @change="handleChange">
   </el-cascader-multiple>
+  
 </div>
  
 
