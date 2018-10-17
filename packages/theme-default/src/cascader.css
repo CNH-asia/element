@@ -76,7 +76,7 @@
     white-space: nowrap;
     background: #fff;
     position: absolute;
-    margin: 5px 0;
+    margin: 3px 0;
     z-index: calc(var(--index-normal) + 1);
     border: var(--select-dropdown-border);
     border-radius: var(--border-radius-small);
