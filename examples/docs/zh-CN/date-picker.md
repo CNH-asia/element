@@ -94,6 +94,111 @@ Date.prototype.Format = function(fmt) { //author: meizz
                             '2015-01-01 00:00:00').getTime();
                     }
                 },
+        pickerOptions4: {
+        shortcuts: [
+          {
+            text: "今日",
+            period: 0,
+            range: 0,
+            // label: "今日",
+            onClick(picker) {
+              const end = new Date(
+                new Date(new Date().Format("yyyy-MM-dd")).getTime() +
+                  24 * 3600 * 1000 -
+                  8 * 3600 * 1000 -
+                  1
+              );
+              const start = new Date(
+                new Date(new Date().Format("yyyy-MM-dd")).getTime() -
+                  8 * 3600 * 1000
+              );
+              picker.$emit("pick", [start, end, "今日"]);
+            }
+          },
+          {
+            text: "昨日",
+            period: 0,
+            range: 1,
+            // label: "昨日",
+            onClick(picker) {
+              const end = new Date(
+                new Date(new Date().Format("yyyy-MM-dd")).getTime() -
+                  8 * 3600 * 1000 -
+                  1
+              );
+              const start = new Date(
+                new Date(new Date().Format("yyyy-MM-dd")).getTime() -
+                  24 * 3600 * 1000 -
+                  8 * 3600 * 1000
+              );
+              picker.$emit("pick", [start, end, "昨日"]);
+            }
+          },
+          {
+            text: "最近7日",
+            period: 6,
+            // label: "最近7日",
+            onClick(picker) {
+              const end = new Date(
+                new Date(new Date().Format("yyyy-MM-dd")).getTime() +
+                  24 * 3600 * 1000 -
+                  8 * 3600 * 1000 -
+                  1
+              );
+              const start = new Date(
+                new Date(new Date().Format("yyyy-MM-dd")).getTime() -
+                  8 * 3600 * 1000
+              );
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 6);
+              picker.$emit("pick", [start, end, "最近7日"]);
+            }
+          },
+          {
+            text: "最近30日",
+            period: 29,
+            onClick(picker) {
+              const end = new Date(
+                new Date(new Date().Format("yyyy-MM-dd")).getTime() +
+                  24 * 3600 * 1000 -
+                  8 * 3600 * 1000 -
+                  1
+              );
+              const start = new Date(
+                new Date(new Date().Format("yyyy-MM-dd")).getTime() -
+                  8 * 3600 * 1000 -
+                  3600 * 1000 * 24 * 29
+              );
+              // start.setTime(start.getTime() - 3600 * 1000 * 24 * 29);
+              picker.$emit("pick", [start, end, "最近30日"]);
+            }
+          },
+          {
+            text: "最近90日",
+            period: 89,
+            onClick(picker) {
+              const end = new Date(
+                new Date(new Date().Format("yyyy-MM-dd")).getTime() +
+                  24 * 3600 * 1000 -
+                  8 * 3600 * 1000 -
+                  1
+              );
+              const start = new Date(
+                new Date(new Date().Format("yyyy-MM-dd")).getTime() -
+                  8 * 3600 * 1000 -
+                  3600 * 1000 * 24 * 89
+              );
+              // start.setTime(start.getTime() - 3600 * 1000 * 24 * 89);
+              picker.$emit("pick", [start, end, "最近60日"]);
+            }
+          }
+        ],
+        disabledDate: function(date) {
+          return (
+            date.getTime() > new Date().getTime() ||
+            date.getTime() < new Date("2018-01-01 00:00:00").getTime()
+          );
+        }
+      },
         pickerOptions3: {
           shortcuts: [{
             text: "昨日",
@@ -135,6 +240,7 @@ Date.prototype.Format = function(fmt) { //author: meizz
           },{
             text: '最近一周',
             period: 7,
+            
             onClick(picker) {
               const end = new Date();
               const start = new Date();
@@ -167,21 +273,32 @@ Date.prototype.Format = function(fmt) { //author: meizz
         value4: '',
         value5: '',
         value6: '',
-        value7: [
+        // value7: [
+        //   new Date(
+        //   new Date(
+        //     new Date(Number(1529424000000)).Format("yyyy-MM-dd")
+        //   ).getTime() -
+        //     8 * 3600 * 1000
+        // ),
+        // new Date(
+        //   new Date(
+        //     new Date(Number(1529424000000)).Format("yyyy-MM-dd")
+        //   ).getTime() +
+        //     16 * 3600 * 1000 -
+        //     1
+        // )
+        // ],
+        value7:[new Date(
+            new Date(new Date().Format("yyyy-MM-dd")).getTime() -
+              6 * 24 * 3600 * 1000 -
+              8 * 3600 * 1000
+          ),
           new Date(
-          new Date(
-            new Date(Number(1529424000000)).Format("yyyy-MM-dd")
-          ).getTime() -
-            8 * 3600 * 1000
-        ),
-        new Date(
-          new Date(
-            new Date(Number(1529424000000)).Format("yyyy-MM-dd")
-          ).getTime() +
-            16 * 3600 * 1000 -
-            1
-        )
-        ],
+            new Date(new Date().Format("yyyy-MM-dd")).getTime() +
+              24 * 3600 * 1000 -
+              8 * 3600 * 1000 -
+              1
+          )],
         defaultValue: [
           new Date(
           new Date(
@@ -423,12 +540,11 @@ Date.prototype.Format = function(fmt) { //author: meizz
   <div class="block">
     <span class="demonstration">带快捷选项</span>
     <el-date-picker
-      v-model="value7"
-      :default-value="defaultValue"
+      v-model="value7"   
       type="daterange"
-      align="right"
+      :editable="false"
       placeholder="选择日期范围"
-      :picker-options="pickerOptions3">
+      :picker-options="pickerOptions4">
     </el-date-picker>
   </div>
   <el-button @click="changeDate">改变世界</el-button>

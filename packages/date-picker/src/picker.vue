@@ -370,7 +370,12 @@ export default {
             ? this.currentValue.concat()
             : this.currentValue;
 
-        if (!value) return;
+        // if (!value) return;
+        //181023 渲染完成后直接清除数据，displayLabel还在的问题
+        if(!value) {
+          this.displayLabel = '';
+          return;
+        }
         const formatter = (
           TYPE_VALUE_RESOLVER_MAP[this.type] ||
           TYPE_VALUE_RESOLVER_MAP["default"]
@@ -439,8 +444,10 @@ export default {
               }
             });
           }
+         
           this.displayLabel = new_text;
         } else {
+          
           this.displayLabel = "";
         }
         
